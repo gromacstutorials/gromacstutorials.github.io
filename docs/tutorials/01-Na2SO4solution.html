@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- HEAD -->
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,
+        initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+        <link href="../figures/favicon-32x32.png" rel="icon" />
+        <title>Salt solution</title>
+        <meta name="description" content="Salt solution">
+        <meta name="author" content="Simon Gravelle">
+        <link rel="stylesheet" type="text/css"
+        href="../assets_tutorials/vendor/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css"
+        href="../assets_tutorials/vendor/font-awesome/css/all.min.css" />
+        <link rel="stylesheet" type="text/css"
+        href="../assets_tutorials/css/stylesheet.css" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-BFND91CYC2"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BFND91CYC2');
+        </script>
+        <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+    <body data-spy="scroll" data-target=".idocs-navigation" data-offset="125">
+        <div id="main-wrapper">
+            <!-- HEADER -->
+            <header id="header" class="sticky-top">
+                <nav class="primary-menu navbar navbar-expand-lg navbar-dropdown-dark">
+                    <div class="container-fluid">
+                        <a class="logo ml-md-3" href="../index.html" title="LAMMPS tutorials">
+                        <img src="../figures/logo.png"
+                        alt="GROMACS tutorials" height="60"/>
+                        </a>
+                        <div id="header-nav" class="collapse navbar-collapse justify-content-end">
+                            <ul class="navbar-nav">
+                            <li>
+                                <a href="../index.html">All tutorials</a>
+                            </li>
+                            <li>
+                                <a href="../miscellaneous/contact.html">Contact me</a>
+                            </li>
+                            </ul>
+                        <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
+                            <li class="social-icons-twitter"><a data-toggle="tooltip"
+                            href="https://twitter.com/GravelleSimon" target="_blank"
+                            title="" data-original-title="Twitter">
+                            <i class="fab fa-twitter"></i></a></li>
+                            <li class="social-icons-twitter"><a data-toggle="tooltip"
+                            href="https://gitlab.com/sgravelle" target="_blank"
+                            title="" data-original-title="Gitlab">
+                            <i class="fab fa-gitlab"></i></i></a></li>
+                            <li class="social-icons-twitter"><a data-toggle="tooltip"
+                            href="https://github.com/simongravelle" target="_blank"
+                            title="" data-original-title="Github">
+                            <i class="fab fa-github"></i></i></a></li>
+                            <li class="social-icons-twitter"><a data-toggle="tooltip"
+                            href="https://www.youtube.com/c/SimonGravelle"
+                            target="_blank" title="" data-original-title="Youtube">
+                            <i class="fab fa-youtube"></i></i></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- sidebar -->
+            <div class="idocs-navigation bg-light">
+                <ul class="nav flex-column ">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#intro">Getting Started</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#installation">Installation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#input">Input files</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- main page -->
+            <div class="idocs-content">
+                <div class="container">
+                    <section id="intro">
+                        <h1>Salt solution</h1>
+                        <h3>The very basics of GROMACS through a simple example:
+                        a bulk solution of SO<sub>4</sub><sup>2-</sup> and Na<sup>+</sup>.</h3>
+                        <p>
+                            <img src="../figures/01-SimpleMolecularSimulation/main_image.png"
+                            style="width:100%" alt="Responsive image"/>
+                            <small style="color:#6B6B6B">
+                            Figure: a binary fluid in a 2D box at 3 different times
+                            </small>
+                        </p>
+                        <p>
+                            <b>The objective of this tutorial</b> is to use the
+                            open-source code GROMACS (derived from GROningen MAchine for Chemical Simulations) to perform
+                            a simple molecular dynamics simulation: a liquid solution of water mixed with
+                            sodium (Na<sup>+</sup>) and sulfate (SO<sub>4</sub><sup>2-</sup>) ions.
+                            This tutorial illustrates several major ingredients of
+                            molecular dynamics simulations, such as energy minimisation, 
+                            NVT and NPT equilibration, integration of the equations of motion,
+                            and trajectory visualisation.
+                        </p>
+                        <p>
+                            There are several parts to this tutorial:
+                            <ul>
+                                <li> 
+                                    <a href="#installation">Softwares installation - </a>
+                                    A quick look at the required softwares
+                                </li>
+                                <li> 
+                                    <a href="#input">Inputs - </a>
+                                    Generation of the input files
+                                </li>
+                            </ul>
+                        </p>
+                        <p class="alert alert-info">
+                            <a href="../miscellaneous/contact.html">Click here</a> to contact me.
+                        </p>
+                    </section>
+                    <br><br>
+                    <!-- SECTION 0 -->
+                    <section id="installation">
+                        <h2>Software installation</h2>
+                        <p>
+                            GROMACS must be installed on your machine. You can install it
+                            following the instructions of the
+                            <a href="https://manual.gromacs.org/current/index.html" target="_blank"
+                            class="removelinkdefault">GROMACS website</a>. Alternatively,
+                            if you are using Ubuntu OS, you can simply execute the
+                            following command in a terminal:
+                            <pre><code>sudo apt-get install gromacs</code></pre>
+                        </p>
+                        <p>
+                            You can verify that GROMACS is indeed installed on you computer
+                            by typing in a terminal :
+                            <pre><code>gmx</code></pre>
+                        </p>
+                        <p>
+                            And you should see the version of GROMACS that has been
+                            installed (on the top), I see:
+                            <pre><code>:-) GROMACS - gmx, 2021.4 (-:</code></pre>
+                        </p>
+                        <p>
+                            as well as a quote (at the bottom), such as 
+                            <pre><code>GROMACS reminds you: "Computers are like humans - they do everything except think." (John von Neumann)</code></pre>
+                        </p>
+                        <p>
+                            In addition to GROMACS, you will need the 3 following tools:
+                            <ul>
+                                <li>
+                                    (1) <a href="https://help.gnome.org/users/gedit/stable/"
+                            target="_blank" class="removelinkdefault"> a basic text
+                            editing software</a> such as Vim, Gedit, or Notepad++,
+                                </li>
+                                <li>
+                                    (2) <a href="https://www.ks.uiuc.edu/Research/vmd/"
+                                    target="_blank" class="removelinkdefault"> a visualization
+                                    software</a>, here I will use VMD (note: VMD is free but you
+                                    have to register to the uiuc website in order to download
+                                    it. If you don't want to, you can also use Ovito.),
+                                </li>
+                                <li>
+                                    (3) and <a href="https://plasma-gate.weizmann.ac.il/Grace/"
+                                    target="_blank" class="removelinkdefault">a plotting
+                                    tool</a> like XmGrace or pyplot.
+                                </li>
+                        </ul>     
+                        </p>
+                    </section>
+                    <br><br>
+                    <!-- SECTION 1 -->
+                    <section id="input">
+                        <h2>The input files</h2>
+                        <p>  
+                            In order to run a simulation using GROMACS, one needs
+                            to generate 3 files:
+                            <ul>
+                                <li>
+                                    1) a <b>configuration file</b> (.gro) containing the initial 
+                                    positions of the atoms and the box dimensions,
+                                </li>
+                                <li>
+                                    2) a <b>topology file</b> (.top) containing information
+                                    about the force field (interaction parameters, molecular constraint, etc.),
+                                </li>
+                                <li>
+                                    3) and an <b>input file</b> (.mdp) containing the parameters of the simulation (temperature, timestep, etc.).
+                                </li>
+                            </ul>
+                        </p>
+                        <h4>1) The configuration file (.gro)</h4>
+                        <p>
+                            Here the atoms positions are given in a conf.gro file (Gromos87 format), which you can download
+                            by clicking <a target="_blank" href="../../inputs/01-Na2SO4solution/conf.gro">here</a>.
+                            The file looks like that:
+                            <pre><code>SO4- Na2+ solution
+3557
+    1  SO4   O1    1   2.725   1.999   2.077
+    1  SO4   O2    2   2.679   2.091   1.839
+    1  SO4   O3    3   2.505   2.127   2.028
+    1  SO4   O4    4   2.542   1.890   1.930
+    1  SO4    S    5   2.612   2.027   1.968
+  (...)
+  898  SOL  HW1 3555   3.004   3.021   2.945
+  898  SOL  HW2 3556   3.004   2.869   2.945
+  898  SOL   MW 3557   2.955   2.945   2.945
+   3.10000   3.10000   3.10000</code></pre>
+                        </p>
+                        <p>The first line is a comment, the second is the total number of atoms, and the last line is 
+                            the box dimension in nanometer. Between the second and the last line are written 
+                            exactly as many lines as there are atoms. Each line indicates, from left to right, the 
+                            residue Id (the atoms of the same SO<sub>4</sub><sup>2-</sup> ion have the same residue Id),
+                            the residue name, the atom name, the atom Id, and finally the position (x, y, and z).
+                            <br><br>
+                            This conf.gro file can be visualized using VMD/ovito:
+                        </p>
+                        <p>
+                            <img src="../figures/01-Na2SO4solution/system_step0.png"
+                            style="width:33%" alt="Responsive image"/>
+                            <small style="color:#6B6B6B">
+                            Figure: SO<sub>4</sub><sup>2-</sup> ions (in yellow and red) and Na<sub>+</sub> ions (blue) 
+                            in water (red and white). 
+                            </small>
+                        </p>
+                        <p>
+                            As can be seen in this figure, the water molecules are arranged in a quite unrealistic regular manner, with all 
+                            dipoles facing in the same direction, and possibly some overlapping between some of the atoms.
+                        </p>
+                        <h4>2) The topology file (.top)</h4>
+                        <p>
+                            The topology file contains information about the interactions of the different atoms and molecules. 
+                            You can download it by clicking <a target="_blank" href="../../inputs/01-Na2SO4solution/topol.top">here</a>.
+                            Place it in the same folder as the conf.gro file. The top file looks like that:
+                            <pre><code>#include "ff/forcefield.itp"
+#include "ff/h2o.itp"
+#include "ff/na.itp"
+#include "ff/so4.itp"
+
+[ System ]
+SO4- Na2+ solution
+
+[ Molecules ]
+
+SO4 7
+Na 14
+SOL 875</code></pre>
+                        </p>
+                        <p>
+                            The 4 first lines are used to include the values of the parameters, that are given in separate files 
+                            for clarity. Create a folder named 'ff/', and copy 
+                            <a target="_blank" href="../../inputs/01-Na2SO4solution/ff/forcefield.itp">forcefield.itp</a>,
+                            <a target="_blank" href="../../inputs/01-Na2SO4solution/ff/h2o.itp">h2o.itp</a>,
+                            <a target="_blank" href="../../inputs/01-Na2SO4solution/ff/na.itp">na.itp</a>, and
+                            <a target="_blank" href="../../inputs/01-Na2SO4solution/ff/so4.itp">so4.itp</a> in it. The rest 
+                            of the topol.top file contain the system name, and list the molecules. Its important that the order 
+                            of the molecules in the topology file (here SO4 first, Na second, and H2O last) matches the order 
+                            of the conf.gro file. 
+                            <br><br>
+                            The four files located in the 'ff/' folder contain the information about the atoms (names, masses,
+                            changes, Lennard-Jones coefficients) and residues (bond and angular constraints).
+                        </p>
+
+
+                    </section>
+                    <br><br>
+                    <!-- SECTION N -->
+                    <section id="further">
+                        <h2>Going further with exercises</h2>
+                        <br>
+                        <p class="alert alert-info"> 
+                        Request the solutions by email, or register <a target="_blank"
+                        href="https://www.patreon.com/molecularsimulations">here</a> and access all the solutions
+                        + additional LAMMPS content.
+                        </p>
+                        <br>
+                        <h4><b>Preamble : on the importance of energy minimisation</b></h4>
+                        <p>
+                        A good way to master 
+                        </p>
+
+                        <p class="alert alert-info">
+                        <a href="../miscellaneous/contact.html">Click here</a>
+                        to contact me.
+                        </p>
+                    </section>
+                </div>
+            </div>
+            <!-- Footer -->
+            <footer id="footer" class="section">
+                <div class="container">
+                    <p class="text-2 text-center mb-0">This template has been adapted from
+                    <a class="btn-link" target="_blank"
+                    href="https://github.com/harnishdesign/iDocs/">HarnishDesign</a>.
+                    </p>
+                </div>
+            </footer>
+        </div>
+        <!-- JavaScript -->
+        <script src="../assets_tutorials/vendor/jquery/jquery.min.js"></script>
+        <script src="../assets_tutorials/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../assets_tutorials/vendor/highlight.js/highlight.min.js"></script>
+        <script src="../assets_tutorials/vendor/jquery.easing/jquery.easing.min.js"></script>
+        <script src="../assets_tutorials/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <script src="../assets_tutorials/js/theme.js"></script>
+    </body>
+</html>

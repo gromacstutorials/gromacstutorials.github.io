@@ -12,9 +12,9 @@ nstlist = 10 ; frequency to update the neighbor list
 ns_type = grid
 
 ;======================== output ============== ; description
-nstlog = 10 ; number of steps that elapse between writing energies to the log file
-nstenergy = 10 ; number of steps that elapse between writing energies to energy file
-nstxout = 10 ; frequency to write coordinates to xtc trajectory
+nstlog = 100 ; number of steps that elapse between writing energies to the log file
+nstenergy = 100 ; number of steps that elapse between writing energies to energy file
+nstxout = 10 ; frequency to write coordinates to trr trajectory
 
 ;======================== van der Waals ======= ; description
 vdw-type = Cut-off ; plain cut-off with rlist >= rvdw
