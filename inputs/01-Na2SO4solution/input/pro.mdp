@@ -1,39 +1,34 @@
-;======================== running ============= ; description
-integrator = md ; leap-frog algorithm for integrating Newton’s equations of motion.
-nsteps = 200000 ; maximum number of steps to integrate or minimize (2 ns)
-dt = 0.001 ; time step for integration (1 fs)
-comm_mode = linear ; remove center of mass translation
-comm_grps = system ; group(s) for center of mass motion removal
+integrator = md
+nsteps = 100000
+dt = 0.001
 
-;======================== neighbor searching == ; description
-cutoff-scheme = Verlet ; generate a pair list with buffering
-nstlist = 10 ; frequency to update the neighbor list
+comm_mode = linear
+comm_grps = system
+
+gen-vel = yes
+gen-temp = 360
+
+cutoff-scheme = Verlet
+nstlist = 10
 ns_type = grid
 
-;======================== output ============== ; description
-nstlog = 1000 ; number of steps that elapse between writing energies to the log file
-nstenergy = 1000 ; number of steps that elapse between writing energies to energy file
-nstxout-compressed = 1000 ; frequency to write coordinates to xtc trajectory
+nstxout-compressed = 5000
+nstenergy = 100
+nstlog = 100
 
-;======================== van der Waals ======= ; description
-vdw-type = Cut-off ; plain cut-off with rlist >= rvdw
-rvdw = 1.0 ; distance for the LJ cut-off (nm)
+vdw-type = Cut-off
+rvdw = 1.0
 
-; ======================= electrostatics ======= ; description
-coulombtype = pme ; fast smooth Particle-Mesh Ewald (SPME) electrostatics
-fourierspacing = 0.1 ; this should give an accuracy of about 2-3*10^-4
-pme-order = 4 ; interpolation order for PME (4 = cubic interpolation)
-rcoulomb = 1.0 ; distance for the Coulomb cut-off (nm)
+coulombtype = pme
+fourierspacing = 0.1
+pme-order = 4
+rcoulomb = 1.0
 
-; ======================= constraints ========= ; description
-constraint-algorithm = lincs ; more stable and faster than SHAKE
-constraints = hbonds ; convert the bonds with H-atoms to constraints
-continuation = yes ; apply or not constraints to the start configuration
+constraint-algorithm = lincs
+constraints = hbonds
 
-; ======================= temp. coupling ======= ; description
-tcoupl = v-rescale ; Berendsen + stochastic term = proper canonical ensemble
-ld-seed = 48456 ; seed
-tc-grps = Water non-Water ; groups to couple to separate temperature baths
-tau-t = 0.5 0.5 ; time constant for coupling (ps)
-ref-t = 360 360 ; reference temperature for coupling (K)
-nhchainlength = 1 ; number of chained Nose-Hoover thermostats
+tcoupl = v-rescale
+ld-seed = 48456
+tc-grps = Water non-Water
+tau-t = 0.5 0.5
+ref-t = 360 360

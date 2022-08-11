@@ -87,7 +87,15 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#impnvt">Improved NVT</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#npt">NPT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#prod">Diffusion coefficient measurement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#further">Going further</a>
+                    </li>
                 </ul>
             </div>
             <!-- main page -->
@@ -98,10 +106,12 @@
                         <h3>The very basics of GROMACS through a simple example:
                         a bulk solution of SO<sub>4</sub><sup>2-</sup> and Na<sup>+</sup>.</h3>
                         <p>
-                            <img src="../figures/01-SimpleMolecularSimulation/main_image.png"
-                            style="width:100%" alt="Responsive image"/>
+                            <img src="../figures/01-Na2SO4solution/Na2SO4_transparent.png"
+                            style="width:29%" alt="Responsive image"/>
+                            <img src="../figures/01-Na2SO4solution/msdgif.gif"
+                            style="width:33%" alt="Responsive image"/>  <!--msd_alt.png-->
                             <p style="color:#6B6B6B">
-                            Figure: a binary fluid in a 2D box at 3 different times
+                            Figure: a water solution of SO<sub>4</sub><sup>2-</sup> and Na<sup>+</sup> ions, and the calculated mean square displacement for the ion SO<sub>4</sub><sup>2-</sup>.
                             </p>
                         </p>
                         <p>
@@ -343,9 +353,11 @@ Norm of force     =  4.6640654e+01</code></pre>
                             from the default parameters was not reached. This is fine, it really does not matter for us here. 
                             <br><br>
                             Let us visualize the atoms' trajectories during the minimization step:
+                        </p>
+                        <p>         
                             <img src="../figures/01-Na2SO4solution/min.gif"
                             style="width:33%" alt="Gif minimization system"/>
-                            <p style="color:#6B6B6B">Video showing the motion of the atoms during the energy minimization. 
+                            <p style="color:#6B6B6B">Movie showing the motion of the atoms during the energy minimization. 
                             <br><br>
                             <b>Note for VMD user:</b> You can avoid having molecules 'cut in half' by the periodic boundary conditionsby rewriting the trajectory using 
                             'gmx trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole' </p>
@@ -519,32 +531,208 @@ comm_grps = system</code></pre>
                                 orange curve is from the improved NVT input file. </p>
                             </p>
                     </section>
+                    <!-- SECTION 4 -->
+                    <br><br>
+                    <section id="npt">
+                        <h2>NPT</h2>
+                        <p>
+                            Now that the system is properly equilibrated in the NVT ensemble, let us perform an equilibration in 
+                            the NPT ensemble, where the pressure is imposed and the volume of the box is free to relax, so that 
+                            the density of the fluid converges toward equilibrium. 
+                            <br><br>
+                            Create a new input script, call it 'npt.mdp', and copyt the following lines in it:
+                            <pre><code>integrator = md
+nsteps = 50000
+dt = 0.001
 
+comm_mode = linear
+comm_grps = system
 
+gen-vel = yes
+gen-temp = 360
 
+cutoff-scheme = Verlet
+nstlist = 10
+ns_type = grid
 
+nstlog = 100
+nstenergy = 100
+nstxout-compressed = 1000
 
+vdw-type = Cut-off
+rvdw = 1.0
 
-                    <!-- SECTION N -->
+coulombtype = pme
+fourierspacing = 0.1
+pme-order = 4
+rcoulomb = 1.0
+
+constraint-algorithm = lincs
+constraints = hbonds
+
+tcoupl = v-rescale
+ld-seed = 48456
+tc-grps = Water non-Water
+tau-t = 0.5 0.5
+ref-t = 360 360
+
+pcoupl = berendsen
+Pcoupltype = isotropic
+tau_p = 1.0
+ref_p = 1.0
+compressibility = 4.5e-5</code></pre>
+                        </p>
+                        <p>
+                            The main difference with the previous NVT script, is the addition of the isotropic Berendsen pressure coupling with a 
+                            target pressure of 1 bar. Another difference is the addition of the 'nstlog' and 'nstenergy' commands to 
+                            control the frequency at which information are printed in the log file and in the energy file (edr).
+                            Run it using : 
+                            <pre><code>gmx grompp -f input/npt.mdp -c nvt.gro -p topol.top -o npt -pp npt -po npt
+gmx mdrun -v -deffnm npt</code></pre>
+                        </p>
+                        <p>   
+                            Let us have a look a both temperature, pressure and volume during the NPT step using the 'gmx energy' command.
+                            <br><br>
+                            The temperature starts from 0, which was expected since the atoms 
+                            have no velocity during a minimization step, and reaches the requested temperature of 360 K after 
+                            a duration of a few picosecond, in agreement with the imposed damping time (tau-t = 0.5 ps):
+                        </p>
+                        <p>
+                            <img src="../figures/01-Na2SO4solution/npt.png"
+                            style="width:100%" alt="Responsive image"/>
+                            <p style="color:#6B6B6B">From left to right: evolution of the temperature, pressure, and volume of the simulation box as a function of the 
+                            time during the NPT equilibration.</p>
+                        </p>
+                        <p>  
+                            Our results show that the temperature remains well controlled during the NPT run, and that the volume was initially too small 
+                            for the desired pressure, and equilibrated itself at the slightly larger value after a few pico-second. Our results also 
+                            show large oscillation in the pressure. These large oscillations are normal in molecular dynamics, particularly with liquid water 
+                            that is particularly uncompressible. 
+                        </p>
+                    </section>
+                    <!-- SECTION 5 -->
+                    <br><br>
+                    <section id="prod">
+                        <h2>Diffusion coefficient measurement</h2>
+                        <p>
+                            Now that the system is fully equilibrated, we can perform a longer simulation and 
+                            extract one quantity of interest. Here, as an illustration, the diffusion coefficients 
+                            of all 3 species (water and ions) will be measured. First, let us perform a longer run in 
+                            the NVT ensemble. Create a new input file, call it 'pro.mdp' ('pro' is for 'production'), and 
+                            copy the following lines into it:
+                            <pre><code>integrator = md
+nsteps = 200000
+dt = 0.001
+
+comm_mode = linear
+comm_grps = system
+
+gen-vel = yes
+gen-temp = 360
+
+cutoff-scheme = Verlet
+nstlist = 10
+ns_type = grid
+
+nstlog = 100
+nstenergy = 100
+nstxout-compressed = 1000
+
+vdw-type = Cut-off
+rvdw = 1.0
+
+coulombtype = pme
+fourierspacing = 0.1
+pme-order = 4
+rcoulomb = 1.0
+
+constraint-algorithm = lincs
+constraints = hbonds
+
+tcoupl = v-rescale
+ld-seed = 48456
+tc-grps = Water non-Water
+tau-t = 0.5 0.5</code></pre>
+                        </p>
+                        <p>
+                            And run it using : 
+                            <pre><code>gmx grompp -f input/pro.mdp -c npt.gro -p topol.top -o pro -pp pro -po pro
+gmx mdrun -v -deffnm pro</code></pre>
+                        </p>
+                        <p>
+                            When its completed, compute the mean square displacement using:
+                            <pre><code>gmx msd -f pro.xtc -s pro.tpr -o SO4.xvg</code></pre>
+                        </p>
+                        <p>
+                            and select the SO4 ions. Fitting the slope of the MSD gives a value of 1.3e-5 cm<sup>2</sup>/s for the diffusion coefficient. For Na,
+                            the value is 1.5e-5 cm<sup>2</sup>/s, and for water 5.2e-5 cm<sup>2</sup>/s (not too far from the 
+                            experimental value of ~ 7e-5 cm<sup>2</sup>/s for T=360 K). 
+                            <br><br>
+                            <b>Side note:</b> Diffusion coefficients obtained from molecular dynamics simulations in a 
+                            finite sized box must be corrected, but this is beyond the scope of the present tutorial, see 
+                            this <a href="https://pubs.acs.org/doi/pdf/10.1021/acs.jpcb.1c05303", target="_blank">paper</a> for more details. 
+                            <br><br>
+                            The final MSDs plots look like this:
+                        </p>
+                        <p>
+                            <img src="../figures/01-Na2SO4solution/MSD.png"
+                            style="width:33%" alt="Responsive image"/>
+                            <p style="color:#6B6B6B">MSDs for the three species, respectively.</p>
+                        </p>
+                    </section>
+                    <br><br>
+                    <!-- SECTION 6 -->
                     <section id="further">
                         <h2>Going further with exercises</h2>
                         <br>
-                        <p class="alert alert-info"> 
+                        <!--<p class="alert alert-info"> 
                         Request the solutions by email, or register <a target="_blank"
                         href="https://www.patreon.com/molecularsimulations">here</a> and access all the solutions
-                        + additional LAMMPS content.
-                        </p>
+                        + additional LAMMPS/GROMACS content.
+                        </p>-->
                         <br>
-                        <h4><b>Preamble :</b></h4>
+                        <h4><b>Measure the radial distribution function (RDF)</b></h4>
                         <p>
-                        Text here...
+                        Using GROMACS internal commands (the same way we used 'gmx msd'), extract the 
+                        radial distribution function between Na and SO4 ions. 
+                        It should look like that:  
+                        <!-- gmx rdf -f pro.xtc -s pro.tpr -o rdf_whole.xvg -> choose either 
+                        system twice, or Na then SO4 -->
                         </p>
+                        <p>
+                            <img src="../figures/01-Na2SO4solution/RDF.png"
+                            style="width:33%" alt="Responsive image"/>
+                            <p style="color:#6B6B6B">RDF extracted from the Na2SO4 solution.</p>
+                        </p>
+
+
 
                         <p class="alert alert-info">
                         <a href="../miscellaneous/contact.html">Click here</a>
                         to contact me.
                         </p>
                     </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 </div>
             </div>
             <!-- Footer -->

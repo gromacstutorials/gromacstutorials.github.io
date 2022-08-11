@@ -2,7 +2,7 @@
 ;	File 'npt.mdp' was generated
 ;	By user: sgravelle (1198)
 ;	On host: caribou
-;	At date: Thu Aug 11 11:54:22 2022
+;	At date: Thu Aug 11 18:29:01 2022
 ;
 ;	Created by:
 ;	                     :-) GROMACS - gmx grompp, 2021.4 (-:
@@ -65,9 +65,9 @@ nstxout                  = 0
 nstvout                  = 0
 nstfout                  = 0
 ; Output frequency for energies to log file and energy file
-nstlog                   = 1000
+nstlog                   = 100
 nstcalcenergy            = 100
-nstenergy                = 1000
+nstenergy                = 100
 ; Output frequency and precision for .xtc file
 nstxout-compressed       = 1000
 compressed-x-precision   = 1000
@@ -133,7 +133,7 @@ implicit-solvent         = no
 ; Temperature coupling  
 tcoupl                   = v-rescale
 nsttcouple               = -1
-nhchainlength            = 1
+nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
 ; Groups to couple separately
 tc-grps                  = Water non-Water
@@ -167,8 +167,8 @@ annealing-time           =
 annealing-temp           = 
 
 ; GENERATE VELOCITIES FOR STARTUP RUN
-gen-vel                  = no
-gen-temp                 = 300
+gen-vel                  = yes
+gen-temp                 = 360
 gen-seed                 = -1
 
 ; OPTIONS FOR BONDS    
@@ -176,7 +176,7 @@ constraints              = hbonds
 ; Type of constraint algorithm
 constraint-algorithm     = lincs
 ; Do not constrain the start configuration
-continuation             = yes
+continuation             = no
 ; Use successive overrelaxation to reduce the number of shake iterations
 Shake-SOR                = no
 ; Relative tolerance of shake
