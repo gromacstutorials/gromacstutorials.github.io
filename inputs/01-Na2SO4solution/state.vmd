@@ -341,10 +341,11 @@ display dof off
 display dof_fnumber 64.000000
 display dof_focaldist 0.700000
 mol new conf.gro type gro first 0 last -1 step 1 filebonds 1 autobonds 1 waitfor all
+mol addfile min_whole.trr type trr first 0 last -1 step 1 filebonds 1 autobonds 1 waitfor all
 mol delrep 0 top
-mol representation VDW 1.000000 52.000000
+mol representation VDW 0.800000 52.000000
 mol color Name
-mol selection {type Na}
+mol selection {type O1 O2 O3 O4}
 mol material Opaque
 mol addrep top
 mol selupdate 0 top 0
@@ -376,9 +377,9 @@ mol clipplane center 5 0 top {0.0 0.0 0.0}
 mol clipplane color  5 0 top {0.5 0.5 0.5 }
 mol clipplane normal 5 0 top {0.0 0.0 1.0}
 mol clipplane status 5 0 top {0}
-mol representation VDW 0.900000 52.000000
-mol color Name
-mol selection {type S}
+mol representation VDW 0.800000 52.000000
+mol color Type
+mol selection {type OW}
 mol material Opaque
 mol addrep top
 mol selupdate 1 top 0
@@ -410,9 +411,9 @@ mol clipplane center 5 1 top {0.0 0.0 0.0}
 mol clipplane color  5 1 top {0.5 0.5 0.5 }
 mol clipplane normal 5 1 top {0.0 0.0 1.0}
 mol clipplane status 5 1 top {0}
-mol representation VDW 0.800000 47.000000
-mol color Name
-mol selection {type O1 O2 O3 O4}
+mol representation VDW 0.500000 52.000000
+mol color Type
+mol selection {type HW1 HW}
 mol material Opaque
 mol addrep top
 mol selupdate 2 top 0
@@ -444,9 +445,9 @@ mol clipplane center 5 2 top {0.0 0.0 0.0}
 mol clipplane color  5 2 top {0.5 0.5 0.5 }
 mol clipplane normal 5 2 top {0.0 0.0 1.0}
 mol clipplane status 5 2 top {0}
-mol representation DynamicBonds 1.600000 0.300000 12.000000
-mol color Name
-mol selection {type OW HW1 HW2}
+mol representation VDW 0.900000 52.000000
+mol color Type
+mol selection {type Na}
 mol material Opaque
 mol addrep top
 mol selupdate 3 top 0
@@ -478,9 +479,9 @@ mol clipplane center 5 3 top {0.0 0.0 0.0}
 mol clipplane color  5 3 top {0.5 0.5 0.5 }
 mol clipplane normal 5 3 top {0.0 0.0 1.0}
 mol clipplane status 5 3 top {0}
-mol representation VDW 0.800000 47.000000
+mol representation VDW 1.000000 52.000000
 mol color Type
-mol selection {type OW}
+mol selection {type S}
 mol material Opaque
 mol addrep top
 mol selupdate 4 top 0
@@ -512,42 +513,8 @@ mol clipplane center 5 4 top {0.0 0.0 0.0}
 mol clipplane color  5 4 top {0.5 0.5 0.5 }
 mol clipplane normal 5 4 top {0.0 0.0 1.0}
 mol clipplane status 5 4 top {0}
-mol representation VDW 0.500000 47.000000
-mol color Name
-mol selection {type HW1 HW2}
-mol material Opaque
-mol addrep top
-mol selupdate 5 top 0
-mol colupdate 5 top 0
-mol scaleminmax top 5 0.000000 0.000000
-mol smoothrep top 5 0
-mol drawframes top 5 {now}
-mol clipplane center 0 5 top {0.0 0.0 0.0}
-mol clipplane color  0 5 top {0.5 0.5 0.5 }
-mol clipplane normal 0 5 top {0.0 0.0 1.0}
-mol clipplane status 0 5 top {0}
-mol clipplane center 1 5 top {0.0 0.0 0.0}
-mol clipplane color  1 5 top {0.5 0.5 0.5 }
-mol clipplane normal 1 5 top {0.0 0.0 1.0}
-mol clipplane status 1 5 top {0}
-mol clipplane center 2 5 top {0.0 0.0 0.0}
-mol clipplane color  2 5 top {0.5 0.5 0.5 }
-mol clipplane normal 2 5 top {0.0 0.0 1.0}
-mol clipplane status 2 5 top {0}
-mol clipplane center 3 5 top {0.0 0.0 0.0}
-mol clipplane color  3 5 top {0.5 0.5 0.5 }
-mol clipplane normal 3 5 top {0.0 0.0 1.0}
-mol clipplane status 3 5 top {0}
-mol clipplane center 4 5 top {0.0 0.0 0.0}
-mol clipplane color  4 5 top {0.5 0.5 0.5 }
-mol clipplane normal 4 5 top {0.0 0.0 1.0}
-mol clipplane status 4 5 top {0}
-mol clipplane center 5 5 top {0.0 0.0 0.0}
-mol clipplane color  5 5 top {0.5 0.5 0.5 }
-mol clipplane normal 5 5 top {0.0 0.0 1.0}
-mol clipplane status 5 5 top {0}
 mol rename top conf.gro
-set viewpoints([molinfo top]) {{{1 0 0 -16.0916} {0 1 0 -15.3165} {0 0 1 -15.7284} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}} {{0.0727181 0 0 0} {0 0.0727181 0 0} {0 0 0.0727181 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}}}
+set viewpoints([molinfo top]) {{{1 0 0 -15.8424} {0 1 0 -15.7416} {0 0 1 -15.5268} {0 0 0 1}} {{1.00583e-07 1 -1.04308e-07 0} {0 1.04308e-07 1 0} {1 -5.58794e-08 1.11022e-14 0} {0 0 0 1}} {{0.0862219 0 0 0} {0 0.0862219 0 0} {0 0 0.0862219 0} {0 0 0 1}} {{1 0 0 0.01} {0 1 0 0.02} {0 0 1 0} {0 0 0 1}}}
 lappend viewplist [molinfo top]
 set topmol [molinfo top]
 # done with molecule 0
@@ -698,6 +665,8 @@ color scale colors WBlk {1.0 1.0 1.0} {0.5 0.5 0.5} {0.0 0.0 0.0}
     {color Segname {} blue}
     {color Conformation {all} blue}
     {color Molecule {0} blue}
+    {color Molecule {1} red}
+    {color Molecule {conf.gro} red}
     {color Structure {3_10_Helix} blue}
     {color Surface {Grasp} gray}
     {color Labels {Springs} orange}
@@ -707,7 +676,7 @@ color scale colors WBlk {1.0 1.0 1.0} {0.5 0.5 0.5} {0.0 0.0 0.0}
   foreach colcmd $colorcmds {
     set val [catch {eval $colcmd}]
   }
-  color change rgb 0 0.0 0.0 1.0
+  color change rgb 0 0.2800000011920929 0.0 1.0
   color change rgb 2 0.3499999940395355 0.3499999940395355 0.3499999940395355
   color change rgb 3 0.5400000214576721 0.0 0.0
   color change rgb 4 1.0 1.0 0.0
