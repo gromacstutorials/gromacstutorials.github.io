@@ -11,3 +11,5 @@ gmx mdrun -v -deffnm npt
 
 gmx grompp -f input/pro.mdp -c npt.gro -p topol.top -o pro -pp pro -po pro
 gmx mdrun -v -deffnm pro
+
+rm *#*

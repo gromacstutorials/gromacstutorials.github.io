@@ -1,17 +1,17 @@
 ;
 ;	File 'min.mdp' was generated
-;	By user: sgravelle (1198)
-;	On host: caribou
-;	At date: Wed Aug 10 14:16:06 2022
+;	By user: unknown (1000)
+;	On host: mint2
+;	At date: Wed Aug 10 22:25:49 2022
 ;
 ;	Created by:
-;	                     :-) GROMACS - gmx grompp, 2021.4 (-:
+;	             :-) GROMACS - gmx grompp, 2020.1-Ubuntu-2020.1-1 (-:
 ;	
-;	Executable:   /work/sgravelle/Softwares/gromacs-install/bin/gmx
-;	Data prefix:  /work/sgravelle/Softwares/gromacs-install
-;	Working dir:  /tikhome/sgravelle/Git/GROMACStutorials/gromacstutorials.github.io/inputs/01-Na2SO4solution
+;	Executable:   /usr/bin/gmx
+;	Data prefix:  /usr
+;	Working dir:  /media/simon/57A6-2AD4/gromacstutorials.github.io/inputs/01-Na2SO4solution
 ;	Command line:
-;	  gmx grompp -f input/min.mdp -c conf.gro -p topol.top -o min -pp min -po min
+;	  gmx grompp -f input/min2.mdp -c conf.gro -p topol.top -o min -pp min -po min
 
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
@@ -30,8 +30,6 @@ nsteps                   = 5000
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
 simulation-part          = 1
-; Multiple time-stepping
-mts                      = no
 ; mode for center of mass motion removal
 comm-mode                = Linear
 ; number of steps for center of mass motion removal
@@ -46,7 +44,7 @@ ld-seed                  = -1
 
 ; ENERGY MINIMIZATION OPTIONS
 ; Force tolerance and initial step-size
-emtol                    = 100
+emtol                    = 10
 emstep                   = 0.01
 ; Max number of iterations in relax-shells
 niter                    = 20
@@ -65,9 +63,9 @@ nstxout                  = 10
 nstvout                  = 0
 nstfout                  = 0
 ; Output frequency for energies to log file and energy file
-nstlog                   = 100
+nstlog                   = 1000
 nstcalcenergy            = 100
-nstenergy                = 100
+nstenergy                = 1000
 ; Output frequency and precision for .xtc file
 nstxout-compressed       = 0
 compressed-x-precision   = 1000
@@ -95,10 +93,10 @@ rlist                    = 1
 
 ; OPTIONS FOR ELECTROSTATICS AND VDW
 ; Method for doing electrostatics
-coulombtype              = pme
+coulombtype              = Cut-off
 coulomb-modifier         = Potential-shift-Verlet
 rcoulomb-switch          = 0
-rcoulomb                 = 1.0
+rcoulomb                 = 1
 ; Relative dielectric constant for the medium and the reaction field
 epsilon-r                = 1
 epsilon-rf               = 0
@@ -107,7 +105,7 @@ vdw-type                 = Cut-off
 vdw-modifier             = Potential-shift-Verlet
 ; cut-off lengths       
 rvdw-switch              = 0
-rvdw                     = 1.0
+rvdw                     = 1
 ; Apply long range dispersion corrections for Energy and Pressure
 DispCorr                 = No
 ; Extension of the potential lookup tables beyond the cut-off
@@ -115,7 +113,7 @@ table-extension          = 1
 ; Separate tables between energy group pairs
 energygrp-table          = 
 ; Spacing for the PME/PPPM FFT grid
-fourierspacing           = 0.1
+fourierspacing           = 0.12
 ; FFT grid size, when a value is 0 fourierspacing will be used
 fourier-nx               = 0
 fourier-ny               = 0
@@ -153,8 +151,28 @@ refcoord-scaling         = No
 
 ; OPTIONS FOR QMMM calculations
 QMMM                     = no
-; Groups treated with MiMiC
+; Groups treated Quantum Mechanically
 QMMM-grps                = 
+; QM method             
+QMmethod                 = 
+; QMMM scheme           
+QMMMscheme               = normal
+; QM basisset           
+QMbasis                  = 
+; QM charge             
+QMcharge                 = 
+; QM multiplicity       
+QMmult                   = 
+; Surface Hopping       
+SH                       = 
+; CAS space options     
+CASorbitals              = 
+CASelectrons             = 
+SAon                     = 
+SAoff                    = 
+SAsteps                  = 
+; Scale factor for MM charges
+MMChargeScaleFactor      = 1
 
 ; SIMULATED ANNEALING  
 ; Type of annealing for each temperature group (no/single/periodic)

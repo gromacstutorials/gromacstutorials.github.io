@@ -197,7 +197,7 @@
                             Here the atoms positions are given in a conf.gro file (Gromos87 format), which you can download
                             by clicking <a target="_blank" href="../../inputs/01-Na2SO4solution/conf.gro">here</a>.
                             The file looks like that:
-                            <pre><code>SO4- Na2+ solution
+                            <pre><code>Na2SO4 solution
 3557
     1  SO4   O1    1   2.725   1.999   2.077
     1  SO4   O2    2   2.679   2.091   1.839
@@ -216,7 +216,8 @@
                             residue Id (the atoms of the same SO<sub>4</sub><sup>2-</sup> ion have the same residue Id),
                             the residue name, the atom name, the atom Id, and finally the position (x, y, and z).
                             <br><br>
-                            This conf.gro file can be visualized using VMD/ovito:
+                            This conf.gro file can be visualized using VMD/Ovito (play with atoms' representation
+                            to make it look better than it is by default):
                         </p>
                         <p>
                             <img src="../figures/01-Na2SO4solution/system_step0.png"
@@ -241,7 +242,7 @@
 #include "ff/so4.itp"
 
 [ System ]
-SO4- Na2+ solution
+Na2SO4 solution
 
 [ Molecules ]
 
@@ -256,15 +257,172 @@ SOL 875</code></pre>
                             <a target="_blank" href="../../inputs/01-Na2SO4solution/ff/h2o.itp">h2o.itp</a>,
                             <a target="_blank" href="../../inputs/01-Na2SO4solution/ff/na.itp">na.itp</a>, and
                             <a target="_blank" href="../../inputs/01-Na2SO4solution/ff/so4.itp">so4.itp</a> in it. The rest 
-                            of the topol.top file contain the system name, and list the molecules. Its important that the order 
-                            of the molecules in the topology file (here SO4 first, Na second, and H2O last) matches the order 
+                            of the topol.top file contains the system name, and a list of the molecules. Its important that the order 
+                            of the molecules in the topology file (here SO4 first, Na second, and SOL (H2O) last) matches the order 
                             of the conf.gro file. 
                             <br><br>
                             The four files located in the 'ff/' folder contain the information about the atoms (names, masses,
                             changes, Lennard-Jones coefficients) and residues (bond and angular constraints).
                         </p>
+                        <h4>3) The input file (.mdp)</h4>
+                        <p>
+                            The input file contains instructions about the simulation, such as 
+                            <ul>
+                                <li>
+                                    <b>-</b> the thermostat to be used (e.g. Langevin, Berendsen),
+                                </li> 
+                                <li>
+                                    <b>-</b> the cut-off for the interactions (e.g. Lennard-Jones),
+                                </li> 
+                                <li>
+                                    <b>-</b> or the molecular dynamics integrator (e.g. steep-decent, molecular dynamics).
+                                </li> 
+                            </ul>
+                        </p>
+                        <p>
+                            In this tutorial, 4 different input files will be written in order to perform respectively an energy minimization
+                            of the salt solution, an equilibration in the NVT ensemble, an equilibration in the NPT ensemble, and finally a production run. 
+                        </p>
+                    </section>
+                    <!-- SECTION 2 -->
+                    <section id="minimisation">
+                        <h2>Energy minimisation</h2>
+                        <p>  
+                            It is clear from the current conf file (see the previous image) that the atoms are currently in a 
+                            quite unphysical configuration. It would be risky to directly perform a molecular dynamics simulation,
+                            as atoms would most likely undergo huge forces and make the system explode. <br><br>
+                            In order to bring the system into a favorable state, let us perform an energy minimization 
+                            which consists in moving the atoms until the forces between them are reasonable. 
+                        </p>
+                        <p>
+                            Open a blank file, call it min.mdp, and save it in a folder called 'input/'. The new folder 'input/'
+                            must be located in the same folder as 'ff/', 'topol.top', and 'conf.gro'. Copy the following 
+                            lines into min.mdp: 
+                            <pre><code>integrator = steep
+nsteps = 5000</code></pre> 
+                        </p>
+                        <p>
+                            These commands specify to GROMACS that the integrator to be used is the speepest-descent, which 
+                            move the atom according the largest forces [VERIFY] until one stopping criterial is reached. 
+                            Then we specify a minimum number os steps to perform [GIVE PRECISION].<br><br>
+                            In addition, we would like to be able to visualize the trajectory of the atoms during the 
+                            minimization, so let us add the following command to the input file in order to 
+                            print the atoms positions every 10 steps:
+                            <pre><code>nstxout = 10</code></pre> 
+                        </p>
+                        [[[ ALSO MAKE THE WATER FLEXIBLE MAY BE ?]]]
+                        <p>
+                            We now have a very minimalist input script, let us try it.
+                            From the terminal, type:
+                            <pre><code>gmx grompp -f input/min.mdp -c conf.gro -p topol.top -o min -pp min -po min
+gmx mdrun -v -deffnm min</code></pre> 
+                        </p>
+                        <p>
+                            [GIVE QUICK EXPLANATION]
+                            <br><br>
+                            If everything goes according to the plan, you should see something like :
+                            <pre><code>Steepest Descents converged to machine precision in 824 steps,
+but did not reach the requested Fmax < 10.
+Potential Energy  = -6.8990930e+04
+Maximum force     =  2.4094606e+02 on atom 1654
+Norm of force     =  4.6640654e+01</code></pre> 
+                        </p>
+                        <p>
+                            It indicates us that energy minimization has been performed, even though the precision that was asked 
+                            from the default parameters was not reached. This is fine, it really does not matter for us here. 
+                            <br><br>
+                            Let us visualize the atoms' trajectories during the minimization step. You should see something that
+                            resemble:
+                            <img src="../figures/01-Na2SO4solution/system_step0.png"
+                            style="width:33%" alt="Responsive image"/>
+                            <small style="color:#6B6B6B">[Add gif here]</small>
+                        </p>
+                        <p>
+                            One can see that the molecules reorient themselves into more energetically favorable positions, and that 
+                            the distances between the atoms are being progressively homogeneized. Let us have a look at the
+                            evolution of the potential energy of the system. To do so, we can use the internal 'energy' command 
+                            of GROMACS to analyze the simulation after it's been completed (post-mortem analyze). In the 
+                            terminal, type:  
+                            <pre><code>gmx energy -f min.edr -o epotmin.xvg</code></pre>
+                        </p>
+                        <p>
+                            and choose 'potential'. Here the edr file produced by Gromacs during the last run is used, and the result is saved in 
+                            the epotmin.xvg file. Let us plot it:
+                        </p>
+                        <p>
+                            <img src="../figures/01-Na2SO4solution/epotmin.png"
+                            style="width:33%" alt="Responsive image"/>
+                            <small style="color:#6B6B6B">Evolution of the potential energy as a function of the 
+                            number of steps during energy minimization.</small>
+                        </p>
+                        <p>
+                            <b>Observation:</b> One can see from the energy plot that the potential energy is initially huge and positive, 
+                            which is the consequence of atoms being too close from one another, and to molecules being 
+                            wrongly oriented. As the minimisation progresses, the potential energy rapidly decreases and reach a large and 
+                            negative value, which is usually a good sign as it indicates that the atoms are now in an energetically favorable configuration.
+                        </p>
+                        <p>
+                            The system is now ready for the molecular dynamics.
+                        </p>
+                    </section>
+                    <!-- SECTION 2 -->
+                    <section id="minimisation">
+                        <h2>Minimalist NVT input file</h2>
+                        <p>
+                            Let us first perform a small (20 picoseconds) equilibration in the NVT ensemble, where the number of atom (N),
+                            volume (V), and temperature are maintained fixed (T). For that, let use write a new input
+                            script called nvt.mdp, and saved in the same 'input/' folder.  Copy the following lines into it:
+                            <pre><code>integrator = md
+nsteps = 20000
+dt = 0.001</code></pre>
+                        </p>
+                        <p>
+                            Here the molecular dynamics (md) integrator is used [IS IT VERLET], and a number of 20k
+                            steps with timestep (dt) 0.001 ps is requested. Let us print the trajectory in a xtc file
+                            every 1 ps by adding:
+                            <pre><code>nstxout-compressed = 1000</code></pre>
+                        </p>
+                        <p>
+                            For NVT simulation, one needs to impose the temperature of the atoms. Let us control the temperature 
+                            over the course of the simulation using 
+                            the v-rescale thermostat, which is the Berendsen thermostat with a stochastic term (known to 
+                            give proper canonical ensemble):
+                            <pre><code>tcoupl = v-rescale
+ref-t = 360
+tc-grps = system
+tau-t = 0.5</code></pre>
+                        </p>                  
+                        <p>  
+                            Here we also specified that the thermostat is applied to the entire system (we could choose 
+                            to apply it only to a certain group of atom, which is justified for some systems), and that 
+                            the damping constant for the thermostat is 0.5 ps. 
+                            <br><br>
+                            <b>Remark: </b> The relatively high temperature of 360 K has been chosen here in order to reduce the 
+                            viscosity of the solution and converge toward diffusion result faster. 
+                            <br><br>
+                            We now have a minimalist input file for performing the NVT step. Type in the terminal:
+                            <pre><code>gmx grompp -f input/nvt.mdp -c min.gro -p topol.top -o nvt -pp nvt -po nvt
+gmx mdrun -v -deffnm nvt</code></pre>
+                        </p>
+                        <p>   
+                            Where '-c min.gro' ensures that the previously minimized configuration is used as a starting point.  
+                            Let us ensure that the system temperature indeed reached the value of 360 K by using the energy
+                            command of gromacs. Type:  
+                            <pre><code>gmx energy -f nvt.edr -o Tnvt.xvg</code></pre>
+                        </p>
+                        <p>
+                            and choose 'temperature'. The temperature start from 0, which was expected as the atoms 
+                            have no velocity during a minimisation step, and reaches the requested temperature of 360 K after 
+                            a duration of a few picosecond, in agreement with the imposed damping time (tau-t = 0.5 ps):
+                        </p>
+                        <p>
+                            <img src="../figures/01-Na2SO4solution/Tnvt.png"
+                            style="width:33%" alt="Responsive image"/>
+                            <small style="color:#6B6B6B">Evolution of the temperature as a function of the 
+                            time during the NVT equilibration.</small>
+                        </p>
 
-
+                        </p>
                     </section>
                     <br><br>
                     <!-- SECTION N -->

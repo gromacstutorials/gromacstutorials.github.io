@@ -4,10 +4,10 @@
 #include "ff/so4.itp"
 
 [ System ]
-SO4- Na2+ solution
+Na2SO4 solution
 
 [ Molecules ]
 
 SO4 7
 Na 14
-SOL 875
+SOL 981
