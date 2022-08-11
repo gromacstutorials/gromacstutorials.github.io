@@ -342,11 +342,13 @@ Norm of force     =  4.6640654e+01</code></pre>
                             It indicates us that energy minimization has been performed, even though the precision that was asked 
                             from the default parameters was not reached. This is fine, it really does not matter for us here. 
                             <br><br>
-                            Let us visualize the atoms' trajectories during the minimization step. You should see something that
-                            resemble:
-                            <img src="../figures/01-Na2SO4solution/system_step0.png"
-                            style="width:33%" alt="Responsive image"/>
-                            <p style="color:#6B6B6B">[Add gif here]</p>
+                            Let us visualize the atoms' trajectories during the minimization step:
+                            <img src="../figures/01-Na2SO4solution/min.gif"
+                            style="width:33%" alt="Gif minimization system"/>
+                            <p style="color:#6B6B6B">Video showing the motion of the atoms during the energy minimization. 
+                            <br><br>
+                            <b>Note for VMD user:</b> You can avoid having molecules 'cut in half' by the periodic boundary conditionsby rewriting the trajectory using 
+                            'gmx trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole' </p>
                         </p>
                         <p>
                             One can see that the molecules reorient themselves into more energetically favorable positions, and that 
