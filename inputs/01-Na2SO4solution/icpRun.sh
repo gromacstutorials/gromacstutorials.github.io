@@ -11,3 +11,5 @@
 
 /work/sgravelle/Softwares/gromacs-install/bin/gmx grompp -f input/pro.mdp -c npt.gro -p topol.top -o pro -pp pro -po pro
 /work/sgravelle/Softwares/gromacs-install/bin/gmx mdrun -v -deffnm pro
+
+rm *#*

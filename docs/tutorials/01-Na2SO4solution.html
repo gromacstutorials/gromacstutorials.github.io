@@ -78,6 +78,16 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="#input">Input files</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#minimization">Energy minimization</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#minnvt">Minimalist NVT</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#impnvt">Improved NVT</a>
+                    </li>
+
                 </ul>
             </div>
             <!-- main page -->
@@ -90,9 +100,9 @@
                         <p>
                             <img src="../figures/01-SimpleMolecularSimulation/main_image.png"
                             style="width:100%" alt="Responsive image"/>
-                            <small style="color:#6B6B6B">
+                            <p style="color:#6B6B6B">
                             Figure: a binary fluid in a 2D box at 3 different times
-                            </small>
+                            </p>
                         </p>
                         <p>
                             <b>The objective of this tutorial</b> is to use the
@@ -100,7 +110,7 @@
                             a simple molecular dynamics simulation: a liquid solution of water mixed with
                             sodium (Na<sup>+</sup>) and sulfate (SO<sub>4</sub><sup>2-</sup>) ions.
                             This tutorial illustrates several major ingredients of
-                            molecular dynamics simulations, such as energy minimisation, 
+                            molecular dynamics simulations, such as energy minimization, 
                             NVT and NPT equilibration, integration of the equations of motion,
                             and trajectory visualisation.
                         </p>
@@ -222,10 +232,10 @@
                         <p>
                             <img src="../figures/01-Na2SO4solution/system_step0.png"
                             style="width:33%" alt="Responsive image"/>
-                            <small style="color:#6B6B6B">
+                            <p style="color:#6B6B6B">
                             Figure: SO<sub>4</sub><sup>2-</sup> ions (in yellow and red) and Na<sub>+</sub> ions (blue) 
                             in water (red and white). 
-                            </small>
+                            </p>
                         </p>
                         <p>
                             As can be seen in this figure, the water molecules are arranged in a quite unrealistic regular manner, with all 
@@ -285,8 +295,9 @@ SOL 875</code></pre>
                         </p>
                     </section>
                     <!-- SECTION 2 -->
-                    <section id="minimisation">
-                        <h2>Energy minimisation</h2>
+                    <br><br>
+                    <section id="minimization">
+                        <h2>Energy minimization</h2>
                         <p>  
                             It is clear from the current conf file (see the previous image) that the atoms are currently in a 
                             quite unphysical configuration. It would be risky to directly perform a molecular dynamics simulation,
@@ -302,15 +313,13 @@ SOL 875</code></pre>
 nsteps = 5000</code></pre> 
                         </p>
                         <p>
-                            These commands specify to GROMACS that the integrator to be used is the speepest-descent, which 
-                            move the atom according the largest forces [VERIFY] until one stopping criterial is reached. 
-                            Then we specify a minimum number os steps to perform [GIVE PRECISION].<br><br>
+                            These commands specify to GROMACS that the algorithm to be used is the speepest-descent, which move 
+                            the atoms following the direction of the largest forces until 1 stopping criterial is reached. Then we specify the maximum number os steps to perform.<br><br>
                             In addition, we would like to be able to visualize the trajectory of the atoms during the 
                             minimization, so let us add the following command to the input file in order to 
                             print the atoms positions every 10 steps:
                             <pre><code>nstxout = 10</code></pre> 
                         </p>
-                        [[[ ALSO MAKE THE WATER FLEXIBLE MAY BE ?]]]
                         <p>
                             We now have a very minimalist input script, let us try it.
                             From the terminal, type:
@@ -318,8 +327,10 @@ nsteps = 5000</code></pre>
 gmx mdrun -v -deffnm min</code></pre> 
                         </p>
                         <p>
-                            [GIVE QUICK EXPLANATION]
+                            The first comand (grommp) is preprocessing the files in order to prepare the simulation. The grommp command also check the validity of the files. Using the '-f', '-c', and '-p' keywords, we specify which input, configuration, and topology files must be used.
+                            The other keywords '-o', '-pp', and '-po' are here to speficy the names of the output that will be produced during the run.
                             <br><br>
+                            The second command (mdrun) is the engine performing the computation from the preprocessed files (reconised thank to the -deffnm keyword). The '-v' option is here to turnon the verbose and have more information printed in te terminal.                             <br><br>
                             If everything goes according to the plan, you should see something like :
                             <pre><code>Steepest Descents converged to machine precision in 824 steps,
 but did not reach the requested Fmax < 10.
@@ -335,7 +346,7 @@ Norm of force     =  4.6640654e+01</code></pre>
                             resemble:
                             <img src="../figures/01-Na2SO4solution/system_step0.png"
                             style="width:33%" alt="Responsive image"/>
-                            <small style="color:#6B6B6B">[Add gif here]</small>
+                            <p style="color:#6B6B6B">[Add gif here]</p>
                         </p>
                         <p>
                             One can see that the molecules reorient themselves into more energetically favorable positions, and that 
@@ -352,21 +363,22 @@ Norm of force     =  4.6640654e+01</code></pre>
                         <p>
                             <img src="../figures/01-Na2SO4solution/epotmin.png"
                             style="width:33%" alt="Responsive image"/>
-                            <small style="color:#6B6B6B">Evolution of the potential energy as a function of the 
-                            number of steps during energy minimization.</small>
+                            <p style="color:#6B6B6B">Evolution of the potential energy as a function of the 
+                            number of steps during energy minimization.</p>
                         </p>
                         <p>
                             <b>Observation:</b> One can see from the energy plot that the potential energy is initially huge and positive, 
                             which is the consequence of atoms being too close from one another, and to molecules being 
-                            wrongly oriented. As the minimisation progresses, the potential energy rapidly decreases and reach a large and 
+                            wrongly oriented. As the minimization progresses, the potential energy rapidly decreases and reaches a large and 
                             negative value, which is usually a good sign as it indicates that the atoms are now in an energetically favorable configuration.
                         </p>
                         <p>
-                            The system is now ready for the molecular dynamics.
+                            The system is now ready for the molecular dynamics simulation.
                         </p>
                     </section>
                     <!-- SECTION 2 -->
-                    <section id="minimisation">
+                    <br><br>
+                    <section id="minnvt">
                         <h2>Minimalist NVT input file</h2>
                         <p>
                             Let us first perform a small (20 picoseconds) equilibration in the NVT ensemble, where the number of atom (N),
@@ -377,7 +389,7 @@ nsteps = 20000
 dt = 0.001</code></pre>
                         </p>
                         <p>
-                            Here the molecular dynamics (md) integrator is used [IS IT VERLET], and a number of 20k
+                            Here the molecular dynamics (md) integrator is used (leapfrog algorithm), and a number of 20000
                             steps with timestep (dt) 0.001 ps is requested. Let us print the trajectory in a xtc file
                             every 1 ps by adding:
                             <pre><code>nstxout-compressed = 1000</code></pre>
@@ -405,26 +417,112 @@ tau-t = 0.5</code></pre>
 gmx mdrun -v -deffnm nvt</code></pre>
                         </p>
                         <p>   
-                            Where '-c min.gro' ensures that the previously minimized configuration is used as a starting point.  
-                            Let us ensure that the system temperature indeed reached the value of 360 K by using the energy
+                            Where '-c min.gro' ensures that the previously minimized configuration is used as a starting point.
+                            <br><br>
+                            After the completion of the simulation, we can ensure that the system temperature 
+                            indeed reached the value of 360 K by using the energy
                             command of gromacs. Type:  
                             <pre><code>gmx energy -f nvt.edr -o Tnvt.xvg</code></pre>
                         </p>
                         <p>
-                            and choose 'temperature'. The temperature start from 0, which was expected as the atoms 
-                            have no velocity during a minimisation step, and reaches the requested temperature of 360 K after 
+                            and choose 'temperature'. The temperature starts from 0, which was expected since the atoms 
+                            have no velocity during a minimization step, and reaches the requested temperature of 360 K after 
                             a duration of a few picosecond, in agreement with the imposed damping time (tau-t = 0.5 ps):
                         </p>
                         <p>
                             <img src="../figures/01-Na2SO4solution/Tnvt.png"
                             style="width:33%" alt="Responsive image"/>
-                            <small style="color:#6B6B6B">Evolution of the temperature as a function of the 
-                            time during the NVT equilibration.</small>
-                        </p>
-
+                            <p style="color:#6B6B6B">Evolution of the temperature as a function of the 
+                            time during the NVT equilibration.</p>
                         </p>
                     </section>
+                    <!-- SECTION 3 -->
                     <br><br>
+                    <section id="impnvt">
+                        <h2>Improved NVT</h2>
+                        <p>
+                            So far, a very few commands were placed in the input file, meaning that most of the 
+                            instruction have been taken by GROMACS from the default parameters. You can find
+                            what parameters were used during the last nvt run by opening the new nvt.mpd file 
+                            that has been created (not in the 'input/'' folder, but in the main folder).
+                            <br><br>
+                            Exploring this file, one can see for instance that plain cut-off Coulomb interactions have been 
+                            used: 
+                            <pre><code>; Method for doing electrostatics
+coulombtype = Cut-off</code></pre>
+                            </p>
+                            <p>
+                                For this system, long range Coulomb interaction is a better choice.
+                                Therefore, let us improve the NVT step by specifying more options in
+                                the input file. 
+                                <br><br>
+                                First, in nvt.mdp, let us impose the use of the long-range Fast smooth Particle-Mesh 
+                                Ewald (SPME) electrostatics with Fourier spacing of 0.1 nm, order of 4, and 
+                                cut-off of 4:
+                                <pre><code>coulombtype = pme
+fourierspacing = 0.1
+pme-order = 4
+rcoulomb = 1.0</code></pre>
+                            </p>
+                            <p>
+                                <b>Note: </b> With PME, the cut-off specifies which interactions are treated with 
+                                Fourier transforms.
+                                <br><br>
+                                Let us also specify the van der Waals interaction:
+                                <pre><code>vdw-type = Cut-off
+rvdw = 1.0</code></pre>
+                            </p>
+                            <p>
+                                as well as the constraint algorithm for the hydrogen bonds of the water molecules:
+                                <pre><code>constraint-algorithm = lincs
+constraints = hbonds
+continuation = no</code></pre>
+                            </p>
+                            <p>
+                                Let us also perform separate temperature baths (for water and ions=non-water respectively):
+                                <pre><code>tcoupl = v-rescale
+tc-grps = Water non-Water
+tau-t = 0.5 0.5
+ref-t = 360 360</code></pre>
+                            </p>
+                                Let us also specify neighbor searching parameters:
+                            <p>
+                                <pre><code>cutoff-scheme = Verlet
+nstlist = 10
+ns_type = grid</code></pre>
+                            </p>
+                                give an initial kick to the atom (to that the initial velocity is 
+                                close to the desired value):
+                            <p>
+                                <pre><code>gen-vel = yes
+gen-temp = 360</code></pre>
+                            </p>
+                            <p>
+                                and let us remove center of mass translational velocity of the 
+                                whose system:
+                                <pre><code>comm_mode = linear
+comm_grps = system</code></pre>
+                            </p>
+                            <p>
+                                Run the new version of the input script. One obvious difference with the 
+                                previous (minimalist) NVT run is the temperature at the beginning of the 
+                                run (orange curve). In addition, the final temperature is closer to the 
+                                desired temperature.
+                            </p>
+                            <p>
+                                <img src="../figures/01-Na2SO4solution/Tnvt_improved.png"
+                                style="width:33%" alt="Responsive image"/>
+                                <p style="color:#6B6B6B">Evolution of the temperature as a function of the 
+                                time during the NVT equilibration. Blue curve is from the minimalist NVT input file, and the 
+                                orange curve is from the improved NVT input file. </p>
+                            </p>
+                    </section>
+
+
+
+
+
+
                     <!-- SECTION N -->
                     <section id="further">
                         <h2>Going further with exercises</h2>
@@ -435,9 +533,9 @@ gmx mdrun -v -deffnm nvt</code></pre>
                         + additional LAMMPS content.
                         </p>
                         <br>
-                        <h4><b>Preamble : on the importance of energy minimisation</b></h4>
+                        <h4><b>Preamble :</b></h4>
                         <p>
-                        A good way to master 
+                        Text here...
                         </p>
 
                         <p class="alert alert-info">
