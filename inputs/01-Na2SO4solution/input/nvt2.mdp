@@ -1,9 +1,12 @@
-;======================== running ============= ; description
-integrator = md ; leap-frog algorithm for integrating Newton’s equations of motion.
-nsteps = 200000 ; maximum number of steps to integrate or minimize (2 ns)
-dt = 0.001 ; time step for integration (1 fs)
+integrator = md
+nsteps = 20000
+dt = 0.001
+
+
 comm_mode = linear ; remove center of mass translation
 comm_grps = system ; group(s) for center of mass motion removal
+gen-vel = yes ; generate velocities according to a Maxwell distribution
+gen-temp = 360 ; temperature for Maxwell distribution (K)
 
 ;======================== neighbor searching == ; description
 cutoff-scheme = Verlet ; generate a pair list with buffering
@@ -28,7 +31,7 @@ rcoulomb = 1.0 ; distance for the Coulomb cut-off (nm)
 ; ======================= constraints ========= ; description
 constraint-algorithm = lincs ; more stable and faster than SHAKE
 constraints = hbonds ; convert the bonds with H-atoms to constraints
-continuation = yes ; apply or not constraints to the start configuration
+continuation = no ; apply or not constraints to the start configuration
 
 ; ======================= temp. coupling ======= ; description
 tcoupl = v-rescale ; Berendsen + stochastic term = proper canonical ensemble

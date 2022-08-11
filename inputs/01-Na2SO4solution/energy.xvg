@@ -1,0 +1,45 @@
+# This file was created Wed Aug 10 23:09:16 2022
+# Created by:
+#              :-) GROMACS - gmx energy, 2020.1-Ubuntu-2020.1-1 (-:
+# 
+# Executable:   /usr/bin/gmx
+# Data prefix:  /usr
+# Working dir:  /media/simon/57A6-2AD4/gromacstutorials.github.io/inputs/01-Na2SO4solution
+# Command line:
+#   gmx energy -f nvt.edr
+# gmx energy is part of G R O M A C S:
+#
+# Great Red Oystrich Makes All Chemists Sane
+#
+@    title "GROMACS Energies"
+@    xaxis  label "Time (ps)"
+@    yaxis  label "(K)"
+@TYPE xy
+@ view 0.15, 0.15, 0.75, 0.85
+@ legend on
+@ legend box on
+@ legend loctype view
+@ legend 0.78, 0.8
+@ legend length 2
+@ s0 legend "Temperature"
+    0.000000    0.069013
+    1.000000  306.852875
+    2.000000  351.415802
+    3.000000  361.344086
+    4.000000  370.832916
+    5.000000  360.240784
+    6.000000  388.426880
+    7.000000  378.881744
+    8.000000  367.050262
+    9.000000  372.473053
+   10.000000  376.163300
+   11.000000  361.564331
+   12.000000  376.322021
+   13.000000  368.743042
+   14.000000  375.620911
+   15.000000  376.366577
+   16.000000  381.924530
+   17.000000  371.544403
+   18.000000  375.772644
+   19.000000  375.306702
+   20.000000  382.175751
