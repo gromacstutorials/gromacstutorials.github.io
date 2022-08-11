@@ -1,0 +1,45 @@
+# This file was created Thu Aug 11 12:59:40 2022
+# Created by:
+#                      :-) GROMACS - gmx energy, 2021.4 (-:
+# 
+# Executable:   /work/sgravelle/Softwares/gromacs-install/bin/gmx
+# Data prefix:  /work/sgravelle/Softwares/gromacs-install
+# Working dir:  /tikhome/sgravelle/Git/GROMACStutorials/gromacstutorials.github.io/inputs/01-Na2SO4solution
+# Command line:
+#   gmx energy -f nvt.edr -o Tnvt_test.xvg
+# gmx energy is part of G R O M A C S:
+#
+# Gromacs Runs On Most of All Computer Systems
+#
+@    title "GROMACS Energies"
+@    xaxis  label "Time (ps)"
+@    yaxis  label "(K)"
+@TYPE xy
+@ view 0.15, 0.15, 0.75, 0.85
+@ legend on
+@ legend box on
+@ legend loctype view
+@ legend 0.78, 0.8
+@ legend length 2
+@ s0 legend "Temperature"
+    0.000000  355.116425
+    1.000000  388.752808
+    2.000000  373.765350
+    3.000000  367.281891
+    4.000000  360.364227
+    5.000000  358.632080
+    6.000000  350.452332
+    7.000000  350.213501
+    8.000000  363.093628
+    9.000000  353.914215
+   10.000000  346.630157
+   11.000000  351.889587
+   12.000000  364.480957
+   13.000000  358.916321
+   14.000000  364.925079
+   15.000000  362.672394
+   16.000000  357.319641
+   17.000000  359.138794
+   18.000000  362.380066
+   19.000000  361.490906
+   20.000000  352.910645

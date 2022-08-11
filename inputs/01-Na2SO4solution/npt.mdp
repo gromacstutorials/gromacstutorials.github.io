@@ -1,8 +1,8 @@
 ;
-;	File 'nvt.mdp' was generated
+;	File 'npt.mdp' was generated
 ;	By user: sgravelle (1198)
 ;	On host: caribou
-;	At date: Thu Aug 11 12:59:07 2022
+;	At date: Thu Aug 11 11:54:22 2022
 ;
 ;	Created by:
 ;	                     :-) GROMACS - gmx grompp, 2021.4 (-:
@@ -11,7 +11,7 @@
 ;	Data prefix:  /work/sgravelle/Softwares/gromacs-install
 ;	Working dir:  /tikhome/sgravelle/Git/GROMACStutorials/gromacstutorials.github.io/inputs/01-Na2SO4solution
 ;	Command line:
-;	  gmx grompp -f input/nvt.mdp -c min.gro -p topol.top -o nvt -pp nvt -po nvt
+;	  gmx grompp -f input/npt.mdp -c nvt.gro -p topol.top -o npt -pp npt -po npt
 
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
@@ -25,7 +25,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 20000
+nsteps                   = 50000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -133,21 +133,21 @@ implicit-solvent         = no
 ; Temperature coupling  
 tcoupl                   = v-rescale
 nsttcouple               = -1
-nh-chain-length          = 10
+nhchainlength            = 1
 print-nose-hoover-chain-variables = no
 ; Groups to couple separately
-tc-grps                  = System
+tc-grps                  = Water non-Water
 ; Time constant (ps) and reference temperature (K)
-tau-t                    = 0.5
-ref-t                    = 360
+tau-t                    = 0.5 0.5
+ref-t                    = 360 360
 ; pressure coupling     
-pcoupl                   = No
-pcoupltype               = Isotropic
+pcoupl                   = berendsen
+Pcoupltype               = isotropic
 nstpcouple               = -1
 ; Time constant (ps), compressibility (1/bar) and reference P (bar)
-tau-p                    = 1
-compressibility          = 
-ref-p                    = 
+tau_p                    = 1.0
+compressibility          = 4.5e-5
+ref_p                    = 1.0
 ; Scaling of reference coordinates, No, All or COM
 refcoord-scaling         = No
 
@@ -167,8 +167,8 @@ annealing-time           =
 annealing-temp           = 
 
 ; GENERATE VELOCITIES FOR STARTUP RUN
-gen-vel                  = yes
-gen-temp                 = 360
+gen-vel                  = no
+gen-temp                 = 300
 gen-seed                 = -1
 
 ; OPTIONS FOR BONDS    
@@ -176,7 +176,7 @@ constraints              = hbonds
 ; Type of constraint algorithm
 constraint-algorithm     = lincs
 ; Do not constrain the start configuration
-continuation             = no
+continuation             = yes
 ; Use successive overrelaxation to reduce the number of shake iterations
 Shake-SOR                = no
 ; Relative tolerance of shake

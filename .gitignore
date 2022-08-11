@@ -12,4 +12,5 @@
 **/nvt.gro
 **/npt.gro
 **/temp/
-
+**/*#*
+**/step*pdb
