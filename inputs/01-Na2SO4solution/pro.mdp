@@ -2,7 +2,7 @@
 ;	File 'pro.mdp' was generated
 ;	By user: sgravelle (1198)
 ;	On host: caribou
-;	At date: Thu Aug 11 11:54:36 2022
+;	At date: Thu Aug 11 18:29:09 2022
 ;
 ;	Created by:
 ;	                     :-) GROMACS - gmx grompp, 2021.4 (-:
@@ -25,7 +25,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 200000
+nsteps                   = 100000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -65,11 +65,11 @@ nstxout                  = 0
 nstvout                  = 0
 nstfout                  = 0
 ; Output frequency for energies to log file and energy file
-nstlog                   = 1000
+nstlog                   = 100
 nstcalcenergy            = 100
-nstenergy                = 1000
+nstenergy                = 100
 ; Output frequency and precision for .xtc file
-nstxout-compressed       = 1000
+nstxout-compressed       = 5000
 compressed-x-precision   = 1000
 ; This selects the subset of atoms for the compressed
 ; trajectory file. You can select multiple groups. By
@@ -133,7 +133,7 @@ implicit-solvent         = no
 ; Temperature coupling  
 tcoupl                   = v-rescale
 nsttcouple               = -1
-nhchainlength            = 1
+nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
 ; Groups to couple separately
 tc-grps                  = Water non-Water
@@ -167,8 +167,8 @@ annealing-time           =
 annealing-temp           = 
 
 ; GENERATE VELOCITIES FOR STARTUP RUN
-gen-vel                  = no
-gen-temp                 = 300
+gen-vel                  = yes
+gen-temp                 = 360
 gen-seed                 = -1
 
 ; OPTIONS FOR BONDS    
@@ -176,7 +176,7 @@ constraints              = hbonds
 ; Type of constraint algorithm
 constraint-algorithm     = lincs
 ; Do not constrain the start configuration
-continuation             = yes
+continuation             = no
 ; Use successive overrelaxation to reduce the number of shake iterations
 Shake-SOR                = no
 ; Relative tolerance of shake

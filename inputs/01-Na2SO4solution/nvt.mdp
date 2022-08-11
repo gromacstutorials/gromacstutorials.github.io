@@ -2,7 +2,7 @@
 ;	File 'nvt.mdp' was generated
 ;	By user: sgravelle (1198)
 ;	On host: caribou
-;	At date: Thu Aug 11 12:59:07 2022
+;	At date: Thu Aug 11 18:28:57 2022
 ;
 ;	Created by:
 ;	                     :-) GROMACS - gmx grompp, 2021.4 (-:
@@ -136,10 +136,10 @@ nsttcouple               = -1
 nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
 ; Groups to couple separately
-tc-grps                  = System
+tc-grps                  = Water non-Water
 ; Time constant (ps) and reference temperature (K)
-tau-t                    = 0.5
-ref-t                    = 360
+tau-t                    = 0.5 0.5
+ref-t                    = 360 360
 ; pressure coupling     
 pcoupl                   = No
 pcoupltype               = Isotropic
