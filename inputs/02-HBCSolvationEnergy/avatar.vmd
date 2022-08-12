@@ -12,9 +12,9 @@ proc vmdrestoremymaterials {} {
     }
   }
   material change ambient Opaque 0.000000
-  material change diffuse Opaque 0.650000
-  material change specular Opaque 0.500000
-  material change shininess Opaque 0.534020
+  material change diffuse Opaque 0.540000
+  material change specular Opaque 0.230000
+  material change shininess Opaque 0.210000
   material change mirror Opaque 0.000000
   material change opacity Opaque 1.000000
   material change outline Opaque 0.000000
@@ -25,7 +25,7 @@ proc vmdrestoremymaterials {} {
   material change specular Transparent 0.500000
   material change shininess Transparent 0.534020
   material change mirror Transparent 0.000000
-  material change opacity Transparent 0.080000
+  material change opacity Transparent 0.150000
   material change outline Transparent 0.000000
   material change outlinewidth Transparent 0.000000
   material change transmode Transparent 0.000000
@@ -344,7 +344,7 @@ mol new solvated.gro type gro first 0 last -1 step 1 filebonds 1 autobonds 1 wai
 mol addfile nvt.xtc type xtc first 0 last -1 step 1 filebonds 1 autobonds 1 waitfor all
 mol addfile npt.xtc type xtc first 0 last -1 step 1 filebonds 1 autobonds 1 waitfor all
 mol delrep 0 top
-mol representation VDW 0.300000 12.000000
+mol representation VDW 0.300000 47.000000
 mol color Name
 mol selection {type H1 H2 H3 H4 H5 H6 H7 H8 H9 H10 H11 H12 H13 H14 H15 H16 H17 H18}
 mol material Opaque
@@ -378,7 +378,7 @@ mol clipplane center 5 0 top {0.0 0.0 0.0}
 mol clipplane color  5 0 top {0.5 0.5 0.5 }
 mol clipplane normal 5 0 top {0.0 0.0 1.0}
 mol clipplane status 5 0 top {0}
-mol representation DynamicBonds 1.600000 0.300000 12.000000
+mol representation DynamicBonds 1.600000 0.300000 47.000000
 mol color Name
 mol selection {resname FJEW}
 mol material Opaque
@@ -447,9 +447,9 @@ mol clipplane color  5 2 top {0.5 0.5 0.5 }
 mol clipplane normal 5 2 top {0.0 0.0 1.0}
 mol clipplane status 5 2 top {0}
 mol showrep top 2 0
-mol representation VDW 0.800000 12.000000
+mol representation VDW 0.800000 57.000000
 mol color Type
-mol selection {resname SOL and within 4 of resname FJEW}
+mol selection {within 5 of resname FJEW}
 mol material Opaque
 mol addrep top
 mol selupdate 3 top 0
@@ -517,9 +517,9 @@ mol clipplane color  5 4 top {0.5 0.5 0.5 }
 mol clipplane normal 5 4 top {0.0 0.0 1.0}
 mol clipplane status 5 4 top {0}
 mol showrep top 4 0
-mol representation QuickSurf 1.400000 1.300000 0.485000 3.000000
+mol representation QuickSurf 1.300000 0.600000 0.700000 3.000000
 mol color Name
-mol selection {(type OW or resname FJEW) and within 3.5 of resname FJEW}
+mol selection {type OW or resname FJEW}
 mol material Transparent
 mol addrep top
 mol selupdate 5 top 0
@@ -551,9 +551,10 @@ mol clipplane center 5 5 top {0.0 0.0 0.0}
 mol clipplane color  5 5 top {0.5 0.5 0.5 }
 mol clipplane normal 5 5 top {0.0 0.0 1.0}
 mol clipplane status 5 5 top {0}
-mol representation VDW 0.700000 12.000000
+mol showrep top 5 0
+mol representation VDW 0.900000 57.000000
 mol color Type
-mol selection {(type OW) and within 4.5 of resname FJEW}
+mol selection {resid 296 153 120 4 and (type OW)}
 mol material Opaque
 mol addrep top
 mol selupdate 6 top 0
@@ -585,10 +586,9 @@ mol clipplane center 5 6 top {0.0 0.0 0.0}
 mol clipplane color  5 6 top {0.5 0.5 0.5 }
 mol clipplane normal 5 6 top {0.0 0.0 1.0}
 mol clipplane status 5 6 top {0}
-mol showrep top 6 0
-mol representation VDW 0.700000 12.000000
+mol representation VDW 0.600000 57.000000
 mol color Type
-mol selection {(type HW1 HW2) and within 2 of resname FJEW}
+mol selection {resid 296 153 120 4 and (type HW1 HW2)}
 mol material Opaque
 mol addrep top
 mol selupdate 7 top 0
@@ -620,9 +620,8 @@ mol clipplane center 5 7 top {0.0 0.0 0.0}
 mol clipplane color  5 7 top {0.5 0.5 0.5 }
 mol clipplane normal 5 7 top {0.0 0.0 1.0}
 mol clipplane status 5 7 top {0}
-mol showrep top 7 0
 mol rename top solvated.gro
-set viewpoints([molinfo top]) {{{1 0 0 -15} {0 1 0 -15} {0 0 1 -15} {0 0 0 1}} {{-0.932548 -0.123096 0.339394 0} {-0.316418 0.731334 -0.604168 0} {-0.173842 -0.67081 -0.720963 0} {0 0 0 1}} {{0.110296 0 0 0} {0 0.110296 0 0} {0 0 0.110296 0} {0 0 0 1}} {{1 0 0 0.350001} {0 1 0 0.23} {0 0 1 0} {0 0 0 1}}}
+set viewpoints([molinfo top]) {{{1 0 0 -15} {0 1 0 -15} {0 0 1 -15} {0 0 0 1}} {{0.789928 -0.613193 -0.00141629 0} {0.554335 0.713115 0.429154 0} {-0.262142 -0.339789 0.903227 0} {0 0 0 1}} {{0.191127 0 0 0} {0 0.191127 0 0} {0 0 0.191127 0} {0 0 0 1}} {{1 0 0 -0.6} {0 1 0 -0.3} {0 0 1 0} {0 0 0 1}}}
 lappend viewplist [molinfo top]
 set topmol [molinfo top]
 # done with molecule 1
@@ -655,7 +654,8 @@ color scale colors WBlk {1.0 1.0 1.0} {0.5 0.5 0.5} {0.0 0.0 0.0}
     {color Display {BackgroundTop} black}
     {color Display {BackgroundBot} blue2}
     {color Display {FPS} white}
-    {color Name {C} gray}
+    {color Name {O} gray}
+    {color Name {C} pink}
     {color Name {LPA} green}
     {color Name {LPB} green}
     {color Name {M} pink}
@@ -792,7 +792,7 @@ color scale colors WBlk {1.0 1.0 1.0} {0.5 0.5 0.5} {0.0 0.0 0.0}
   color change rgb 5 0.5 0.5 0.20000000298023224
   color change rgb 6 0.6000000238418579 0.6000000238418579 0.6000000238418579
   color change rgb 7 0.0 1.0 0.0
-  color change rgb 9 1.0 0.0 0.0
+  color change rgb 9 0.5299999713897705 0.6800000071525574 0.7599999904632568
   color change rgb 11 0.6499999761581421 0.0 0.6499999761581421
   color change rgb 12 0.5 0.8999999761581421 0.4000000059604645
   color change rgb 13 0.8999999761581421 0.4000000059604645 0.699999988079071
