@@ -10,5 +10,5 @@ All the files generated during the tutorials can be found in the [input/](inputs
 
 <p float="left">
   <a href="https://gromacstutorials.github.io/tutorials/02-HBCSolvationEnergy.html">
-  <img src="docs/figures/02-HBCSoltvationEnergy/avatar.jpg" width="32%" /></a>
+  <img src="docs/figures/02-HBCSolvationEnergy/avatar.jpg" width="32%" /></a>
 </p>
