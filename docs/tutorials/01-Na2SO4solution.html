@@ -32,7 +32,7 @@
             <header id="header" class="sticky-top">
                 <nav class="primary-menu navbar navbar-expand-lg navbar-dropdown-dark">
                     <div class="container-fluid">
-                        <a class="logo ml-md-3" href="../index.html" title="LAMMPS tutorials">
+                        <a class="logo ml-md-3" href="../index.html" title="GROMACS tutorials">
                         <img src="../figures/logo.png"
                         alt="GROMACS tutorials" height="60"/>
                         </a>
@@ -590,9 +590,6 @@ dt = 0.001
 comm_mode = linear
 comm_grps = system
 
-gen-vel = yes
-gen-temp = 360
-
 cutoff-scheme = Verlet
 nstlist = 10
 ns_type = grid
@@ -626,8 +623,10 @@ compressibility = 4.5e-5</code></pre>
                         </p>
                         <p>
                             The main difference with the previous NVT script, is the addition of the isotropic Berendsen pressure coupling with a 
-                            target pressure of 1 bar. Another difference is the addition of the 'nstlog' and 'nstenergy' commands to 
-                            control the frequency at which information are printed in the log file and in the energy file (edr).
+                            target pressure of 1 bar. Another differences are the addition of the 'nstlog' and 'nstenergy' commands to 
+                            control the frequency at which information are printed in the log file and in the energy file (edr),
+                            and the removing the 'gen-vel' commands.
+                            <br><br>
                             Run it using : 
                             <pre><code>gmx grompp -f inputs/npt.mdp -c nvt.gro -p topol.top -o npt -pp npt -po npt
 gmx mdrun -v -deffnm npt</code></pre>
