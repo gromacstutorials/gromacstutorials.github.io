@@ -73,26 +73,17 @@
                         <a class="nav-link active" href="#intro">Getting Started</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#installation">Installation</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link active" href="#input">Input files</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" href="#minimization">Energy minimization</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#minnvt">Minimalist NVT</a>
-                    </li>
+                        <a class="nav-link active" href="#eq">Equilibration</a>
+                    </li>      
                     <li class="nav-item">
-                        <a class="nav-link active" href="#impnvt">Improved NVT</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#npt">NPT</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#prod">Diffusion coefficient measurement</a>
-                    </li>
+                        <a class="nav-link active" href="#solvation">Solvation energy</a>
+                    </li>      
                     <li class="nav-item">
                         <a class="nav-link active" href="#further">Going further</a>
                     </li>
@@ -131,7 +122,7 @@
                     <br><br>
                     <!-- SECTION 1 -->
                     <section id="input">
-                        <h2>Input files for HBC</h2>
+                        <h2>Input files</h2>
                         <p>
                             Create two folders named 'preparation/' and 'solvation' in the same directory.
                             Go to 'preparation/'. 
@@ -265,8 +256,8 @@ gmx mdrun -v -deffnm min</code></pre>
                             'gmx trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole' </p>
                         </p>
                     <br><br>
-                    <section id="minnvt">
-                        <h2>First equilibration</h2>
+                    <section id="eq">
+                        <h2>Equilibration</h2>
                         <p>
                             Similar to what we did in the previous <a href="01-Na2SO4solution.html">tutorial</a>,
                             let us perform successively a NVT and a NPT relaxation. 
@@ -290,9 +281,8 @@ gmx mdrun -v -deffnm npt</code></pre>
                         </p>
 
                     </section>
-                    <!-- SECTION 5 -->
+                    <!-- SECTION 3 -->
                     <br><br>
-                    <!-- SECTION 6 -->
                     <section id="solvation">
                         <h2>Solvation energy calculation</h2>
                         <p>
@@ -412,10 +402,7 @@ done</code></pre>
                         </p>
 
                     </section>
-
-
-
-
+                    <!--Section 4-->
                     <br><br>
                     <section id="further">
                         <h2>Going further with exercises</h2>
@@ -426,11 +413,9 @@ done</code></pre>
                         + additional LAMMPS/GROMACS content.
                         </p>-->
                         <br>
-                        <h4><b></b></h4>
+                        <h4><b>Solvation energy of another molecule</b></h4>
                         <p>
-                        
-                        <!-- gmx rdf -f pro.xtc -s pro.tpr -o rdf_whole.xvg -> choose either 
-                        system twice, or Na then SO4 -->
+                            Choose another molecule on the atb and calculate its free energy of solvation using the same method.
                         </p>
                         
 
@@ -439,27 +424,6 @@ done</code></pre>
                         to contact me.
                         </p>
                     </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
             <!-- Footer -->
