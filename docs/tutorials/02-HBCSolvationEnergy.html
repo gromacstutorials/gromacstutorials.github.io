@@ -218,7 +218,7 @@ SOL 887</code></pre>
                             Copy the following 
                             lines into min.mdp: 
                             <pre><code>integrator = steep
-nsteps = 5000
+nsteps = 50
 
 nstxout = 10
 
@@ -239,8 +239,8 @@ constraints = hbonds</code></pre>
                         </p>
                         <p>
                             All these lines have been seen in the previous tutorial. In short, this script will 
-                            perform a steepest decent by updating the atom positions according the the 
-                            largest forces directions, until the energy and maximum forces reach a reasonable value. 
+                            perform a steepest descent by updating the atom positions according the the 
+                            largest forces directions, until the energy and maximum force reach a reasonable value. 
                             <br><br>
                             Apply the minimisation to the solvated box using :
                             <pre><code>gmx grompp -f inputs/min.mdp -c solvated.gro -p topol.top -o min -pp min -po min -maxwarn 1
@@ -294,7 +294,7 @@ gmx mdrun -v -deffnm npt</code></pre>
                     <br><br>
                     <!-- SECTION 6 -->
                     <section id="solvation">
-                        <h2>Creation of the 21 simulations</h2>
+                        <h2>Solvation energy calculation</h2>
                         <p>
                             We are done with the first equilibration of the system. We are now going to perform 
                             the solvation free energy calculation, for which 21 independent simulations 
@@ -306,8 +306,8 @@ gmx mdrun -v -deffnm npt</code></pre>
                         <p>
                         <p>
                             Within the 'solvation/' folder, create an 'inputs/' folders. Copy the two 
-                            following <a href="../../inputs/02-HBCSolvationEnergy/solvation/inputs/npt_bis.mdp" download target="_blank">npt_bis.mdp</a>
-                            and <a href="../../inputs/02-HBCSolvationEnergy/solvation/inputs/pro.mdp" download target="_blank">pro.mdp</a> files in 
+                            following <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/02-HBCSolvationEnergy/solvation/inputs/npt_bis.mdp" download target="_blank">npt_bis.mdp</a>
+                            and <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/02-HBCSolvationEnergy/solvation/inputs/pro.mdp" download target="_blank">pro.mdp</a> files in 
                             it. 
                         </p>
                         <p>
@@ -331,7 +331,7 @@ couple-moltype = FJEW</code></pre>
                             The nstdhdl control the frequency at which information are printed in a xvg file during the production run. 
                         </p>
                         <p>
-                            Copy as well the following <a href="../../inputs/02-HBCSolvationEnergy/solvation/topol.top" download target="_blank">topol.top</a>
+                            Copy as well the following <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/02-HBCSolvationEnergy/solvation/topol.top" download target="_blank">topol.top</a>
                             file within the 'solvation/' folder (the only difference with the previous one if the path to the ff folder).
                         </p>
                         <p>
