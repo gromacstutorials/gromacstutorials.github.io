@@ -210,7 +210,7 @@
                         <h4>1) The configuration file (.gro)</h4>
                         <p>
                             For the present simulation, the initial atoms positions and box size are given in a conf.gro file (Gromos87 format) that you can download
-                            by clicking <a target="_blank" href="../../inputs/01-Na2SO4solution/conf.gro">here</a>. Save the conf.gro file 
+                            by clicking <a target="_blank" href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/01-Na2SO4solution/conf.gro">here</a>. Save the conf.gro file 
                             in a folder. The file looks like that:
                             <pre><code>Na2SO4 solution
 3557
@@ -257,7 +257,7 @@
                         <h4>2) The topology file (.top)</h4>
                         <p>
                             The topology file contains information about the interactions of the different atoms and molecules. 
-                            You can download it by clicking <a target="_blank" href="../../inputs/01-Na2SO4solution/topol.top">here</a>.
+                            You can download it by clicking <a target="_blank" href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/01-Na2SO4solution/topol.top">here</a>.
                             Place it in the same folder as the conf.gro file. The top file looks like that:
                             <pre><code>#include "ff/forcefield.itp"
 #include "ff/h2o.itp"
@@ -275,10 +275,10 @@ SOL 875</code></pre>
                         <p>
                             The 4 first lines are used to include the values the parameters given in separate files 
                             (its better for clarity). Create a folder named 'ff/', and copy 
-                            <a target="_blank" href="../../inputs/01-Na2SO4solution/ff/forcefield.itp">forcefield.itp</a>,
-                            <a target="_blank" href="../../inputs/01-Na2SO4solution/ff/h2o.itp">h2o.itp</a>,
-                            <a target="_blank" href="../../inputs/01-Na2SO4solution/ff/na.itp">na.itp</a>, and
-                            <a target="_blank" href="../../inputs/01-Na2SO4solution/ff/so4.itp">so4.itp</a> in it. 
+                            <a target="_blank" href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/01-Na2SO4solution/ff/forcefield.itp">forcefield.itp</a>,
+                            <a target="_blank" href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/01-Na2SO4solution/ff/h2o.itp">h2o.itp</a>,
+                            <a target="_blank" href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/01-Na2SO4solution/ff/na.itp">na.itp</a>, and
+                            <a target="_blank" href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/01-Na2SO4solution/ff/so4.itp">so4.itp</a> in it. 
                             These four files contain information about the atoms (names, masses,
                             changes, Lennard-Jones coefficients) and residues (bond and angular constraints).
                             <br><br>
@@ -399,7 +399,7 @@ Norm of force     =  4.6640654e+01</code></pre>
                             the epotmin.xvg file.                           
                             <br><br>
                             Let us plot it (xvg files can be easily openened using XmGrace, here I use pyplot and jupyter-notebook, find 
-                            all my plotting scripts for this tutorial <a href="../../inputs/01-Na2SO4solution/plot/" download>here</a>):
+                            all my plotting scripts for this tutorial <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/01-Na2SO4solution/plot/" download>here</a>):
                         </p>
                         <p>
                             <img src="../figures/01-Na2SO4solution/epotmin.png"
@@ -741,35 +741,11 @@ gmx mdrun -v -deffnm pro</code></pre>
                             style="width:33%" alt="Responsive image"/>
                             <p style="color:#6B6B6B">RDF extracted from the Na2SO4 solution.</p>
                         </p>
-
-
-
                         <p class="alert alert-info">
                         <a href="../miscellaneous/contact.html">Click here</a>
                         to contact me.
                         </p>
                     </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
             <!-- Footer -->
