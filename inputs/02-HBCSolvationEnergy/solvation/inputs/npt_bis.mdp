@@ -1,4 +1,4 @@
-integrator = md
+integrator = sd
 nsteps = 20000
 dt = 0.001
 
@@ -9,9 +9,9 @@ cutoff-scheme = Verlet
 nstlist = 10
 ns_type = grid
 
-nstlog = 100
-nstenergy = 100
-nstxout-compressed = 1000
+nstxout-compressed = 10000
+nstenergy = 1000
+nstlog = 1000
 
 vdw-type = Cut-off
 rvdw = 1.4
@@ -24,11 +24,10 @@ rcoulomb = 1.4
 constraint-algorithm = lincs
 constraints = hbonds
 
-tcoupl = v-rescale
-ld-seed = 48456
-tc-grps = Water non-Water
-tau-t = 0.5 0.5
-ref-t = 300 300
+tcoupl = no
+tc-grps = system
+tau-t = 0.5
+ref-t = 300
 
 pcoupl = berendsen
 Pcoupltype = isotropic

@@ -318,6 +318,12 @@ couple-moltype = FJEW</code></pre>
                             The nstdhdl control the frequency at which information are printed in a xvg file during the production run. 
                         </p>
                         <p>
+                            In addition, the stochastic integrator 'sd' is used instead 
+                            of 'md', as it provides a better sampling, which is crutial here, 
+                            particularly when the HBC and the water are not coupled.  
+
+                        </p>
+                        <p>
                             Copy as well the following <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/02-HBCSolvationEnergy/solvation/topol.top" download target="_blank">topol.top</a>
                             file within the 'solvation/' folder (the only difference with the previous one if the path to the ff folder).
                         </p>
@@ -387,16 +393,21 @@ done</code></pre>
                             <pre><code>total 0 - 20, DG -17.29 +/- 4.56</code></pre>
                         </p>
                         <p>
-                            The value of -17.3 kJ/mol is somewhat reasonable:
+                            The value of -17.3 kJ/mol is somewhat reasonable, if we compare with literature values
+                            (<a href="https://pubs.acs.org/doi/10.1021/acs.jced.0c00061" target="_blank">10.1021/acs.jced.0c00061</a>)
+                            for smaller aromatic molecule:
                         </p>
 
                         <p>         
                             <img src="../figures/02-HBCSolvationEnergy/literature.png" 
                             style="width:33%" alt="Gif minimization system"/> <!-- ffmpeg -i nvtnpt.gif -r 24 nvtnpt_slower.gif  -->
                             <p style="color:#6B6B6B">Comparison of the calculated free energy of solvation 
-                                with some other values for other similar graphene-like molecule. Results 
-                                are plotted as a function of the number of carbon atoms of the molecules.  
+                                with similar aromatic molecule (from (<a href="https://pubs.acs.org/doi/10.1021/acs.jced.0c00061" target="_blank">10.1021/acs.jced.0c00061</a>)). Results 
+                                are plotted as a function of the number of rings.   
                         </p>
+                        <p>
+
+                        </p> 
 
                     </section>
                     <!--Section 4-->
