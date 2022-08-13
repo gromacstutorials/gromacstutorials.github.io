@@ -1,5 +1,5 @@
 integrator = md
-nsteps = 50000
+nsteps = 20000
 dt = 0.001
 
 comm_mode = linear
@@ -14,12 +14,12 @@ nstenergy = 100
 nstxout-compressed = 1000
 
 vdw-type = Cut-off
-rvdw = 1.0
+rvdw = 1.4
 
 coulombtype = pme
 fourierspacing = 0.1
 pme-order = 4
-rcoulomb = 1.0
+rcoulomb = 1.4
 
 constraint-algorithm = lincs
 constraints = hbonds

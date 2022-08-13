@@ -9,3 +9,5 @@
 /work/sgravelle/Softwares/gromacs-install/bin/gmx grompp -f inputs/npt.mdp -c nvt.gro -p topol.top -o npt -pp npt -po npt -maxwarn 1
 /work/sgravelle/Softwares/gromacs-install/bin/gmx mdrun -v -deffnm npt
 
+#/work/sgravelle/Softwares/gromacs-install/bin/gmx grompp -f inputs/pro.mdp -c npt.gro -p topol.top -o pro -pp pro -po pro -maxwarn 1
+#/work/sgravelle/Softwares/gromacs-install/bin/gmx mdrun -v -deffnm pro

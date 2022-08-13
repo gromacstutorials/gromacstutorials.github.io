@@ -15,12 +15,12 @@ ns_type = grid
 nstxout-compressed = 1000
 
 vdw-type = Cut-off
-rvdw = 1.0
+rvdw = 1.4
 
 coulombtype = pme
 fourierspacing = 0.1
 pme-order = 4
-rcoulomb = 1.0
+rcoulomb = 1.4
 
 constraint-algorithm = lincs
 constraints = hbonds
