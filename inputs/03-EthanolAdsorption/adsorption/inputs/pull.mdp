@@ -29,3 +29,12 @@ ld-seed = 48456
 tc-grps = Water non-Water
 tau-t = 0.5 0.5
 ref-t = 300 300
+
+pull = yes
+pull_nstxout = 50
+pull_ngroups = 1
+pull_group1_name = ethanol_pull 
+pull_coord1_type = umbrella
+pull_coord1_origin = 0 0 0
+pull_coord1_k = 1000
+pull_coord1_dim = Y N N 

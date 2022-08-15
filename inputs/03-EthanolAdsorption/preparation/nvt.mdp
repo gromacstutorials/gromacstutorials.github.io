@@ -1,15 +1,15 @@
 ;
 ;	File 'nvt.mdp' was generated
-;	By user: unknown (1000)
-;	On host: mint2
-;	At date: Sun Aug 14 08:39:21 2022
+;	By user: sgravelle (1198)
+;	On host: caribou
+;	At date: Mon Aug 15 12:21:46 2022
 ;
 ;	Created by:
-;	             :-) GROMACS - gmx grompp, 2020.1-Ubuntu-2020.1-1 (-:
+;	                     :-) GROMACS - gmx grompp, 2021.4 (-:
 ;	
-;	Executable:   /usr/bin/gmx
-;	Data prefix:  /usr
-;	Working dir:  /media/simon/Simon/gromacstutorials.github.io/inputs/03-EthanolAdsorption
+;	Executable:   /work/sgravelle/Softwares/gromacs-install/bin/gmx
+;	Data prefix:  /work/sgravelle/Softwares/gromacs-install
+;	Working dir:  /tikhome/sgravelle/Git/GROMACStutorials/gromacstutorials.github.io/inputs/03-EthanolAdsorption/preparation
 ;	Command line:
 ;	  gmx grompp -f inputs/nvt.mdp -c min.gro -p topol.top -o nvt -pp nvt -po nvt -maxwarn 1
 
@@ -30,6 +30,8 @@ nsteps                   = 1000000
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
 simulation-part          = 1
+; Multiple time-stepping
+mts                      = no
 ; mode for center of mass motion removal
 comm_mode                = linear
 ; number of steps for center of mass motion removal
@@ -151,28 +153,8 @@ refcoord-scaling         = No
 
 ; OPTIONS FOR QMMM calculations
 QMMM                     = no
-; Groups treated Quantum Mechanically
+; Groups treated with MiMiC
 QMMM-grps                = 
-; QM method             
-QMmethod                 = 
-; QMMM scheme           
-QMMMscheme               = normal
-; QM basisset           
-QMbasis                  = 
-; QM charge             
-QMcharge                 = 
-; QM multiplicity       
-QMmult                   = 
-; Surface Hopping       
-SH                       = 
-; CAS space options     
-CASorbitals              = 
-CASelectrons             = 
-SAon                     = 
-SAoff                    = 
-SAsteps                  = 
-; Scale factor for MM charges
-MMChargeScaleFactor      = 1
 
 ; SIMULATED ANNEALING  
 ; Type of annealing for each temperature group (no/single/periodic)
