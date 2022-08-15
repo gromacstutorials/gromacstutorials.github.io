@@ -1,0 +1,19 @@
+integrator = steep
+nsteps = 5000
+
+nstxout = 5
+
+cutoff-scheme = Verlet
+nstlist = 10
+ns_type = grid
+
+vdw-type = Cut-off
+rvdw = 1.0
+
+coulombtype = pme
+fourierspacing = 0.1
+pme-order = 4
+rcoulomb = 1.0
+
+constraint-algorithm = lincs
+constraints = hbonds
