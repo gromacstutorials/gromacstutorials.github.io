@@ -1,0 +1,74 @@
+# This file was created Sun Aug 14 11:30:00 2022
+# Created by:
+#             :-) GROMACS - gmx density, 2020.1-Ubuntu-2020.1-1 (-:
+# 
+# Executable:   /usr/bin/gmx
+# Data prefix:  /usr
+# Working dir:  /media/simon/Simon/gromacstutorials.github.io/inputs/03-EthanolAdsorption/preparation
+# Command line:
+#   gmx density -f nvt.xtc -s nvt.tpr -b 490 -e 510 -d X -o density_500.xvg
+# gmx density is part of G R O M A C S:
+#
+# Gravel Rubs Often Many Awfully Cauterized Sores
+#
+@    title "Partial density"
+@    xaxis  label "Coordinate (nm)"
+@    yaxis  label "Density (kg m\S-3\N)"
+@TYPE xy
+@ view 0.15, 0.15, 0.75, 0.85
+@ legend on
+@ legend box on
+@ legend loctype view
+@ legend 0.78, 0.8
+@ legend length 2
+@ s0 legend "non-Water"
+       0.064                0
+       0.192                0
+        0.32                0
+       0.448                0
+       0.576                0
+       0.704                0
+       0.832                0
+        0.96                0
+       1.088                0
+       1.216         0.255405
+       1.344          9.40692
+       1.472          69.6038
+         1.6          233.272
+       1.728           311.35
+       1.856          272.222
+       1.984          118.684
+       2.112          42.3716
+        2.24          62.1739
+       2.368          92.6182
+       2.496          88.5963
+       2.624          133.945
+       2.752          179.393
+        2.88          148.928
+       3.008          85.8089
+       3.136          76.3904
+       3.264          104.035
+       3.392          137.043
+        3.52          170.242
+       3.648          101.013
+       3.776            72.87
+       3.904          127.115
+       4.032          66.2283
+        4.16          50.7342
+       4.288          99.6922
+       4.416          221.231
+       4.544          339.717
+       4.672          225.663
+         4.8          87.1086
+       4.928          7.64062
+       5.056                0
+       5.184                0
+       5.312                0
+        5.44                0
+       5.568                0
+       5.696                0
+       5.824                0
+       5.952                0
+        6.08                0
+       6.208                0
+       6.336                0

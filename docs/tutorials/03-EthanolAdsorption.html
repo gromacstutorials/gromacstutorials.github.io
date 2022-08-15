@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- HEAD -->
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width,
+        initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
+        <link href="../figures/favicon-32x32.png" rel="icon" />
+        <title>HBC free energy</title>
+        <meta name="description" content="HBC solvation free energy">
+        <meta name="author" content="Simon Gravelle">
+        <link rel="stylesheet" type="text/css"
+        href="../assets_tutorials/vendor/bootstrap/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css"
+        href="../assets_tutorials/vendor/font-awesome/css/all.min.css" />
+        <link rel="stylesheet" type="text/css"
+        href="../assets_tutorials/css/stylesheet.css" />
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-BFND91CYC2"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-BFND91CYC2');
+        </script>
+        <script id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </head>
+    <body data-spy="scroll" data-target=".idocs-navigation" data-offset="125">
+        <div id="main-wrapper">
+            <!-- HEADER -->
+            <header id="header" class="sticky-top">
+                <nav class="primary-menu navbar navbar-expand-lg navbar-dropdown-dark">
+                    <div class="container-fluid">
+                        <a class="logo ml-md-3" href="../index.html" title="GROMACS tutorials">
+                        <img src="../figures/logo.png"
+                        alt="GROMACS tutorials" height="60"/>
+                        </a>
+                        <div id="header-nav" class="collapse navbar-collapse justify-content-end">
+                            <ul class="navbar-nav">
+                            <li>
+                                <a href="../index.html">All tutorials</a>
+                            </li>
+                            <li>
+                                <a href="../miscellaneous/contact.html">Contact me</a>
+                            </li>
+                            </ul>
+                        <ul class="social-icons social-icons-sm ml-lg-2 mr-2">
+                            <li class="social-icons-twitter"><a data-toggle="tooltip"
+                            href="https://twitter.com/GravelleSimon" target="_blank"
+                            title="" data-original-title="Twitter">
+                            <i class="fab fa-twitter"></i></a></li>
+                            <li class="social-icons-twitter"><a data-toggle="tooltip"
+                            href="https://gitlab.com/sgravelle" target="_blank"
+                            title="" data-original-title="Gitlab">
+                            <i class="fab fa-gitlab"></i></i></a></li>
+                            <li class="social-icons-twitter"><a data-toggle="tooltip"
+                            href="https://github.com/simongravelle" target="_blank"
+                            title="" data-original-title="Github">
+                            <i class="fab fa-github"></i></i></a></li>
+                            <li class="social-icons-twitter"><a data-toggle="tooltip"
+                            href="https://www.youtube.com/c/SimonGravelle"
+                            target="_blank" title="" data-original-title="Youtube">
+                            <i class="fab fa-youtube"></i></i></a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- sidebar -->
+            <div class="idocs-navigation bg-light">
+                <ul class="nav flex-column ">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#intro">Getting Started</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#input">Input files</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#minimization">Energy minimization</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#eq">Equilibration</a>
+                    </li>      
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#solvation">Solvation energy</a>
+                    </li>      
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#further">Going further</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- main page -->
+            <div class="idocs-content">
+                <div class="container">
+                    <section id="intro">
+                        <h1>Adsorption properties of ethanol at a water-vacuum interface</h1>
+                        <h3>Free energy profile measurement using umbrella sampling method</h3>
+                        <p>
+                            <img src="../figures/03-EthanolAdsorption/banner.png"
+                            style="width:33%" alt="Responsive image"/>
+                            <p style="color:#6B6B6B">
+                            Description
+                            </p>
+                        </p>
+                        <p>
+                            <b>The objective of this tutorial</b> is to use GROMACS to perform
+                            a molecular dynamics simulation, and to calculate the free energy of 
+                            adsorption of a ethanol at the water-vapor interface. 
+                        </p>
+                        <p>
+                            If you are new to GROMACS, I suggest you to follow <a href="01-Na2SO4solution.html">this simpler tutorial</a> first. 
+                        </p>
+                        <p class="alert alert-info">
+                            <a href="../miscellaneous/contact.html">Click here</a> to contact me.
+                        </p>
+                    </section>
+                    <br><br>
+                    <br><br>
+                    <!-- SECTION 1 -->
+                    <section id="input">
+                        <h2>Input files</h2>
+                        <p>
+                            Create two folders named 'preparation/' and 'adsorption' in the same directory.
+                            Go to 'preparation/'. 
+                        </p>
+                        <p>  
+                            Download the configuration files for the HBC molecule 
+                        </p>
+                            from the atb repository: click <a href="https://atb.uq.edu.au/molecule.py?molid=902261#panel-md" target="_blank">here</a>,
+                            click on 'All-Atom PDB (optimised geometry)' and place 
+                            the file BIPQ_allatom_optimised_geometry.pdb in the 'preparation/' folder.
+                        </p>
+                        <br><br>
+                        <h4>Create the configuration file</h4>
+                        <p>
+                            First, let us convert the pdb file into a gro file consisting of a single 
+                            ethanol molecule at the center of  a small box using trjconv:
+                            <pre><code>gmx trjconv -f BIPQ_allatom_optimised_geometry.pdb -s BIPQ_allatom_optimised_geometry.pdb  -box 0.8 0.8 0.8 -o single_ethanol.gro -center</code></pre>
+                        </p> 
+                        <p>
+                            Select 'system' for both centering and output. If you open the single_ethanol.gro file with VMD, you will see:
+                        </p>
+                        <p>         
+                            <img src="../figures/03-EthanolAdsorption/single_ethanol.png" style="width:20%" alt="Ethanol molecule with VMD"/>
+                            <p style="color:#6B6B6B">Ethanol molecule with carbon atoms in gray, oxygen atom in red, and hydrogen atoms in white.</p>
+                        </p>
+                        <h4>Replicate the ethanol molecule</h4>
+                        <p>
+                            In order to create a system with several ethanol molecule, let us replicate the 
+                            single molecule (4x4x4 times) using genconf:
+                            <pre><code>gmx genconf -f single_ethanol.gro -o replicated_ethanol.gro -nbox 4 4 4</code></pre>
+                        </p>
+                        <p>                         
+                            If you open the replicated_ethanol.gro file with VMD, you will see:
+                        </p>
+                        <p>         
+                            <img src="../figures/03-EthanolAdsorption/replicated_ethanol.png" style="width:33%" alt="Ethanol molecules with VMD"/>
+                            <p style="color:#6B6B6B">Replicated ethanol molecules with carbon atoms in gray, oxygen atom in red, and hydrogen atoms in white.</p>
+                        </p>
+                        <h4>Create the topology file</h4>
+                        <p>
+                            From the <a href="https://atb.uq.edu.au/molecule.py?molid=151371#panel-md" target="_blank">same atb page</a>,
+                            copy the 'GROMACS All-Atom (ITP file)' [tofix] and place it in a folder named 'ff/' and located within the 'preparation/' folder. 
+                            Within 'ff/' download as well the GROMACS top file named 
+                            <a href="https://atb.uq.edu.au/forcefield_files/atb_gromacs/5/gromos54a7_atb.ff.tar.gz" download target="_blank">Gromacs 4.5.x-5.x.x 54a7</a>
+                            containing all the force field parameters. 
+                            Copy as well the 
+                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/preparation/ff/h2o.itp" download target="_blank">h2o.itp</a> file 
+                            for the water molecules in the 'ff/' folder.
+                            <br><br>
+                            Then, let us write the topology file by simply creating a blank file named 'topol.top'
+                            within the 'preparation/' folder, and copying in it:
+                            <pre><code>#include "ff/gromos54a7_atb.ff/forcefield.itp"
+#include "ff/BIPQ_GROMACS_G54A7FF_allatom.itp"
+#include "ff/h2o.itp"
+
+[ system ]
+Ethanol molecules
+
+[ molecules ]
+BIPQ 64</code></pre>
+                        </p>
+                        <h4>Add the water</h4>
+                        <p>
+                            Let us add water molecules. First download the tip4p water configuration file 
+                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/preparation/tip4p.gro" download target="_blank">here</a>, 
+                            and copy it in the 'preparation/' folder. Then, in order to add (tip4p) water molecules
+                            to both gro and top file, use the gmx solvate command as follow:
+                            <pre><code>gmx solvate -cs tip4p.gro -cp replicated_ethanol.gro -o solvated.gro -p topol.top</code></pre>
+                        </p>
+                        <p>
+                            In my case, 858 water molecules with residue name 'SOL' were added. 
+                        </p>
+                        <p>
+                            There should be a new line 'SOL 858' in the topology file 'topol.top':
+                            <pre><code>[ molecules ]
+BIPQ 64
+SOL 858</code></pre>
+                        <p>             
+                            The created 'solvated.gro' file contains the positions of both Ethanol and water
+                            molecules:
+                        </p>
+                        <p>         
+                            <img src="../figures/03-EthanolAdsorption/solvated.png" style="width:33%" alt="Ethanol molecules in water with VMD"/>
+                            <p style="color:#6B6B6B">Replicated ethanol molecules within water.</p>
+                        </p>
+                        <p> 
+                            Since we want to simulate a liquid-vapor system, let us increase the box size along the 
+                            x direction to create the vacuum part:
+                            <pre><code>gmx trjconv -f solvated.gro -s solvated.gro -box 6.4 3.2 3.2 -o solvated_vacuum.gro -center</code></pre>
+                        </p>
+                        <p>
+                            Select 'system' for both centering and output.
+                            <br><br> 
+                            If you encountered a problem during file generation, 
+                            you can also download the file I have generated by clicking 
+                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/preparation/solvated_vacuum.gro" download target="_blank">here</a>.
+                        </p>
+                    </section>
+                    <!-- SECTION 2 -->
+                    <br><br>
+                    <section id="minimization">
+                        <h2>Energy minimization</h2>
+                        <p>  
+                            Create a new folder in the preparation/' folder, call it 'inputs', and save 
+                            the <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/preparation/inputs/min.mdp" download target="_blank">min.mdp</a>
+                            and the <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/preparation/inputs/nvt.mdp" download target="_blank">npt.mdp</a> 
+                            files into it.
+                        </p>
+                        <p>
+                            These 2 files have been seen in previous tutorials.
+                            <br><br>
+                            Apply the minimisation to the solvated box using :
+                            <pre><code>gmx grompp -f inputs/min.mdp -c solvated_vacuum.gro -p topol.top -o min -pp min -po min -maxwarn 1
+gmx mdrun -v -deffnm min</code></pre> 
+                        </p>
+                        <p>
+                            Here the '-maxwarn 1' allows us to perform the simulation despite GROMACS' warning about 
+                            some issue with the force field.
+                            <br><br>
+                            Let us visualize the atoms' trajectories during the minimization step using VMD by typing:
+                            <pre><code>vmd solvate_vacuum.gro min.trr</code></pre>
+                        </p>
+                        <p>
+                            This is what I see:
+                        </p>
+                        <p>         
+                            <img src="../figures/03-EthanolAdsorption/min.gif"
+                            style="width:33%" alt="Gif minimization system"/>
+                            <p style="color:#6B6B6B">Movie showing the motion of the atoms during the energy minimization. 
+                                The two fluid/vacuum interfaces are on the left and or the right sides, respectively.
+                            <br><br>
+                            <b>Note for VMD user:</b> You can avoid having molecules 'cut in half' by the periodic boundary conditions by rewriting the trajectory using 
+                            'gmx trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole' </p>
+                        </p>
+                    <br><br>
+                    <section id="eq">
+                        <h2>Equilibration</h2>
+                        <p>
+                            Let us perform a NVT equilibration in order to reach the equilibrium ethanol/water density profile: 
+                            <pre><code>gmx grompp -f inputs/nvt.mdp -c min.gro -p topol.top -o nvt -pp nvt -po nvt -maxwarn 1
+gmx mdrun -v -deffnm nvt</code></pre>
+                        </p>
+                        <p>
+                            When its done, extract the density profile along x using the following command:
+                            <pre><code>gmx density -f nvt.xtc -s nvt.tpr -b 50 -d X -sl 100 -o density_end_ethanol.xvg</code></pre>
+                        </p>
+                        <p>
+                            and choose 'non_water' for the ethanol. The '-b 50' keyword is used to disregard the 50 first picoseconds of the simulation,
+                            the '-d X' keyword to generate a profile along x, and the '-sl 100' keyword to divide the box into 100 frames. 
+                            <br><br>
+                            <b>Warning: </b> The current equilibration time and for the NVT run (100 ps) is too small. It has been chosen 
+                            to make the tutorial easier to follow for people with a bad laptop (myself included). Increase the duration 
+                            to 1 nanosecond for a better equilibrated system. Alternatively, download the final configuration I have 
+                            generated after a 1 ns run by clicking 
+                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/preparation/nvt_1ns.gro" download target="_blank">here</a>.
+                        </p>
+                        <p>
+                            The density profile I get for both water and ethanol during the last 500 ps of the 1 ns run is :
+                        </p>
+                        <p>
+                            <img src="../figures/03-EthanolAdsorption/density_profile.png" 
+                            style="width:33%" alt="Density profile water ethanol"/>
+                            <p style="color:#6B6B6B">Water and ethanol density profile along x.
+                        </p>
+                        <p>
+                            <b>Discussion: </b> The density profiles show an excess of ethanol at the 2 interfaces, which is expected as 
+                            ethanol is known to be amphiphilic. There is also a local maxima in the center of the fluid layer (near x = 3 nm),
+                            and two depletion area in between the center of the fluid layer anf the two interfaces. 
+                        </p>
+
+
+                    </section>
+                    <!-- SECTION 3 -->
+                    <br><br>
+                    <section id="adsorption">
+                        <h2>Free energy profile calculation</h2>
+                        <p>
+                            We are done with the first equilibration of the system. We are now going to perform 
+                            the adsorption free energy calculation by extracting the free energy profile in 
+                            the direction normal to one of the interface. 
+                        </p>
+                        <p>
+                            Within the 'adsorption/' folder, create an 'inputs/' folders and copy the previously used 
+                            'nvt.mdp'. Rename it 'pull.mdp', and delete the two lines concerning 
+                            the initialisation of velocity at the start of the simulation: 
+
+                            <pre><code>gen-vel = yes
+gen-temp = 300</code></pre>
+
+                            From the 'adsorption/' folder, let us create an index file (replace nvt.gro by nvt_1ns.gro if 
+                            you choose to used this file)  :
+
+                            <pre><code>gmx make_ndx -f ../preparation/nvt.gro -o index.ndx</code></pre>
+
+                            type 
+
+                            <pre><code>a 2
+                            name 6 pull</code></pre>
+
+                            This create a new group named 'pull' made of only 1 atom, the atom with index 2 
+                            which is an oxygen atom of one of the first ethanol molecule in the list (it 
+                            does not matter where this molecule is in the box). You can ensure that the atom 
+                            of index 2 is indeed an oxygen of an ethanol molecule by looking 
+                            at the top of the nvt.gro (or nvt_1ns.gro) file:  
+
+                            <pre><code>Ethanol molecules in water
+ 4008
+    1BIPQ    H6    1   1.679   0.322   1.427 -1.2291 -2.8028 -0.6705
+    1BIPQ    O1    2   1.617   0.317   1.501 -0.1421 -0.1303  0.4816
+    1BIPQ    C2    3   1.549   0.441   1.496 -0.4726 -0.1734  0.4272
+    1BIPQ    H4    4   1.453   0.450   1.548 -0.2059 -0.1001  0.9069
+    1BIPQ    H5    5   1.529   0.454   1.390 -0.7133  0.0381  0.4988
+    1BIPQ    C1    6   1.641   0.548   1.542  0.1500 -0.4454 -0.2006
+    1BIPQ    H1    7   1.600   0.646   1.516  0.5688 -0.5292 -1.1624
+    1BIPQ    H2    8   1.734   0.549   1.486 -1.4595  1.2268 -2.9589
+    1BIPQ    H3    9   1.652   0.548   1.651 -2.4175  0.8229  0.1142
+(...)</code></pre>
+
+
+
+                            <!-- HERE -->
+
+                        <p>
+                            Within the 'adsorption/' folder, create an 'inputs/' folders. Copy the two 
+                            following <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/02-HBCSolvationEnergy/solvation/inputs/npt_bis.mdp" download target="_blank">npt_bis.mdp</a>
+                            and <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/02-HBCSolvationEnergy/solvation/inputs/pro.mdp" download target="_blank">pro.mdp</a> files in 
+                            it. 
+                        </p>
+                        <p>
+                            Both files contain the following commands that are related to the 
+                            free energy calculation:
+                            <pre><code>free_energy = yes
+vdw-lambdas = 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0
+coul-lambdas = 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+sc-alpha = 0.5
+sc-power = 1
+init-lambda-state =  0
+couple-lambda0 = none
+couple-lambda1 = vdw-q
+nstdhdl = 100
+calc_lambda_neighbors = -1
+couple-moltype = FJEW</code></pre>
+                        </p>
+                        <p>
+                            These lines specify that the decoupling between the molecule of interest (here FJEW) and the rest of the 
+                            system (here water) must be done by progressively turning off van der Waals and Coulomb interactions. 
+                            The nstdhdl control the frequency at which information are printed in a xvg file during the production run. 
+                        </p>
+                        <p>
+                            In addition, the stochastic integrator 'sd' is used instead 
+                            of 'md', as it provides a better sampling, which is crutial here, 
+                            particularly when the HBC and the water are not coupled.  
+
+                        </p>
+                        <p>
+                            Copy as well the following <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/02-HBCSolvationEnergy/solvation/topol.top" download target="_blank">topol.top</a>
+                            file within the 'solvation/' folder (the only difference with the previous one if the path to the ff folder).
+                        </p>
+                        <p>
+                            We need to create 21 folders, each containing the input files with different value of init-lambda-state (from 0 to 21).
+                            To do so, create a new bash file fine within the 'solvation/' folder, call it 'createfolders.sh' can copy the following lines
+                            in it:
+                            <pre><code>#/bin/bash
+# delete runall.sh if it exist, then re-create it
+if test -f "runall.sh"; then
+    rm runall.sh
+fi
+touch runall.sh
+echo '#/bin/bash' >> runall.sh
+echo '' >> runall.sh
+# folder for analysis
+mkdir -p dhdl
+# loop on the 21 lambda state
+for state in $(seq 0 20); 
+do
+    # create folder
+    DIRNAME=lambdastate${state}
+    mkdir -p $DIRNAME
+    # copy the topology, inputs, and configuration file in the folder
+    cp -r topol.top $DIRNAME
+    cp -r ../preparation/npt.gro $DIRNAME/preparedstate.gro
+    cp -r inputs $DIRNAME
+    # replace the lambda state in both npt_bis and production mdp file
+    newline='init-lambda-state = '$state
+    linetoreplace=$(cat $DIRNAME/inputs/npt_bis.mdp | grep init-lambda-state)
+    sed -i '/'"$linetoreplace"'/c\'"$newline" $DIRNAME/inputs/npt_bis.mdp
+    sed -i '/'"$linetoreplace"'/c\'"$newline" $DIRNAME/inputs/pro.mdp
+    # create a bash file to launch all the simulations
+    echo 'cd '$DIRNAME >> runall.sh
+    echo 'gmx grompp -f inputs/npt_bis.mdp -c preparedstate.gro -p topol.top -o npt_bis -pp npt_bis -po npt_bis -maxwarn 1' >> runall.sh
+    echo 'gmx mdrun -v -deffnm npt_bis' >> runall.sh
+    echo 'gmx grompp -f inputs/pro.mdp -c npt_bis.gro -p topol.top -o pro -pp pro -po pro -maxwarn 1' >> runall.sh
+    echo 'gmx mdrun -v -deffnm pro' >> runall.sh
+    echo 'cd ..' >> runall.sh
+    echo '' >> runall.sh
+    # create links for the analysis
+    cd dhdl
+    ln -sf ../$DIRNAME/pro.xvg md$state.xvg
+    cd ..    
+done</code></pre>
+                        </p>
+                        <p>
+                            Execute the bash script by typing:
+                            <pre><code>bash createfolders.sh</code></pre>
+                        </p>
+                        <p>
+                            The bash file creates 21 folders, each containing the input files with init-lambda-state from 0 to 21, 
+                            as well as a 'topol.top' file and a 'preparedstate.gro' corresponding to the 
+                            last state of the system simulated in the 'preparation/' folder. 
+                            <br><br>
+                            Run all 21 simulations by executing the 'runall.sh' script:
+                            <pre><code>bash runall.sh</code></pre>
+                        </p>
+                        <p>
+                            This may take a while.
+                            <br><br>
+                            When its complete, go the dhdl folder, and type:
+                            <pre><code>gmx bar -f *.xvg</code></pre>
+                        </p>
+                        <p>
+                            The value of the solvation energy is printed in the terminal:
+                            <pre><code>total 0 - 20, DG -17.29 +/- 4.56</code></pre>
+                        </p>
+                        <p>
+                            The value of -17.3 kJ/mol is somewhat reasonable, if we compare with literature values
+                            (<a href="https://pubs.acs.org/doi/10.1021/acs.jced.0c00061" target="_blank">10.1021/acs.jced.0c00061</a>)
+                            for smaller aromatic molecule:
+                        </p>
+
+                        <p>         
+                            <img src="../figures/02-HBCSolvationEnergy/literature.png" 
+                            style="width:33%" alt="Gif minimization system"/> <!-- ffmpeg -i nvtnpt.gif -r 24 nvtnpt_slower.gif  -->
+                            <p style="color:#6B6B6B">Comparison of the calculated free energy of solvation 
+                                with similar aromatic molecule (from (<a href="https://pubs.acs.org/doi/10.1021/acs.jced.0c00061" target="_blank">10.1021/acs.jced.0c00061</a>)). Results 
+                                are plotted as a function of the number of rings.   
+                        </p>
+                        <p>
+
+                        </p> 
+
+                    </section>
+                    <!--Section 4-->
+                    <br><br>
+                    <section id="further">
+                        <h2>Going further with exercises</h2>
+                        <br>
+                        <!--<p class="alert alert-info"> 
+                        Request the solutions by email, or register <a target="_blank"
+                        href="https://www.patreon.com/molecularsimulations">here</a> and access all the solutions
+                        + additional LAMMPS/GROMACS content.
+                        </p>-->
+                        <br>
+                        <h4><b>Solvation energy of another molecule</b></h4>
+                        <p>
+                            Choose another molecule on the atb data base and calculate its free energy of solvation using the same method.
+                        </p>
+                        <p class="alert alert-info">
+                        <a href="../miscellaneous/contact.html">Click here</a>
+                        to contact me.
+                        </p>
+                    </section>
+                </div>
+            </div>
+            <!-- Footer -->
+            <footer id="footer" class="section">
+                <div class="container">
+                    <p class="text-2 text-center mb-0">This template has been adapted from
+                    <a class="btn-link" target="_blank"
+                    href="https://github.com/harnishdesign/iDocs/">HarnishDesign</a>.
+                    </p>
+                </div>
+            </footer>
+        </div>
+        <!-- JavaScript -->
+        <script src="../assets_tutorials/vendor/jquery/jquery.min.js"></script>
+        <script src="../assets_tutorials/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../assets_tutorials/vendor/highlight.js/highlight.min.js"></script>
+        <script src="../assets_tutorials/vendor/jquery.easing/jquery.easing.min.js"></script>
+        <script src="../assets_tutorials/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <script src="../assets_tutorials/js/theme.js"></script>
+    </body>
+</html>
