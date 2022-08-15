@@ -2,14 +2,14 @@
 ;	File 'nvt.mdp' was generated
 ;	By user: unknown (1000)
 ;	On host: mint2
-;	At date: Sun Aug 14 08:39:21 2022
+;	At date: Mon Aug 15 17:08:44 2022
 ;
 ;	Created by:
 ;	             :-) GROMACS - gmx grompp, 2020.1-Ubuntu-2020.1-1 (-:
 ;	
 ;	Executable:   /usr/bin/gmx
 ;	Data prefix:  /usr
-;	Working dir:  /media/simon/Simon/gromacstutorials.github.io/inputs/03-EthanolAdsorption
+;	Working dir:  /media/simon/Simon/gromacstutorials.github.io/inputs/03-EthanolAdsorption/preparation
 ;	Command line:
 ;	  gmx grompp -f inputs/nvt.mdp -c min.gro -p topol.top -o nvt -pp nvt -po nvt -maxwarn 1
 
@@ -25,7 +25,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 1000000
+nsteps                   = 100000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)

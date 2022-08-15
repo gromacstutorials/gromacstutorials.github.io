@@ -1,17 +1,17 @@
 ;
-;	File 'min.mdp' was generated
+;	File 'pull.mdp' was generated
 ;	By user: unknown (1000)
 ;	On host: mint2
-;	At date: Mon Aug 15 17:06:13 2022
+;	At date: Mon Aug 15 18:31:02 2022
 ;
 ;	Created by:
 ;	             :-) GROMACS - gmx grompp, 2020.1-Ubuntu-2020.1-1 (-:
 ;	
 ;	Executable:   /usr/bin/gmx
 ;	Data prefix:  /usr
-;	Working dir:  /media/simon/Simon/gromacstutorials.github.io/inputs/03-EthanolAdsorption/preparation
+;	Working dir:  /media/simon/Simon/gromacstutorials.github.io/inputs/03-EthanolAdsorption/adsorption
 ;	Command line:
-;	  gmx grompp -f inputs/min.mdp -c solvated_vacuum.gro -p topol.top -o min -pp min -po min -maxwarn 1
+;	  gmx grompp -f inputs/pull.mdp -c pull.gro -p topol.top -o pull -pp pull -po pull -maxwarn 2 -n index.ndx
 
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
@@ -21,26 +21,26 @@ include                  =
 define                   = 
 
 ; RUN CONTROL PARAMETERS
-integrator               = steep
+integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 5000
+nsteps                   = 50000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
 simulation-part          = 1
 ; mode for center of mass motion removal
-comm-mode                = Linear
+comm_mode                = linear
 ; number of steps for center of mass motion removal
 nstcomm                  = 100
 ; group(s) for center of mass motion removal
-comm-grps                = 
+comm_grps                = system
 
 ; LANGEVIN DYNAMICS OPTIONS
 ; Friction coefficient (amu/ps) and random seed
 bd-fric                  = 0
-ld-seed                  = -1
+ld-seed                  = 48456
 
 ; ENERGY MINIMIZATION OPTIONS
 ; Force tolerance and initial step-size
@@ -59,15 +59,15 @@ rtpi                     = 0.05
 
 ; OUTPUT CONTROL OPTIONS
 ; Output frequency for coords (x), velocities (v) and forces (f)
-nstxout                  = 5
+nstxout                  = 0
 nstvout                  = 0
 nstfout                  = 0
 ; Output frequency for energies to log file and energy file
-nstlog                   = 1000
+nstlog                   = 5000
 nstcalcenergy            = 100
-nstenergy                = 1000
+nstenergy                = 5000
 ; Output frequency and precision for .xtc file
-nstxout-compressed       = 0
+nstxout-compressed       = 100
 compressed-x-precision   = 1000
 ; This selects the subset of atoms for the compressed
 ; trajectory file. You can select multiple groups. By
@@ -129,15 +129,15 @@ implicit-solvent         = no
 
 ; OPTIONS FOR WEAK COUPLING ALGORITHMS
 ; Temperature coupling  
-tcoupl                   = No
+tcoupl                   = v-rescale
 nsttcouple               = -1
 nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
 ; Groups to couple separately
-tc-grps                  = 
+tc-grps                  = Water non-Water
 ; Time constant (ps) and reference temperature (K)
-tau-t                    = 
-ref-t                    = 
+tau-t                    = 0.5 0.5
+ref-t                    = 300 300
 ; pressure coupling     
 pcoupl                   = No
 pcoupltype               = Isotropic
@@ -225,7 +225,41 @@ wall-density             =
 wall-ewald-zfac          = 3
 
 ; COM PULLING          
-pull                     = no
+pull                     = yes
+; Cylinder radius for dynamic reaction force groups (nm)
+pull-cylinder-r          = 1.5
+pull-constr-tol          = 1e-06
+pull-print-com           = no
+pull-print-ref-value     = no
+pull-print-components    = no
+pull-nstxout             = 1
+pull-nstfout             = 50
+pull-pbc-ref-prev-step-com = no
+pull-xout-average        = no
+pull-fout-average        = no
+; Number of pull groups 
+pull-ngroups             = 2
+; Number of pull coordinates
+pull-ncoords             = 1
+; Group and coordinate parameters
+pull-group1-name         = ethanol_pull
+pull-group1-weights      = 
+pull-group1-pbcatom      = 0
+pull-group2-name         = water
+pull-group2-weights      = 
+pull-group2-pbcatom      = 0
+pull-coord1-type         = umbrella
+pull-coord1-potential-provider = 
+pull-coord1-geometry     = distance
+pull-coord1-groups       = 1 2
+pull-coord1-dim          = Y N N
+pull-coord1-origin       = 0.0 0.0 0.0
+pull-coord1-vec          = 0.0 0.0 0.0
+pull-coord1-start        = yes
+pull-coord1-init         = 0
+pull-coord1-rate         = 0.0
+pull-coord1-k            = 1000
+pull-coord1-kB           = 1000
 
 ; AWH biasing          
 awh                      = no
