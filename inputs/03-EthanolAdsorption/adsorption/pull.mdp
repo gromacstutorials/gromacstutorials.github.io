@@ -2,7 +2,7 @@
 ;	File 'pull.mdp' was generated
 ;	By user: unknown (1000)
 ;	On host: mint2
-;	At date: Mon Aug 15 18:31:02 2022
+;	At date: Mon Aug 15 22:05:03 2022
 ;
 ;	Created by:
 ;	             :-) GROMACS - gmx grompp, 2020.1-Ubuntu-2020.1-1 (-:
@@ -255,8 +255,8 @@ pull-coord1-groups       = 1 2
 pull-coord1-dim          = Y N N
 pull-coord1-origin       = 0.0 0.0 0.0
 pull-coord1-vec          = 0.0 0.0 0.0
-pull-coord1-start        = yes
-pull-coord1-init         = 0
+pull-coord1-start        = no
+pull-coord1-init         = -3.0
 pull-coord1-rate         = 0.0
 pull-coord1-k            = 1000
 pull-coord1-kB           = 1000

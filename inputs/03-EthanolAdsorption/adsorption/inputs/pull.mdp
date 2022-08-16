@@ -40,9 +40,8 @@ pull-coord1-type = umbrella
 pull-coord1-geometry = distance
 pull-coord1-dim = Y N N 
 pull-coord1-groups = 1 2
-pull-coord1-start = yes
-;pull-coord1-init = 5
-;pull-coord1-origin = 5 0 0
+pull-coord1-start = no
+pull-coord1-init = -3.0
 pull-coord1-rate = 0.0
 pull-coord1-k = 1000
 
