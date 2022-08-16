@@ -1,9 +1,12 @@
 integrator = md
-nsteps = 50000
+nsteps = 100000
 dt = 0.001
 
 comm_mode = linear
 comm_grps = system
+
+gen-vel = yes
+gen-temp = 300
 
 cutoff-scheme = Verlet
 nstlist = 10
@@ -11,7 +14,7 @@ ns_type = grid
 
 nstlog = 5000
 nstenergy = 5000
-nstxout-compressed = 100
+nstxout-compressed = 5000
 
 vdw-type = Cut-off
 rvdw = 1.0
@@ -44,8 +47,3 @@ pull-coord1-start = no
 pull-coord1-init = to_be_replaced
 pull-coord1-rate = 0.0
 pull-coord1-k = 1000
-
-
-
-
-
