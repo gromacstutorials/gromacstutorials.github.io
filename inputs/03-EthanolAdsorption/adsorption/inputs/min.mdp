@@ -1,17 +1,11 @@
-integrator = md
-nsteps = 100000
-dt = 0.001
+integrator = steep
+nsteps = 2500
 
-comm_mode = linear
-comm_grps = system
+nstxout = 5
 
 cutoff-scheme = Verlet
 nstlist = 10
 ns_type = grid
-
-nstlog = 5000
-nstenergy = 5000
-nstxout-compressed = 100
 
 vdw-type = Cut-off
 rvdw = 1.0
@@ -23,12 +17,6 @@ rcoulomb = 1.0
 
 constraint-algorithm = lincs
 constraints = hbonds
-
-tcoupl = v-rescale
-ld-seed = 48456
-tc-grps = Water non-Water
-tau-t = 0.5 0.5
-ref-t = 300 300
 
 pull = yes
 pull-nstxout = 1
@@ -43,4 +31,4 @@ pull-coord1-groups = 1 2
 pull-coord1-start = no
 pull-coord1-init = to_be_replaced
 pull-coord1-rate = 0.0
-pull-coord1-k = 1000
+pull-coord1-k = 10000

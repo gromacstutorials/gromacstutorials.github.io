@@ -1,0 +1,5 @@
+#include "posre.itp"
+Or it could directly contain the [ position_restraints ]
+[ position_restraints ]
+; atom type fx fy fz
+1 1 1000 1000 1000
