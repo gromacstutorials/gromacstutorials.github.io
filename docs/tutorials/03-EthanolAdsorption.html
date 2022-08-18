@@ -293,6 +293,115 @@ gmx mdrun -v -deffnm nvt</code></pre>
                     </section>
                     <!-- SECTION 3 -->
                     <br><br>
+                    <section id="force">
+                        <h2>Imposed forcing</h2>
+                        <p>
+                            To calculate the free energy profile across the liquid/vapor interface, one needs to impose an additional 
+                            harmonic potential to one ethanol molecule, and force it to explore 
+                            certain region of the box, including the energeticaly unfavorable vacuum phase. 
+                            <br><br>
+                            Ultimately, a large number of positions for the ethanol molecule need to be calculated. 
+                            For the sake of testing our protocole, let us first test our protocile using one single position
+                            for the center of the harmonic potential.
+                            <br><br>
+                            Next to 'preparation/', create a folder called 'singleposition/'. Within 'singleposition/',
+                            create a folder named 'inputs', and copy 
+                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/singleposition/inputs/min.mdp" download target="_blank">min.mdp</a>,
+                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/singleposition/inputs/nvt.mdp" download target="_blank">nvt.mdp</a>,
+                            and 
+                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/singleposition/inputs/pro.mdp" download target="_blank">pro.mdp</a>,
+                            in it. 
+                        </p>
+                        <p>
+                            In all 3 mdp files, there is the following lines: 
+                            <pre><code>pull = yes
+pull-nstxout = 1
+pull-ncoords = 1
+pull-ngroups = 2
+pull-group1-name = ethanol_pull
+pull-group2-name = water
+pull-coord1-type = umbrella
+pull-coord1-geometry = distance
+pull-coord1-dim = Y N N 
+pull-coord1-groups = 1 2
+pull-coord1-start = no
+pull-coord1-init = 2
+pull-coord1-rate = 0.0
+pull-coord1-k = 1000</code></pre>
+                        </p>
+                        <p>
+                            <b>Explanations:</b> These lines specify the additional harmonic potential to be applied between 
+                            a group name 'ethanol_pull' (still to be defined) and 'water'. The spring constant 
+                            of the harmonic potential is 1000 kJ/mol/nm2, and the requested distance between the center-of-mass 
+                            of the two groups is 2 nm along the x dimension. 
+                            <br><br>
+                            Let us create an index file :
+                            <pre><code>gmx make_ndx -f ../preparation/nvt.gro -o index.ndx</code></pre>
+                        </p>
+                        <p>
+                            or (if you choose to used this file)
+                            <pre><code>gmx make_ndx -f ../preparation/nvt.gro -o index.ndx</code></pre>
+                        </p>
+                        <p>
+                            and type:
+                            <pre><code>a 2
+name 6 ethanol_pull</code></pre>
+                        </p>
+                        <p>
+                            These commands create a index file containing a new group named 'ethanol_pull' made of only 1 atom: the atom with index 2 
+                            which is an oxygen atom of one of the first ethanol molecule in the list.
+                            We don't care here where this molecule is located in the box. You can ensure that the atom 
+                            of index 2 is indeed an oxygen of an ethanol molecule by looking 
+                            at the top of the nvt.gro (or nvt_1ns.gro) file:  
+                            <pre><code>Ethanol molecules in water
+ 4008
+    1BIPQ    H6    1   1.679   0.322   1.427 -1.2291 -2.8028 -0.6705
+    1BIPQ    O1    2   1.617   0.317   1.501 -0.1421 -0.1303  0.4816
+    1BIPQ    C2    3   1.549   0.441   1.496 -0.4726 -0.1734  0.4272
+    1BIPQ    H4    4   1.453   0.450   1.548 -0.2059 -0.1001  0.9069
+    1BIPQ    H5    5   1.529   0.454   1.390 -0.7133  0.0381  0.4988
+    1BIPQ    C1    6   1.641   0.548   1.542  0.1500 -0.4454 -0.2006
+    1BIPQ    H1    7   1.600   0.646   1.516  0.5688 -0.5292 -1.1624
+    1BIPQ    H2    8   1.734   0.549   1.486 -1.4595  1.2268 -2.9589
+    1BIPQ    H3    9   1.652   0.548   1.651 -2.4175  0.8229  0.1142
+(...)</code></pre>
+                        </p>
+                        <p>
+                            Run all three inputs successively:
+                            <pre><code>gmx grompp -f inputs/min.mdp -c ../preparation/nvt_1ns.gro -p topol.top -o min -pp min -po min -maxwarn 1 -n index.ndx
+gmx mdrun -v -deffnm min
+/gmx grompp -f inputs/nvt.mdp -c min.gro -p topol.top -o nvt -pp nvt -po nvt -maxwarn 1 -n index.ndx 
+gmx mdrun -v -deffnm nvt
+gmx grompp -f inputs/pro.mdp -c nvt.gro -p topol.top -o pro -pp pro -po pro -maxwarn 1 -n index.ndx 
+gmx mdrun -v -deffnm pro</code></pre>
+                        </p>
+                        <p>    
+                            <img src="../figures/03-EthanolAdsorption/umbrella.gif" 
+                            style="width:33%" alt="Gif minimization system"/>
+                            <p style="color:#6B6B6B">Ethanol molecule being pulled from the 
+                                rest of the fluid during minimisation and nvt equilibration.   
+                        </p>
+
+                        <p>         
+                            <img src="../figures/03-EthanolAdsorption/probability_position.png" 
+                            style="width:33%" alt="Gif minimization system"/>
+                            <p style="color:#6B6B6B">Probability distribution of the 
+                                distance between the two center-of-mass. Short (50 ps) and 
+                                long (1.5 ns) runs are compared.   
+                        </p>
+                </section>
+
+
+
+
+
+
+
+
+
+
+                    <!-- SECTION 4 -->
+                    <br><br>
                     <section id="adsorption">
                         <h2>Free energy profile calculation</h2>
                         <p>
@@ -308,34 +417,7 @@ gmx mdrun -v -deffnm nvt</code></pre>
                             <pre><code>gen-vel = yes
 gen-temp = 300</code></pre>
 
-                            From the 'adsorption/' folder, let us create an index file (replace nvt.gro by nvt_1ns.gro if 
-                            you choose to used this file)  :
-
-                            <pre><code>gmx make_ndx -f ../preparation/nvt.gro -o index.ndx</code></pre>
-
-                            type 
-
-                            <pre><code>a 2
-                            name 6 pull</code></pre>
-
-                            This create a new group named 'pull' made of only 1 atom, the atom with index 2 
-                            which is an oxygen atom of one of the first ethanol molecule in the list (it 
-                            does not matter where this molecule is in the box). You can ensure that the atom 
-                            of index 2 is indeed an oxygen of an ethanol molecule by looking 
-                            at the top of the nvt.gro (or nvt_1ns.gro) file:  
-
-                            <pre><code>Ethanol molecules in water
- 4008
-    1BIPQ    H6    1   1.679   0.322   1.427 -1.2291 -2.8028 -0.6705
-    1BIPQ    O1    2   1.617   0.317   1.501 -0.1421 -0.1303  0.4816
-    1BIPQ    C2    3   1.549   0.441   1.496 -0.4726 -0.1734  0.4272
-    1BIPQ    H4    4   1.453   0.450   1.548 -0.2059 -0.1001  0.9069
-    1BIPQ    H5    5   1.529   0.454   1.390 -0.7133  0.0381  0.4988
-    1BIPQ    C1    6   1.641   0.548   1.542  0.1500 -0.4454 -0.2006
-    1BIPQ    H1    7   1.600   0.646   1.516  0.5688 -0.5292 -1.1624
-    1BIPQ    H2    8   1.734   0.549   1.486 -1.4595  1.2268 -2.9589
-    1BIPQ    H3    9   1.652   0.548   1.651 -2.4175  0.8229  0.1142
-(...)</code></pre>
+                            
 
 
 
@@ -450,7 +532,7 @@ done</code></pre>
 
                         <p>         
                             <img src="../figures/02-HBCSolvationEnergy/literature.png" 
-                            style="width:33%" alt="Gif minimization system"/> <!-- ffmpeg -i nvtnpt.gif -r 24 nvtnpt_slower.gif  -->
+                            style="width:33%" alt="Gif minimization system"/>
                             <p style="color:#6B6B6B">Comparison of the calculated free energy of solvation 
                                 with similar aromatic molecule (from (<a href="https://pubs.acs.org/doi/10.1021/acs.jced.0c00061" target="_blank">10.1021/acs.jced.0c00061</a>)). Results 
                                 are plotted as a function of the number of rings.   
