@@ -367,7 +367,7 @@ name 6 ethanol_pull</code></pre>
 (...)</code></pre>
                         </p>
                         <p>
-                            Run all three inputs successively:
+                            Run all 3 inputs successively:
                             <pre><code>gmx grompp -f inputs/min.mdp -c ../preparation/nvt_1ns.gro -p topol.top -o min -pp min -po min -maxwarn 1 -n index.ndx
 gmx mdrun -v -deffnm min
 /gmx grompp -f inputs/nvt.mdp -c min.gro -p topol.top -o nvt -pp nvt -po nvt -maxwarn 1 -n index.ndx 
@@ -375,13 +375,22 @@ gmx mdrun -v -deffnm nvt
 gmx grompp -f inputs/pro.mdp -c nvt.gro -p topol.top -o pro -pp pro -po pro -maxwarn 1 -n index.ndx 
 gmx mdrun -v -deffnm pro</code></pre>
                         </p>
+                        <p>
+                            During minisation, the ethanol molecule is separated from the rest of the fluid until the 
+                            distance between the center-of-mass of the 2 groups is 2 nm:
+                        </p>
                         <p>    
                             <img src="../figures/03-EthanolAdsorption/umbrella.gif" 
                             style="width:33%" alt="Gif minimization system"/>
                             <p style="color:#6B6B6B">Ethanol molecule being pulled from the 
                                 rest of the fluid during minimisation and nvt equilibration.   
                         </p>
-
+                        <p>
+                            Then, during the production run, the average distance between the 2 groups 
+                            is measured over time. Let us plot the histogram of this distance,
+                            toghether with the distribution for longer production run (if you have a 
+                            good computer, feel free to run longer production run than 50 ps):
+                        </p>
                         <p>         
                             <img src="../figures/03-EthanolAdsorption/probability_position.png" 
                             style="width:33%" alt="Gif minimization system"/>
@@ -389,160 +398,63 @@ gmx mdrun -v -deffnm pro</code></pre>
                                 distance between the two center-of-mass. Short (50 ps) and 
                                 long (1.5 ns) runs are compared.   
                         </p>
+                        <p>
+                            The distribution is not centered around x = 2 nm because of the interaction between the 
+                            CO2 and the rest of the fluid.
+                        </p>
                 </section>
+                  <!-- SECTION 4 -->
+                  <br><br>
+                  <section id="adsorption">
+                      <h2>Free energy profile calculation</h2>
+                      <p>
+                        Let us replicate the previous calculation for 30 differents distances, from x = 0 (the 
+                        ethanol molecule is forced to remain at the center of the liquid) to x = 4 (the 
+                        ethanol molecule is far within the vacuum phase).
+                        <br><br>
+                        Create a new folder, call it 'adsorption/', and copy 
+                        <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/adsorption/inputs/min.mdp" download target="_blank">min.mdp</a>,
+                        <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/adsorption/inputs/nvt.mdp" download target="_blank">nvt.mdp</a>,
+                        and 
+                        <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/adsorption/inputs/pro.mdp" download target="_blank">pro.mdp</a>,
+                        in it. 
+                        <br><br>
+                        The only difference with the previous input scripts, is the command:
+                        <pre><code>pull-coord1-init = to_be_replaced</code></pre>
+                      </p>
+                      <p> 
+                        where the keyword 'to_be_replaced' is to be systematicaly replaced within a bash script. Create a bash script, call it 'run.sh', and 
+                        copy the following lines in it:
+                      </p>
+                      <pre><code>#!/bin/bash
 
+set -e
 
+for ((i = 0 ; i < 30 ; i++)); do
+        x=$(echo "0.13*$(($i+1))" | bc);
+        sed 's/to_be_replaced/'$x'/g' inputs/min.mdp > min.mdp
+        gmx grompp -f min.mdp -c ../preparation/nvt_1ns.gro -p topol.top -o min.$i -pp min.$i -po min.$i -maxwarn 1 -n index.ndx
+        gmx mdrun -v -deffnm min.$i
 
+        sed 's/to_be_replaced/'$x'/g' inputs/nvt.mdp > nvt.mdp
+        gmx grompp -f nvt.mdp -c min.$i.gro -p topol.top -o nvt.$i -pp nvt.$i -po nvt.$i -maxwarn 1 -n index.ndx
+        gmx mdrun -v -deffnm nvt.$i
 
-
-
-
-
-
-
-                    <!-- SECTION 4 -->
-                    <br><br>
-                    <section id="adsorption">
-                        <h2>Free energy profile calculation</h2>
-                        <p>
-                            We are done with the first equilibration of the system. We are now going to perform 
-                            the adsorption free energy calculation by extracting the free energy profile in 
-                            the direction normal to one of the interface. 
-                        </p>
-                        <p>
-                            Within the 'adsorption/' folder, create an 'inputs/' folders and copy the previously used 
-                            'nvt.mdp'. Rename it 'pull.mdp', and delete the two lines concerning 
-                            the initialisation of velocity at the start of the simulation: 
-
-                            <pre><code>gen-vel = yes
-gen-temp = 300</code></pre>
-
-                            
-
-
-
-                            <!-- HERE -->
-
-                        <p>
-                            Within the 'adsorption/' folder, create an 'inputs/' folders. Copy the two 
-                            following <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/02-HBCSolvationEnergy/solvation/inputs/npt_bis.mdp" download target="_blank">npt_bis.mdp</a>
-                            and <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/02-HBCSolvationEnergy/solvation/inputs/pro.mdp" download target="_blank">pro.mdp</a> files in 
-                            it. 
-                        </p>
-                        <p>
-                            Both files contain the following commands that are related to the 
-                            free energy calculation:
-                            <pre><code>free_energy = yes
-vdw-lambdas = 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0
-coul-lambdas = 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
-sc-alpha = 0.5
-sc-power = 1
-init-lambda-state =  0
-couple-lambda0 = none
-couple-lambda1 = vdw-q
-nstdhdl = 100
-calc_lambda_neighbors = -1
-couple-moltype = FJEW</code></pre>
-                        </p>
-                        <p>
-                            These lines specify that the decoupling between the molecule of interest (here FJEW) and the rest of the 
-                            system (here water) must be done by progressively turning off van der Waals and Coulomb interactions. 
-                            The nstdhdl control the frequency at which information are printed in a xvg file during the production run. 
-                        </p>
-                        <p>
-                            In addition, the stochastic integrator 'sd' is used instead 
-                            of 'md', as it provides a better sampling, which is crutial here, 
-                            particularly when the HBC and the water are not coupled.  
-
-                        </p>
-                        <p>
-                            Copy as well the following <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/02-HBCSolvationEnergy/solvation/topol.top" download target="_blank">topol.top</a>
-                            file within the 'solvation/' folder (the only difference with the previous one if the path to the ff folder).
-                        </p>
-                        <p>
-                            We need to create 21 folders, each containing the input files with different value of init-lambda-state (from 0 to 21).
-                            To do so, create a new bash file fine within the 'solvation/' folder, call it 'createfolders.sh' can copy the following lines
-                            in it:
-                            <pre><code>#/bin/bash
-# delete runall.sh if it exist, then re-create it
-if test -f "runall.sh"; then
-    rm runall.sh
-fi
-touch runall.sh
-echo '#/bin/bash' >> runall.sh
-echo '' >> runall.sh
-# folder for analysis
-mkdir -p dhdl
-# loop on the 21 lambda state
-for state in $(seq 0 20); 
-do
-    # create folder
-    DIRNAME=lambdastate${state}
-    mkdir -p $DIRNAME
-    # copy the topology, inputs, and configuration file in the folder
-    cp -r topol.top $DIRNAME
-    cp -r ../preparation/npt.gro $DIRNAME/preparedstate.gro
-    cp -r inputs $DIRNAME
-    # replace the lambda state in both npt_bis and production mdp file
-    newline='init-lambda-state = '$state
-    linetoreplace=$(cat $DIRNAME/inputs/npt_bis.mdp | grep init-lambda-state)
-    sed -i '/'"$linetoreplace"'/c\'"$newline" $DIRNAME/inputs/npt_bis.mdp
-    sed -i '/'"$linetoreplace"'/c\'"$newline" $DIRNAME/inputs/pro.mdp
-    # create a bash file to launch all the simulations
-    echo 'cd '$DIRNAME >> runall.sh
-    echo 'gmx grompp -f inputs/npt_bis.mdp -c preparedstate.gro -p topol.top -o npt_bis -pp npt_bis -po npt_bis -maxwarn 1' >> runall.sh
-    echo 'gmx mdrun -v -deffnm npt_bis' >> runall.sh
-    echo 'gmx grompp -f inputs/pro.mdp -c npt_bis.gro -p topol.top -o pro -pp pro -po pro -maxwarn 1' >> runall.sh
-    echo 'gmx mdrun -v -deffnm pro' >> runall.sh
-    echo 'cd ..' >> runall.sh
-    echo '' >> runall.sh
-    # create links for the analysis
-    cd dhdl
-    ln -sf ../$DIRNAME/pro.xvg md$state.xvg
-    cd ..    
+        sed 's/to_be_replaced/'$x'/g' inputs/pull.mdp > pull.mdp
+        gmx grompp -f pull.mdp -c nvt.$i.gro -p topol.top -o pull.$i -pp pull.$i -po pull.$i -maxwarn 1 -n index.ndx
+        gmx mdrun -v -deffnm pull.$i
 done</code></pre>
-                        </p>
-                        <p>
-                            Execute the bash script by typing:
-                            <pre><code>bash createfolders.sh</code></pre>
-                        </p>
-                        <p>
-                            The bash file creates 21 folders, each containing the input files with init-lambda-state from 0 to 21, 
-                            as well as a 'topol.top' file and a 'preparedstate.gro' corresponding to the 
-                            last state of the system simulated in the 'preparation/' folder. 
-                            <br><br>
-                            Run all 21 simulations by executing the 'runall.sh' script:
-                            <pre><code>bash runall.sh</code></pre>
-                        </p>
-                        <p>
-                            This may take a while.
-                            <br><br>
-                            When its complete, go the dhdl folder, and type:
-                            <pre><code>gmx bar -f *.xvg</code></pre>
-                        </p>
-                        <p>
-                            The value of the solvation energy is printed in the terminal:
-                            <pre><code>total 0 - 20, DG -17.29 +/- 4.56</code></pre>
-                        </p>
-                        <p>
-                            The value of -17.3 kJ/mol is somewhat reasonable, if we compare with literature values
-                            (<a href="https://pubs.acs.org/doi/10.1021/acs.jced.0c00061" target="_blank">10.1021/acs.jced.0c00061</a>)
-                            for smaller aromatic molecule:
-                        </p>
+                    </p>
+                    <p> 
+                        Copy the previously created index file and topology file within the 'adsorption/'
+                        folder, and execute the bash script. For better result, you can increase the duration of the 
+                        nvt and production runs. 
+                    </p>
 
-                        <p>         
-                            <img src="../figures/02-HBCSolvationEnergy/literature.png" 
-                            style="width:33%" alt="Gif minimization system"/>
-                            <p style="color:#6B6B6B">Comparison of the calculated free energy of solvation 
-                                with similar aromatic molecule (from (<a href="https://pubs.acs.org/doi/10.1021/acs.jced.0c00061" target="_blank">10.1021/acs.jced.0c00061</a>)). Results 
-                                are plotted as a function of the number of rings.   
-                        </p>
-                        <p>
 
-                        </p> 
 
                     </section>
-                    <!--Section 4-->
+                    <!--Section 5-->
                     <br><br>
                     <section id="further">
                         <h2>Going further with exercises</h2>
