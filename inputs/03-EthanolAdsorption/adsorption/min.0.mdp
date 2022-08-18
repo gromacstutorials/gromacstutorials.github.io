@@ -1,15 +1,15 @@
 ;
 ;	File 'min.0.mdp' was generated
-;	By user: sgravelle (1198)
-;	On host: caribou
-;	At date: Thu Aug 18 10:22:37 2022
+;	By user: huber (1000)
+;	On host: fpprak-TUXEDO
+;	At date: Thu Aug 18 17:45:20 2022
 ;
 ;	Created by:
-;	                     :-) GROMACS - gmx grompp, 2021.4 (-:
+;	             :-) GROMACS - gmx grompp, 2020.1-Ubuntu-2020.1-1 (-:
 ;	
-;	Executable:   /work/sgravelle/Softwares/gromacs-install/bin/gmx
-;	Data prefix:  /work/sgravelle/Softwares/gromacs-install
-;	Working dir:  /media/sgravelle/Simon/gromacstutorials.github.io/inputs/03-EthanolAdsorption/adsorption
+;	Executable:   /usr/bin/gmx
+;	Data prefix:  /usr
+;	Working dir:  /media/huber/Simon/gromacstutorials.github.io/inputs/03-EthanolAdsorption/adsorption
 ;	Command line:
 ;	  gmx grompp -f min.mdp -c ../preparation/nvt_1ns.gro -p topol.top -o min.0 -pp min.0 -po min.0 -maxwarn 1 -n index.ndx
 
@@ -30,8 +30,6 @@ nsteps                   = 1000
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
 simulation-part          = 1
-; Multiple time-stepping
-mts                      = no
 ; mode for center of mass motion removal
 comm-mode                = Linear
 ; number of steps for center of mass motion removal
@@ -153,8 +151,28 @@ refcoord-scaling         = No
 
 ; OPTIONS FOR QMMM calculations
 QMMM                     = no
-; Groups treated with MiMiC
+; Groups treated Quantum Mechanically
 QMMM-grps                = 
+; QM method             
+QMmethod                 = 
+; QMMM scheme           
+QMMMscheme               = normal
+; QM basisset           
+QMbasis                  = 
+; QM charge             
+QMcharge                 = 
+; QM multiplicity       
+QMmult                   = 
+; Surface Hopping       
+SH                       = 
+; CAS space options     
+CASorbitals              = 
+CASelectrons             = 
+SAon                     = 
+SAoff                    = 
+SAsteps                  = 
+; Scale factor for MM charges
+MMChargeScaleFactor      = 1
 
 ; SIMULATED ANNEALING  
 ; Type of annealing for each temperature group (no/single/periodic)
@@ -238,7 +256,7 @@ pull-coord1-dim          = Y N N
 pull-coord1-origin       = 0.0 0.0 0.0
 pull-coord1-vec          = 0.0 0.0 0.0
 pull-coord1-start        = no
-pull-coord1-init         = .13
+pull-coord1-init         = .065
 pull-coord1-rate         = 0.0
 pull-coord1-k            = 10000
 pull-coord1-kB           = 10000

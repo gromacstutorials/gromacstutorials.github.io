@@ -1,4 +1,4 @@
-# This file was created Thu Aug 18 11:51:46 2022
+# This file was created Thu Aug 18 17:20:16 2022
 # Created by:
 #                       :-) GROMACS - gmx wham, 2021.4 (-:
 # 
@@ -9,7 +9,7 @@
 #   gmx wham -it tpr.dat -if pullf.dat
 # gmx wham is part of G R O M A C S:
 #
-# Green Red Orange Magenta Azure Cyan Skyblue
+# Good ROcking Metal Altar for Chronical Sinners
 #
 @    title "Umbrella histograms"
 @    xaxis  label "\xx\f{} (nm)"

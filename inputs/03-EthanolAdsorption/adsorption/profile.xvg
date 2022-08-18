@@ -1,4 +1,4 @@
-# This file was created Thu Aug 18 11:55:54 2022
+# This file was created Thu Aug 18 17:21:34 2022
 # Created by:
 #                       :-) GROMACS - gmx wham, 2021.4 (-:
 # 
@@ -9,7 +9,7 @@
 #   gmx wham -it tpr.dat -if pullf.dat
 # gmx wham is part of G R O M A C S:
 #
-# Gallium Rubidium Oxygen Manganese Argon Carbon Silicon
+# Grunge ROck MAChoS
 #
 @    title "Umbrella potential"
 @    xaxis  label "\xx\f{} (nm)"
