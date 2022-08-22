@@ -350,6 +350,14 @@ pull-coord1-k = 1000</code></pre>
                             of the harmonic potential is 1000 kJ/mol/nm2, and the requested distance between the center-of-mass 
                             of the two groups is 2 nm along the x dimension. 
                             <br><br>
+                            Copy as well the previously created topol.top file. Modify the 
+                            first lines to adapt the path to the force field folder:
+                            <pre><code>#include "../preparation/ff/gromos54a7_atb.ff/forcefield.itp"
+#include "../preparation/ff/BIPQ_GROMACS_G54A7FF_allatom.itp"
+#include "../preparation/ff/h2o.itp"</code></pre>
+                        </p>
+                        <p>
+                            <br><br>
                             Let us create an index file :
                             <pre><code>gmx make_ndx -f ../preparation/nvt.gro -o index.ndx</code></pre>
                         </p>
@@ -408,9 +416,7 @@ gmx mdrun -v -deffnm pro</code></pre>
                         </p>
                         <p>
                             Then, during the production run, the average distance between the 2 groups 
-                            is measured over time. Let us plot the histogram of this distance,
-                            toghether with the distribution for longer production run (if you have a 
-                            good computer, feel free to run longer production run than 50 ps):
+                            is measured over time. Let us plot the histogram of this distance:
                         </p>
                         <p>         
                             <img src="../figures/03-EthanolAdsorption/probability_position.png" 
@@ -419,6 +425,12 @@ gmx mdrun -v -deffnm pro</code></pre>
                                 distance between the two center-of-mass. Short (50 ps) and 
                                 long (1.5 ns) runs are compared.   
                         </p>
+                        <p>
+                            <b>Note:</b> A longer run has been added for comparison.  
+                            If you have a good computer, feel free to run longer production run than 50 ps.
+                        </p>
+
+
                         <p>
                             The distribution is not centered around x = 2 nm because of the interaction between the 
                             CO2 and the rest of the fluid.
@@ -440,11 +452,12 @@ gmx mdrun -v -deffnm pro</code></pre>
                         <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/adsorption/inputs/pro.mdp" download target="_blank">pro.mdp</a>,
                         in it. 
                         <br><br>
-                        The only difference with the previous input scripts, is the command:
+                        The only difference with the previous input scripts is the command:
                         <pre><code>pull-coord1-init = to_be_replaced</code></pre>
                       </p>
                       <p> 
-                        where the keyword 'to_be_replaced' is to be systematicaly replaced within a bash script. Create a bash script, call it 'run.sh', and 
+                        where the keyword 'to_be_replaced' is to be systematically replaced using a bash script. 
+                        Create a bash script, call it 'run.sh', and 
                         copy the following lines in it:
                       </p>
                       <pre><code>#!/bin/bash
