@@ -79,6 +79,9 @@
                         <a class="nav-link active" href="#minimization">Energy minimization</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link active" href="#eq">NVT equilibration</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link active" href="#force">Imposed forcing</a>
                     </li>      
                     <li class="nav-item">
@@ -232,11 +235,12 @@ SOL 858</code></pre>
                         <p>  
                             Create a new folder in the preparation/' folder, call it 'inputs', and save 
                             the <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/preparation/inputs/min.mdp" download target="_blank">min.mdp</a>
-                            and the <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/preparation/inputs/nvt.mdp" download target="_blank">npt.mdp</a> 
+                            and the <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/preparation/inputs/nvt.mdp" download target="_blank">nvt.mdp</a> 
                             files into it.
                         </p>
                         <p>
-                            These 2 files have been seen in previous tutorials.
+                            These 2 files have been seen in the previous tutorials. They contain the GROMACS commands, such as the type 
+                            of solver to use, the temperature, etc.
                             <br><br>
                             Apply the minimisation to the solvated box using :
                             <pre><code>gmx grompp -f inputs/min.mdp -c solvated_vacuum.gro -p topol.top -o min -pp min -po min -maxwarn 1
@@ -247,7 +251,7 @@ gmx mdrun -v -deffnm min</code></pre>
                             some issue with the force field.
                             <br><br>
                             Let us visualize the atoms' trajectories during the minimization step using VMD by typing:
-                            <pre><code>vmd solvate_vacuum.gro min.trr</code></pre>
+                            <pre><code>vmd solvated_vacuum.gro min.trr</code></pre>
                         </p>
                         <p>
                             This is what I see:
@@ -256,21 +260,25 @@ gmx mdrun -v -deffnm min</code></pre>
                             <img src="../figures/03-EthanolAdsorption/min.gif"
                             style="width:33%" alt="Gif minimization system"/>
                             <p style="color:#6B6B6B">Movie showing the motion of the atoms during the energy minimization. 
-                                The two fluid/vacuum interfaces are on the left and or the right sides, respectively.
+                                The two fluid/vacuum interfaces are on the left and or the right sides, respectively.</p>
                             <br><br>
                             <b>Note for VMD user:</b> You can avoid having molecules 'cut in half' by the periodic boundary conditions by rewriting the trajectory using 
                             'gmx trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole' </p>
                         </p>
+                        <p>
+                            <b>Observation:</b> During energy minimisation, the molecules move until the forces between the atom are reasonable. 
+                        </p>
+                    </section>
                     <br><br>
                     <section id="eq">
                         <h2>Equilibration</h2>
                         <p>
-                            Let us perform a NVT equilibration in order to reach the equilibrium ethanol/water density profile: 
+                            Starting from the minimized configuration, let us perform a NVT equilibration for 100 ps in order to let the system reach equilibrium: 
                             <pre><code>gmx grompp -f inputs/nvt.mdp -c min.gro -p topol.top -o nvt -pp nvt -po nvt -maxwarn 1
 gmx mdrun -v -deffnm nvt</code></pre>
                         </p>
                         <p>
-                            When its done, extract the density profile along x using the following command:
+                            When its done, extract the ethanol/water density profile along x using the following command:
                             <pre><code>gmx density -f nvt.xtc -s nvt.tpr -b 50 -d X -sl 100 -o density_end_ethanol.xvg</code></pre>
                         </p>
                         <p>
@@ -296,8 +304,6 @@ gmx mdrun -v -deffnm nvt</code></pre>
                             ethanol is known to be amphiphilic. There is also a local maxima in the center of the fluid layer (near x = 3 nm),
                             and two depletion area in between the center of the fluid layer anf the two interfaces. 
                         </p>
-
-
                     </section>
                     <!-- SECTION 3 -->
                     <br><br>
