@@ -1,7 +1,7 @@
 integrator = steep
-nsteps = 2500
+nsteps = 1000
 
-nstxout = 5
+nstxout = 0
 
 cutoff-scheme = Verlet
 nstlist = 10
@@ -19,7 +19,7 @@ constraint-algorithm = lincs
 constraints = hbonds
 
 pull = yes
-pull-nstxout = 1
+pull-nstxout = 0
 pull-ncoords = 1
 pull-ngroups = 2
 pull-group1-name = ethanol_pull
@@ -32,3 +32,4 @@ pull-coord1-start = no
 pull-coord1-init = to_be_replaced
 pull-coord1-rate = 0.0
 pull-coord1-k = 10000
+pull-group1-pbcatom = 1387

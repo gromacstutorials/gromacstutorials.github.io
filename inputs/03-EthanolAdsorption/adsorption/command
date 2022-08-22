@@ -1,1 +1,6 @@
- gmx grompp -f inputs/pull.mdp -c ../preparation/nvt.gro -p topol.top -o pull -pp pull -po pull -maxwarn 2 -n index.ndx 
+gmx grompp -f inputs/pull.mdp -c ../preparation/nvt.gro -p topol.top -o pull -pp pull -po pull -maxwarn 2 -n index.ndx 
+ 
+ 
+/tikhome/sgravelle/Softwares/wham/wham/wham -0.5 39.5 50 1e-8 300 0 metadata.dat PMF.dat
+ 
+gmx wham -it tpr.dat -if pullf.dat

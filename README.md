@@ -9,5 +9,8 @@ All the files generated during the tutorials can be found in the [input/](inputs
 
   <a href="https://gromacstutorials.github.io/tutorials/02-HBCSolvationEnergy.html">
   <img src="docs/figures/02-HBCSolvationEnergy/avatar.jpg" width="32%" /></a>
+  
+   <a href="https://gromacstutorials.github.io/tutorials/03-EthanolAdsorption.html">
+  <img src="docs/figures/03-EthanolAdsorption/avatar.jpg" width="32%" /></a>
 </p>
 
