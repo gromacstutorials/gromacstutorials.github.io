@@ -122,15 +122,18 @@
                     <section id="input">
                         <h2>Input files</h2>
                         <p>
-                            Create two folders named 'preparation/' and 'adsorption' in the same directory.
-                            Go to 'preparation/'. 
+                            Create 3 folders named 'preparation/', 'adsorption', and 'singleposition' 
+                            in the same directory. Go to 'preparation/'. 
                         </p>
                         <p>  
-                            Download the configuration files for the HBC molecule 
-                        </p>
-                            from the atb repository: click <a href="https://atb.uq.edu.au/molecule.py?molid=902261#panel-md" target="_blank">here</a>,
+                            Download the configuration files for the ethanol molecule 
+                            from the atb repository: 
+                            click <a href="https://atb.uq.edu.au/molecule.py?molid=902261#panel-md" 
+                            target="_blank">here</a>,
                             click on 'All-Atom PDB (optimised geometry)' and place 
-                            the file BIPQ_allatom_optimised_geometry.pdb in the 'preparation/' folder.
+                            the file 
+                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/preparation/BIPQ_allatom_optimised_geometry.pdb" target="_blank">
+                            BIPQ_allatom_optimised_geometry.pdb</a> in the 'preparation/' folder.
                         </p>
                         <br><br>
                         <h4>Create the configuration file</h4>
@@ -140,7 +143,8 @@
                             <pre><code>gmx trjconv -f BIPQ_allatom_optimised_geometry.pdb -s BIPQ_allatom_optimised_geometry.pdb  -box 0.8 0.8 0.8 -o single_ethanol.gro -center</code></pre>
                         </p> 
                         <p>
-                            Select 'system' for both centering and output. If you open the single_ethanol.gro file with VMD, you will see:
+                            Select 'system' for both centering and output. If you open the single_ethanol.gro file with VMD, you will see
+                            (after some aesthetical improvement):
                         </p>
                         <p>         
                             <img src="../figures/03-EthanolAdsorption/single_ethanol.png" style="width:20%" alt="Ethanol molecule with VMD"/>
@@ -148,7 +152,7 @@
                         </p>
                         <h4>Replicate the ethanol molecule</h4>
                         <p>
-                            In order to create a system with several ethanol molecule, let us replicate the 
+                            In order to create a system with several ethanol molecules, let us replicate the 
                             single molecule (4x4x4 times) using genconf:
                             <pre><code>gmx genconf -f single_ethanol.gro -o replicated_ethanol.gro -nbox 4 4 4</code></pre>
                         </p>
@@ -161,9 +165,11 @@
                         </p>
                         <h4>Create the topology file</h4>
                         <p>
-                            From the <a href="https://atb.uq.edu.au/molecule.py?molid=151371#panel-md" target="_blank">same atb page</a>,
-                            copy the 'GROMACS All-Atom (ITP file)' [tofix] and place it in a folder named 'ff/' and located within the 'preparation/' folder. 
-                            Within 'ff/' download as well the GROMACS top file named 
+                            From the <a href="https://atb.uq.edu.au/molecule.py?molid=902261#panel-md" target="_blank">same atb page</a>,
+                            copy the 
+                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/preparation/ff/BIPQ_GROMACS_G54A7FF_allatom.itp" target="_blank">
+                                'GROMACS G54A7FF All-Atom (ITP file)'</a> and place it in a folder named 'ff/' and located within the 'preparation/' folder. 
+                            Within 'ff/', download as well the GROMACS top file named 
                             <a href="https://atb.uq.edu.au/forcefield_files/atb_gromacs/5/gromos54a7_atb.ff.tar.gz" download target="_blank">Gromacs 4.5.x-5.x.x 54a7</a>
                             containing all the force field parameters. 
                             Copy as well the 
@@ -200,7 +206,7 @@ BIPQ 64
 SOL 858</code></pre>
                         <p>             
                             The created 'solvated.gro' file contains the positions of both Ethanol and water
-                            molecules:
+                            molecules, it looks like that:
                         </p>
                         <p>         
                             <img src="../figures/03-EthanolAdsorption/solvated.png" style="width:33%" alt="Ethanol molecules in water with VMD"/>
@@ -208,14 +214,14 @@ SOL 858</code></pre>
                         </p>
                         <p> 
                             Since we want to simulate a liquid-vapor system, let us increase the box size along the 
-                            x direction to create the vacuum part:
-                            <pre><code>gmx trjconv -f solvated.gro -s solvated.gro -box 6.4 3.2 3.2 -o solvated_vacuum.gro -center</code></pre>
+                            x direction to create a large vacuum area:
+                            <pre><code>gmx trjconv -f solvated.gro -s solvated.gro -box 20.0 3.2 3.2 -o solvated_vacuum.gro -center</code></pre>
                         </p>
                         <p>
                             Select 'system' for both centering and output.
                             <br><br> 
                             If you encountered a problem during file generation, 
-                            you can also download the file I have generated by clicking 
+                            you can also download the solvated_vacuum.gro file I have generated by clicking 
                             <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/preparation/solvated_vacuum.gro" download target="_blank">here</a>.
                         </p>
                     </section>
