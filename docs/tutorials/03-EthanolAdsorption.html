@@ -266,7 +266,8 @@ gmx mdrun -v -deffnm min</code></pre>
                             'gmx trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole' </p>
                         </p>
                         <p>
-                            <b>Observation:</b> During energy minimisation, the molecules move until the forces between the atom are reasonable. 
+                            <b>Observation:</b> During energy minimisation, the molecules move until 
+                            the forces between the atoms are reasonable. 
                         </p>
                     </section>
                     <br><br>
@@ -278,14 +279,15 @@ gmx mdrun -v -deffnm min</code></pre>
 gmx mdrun -v -deffnm nvt</code></pre>
                         </p>
                         <p>
-                            When its done, extract the ethanol/water density profile along x using the following command:
+                            When its done, extract the ethanol density profile along x using the following command:
                             <pre><code>gmx density -f nvt.xtc -s nvt.tpr -b 50 -d X -sl 100 -o density_end_ethanol.xvg</code></pre>
                         </p>
                         <p>
                             and choose 'non_water' for the ethanol. The '-b 50' keyword is used to disregard the 50 first picoseconds of the simulation,
                             the '-d X' keyword to generate a profile along x, and the '-sl 100' keyword to divide the box into 100 frames. 
+                            Repeat the procedure to extract the water profile as well.
                             <br><br>
-                            <b>Warning: </b> The current equilibration time and for the NVT run (100 ps) is too small. It has been chosen 
+                            <b>Warning: </b> The current equilibration time for the NVT run (100 ps) is too small. It has been chosen 
                             to make the tutorial easier to follow for people with a bad laptop (myself included). Increase the duration 
                             to 1 nanosecond for a better equilibrated system. Alternatively, download the final configuration I have 
                             generated after a 1 ns run by clicking 
@@ -302,7 +304,7 @@ gmx mdrun -v -deffnm nvt</code></pre>
                         <p>
                             <b>Discussion: </b> The density profiles show an excess of ethanol at the 2 interfaces, which is expected as 
                             ethanol is known to be amphiphilic. There is also a local maxima in the center of the fluid layer (near x = 3 nm),
-                            and two depletion area in between the center of the fluid layer anf the two interfaces. 
+                            and two depletion area in between the center of the fluid layer and the two interfaces. 
                         </p>
                     </section>
                     <!-- SECTION 3 -->
@@ -311,23 +313,22 @@ gmx mdrun -v -deffnm nvt</code></pre>
                         <h2>Imposed forcing</h2>
                         <p>
                             To calculate the free energy profile across the liquid/vapor interface, one needs to impose an additional 
-                            harmonic potential to one ethanol molecule, and force it to explore 
-                            certain region of the box, including the energeticaly unfavorable vacuum phase. 
+                            harmonic potential to one ethanol molecule and force it to explore 
+                            the box, including the most energeticaly unfavorable part. 
                             <br><br>
-                            Ultimately, a large number of positions for the ethanol molecule need to be calculated. 
-                            For the sake of testing our protocole, let us first test our protocile using one single position
-                            for the center of the harmonic potential.
+                            In order to test our protocole, let us first calculate one single position. More positions will be 
+                            calculated in the next part of this tutorial.
                             <br><br>
-                            Next to 'preparation/', create a folder called 'singleposition/'. Within 'singleposition/',
+                            Within 'singleposition/',
                             create a folder named 'inputs', and copy 
-                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/singleposition/inputs/min.mdp" download target="_blank">min.mdp</a>,
-                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/singleposition/inputs/nvt.mdp" download target="_blank">nvt.mdp</a>,
+                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/singleposition/inputs/min.mdp" target="_blank">min.mdp</a>,
+                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/singleposition/inputs/nvt.mdp" target="_blank">nvt.mdp</a>,
                             and 
-                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/singleposition/inputs/pro.mdp" download target="_blank">pro.mdp</a>,
+                            <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/singleposition/inputs/pro.mdp" target="_blank">pro.mdp</a>,
                             in it. 
                         </p>
                         <p>
-                            In all 3 mdp files, there is the following lines: 
+                            In all 3 mdp files, there are the following lines: 
                             <pre><code>pull = yes
 pull-nstxout = 1
 pull-ncoords = 1
@@ -362,8 +363,9 @@ pull-coord1-k = 1000</code></pre>
 name 6 ethanol_pull</code></pre>
                         </p>
                         <p>
-                            These commands create a index file containing a new group named 'ethanol_pull' made of only 1 atom: the atom with index 2 
-                            which is an oxygen atom of one of the first ethanol molecule in the list.
+                            Press 'q' to save and exit. These commands create an 
+                            index file containing a new group named 'ethanol_pull' made of only 1 atom: the atom with index 2.
+                            This atom is the oxygen atom of the first ethanol molecule in the list.
                             We don't care here where this molecule is located in the box. You can ensure that the atom 
                             of index 2 is indeed an oxygen of an ethanol molecule by looking 
                             at the top of the nvt.gro (or nvt_1ns.gro) file:  
@@ -381,6 +383,11 @@ name 6 ethanol_pull</code></pre>
 (...)</code></pre>
                         </p>
                         <p>
+                            <b>Note:</b> Other atoms of the molecule could have been chosen, or even the full 
+                            ethanol molecule. 
+                        </p>
+                        <p> 
+
                             Run all 3 inputs successively:
                             <pre><code>gmx grompp -f inputs/min.mdp -c ../preparation/nvt_1ns.gro -p topol.top -o min -pp min -po min -maxwarn 1 -n index.ndx
 gmx mdrun -v -deffnm min
