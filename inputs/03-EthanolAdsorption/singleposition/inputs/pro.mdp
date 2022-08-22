@@ -24,7 +24,7 @@ rcoulomb = 1.0
 constraint-algorithm = lincs
 constraints = hbonds
 
-tcoupl = v-rescale
+tcoupl = no
 ld-seed = 48456
 tc-grps = Water non-Water
 tau-t = 0.5 0.5
