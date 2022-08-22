@@ -79,14 +79,11 @@
                         <a class="nav-link active" href="#minimization">Energy minimization</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="#eq">Equilibration</a>
+                        <a class="nav-link active" href="#force">Imposed forcing</a>
                     </li>      
                     <li class="nav-item">
-                        <a class="nav-link active" href="#solvation">Solvation energy</a>
+                        <a class="nav-link active" href="#adsorption">Free energy profile</a>
                     </li>      
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#further">Going further</a>
-                    </li>
                 </ul>
             </div>
             <!-- main page -->
@@ -94,12 +91,17 @@
                 <div class="container">
                     <section id="intro">
                         <h1>Adsorption properties of ethanol at a water-vacuum interface</h1>
-                        <h3>Free energy profile measurement using umbrella sampling method</h3>
+                        <h3>Free energy profile measurement using umbrella sampling and WHAM</h3>
                         <p>
-                            <img src="../figures/03-EthanolAdsorption/banner.png"
-                            style="width:33%" alt="Responsive image"/>
+                            <img src="../figures/03-EthanolAdsorption/umbrella.gif"
+                            style="width:33%" alt="ethanol molecule being pulled"/>
+                            <img src="../figures/03-EthanolAdsorption/PMF.png"
+                            style="width:28%" alt="PMF free nergy profile GROMACS"/>
                             <p style="color:#6B6B6B">
-                            Description
+                                Left: Ethanol molecule being pulled from a water/ethanol mixture into 
+                                the vapor phase. 
+                                Right: Corresponding PMF profile. The liquid phase is 
+                                in x < 1.5 nm, and the interface in x = 1.5 nm. 
                             </p>
                         </p>
                         <p>
@@ -445,25 +447,59 @@ for ((i = 0 ; i < 30 ; i++)); do
         gmx mdrun -v -deffnm pull.$i
 done</code></pre>
                     </p>
-                    <p> 
+                    <p>   
                         Copy the previously created index file and topology file within the 'adsorption/'
-                        folder, and execute the bash script. For better result, you can increase the duration of the 
-                        NVT and production runs. 
+                        folder, and execute the bash script.
+                        <br><br>
+                        When the simulation is done, create 2 files (credit to
+                        <a href = "https://gaseri.org/en/tutorials/gromacs/5-umbrella/#simulation" target="_blank">
+                            the excellent gaseri site</a>)
+                        <pre><code>ls prd.*.tpr > tpr.dat</code></pre>
+                    </p>
+                    <p> 
+                        and:
+                        <pre><code>ls pullf-prd.*.xvg > pullf.dat</code></pre>
+                    </p>
+                    <p> 
+                        Finally, perform the analysis using the WHAM command of GROMACS:
+                        <pre><code>gmx wham -it tpr.dat -if pullf.dat</code></pre>
+                    </p>
+                    <p> 
+                        A file named "profile.xvg" must have been created, and it should contain a 
+                        PMF profile resembling the red curve below:
+                        <br><br>    
+                        <img src="../figures/03-EthanolAdsorption/PMF.png" 
+                        style="width:33%" alt="PMF profile"/>
+                        <p style="color:#6B6B6B">PMF for the ethanol molecule accross the interface 
+                            between a water/ethanol mixture and vapor.   
+                    </p>
+                    <p> 
+                        <b>Note:</b> Runs of 100 ps as done in this tutorial are too short to obtain a proper result.
+                        Increase the duration of the production runs to a few nanoseconds to obtain a proper PMF (like 
+                        the blue curve in the figure above). 
+                        <br><br>
+                        <b>Explanation:</b> The PMF shows a plateau inside the bulk liquid (x<1 nm), a minimum 
+                        at the interface  (x=1.5 nm), and increase in the vapor phase (x>1.5 nm). The minimum at 
+                        the interface indicate that ethanol favorably adsorb at the liquid/vapor interface, 
+                        which is consistent with the density profile. The PMF also indicates that, once adsorbed, 
+                        the ethanol molecule requires an energy of about 5 kJ/mol to re-enter the liquid phase
+                        (looking at the blue curve), which is about 2.2 kBT. Finally the PMF shows that it is 
+                        energetically costly for the ethanol molecule to fully desorb and go into the vacuum phase
+                        as the energy barrer to overcome is at least 25 kJ/mol. Consistently, when performing 
+                        MD simulation, it is rare to observe an ethanol molecule exploring the vapor phase. 
                     </p>
 
-
-
                     </section>
-                    <!--Section 5-->
+                    <!--Section 5
                     <br><br>
                     <section id="further">
                         <h2>Going further with exercises</h2>
                         <br>
-                        <!--<p class="alert alert-info"> 
+                        <p class="alert alert-info"> 
                         Request the solutions by email, or register <a target="_blank"
                         href="https://www.patreon.com/molecularsimulations">here</a> and access all the solutions
                         + additional LAMMPS/GROMACS content.
-                        </p>-->
+                        </p>
                         <br>
                         <h4><b>Solvation energy of another molecule</b></h4>
                         <p>
@@ -473,7 +509,7 @@ done</code></pre>
                         <a href="../miscellaneous/contact.html">Click here</a>
                         to contact me.
                         </p>
-                    </section>
+                    </section>-->
                 </div>
             </div>
             <!-- Footer -->

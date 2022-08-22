@@ -1,20 +1,3 @@
-# This file was created Fri Aug 19 18:45:23 2022
-# Created by:
-#                       :-) GROMACS - gmx wham, 2021.4 (-:
-# 
-# Executable:   /work/sgravelle/Softwares/gromacs-install/bin/gmx
-# Data prefix:  /work/sgravelle/Softwares/gromacs-install
-# Working dir:  /tikhome/sgravelle/Git/GROMACStutorials/gromacstutorials.github.io/inputs/03-EthanolAdsorption/adsorption
-# Command line:
-#   gmx wham -it tpr.dat -if pullf.dat
-# gmx wham is part of G R O M A C S:
-#
-# Green Red Orange Magenta Azure Cyan Skyblue
-#
-@    title "Umbrella potential"
-@    xaxis  label "\xx\f{} (nm)"
-@    yaxis  label "E (kJ mol\S-1\N)"
-@TYPE xy
 5.274998e-03	0.000000e+00
 1.545680e-02	4.927878e-01
 2.563860e-02	2.530784e-01
