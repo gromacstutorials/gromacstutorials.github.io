@@ -117,9 +117,751 @@ The input files
          timestep).
 
 
+The configuration file (.gro)
+-----------------------------
 
+..  container:: justify
 
+    For the present simulation, the initial atoms
+    positions and box size are given in a conf.gro file
+    (Gromos87 format) that you can download by clicking
+    |cong.gro|
+    Save the conf.gro file in a folder. The file looks
+    like that:
 
+.. |cong.gro| raw:: html
 
-#..  code-block:: gromacs
-#   :caption: *to be copied in input1.lammps*
+    <a href="../../../../inputs/01-Na2SO4solution/conf.gro" target="_blank">here</a>
+
+..  code-block:: bw
+
+    Na2SO4 solution
+    3557
+        1  SO4   O1    1   2.725   1.999   2.077
+        1  SO4   O2    2   2.679   2.091   1.839
+        1  SO4   O3    3   2.505   2.127   2.028
+        1  SO4   O4    4   2.542   1.890   1.930
+        1  SO4    S    5   2.612   2.027   1.968
+    (...)
+    898  SOL  HW1 3555   3.004   3.021   2.945
+    898  SOL  HW2 3556   3.004   2.869   2.945
+    898  SOL   MW 3557   2.955   2.945   2.945
+    3.10000   3.10000   3.10000
+
+..  container:: justify
+
+    **Description:** The first line is a comment, the
+    second is the total number of atoms, and the last
+    line is the box dimension in nanometer (nm). Between
+    the second and the last line there is one line per
+    atom. Each line indicates, from left to right, the
+    residue Id (the atoms of the same
+    SO\ :sub:`4`\ :sup:`2-` ion have the same residue
+    Id), the residue name, the atom name, the atom Id,
+    and finally the atom position (x, y, and z
+    coordinate in nm).
+    
+    **Remark:** The format of conf.gro file is fixed,
+    all columns are in a fixed position. For example,
+    the first five columns are for the residue number.
+    This conf.gro file can be visualized using VMD by
+    typing in the terminal:
+
+..  code-block:: bash
+
+     vmd conf.gro
+
+..  container:: justify
+
+    You have to play with atoms' representation and color
+    to make it look better than it is by default:
+
+.. figure:: figures/bulksolution/system_step0.png
+    :alt: Gromacs initial configuration of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
+    :height: 300
+
+    Figure: SO\ :sub:`4`\ :sup:`2-` ions (in yellow and
+    red) and Na\ :sub:`+` ions (blue) in water (red and
+    white).
+
+..  container:: justify
+
+    As can be seen in this figure, the water molecules are
+    arranged in a quite unrealistic and regular manner, with
+    all dipoles facing in the same direction, and possibly
+    some overlapping between some of the molecules and ions.
+
+The topology file (.top)
+------------------------
+
+..  container:: justify
+
+    The topology file contains information about the
+    interactions of the different atoms and molecules. You
+    can download it by clicking |topol.top|.
+    Place it in the same folder as the conf.gro file. The
+    top file looks like that:
+
+.. |topol.top| raw:: html
+
+    <a href="../../../../inputs/01-Na2SO4solution/topol.top" target="_blank">here</a>
+
+..  code-block:: bw
+
+    #include "ff/forcefield.itp"
+    #include "ff/h2o.itp"
+    #include "ff/na.itp"
+    #include "ff/so4.itp"
+
+    [ System ]
+    Na2SO4 solution
+
+    [ Molecules ]
+    SO4 7
+    Na 14
+    SOL 875
+
+..  container:: justify
+
+    The 4 first lines are used to include the values the
+    parameters given in separate files (it is usually better to use multiple
+    files for clarity). Create a folder named 'ff/', and copy
+    |forcefield.itp|, |h2o.itp|, |na.itp|, and |so4.itp|
+    in it. These four files contain information about
+    the atoms (names, masses, changes, Lennard-Jones
+    coefficients) and residues (bond and angular
+    constraints).
+    The rest of the topol.top file contains the system
+    name, and a list of the molecules. Its important
+    that the order of the molecules in the topology file
+    (here SO4 first, Na second, and SOL (H2O) last)
+    matches the order of the conf.gro file.
+
+.. |forcefield.itp| raw:: html
+
+    <a href="../../../../inputs/01-Na2SO4solution/ff/forcefield.itp" target="_blank">forcefield.itp</a>
+
+.. |h2o.itp| raw:: html
+
+    <a href="../../../../inputs/01-Na2SO4solution/ff/h2o.itp" target="_blank">h2o.itp</a>
+
+.. |na.itp| raw:: html
+
+    <a href="../../../../inputs/01-Na2SO4solution/ff/na.itp" target="_blank">na.itp</a>
+
+.. |so4.itp| raw:: html
+
+    <a href="../../../../inputs/01-Na2SO4solution/ff/so4.itp" target="_blank">so4.itp</a>
+
+The input file (.mdp)
+---------------------
+
+..  container:: justify
+
+    The input file contains instructions about the
+    simulation, such as
+
+    The input file contains instructions about the
+    simulation, such as
+
+    -  the thermostat to be used (e.g. Langevin, Berendsen),
+    -  the cut-off for the interactions (e.g. Lennard-Jones),
+    -  or the molecular dynamics integrator (e.g. steep-decent, molecular dynamics).
+
+    In this tutorial, 4 different input files will be
+    written in order to perform respectively an energy
+    minimization of the salt solution, an equilibration
+    in the NVT ensemble, an equilibration in the NPT
+    ensemble, and finally a production run.
+    Input files will be placed in a 'inputs/' folder. 
+
+    At this point, your folder should look like that:
+
+.. figure:: figures/bulksolution/gromacs_inputs.png
+    :alt: Gromacs files and structure folder
+    :height: 150
+
+Energy minimization
+===================
+
+..  container:: justify
+
+    It is clear from the current conf file (see the
+    previous image) that the atoms are currently in a
+    quite unphysical configuration. It would be risky to
+    directly perform a molecular dynamics simulation;
+    atoms would undergo huge forces and the system would
+    explode.
+
+    In order to bring the system into a favorable state,
+    let us perform an energy minimization which consists
+    in moving the atoms until the forces between them
+    are reasonable.
+
+    Open a blank file, call it min.mdp, and save it in the
+    'inputs/' folder. Copy the following lines into min.mdp:
+
+..  code-block:: bw
+
+    integrator = steep
+    nsteps = 5000
+
+..  container:: justify
+
+    These commands specify to GROMACS that the algorithm
+    to be used is the speepest-descent, which move the
+    atoms following the direction of the largest forces
+    until a stopping criterial is reached. Then, the 'nsteps' command 
+    specifies the maximum number of steps to perform.
+
+    As we would like to be able to visualize
+    the trajectory of the atoms during the minimization,
+    let us add the following command to the input
+    file in order to print the atoms positions every 10 steps:
+
+..  code-block:: bw
+
+    nstxout = 10
+
+..  container:: justify
+
+    We now have a very minimalist input script, let us try
+    it. From the terminal, type:
+
+..  code-block:: bash
+
+    gmx grompp -f inputs/min.mdp -c conf.gro -p topol.top -o min -pp min -po min
+    gmx mdrun -v -deffnm min
+
+..  container:: justify
+
+    The first command (grompp) is used to preprocess the
+    files in order to prepare the simulation. The grompp
+    command also checks the validity of the files. Using
+    the '-f', '-c', and '-p' keywords, we specify which
+    input, configuration, and topology files must be
+    used, respectively. The other keywords '-o', '-pp', and '-po' are
+    used to specify the names of the output that will be
+    produced during the run. The second command (mdrun) calls the engine
+    performing the computation from the preprocessed
+    files (which is recognized thanks to the -deffnm keyword). The
+    '-v' option is here to enable verbose and have more
+    information printed in the terminal.
+
+    If everything works, you should see something like :
+
+..  code-block:: bw
+
+    Steepest Descents converged to machine precision in 824 steps,
+    but did not reach the requested Fmax < 10.
+    Potential Energy  = -6.8990930e+04
+    Maximum force     =  2.4094606e+02 on atom 1654
+    Norm of force     =  4.6640654e+01
+
+..  container:: justify
+
+    The information printed in the terminal indicates us
+    that energy minimization has been performed, even
+    though the precision that was asked from the default
+    parameters was not reached. We can ignore this
+    message. The final potential energy is large and
+    negative, and the maximum force is small: 240
+    kJ/mol/nm (about 0.4 pN). Everything seems alright.
+    Let us visualize the atoms' trajectories during the
+    minimization step using VMD by typing:
+
+..  code-block:: bash
+
+    vmd conf.gro min.trr
+
+..  container:: justify
+
+    This is what I see:
+
+.. figure:: figures/bulksolution/min.gif
+    :alt: Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization.
+    :height: 150
+
+..  container:: justify
+
+    **Note for VMD user:** You can avoid having
+    molecules 'cut in half' by the periodic boundary
+    conditions by rewriting the trajectory using 'gmx
+    trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole'
+
+    One can see that the molecules reorient themselves
+    into more energetically favorable positions, and that
+    the distances between the atoms are being
+    progressively homogeneized. Let us have a look at the
+    evolution of the potential energy of the system. To do
+    so, we can use the internal 'energy' command of
+    GROMACS. In the terminal, type:
+
+..  code-block:: bash
+
+    gmx energy -f min.edr -o epotmin.xvg
+
+..  container:: justify
+
+    and choose 'potential'. Here the edr file produced
+    by Gromacs during the last run is used, and the
+    result is saved in the epotmin.xvg file.
+    Let us plot it (xvg files can be easily opened
+    using XmGrace, here I use pyplot and jupyter-notebook, all files are available on gitlab).
+
+.. figure:: figures/bulksolution/epotmin.png
+    :alt: Gromacs tutorial : energy versus time.
+    :width: 400
+
+    Evolution of the potential energy as a function of the
+    number of steps during energy minimization.
+
+..  container:: justify
+
+    **Observation:** One can see from the energy plot that
+    the potential energy is initially huge and positive,
+    which is the consequence of atoms being too close from
+    one another, and to molecules being wrongly oriented.
+    As the minimization progresses, the potential energy
+    rapidly decreases and reaches a large and negative
+    value, which is usually a good sign as it indicates
+    that the atoms are now in an energetically favorable
+    configuration.
+
+    The system is now ready for the molecular dynamics
+    simulation.
+
+Minimalist NVT input file
+=========================
+
+..  container:: justify
+
+    Let us first perform a small (20 picoseconds)
+    equilibration in the NVT ensemble. For this
+    simulation, the number of atom (N) and volume (V) are
+    maintained fixed, and the temperature (T) is adjusted
+    using a thermostat. Let use write a new input script
+    called nvt.mdp, and save it in the 'inputs/' folder.
+    Copy the following lines into it:
+
+..  code-block:: bw
+
+    integrator = md
+    nsteps = 20000
+    dt = 0.001
+
+..  container:: justify
+
+    Here the molecular dynamics (md) integrator is used
+    (leapfrog algorithm), and a number of 20000 steps with
+    timestep (dt) 0.001 ps is requested, so the total
+    requested duration is 20 ps. Let us print the
+    trajectory in a xtc file every 1 ps by adding:
+
+..  code-block:: bw
+
+    nstxout-compressed = 1000
+
+..  container:: justify
+
+    Let us control the temperature over the course of the
+    simulation using the v-rescale thermostat, which is
+    the Berendsen thermostat with an additional stochastic
+    term (it is known to give proper canonical ensemble):
+
+..  code-block:: bw
+
+    tcoupl = v-rescale
+    ref-t = 360
+    tc-grps = system
+    tau-t = 0.5
+
+..  container:: justify
+
+    Here we also specified that the thermostat is
+    applied to the entire system (we could choose to
+    apply it only to a certain group of atom, which we
+    will do later), and that the damping constant for
+    the thermostat is 0.5 ps.
+
+    **Remark:** The relatively high temperature of 360 K
+    has been chosen here in order to reduce the
+    viscosity of the solution and converge toward
+    the desired result (i.e. the diffusion coefficient) faster.
+    We now have a minimalist input file for performing
+    the NVT step. Run it by typing in the terminal:
+
+..  code-block:: bw
+
+    gmx grompp -f inputs/nvt.mdp -c min.gro -p topol.top -o nvt -pp nvt -po nvt
+    gmx mdrun -v -deffnm nvt
+
+..  container:: justify
+
+    Here '-c min.gro' ensures that the previously
+    minimized configuration is used as a starting point.
+    
+    After the completion of the simulation, we can
+    ensure that the system temperature indeed reached
+    the value of 360 K by using the energy command of
+    GROMACS. Type:
+
+..  code-block:: bw
+
+    gmx energy -f nvt.edr -o Tnvt.xvg
+
+..  container:: justify
+
+    and choose 'temperature'.
+    
+    From the generated file, we can see that temperature
+    started from 0, which was expected since the atoms
+    have no velocity during a minimization step, and
+    reaches a temperature slightly larger than the
+    requested 360 K after a duration of a few
+    picoseconds:
+
+.. figure:: figures/bulksolution/Tnvt.png
+    :alt: Gromacs tutorial : temperature versus time.
+    :width: 400
+
+    Evolution of the temperature as a function of the time
+    during the NVT equilibration. Dashed line is the
+    requested temperature of 360 K.
+
+Improved NVT
+============
+
+..  container:: justify
+
+    So far, a very few commands have been placed in the
+    NVT input file, meaning that most of the instruction
+    have been taken by GROMACS from the default
+    parameters. You can find what parameters were used
+    during the last nvt run by opening the new nvt.mdp
+    file that has been created (i.e. not the one in the
+    'inputs/' folder, but the one in the main folder).
+    Exploring this new nvt.mdp file shows us that, for
+    instance, plain cut-off Coulomb interactions have
+    been used:
+
+..  code-block:: bw
+
+    ; Method for doing electrostatics
+    coulombtype = Cut-off
+
+..  container:: justify
+
+    For this system, long range Coulomb interaction is a
+    better choice. We could also perform better thermostating the
+    system by thermostating water and ions separately.
+    Therefore, let us improve the NVT step by specifying
+    more options in the input file.
+    First, in nvt.mdp, let us impose the use of the
+    long-range Fast smooth Particle-Mesh Ewald (SPME)
+    electrostatics with Fourier spacing of 0.1 nm, order
+    of 4, and cut-off of 4:
+
+..  code-block:: bw
+
+    coulombtype = pme
+    fourierspacing = 0.1
+    pme-order = 4
+    rcoulomb = 1.0
+
+..  container:: justify
+
+    **Note:** With PME, the cut-off specifies which
+    interactions are treated with Fourier transforms.
+    Let us also specify the van der Waals interaction:
+
+..  code-block:: bw
+
+    vdw-type = Cut-off
+    rvdw = 1.0
+
+..  container:: justify
+
+    as well as the constraint algorithm for the hydrogen
+    bonds of the water molecules:
+
+..  code-block:: bw
+
+    constraint-algorithm = lincs
+    constraints = hbonds
+    continuation = no
+
+..  container:: justify
+
+    Let us also perform separate temperature baths (for
+    water and ions (here corresponding to the gromacs group called non-water) respectively)
+    by replacing:
+
+..  code-block:: bw
+
+    tcoupl = v-rescale
+    ref-t = 360
+    tc-grps = system
+    tau-t = 0.5
+
+..  container:: justify
+
+    by:
+
+..  code-block:: bw
+
+    tcoupl = v-rescale
+    tc-grps = Water non-Water
+    tau-t = 0.5 0.5
+    ref-t = 360 360
+
+..  container:: justify
+
+    Let us specify neighbor searching parameters:
+
+..  code-block:: bw
+
+    cutoff-scheme = Verlet
+    nstlist = 10
+    ns_type = grid
+
+..  container:: justify
+
+    Let us give an initial kick to the atom (so that the initial
+    total velocities give the desired temperature instead of 0):
+
+..  code-block:: bw
+
+    gen-vel = yes
+    gen-temp = 360
+
+..  container:: justify
+
+    and let us remove center of mass translational
+    velocity of the whose system:
+
+..  code-block:: bw
+
+    comm_mode = linear
+    comm_grps = system
+
+..  container:: justify
+
+    Run the new version of the input script. One obvious
+    difference with the previous (minimalist) NVT run is
+    the temperature at the beginning of the run (orange
+    curve). In addition, the final temperature is closer
+    to the desired temperature:
+
+.. figure:: figures/bulksolution/Tnvt_improved.png
+    :alt: Gromacs tutorial : temperature versus time - improved input.
+    :width: 400
+
+    Evolution of the temperature as a function of the time
+    during the NVT equilibration. The blue curve is from
+    the minimalist NVT input file, and the orange curve is
+    from the improved NVT input file.
+
+NPT
+===
+
+..  container:: justify
+
+    Now that the system is properly equilibrated in the
+    NVT ensemble, let us perform an equilibration in the
+    NPT ensemble, where the pressure is imposed and the
+    volume of the box is free to relax, so that the
+    density of the fluid converges toward equilibrium.
+    Create a new input script, call it 'npt.mdp', and
+    copy the following lines in it:
+
+..  code-block:: bw
+
+    integrator = md
+    nsteps = 50000
+    dt = 0.001
+
+    comm_mode = linear
+    comm_grps = system
+
+    cutoff-scheme = Verlet
+    nstlist = 10
+    ns_type = grid
+
+    nstlog = 100
+    nstenergy = 100
+    nstxout-compressed = 1000
+
+    vdw-type = Cut-off
+    rvdw = 1.0
+
+    coulombtype = pme
+    fourierspacing = 0.1
+    pme-order = 4
+    rcoulomb = 1.0
+
+    constraint-algorithm = lincs
+    constraints = hbonds
+
+    tcoupl = v-rescale
+    ld-seed = 48456
+    tc-grps = Water non-Water
+    tau-t = 0.5 0.5
+    ref-t = 360 360
+
+    pcoupl = berendsen
+    Pcoupltype = isotropic
+    tau_p = 1.0
+    ref_p = 1.0
+    compressibility = 4.5e-5
+
+..  container:: justify
+
+    The main difference with the previous NVT script, is
+    the addition of the isotropic Berendsen pressure
+    coupling with a target pressure of 1 bar. Another
+    differences are the addition of the 'nstlog' and
+    'nstenergy' commands to control the frequency at
+    which information are printed in the log file and in
+    the energy file (edr), and the removing the
+    'gen-vel' commands. Run it using :
+
+..  code-block:: bash 
+
+    gmx grompp -f inputs/npt.mdp -c nvt.gro -p topol.top -o npt -pp npt -po npt
+    gmx mdrun -v -deffnm npt
+
+..  container:: justify
+
+    Let us have a look a both temperature, pressure and
+    volume during the NPT step using the 'gmx energy'
+    command:
+
+.. figure:: figures/bulksolution/npt.png
+    :alt: Gromacs tutorial : NPT equilibration
+    :width: 400
+
+    From left to right: evolution of the temperature,
+    pressure, and volume of the simulation box as a
+    function of the time during the NPT equilibration.
+
+..  container:: justify
+
+    The results show that the temperature remains well
+    controlled during the NPT run. The results also show
+    that the volume was initially too small for the
+    desired pressure, and equilibrated itself at a
+    slightly larger value after a few pico-seconds.
+    Finally, the results show large oscillations of the
+    pressure with time. These large oscillations are
+    typical in molecular dynamics, particularly with
+    liquid water that is particularly uncompressible.
+
+Diffusion coefficient measurement
+=================================
+
+..  container:: justify
+
+    Now that the system is fully equilibrated, we can
+    perform a longer simulation and extract quantities of
+    interest. Here, as an illustration, the diffusion
+    coefficients of all 3 species (water and ions) will be
+    measured. First, let us perform a longer run in the
+    NVT ensemble. Create a new input file, call it
+    'pro.mdp' ('pro' is for 'production'), and copy the
+    following lines into it:
+
+..  code-block:: bw 
+
+    integrator = md
+    nsteps = 200000
+    dt = 0.001
+
+    comm_mode = linear
+    comm_grps = system
+
+    cutoff-scheme = Verlet
+    nstlist = 10
+    ns_type = grid
+
+    nstlog = 100
+    nstenergy = 100
+    nstxout-compressed = 1000
+
+    vdw-type = Cut-off
+    rvdw = 1.0
+
+    coulombtype = pme
+    fourierspacing = 0.1
+    pme-order = 4
+    rcoulomb = 1.0
+
+    constraint-algorithm = lincs
+    constraints = hbonds
+
+    tcoupl = v-rescale
+    ld-seed = 48456
+    tc-grps = Water non-Water
+    tau-t = 0.5 0.5
+    ref_t = 360 360
+
+..  container:: justify
+
+    Run it using:
+
+..  code-block:: bash 
+
+    gmx grompp -f inputs/pro.mdp -c npt.gro -p topol.top -o pro -pp pro -po pro
+    gmx mdrun -v -deffnm pro
+
+..  container:: justify
+
+    When its completed, compute the mean square
+    displacement using:
+
+..  code-block:: bash 
+
+    gmx msd -f pro.xtc -s pro.tpr -o SO4.xvg
+
+..  container:: justify
+
+    and select the SO4 ions. Fitting the slope of the
+    MSD gives a value of 1.3e-5 cm\ :sup:`2`/s for the
+    diffusion coefficient. For Na, the value is 1.5e-5
+    cm\ :sup:`2`/s, and for water 5.2e-5 cm\ :sup:`2`/s
+    (not too far from the experimental value of ~ 7e-5
+    cm\ :sup:`2`/s for T=360 K).
+    
+    **Side note:** Diffusion coefficients obtained from
+    molecular dynamics simulations in a finite sized box
+    must be corrected, but this is beyond the scope of
+    the present tutorial, see this
+    `paper <https://pubs.acs.org/doi/pdf/10.1021/acs.jpcb.1c05303>`__
+    for more details.
+    The final MSDs plots look like this:
+
+.. figure:: figures/bulksolution/MSD.png
+    :alt: Gromacs tutorial : diffusion coefficient
+    :width: 400
+
+    MSDs for the three species, respectively.
+
+Going further with exercises
+============================
+
+Radial distribution function
+----------------------------
+
+..  container:: justify
+
+    Using GROMACS internal commands (the same way we used
+    'gmx msd'), extract the radial distribution function
+    between Na and SO4 ions. It should look like that:
+
+.. figure:: figures/bulksolution/RDF.png
+    :alt: Gromacs tutorial : RDF
+    :width: 400
+
+    RDF extracted from the Na2SO4 solution.
+
+.. include:: ../contact/contactme.rst

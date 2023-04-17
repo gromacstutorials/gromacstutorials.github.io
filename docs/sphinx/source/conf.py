@@ -34,7 +34,7 @@ extensions = ['sphinxcontrib.googleanalytics']
 
 
 # google analytics
-googleanalytics_id = 'G-W1WGEC5GQ8'
+googleanalytics_id = 'G-BFND91CYC2'
 
 
 # Add any paths that contain templates here, relative to this directory.
