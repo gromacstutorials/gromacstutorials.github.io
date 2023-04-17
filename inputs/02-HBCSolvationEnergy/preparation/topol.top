@@ -1,0 +1,10 @@
+#include "ff/gromos54a7_atb.ff/forcefield.itp"
+#include "ff/FJEW_GROMACS_G54A7FF_allatom.itp"
+#include "ff/h2o.itp"
+
+[ system ]
+Single HBC molecule in water
+
+[ molecules ]
+FJEW 1
+SOL 887
