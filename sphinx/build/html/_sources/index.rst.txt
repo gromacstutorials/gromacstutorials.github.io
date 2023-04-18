@@ -17,6 +17,7 @@ Welcome to gromacstutorials's documentation!
    :caption: Tutorials
 
    tutorials/bulksolution.rst
+   tutorials/solvationenergy.rst
   
 .. toctree::
    :maxdepth: 2
