@@ -12,10 +12,10 @@
         gtag('js', new Date());
         gtag('config', 'G-BFND91CYC2');
     </script>
-    <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" />
+    <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Contact" href="../contact/contact.html" /><link rel="prev" title="Bulk salt solution" href="bulksolution.html" />
 
     <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
-        <title>&lt;no title&gt; - </title>
+        <title>Molecule solvation energy - </title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -144,7 +144,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -172,13 +172,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../howto.html">How-to</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/bulksolution.html">Bulk salt solution</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../tutorials/solvationenergy.html">Molecule solvation energy</a></li>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="bulksolution.html">Bulk salt solution</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Molecule solvation energy</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Extra content</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="contact.html">Contact</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contact/contact.html">Contact</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../miscellaneous/participation.html">Wanna contribute?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../miscellaneous/vmd.html">VMD tips</a></li>
 </ul>
@@ -209,24 +209,146 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
         </div>
         <article role="main">
-          <div class="patreon admonition">
-<p class="admonition-title">Looking for help with your project?</p>
-<p>See the <a class="reference internal" href="contact.html#contact-label"><span class="std std-ref">Contact</span></a> page.</p>
+          <section id="molecule-solvation-energy">
+<span id="bulk-solution-label"></span><h1>Molecule solvation energy<a class="headerlink" href="#molecule-solvation-energy" title="Permalink to this heading">#</a></h1>
+<div class="hatnote docutils container">
+<p>Free energy solvation calculation of a
+disk-like molecule</p>
 </div>
+<figure class="align-right">
+<a class="reference internal image-reference" href="../_images/banner.png"><img alt="HBC (graphene-like) molecule in water" src="../_images/banner.png" style="height: 250px;" /></a>
+</figure>
+<div class="justify docutils container">
+<p><strong>The objective of this tutorial</strong> is to use GROMACS
+to perform a molecular dynamics simulation, and to
+calculate the free energy of solvation of a
+graphene-like molecule named hexabenzocoronene.</p>
+</div>
+<section id="input-files">
+<h2>Input files<a class="headerlink" href="#input-files" title="Permalink to this heading">#</a></h2>
+<div class="justify docutils container">
+<p>Create two folders named ‘preparation/’ and
+‘solvation’ in the same directory. Go to
+‘preparation/’.</p>
+<p>Download the configuration files for the HBC molecule
+from the atb repository: click
+<a class="reference external" href="https://atb.uq.edu.au/molecule.py?molid=151371#panel-md">here</a>,
+download the structure file ‘All-Atom PDB (optimised
+geometry)’ and place it in the ‘preparation/’ folder.</p>
+</div>
+<section id="create-the-configuration-file">
+<h3>Create the configuration file<a class="headerlink" href="#create-the-configuration-file" title="Permalink to this heading">#</a></h3>
+<div class="justify docutils container">
+<p>First, let us convert the pdb file into a gro file
+within a box of finite size using trj conv:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx trjconv -f FJEW_allatom_optimised_geometry.pdb -s FJEW_allatom_optimised_geometry.pdb -o hbc.gro -box 3 3 3 -center
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Select ‘system’ for both centering and output. If you
+open the hbc.gro file with VMD, you will see:</p>
+</div>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="../_images/hbc.png"><img alt="GROMACS tutorial : HBC (graphene) molecule with VMD" src="../_images/hbc.png" style="height: 150px;" /></a>
+<figcaption>
+<p><span class="caption-text">HBC molecule with carbon atoms in gray and hydrogen
+atoms in white.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="justify docutils container">
+<p>You can also download the <a href="../../../../inputs/02-HBCSolvationEnergy/preparation/hbc.gro" target="_blank">here</a>
+I have generated.</p>
+</div>
+</section>
+<section id="create-the-topology-file">
+<h3>Create the topology file<a class="headerlink" href="#create-the-topology-file" title="Permalink to this heading">#</a></h3>
+<div class="justify docutils container">
+<p>From the <a class="reference external" href="https://atb.uq.edu.au/molecule.py?molid=151371#panel-md">same atb
+page</a>,
+copy the ‘GROMACS G54A7FF All-Atom (ITP file)’ and
+place it in a folder named ‘ff/’ and located within
+the ‘preparation/’ folder. Within ‘ff/’ download as
+well the GROMACS top file named <a class="reference external" href="https://atb.uq.edu.au/forcefield_files/atb_gromacs/5/gromos54a7_atb.ff.tar.gz">Gromacs 4.5.x-5.x.x
+54a7</a>
+containing all the force field parameters.
+Then, let us write the topology file by simply
+creating a blank file named ‘topol.top’ within the
+‘preparation/’ folder, and copying in it:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>#include &quot;ff/gromos54a7_atb.ff/forcefield.itp&quot;
+#include &quot;ff/FJEW_GROMACS_G54A7FF_allatom.itp&quot;
+
+[ system ]
+Single HBC molecule
+
+[ molecules ]
+FJEW 1
+</pre></div>
+</div>
+</section>
+<section id="add-the-water">
+<h3>Add the water<a class="headerlink" href="#add-the-water" title="Permalink to this heading">#</a></h3>
+<div class="justify docutils container">
+<p>Let us add water molecules. First download the tip4p
+water configuration file <a href="../../../../inputs/02-HBCSolvationEnergy/preparation/tip4p.gro" target="_blank">here</a>,
+and copy it in the ‘preparation/’ folder. Then, in
+order to add (tip4p) water molecules to both gro and
+top file, use the gmx solvate command as follow:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx solvate -cs tip4p.gro -cp hbc.gro -o solvated.gro -p topol.top
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>You should see the following message:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>Processing topology
+Adding line for 887 solvent molecules with resname (SOL) to topology file (topol.top)
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>and a new line ‘SOL 887’ in the topology file:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ molecules ]
+FJEW 1
+SOL 887
+</pre></div>
+</div>
+</section>
+</section>
+</section>
 
         </article>
       </div>
       <footer>
         
         <div class="related-pages">
-          
-          
+          <a class="next-page" href="../contact/contact.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Contact</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="bulksolution.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Bulk salt solution</div>
+                
+              </div>
+            </a>
         </div>
         <div class="bottom-of-page">
           <div class="left-details">
@@ -241,8 +363,32 @@
         
       </footer>
     </div>
-    <aside class="toc-drawer no-toc">
+    <aside class="toc-drawer">
       
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Molecule solvation energy</a><ul>
+<li><a class="reference internal" href="#input-files">Input files</a><ul>
+<li><a class="reference internal" href="#create-the-configuration-file">Create the configuration file</a></li>
+<li><a class="reference internal" href="#create-the-topology-file">Create the topology file</a></li>
+<li><a class="reference internal" href="#add-the-water">Add the water</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
       
       
     </aside>
