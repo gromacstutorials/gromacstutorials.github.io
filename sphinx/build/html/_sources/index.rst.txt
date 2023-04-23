@@ -18,6 +18,7 @@ Welcome to gromacstutorials's documentation!
 
    tutorials/bulksolution.rst
    tutorials/solvationenergy.rst
+   tutorials/ethanoladsorption.rst
   
 .. toctree::
    :maxdepth: 2
