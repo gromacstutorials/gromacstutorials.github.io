@@ -223,7 +223,10 @@
 disk-like molecule</p>
 </div>
 <figure class="align-right">
-<a class="reference internal image-reference" href="../_images/banner.png"><img alt="HBC (graphene-like) molecule in water" src="../_images/banner.png" style="height: 250px;" /></a>
+<a class="only-light reference internal image-reference" href="../_images/minimize-light.png"><img alt="HBC (graphene-like) molecule in water" class="only-light" src="../_images/minimize-light.png" style="height: 250px;" /></a>
+</figure>
+<figure class="align-right">
+<a class="only-dark reference internal image-reference" href="../_images/minimize-dark.png"><img alt="HBC (graphene-like) molecule in water" class="only-dark" src="../_images/minimize-dark.png" style="height: 250px;" /></a>
 </figure>
 <div class="justify docutils container">
 <p>The objective of this tutorial is to use GROMACS
@@ -378,12 +381,13 @@ constraints = hbonds
 </pre></div>
 </div>
 <div class="justify docutils container">
-<p>All these lines have been seen in the previous
-tutorial. In short, this script will perform a
+<p>All these lines have been seen in the first
+tutorial (<a class="reference internal" href="bulksolution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a>). In short, this script will perform a
 steepest descent by updating the atom positions
-according the the largest forces directions, until
+according to the largest forces directions, until
 the energy and maximum force reach a reasonable
-value. Apply the minimisation to the solvated box using :</p>
+value.</p>
+<p>Apply the minimisation to the solvated box using :</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/min.mdp<span class="w"> </span>-c<span class="w"> </span>solvated.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>min<span class="w"> </span>-pp<span class="w"> </span>min<span class="w"> </span>-po<span class="w"> </span>min<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">1</span>
 gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>min
@@ -393,29 +397,26 @@ gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </spa
 <p>Here the ‘-maxwarn 1’ allows us to perform the
 simulation despite GROMACS’ warning about some force
 field issue. Since this is a tutorial and not actual
-research, we ca safely ignore this warning.
-Let us visualize the atoms’ trajectories during the
+research, we can safely ignore this warning.</p>
+<p>Let us visualize the atoms’ trajectories during the
 minimization step using VMD by typing:</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>solvate.gro<span class="w"> </span>min.trr
 </pre></div>
 </div>
 <div class="justify docutils container">
-<p>This is what I see:</p>
+<p>The final state looks like that:</p>
 </div>
-<figure class="align-default" id="id2">
-<a class="reference internal image-reference" href="../_images/min1.gif"><img alt="GROMACS tutorial : HBC (graphene) molecule during minimisation in water" src="../_images/min1.gif" style="height: 150px;" /></a>
+<figure class="align-center">
+<a class="only-light reference internal image-reference" href="../_images/minimize-light.png"><img alt="Gromacs HBC (graphene) molecule after minimisation in water" class="only-light" src="../_images/minimize-light.png" style="height: 400px;" /></a>
+</figure>
+<figure class="align-center" id="id2">
+<a class="only-dark reference internal image-reference" href="../_images/minimize-dark.png"><img alt="Gromacs HBC (graphene) molecule after minimisation in water" class="only-dark" src="../_images/minimize-dark.png" style="height: 400px;" /></a>
 <figcaption>
-<p><span class="caption-text">Movie showing the motion of the atoms during the
-energy minimization.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">HBC molecule in water after
+energy minimization. Water is represented as a transparent field.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<div class="justify docutils container">
-<p><strong>Note for VMD user:</strong> You can avoid having
-molecules ‘cut in half’ by the periodic boundary
-conditions by rewriting the trajectory using ‘gmx
-trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole’</p>
-</div>
 </section>
 <section id="equilibration">
 <h2>Equilibration<a class="headerlink" href="#equilibration" title="Permalink to this heading">#</a></h2>

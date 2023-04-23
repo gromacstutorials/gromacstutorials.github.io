@@ -8,8 +8,15 @@ Molecule solvation energy
     Free energy solvation calculation of a
     disk-like molecule
 
-.. figure:: figures/solvationenergy/banner.png
+.. figure:: figures/solvationenergy/minimize-light.png
     :alt: HBC (graphene-like) molecule in water
+    :class: only-light
+    :height: 250
+    :align: right
+
+.. figure:: figures/solvationenergy/minimize-dark.png
+    :alt: HBC (graphene-like) molecule in water
+    :class: only-dark
     :height: 250
     :align: right
 
@@ -224,12 +231,14 @@ Energy minimization
 
 ..  container:: justify
 
-    All these lines have been seen in the previous
-    tutorial. In short, this script will perform a
+    All these lines have been seen in the first
+    tutorial (:ref:`bulk-solution-label`). In short, this script will perform a
     steepest descent by updating the atom positions
-    according the the largest forces directions, until
+    according to the largest forces directions, until
     the energy and maximum force reach a reasonable
-    value. Apply the minimisation to the solvated box using :
+    value. 
+    
+    Apply the minimisation to the solvated box using :
 
 ..  code-block:: bash
 
@@ -241,7 +250,8 @@ Energy minimization
     Here the '-maxwarn 1' allows us to perform the
     simulation despite GROMACS' warning about some force
     field issue. Since this is a tutorial and not actual
-    research, we ca safely ignore this warning.
+    research, we can safely ignore this warning.
+
     Let us visualize the atoms' trajectories during the
     minimization step using VMD by typing:
 
@@ -251,21 +261,22 @@ Energy minimization
 
 ..  container:: justify
 
-    This is what I see:
+    The final state looks like that:
 
-.. figure:: figures/solvationenergy/min.gif
-    :alt: GROMACS tutorial : HBC (graphene) molecule during minimisation in water
-    :height: 150
+.. figure:: figures/solvationenergy/minimize-light.png
+    :alt: Gromacs HBC (graphene) molecule after minimisation in water
+    :class: only-light
+    :height: 400
+    :align: center
 
-    Movie showing the motion of the atoms during the
-    energy minimization.
+.. figure:: figures/solvationenergy/minimize-dark.png
+    :alt: Gromacs HBC (graphene) molecule after minimisation in water
+    :class: only-dark
+    :height: 400
+    :align: center
 
-..  container:: justify
-  
-    **Note for VMD user:** You can avoid having
-    molecules 'cut in half' by the periodic boundary
-    conditions by rewriting the trajectory using 'gmx
-    trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole'
+    HBC molecule in water after
+    energy minimization. Water is represented as a transparent field. 
 
 Equilibration
 =============
