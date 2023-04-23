@@ -369,12 +369,12 @@ nstlist = 10
 ns_type = grid
 
 vdw-type = Cut-off
-rvdw = 1.4
+rvdw = 1.0
 
 coulombtype = pme
 fourierspacing = 0.1
 pme-order = 4
-rcoulomb = 1.4
+rcoulomb = 1.0
 
 constraint-algorithm = lincs
 constraints = hbonds
@@ -387,7 +387,7 @@ steepest descent by updating the atom positions
 according to the largest forces directions, until
 the energy and maximum force reach a reasonable
 value.</p>
-<p>Apply the minimisation to the solvated box using :</p>
+<p>Apply the minimisation to the solvated box using:</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/min.mdp<span class="w"> </span>-c<span class="w"> </span>solvated.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>min<span class="w"> </span>-pp<span class="w"> </span>min<span class="w"> </span>-po<span class="w"> </span>min<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">1</span>
 gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>min
@@ -433,17 +433,24 @@ gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </spa
 <div class="justify docutils container">
 <p>The simulation looks like that:</p>
 </div>
-<figure class="align-default" id="id3">
-<a class="reference internal image-reference" href="../_images/nvtnpt.gif"><img alt="GROMACS tutorial : HBC (graphene) molecule during NVT and NPT equilibration" src="../_images/nvtnpt.gif" style="height: 150px;" /></a>
+<figure class="align-center">
+<a class="only-light reference internal image-reference" href="../_images/nvtnpt-light.webp"><img alt="Gromacs HBC (graphene) molecule during NVT and NPT equilibration" class="only-light" src="../_images/nvtnpt-light.webp" style="height: 400px;" /></a>
+</figure>
+<figure class="align-center" id="id3">
+<a class="only-dark reference internal image-reference" href="../_images/nvtnpt-dark.webp"><img alt="Gromacs HBC (graphene) molecule during NVT and NPT equilibration" class="only-dark" src="../_images/nvtnpt-dark.webp" style="height: 400px;" /></a>
 <figcaption>
 <p><span class="caption-text">Movie showing the motion of the atoms during the
 NVT and NPT equilibration steps. For clarity, the
 water molecules are represented as a continuum field.</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+<div class="justify docutils container">
+<p>Here we use maxwarn 1 to disregard a GROMACS warning about the force field. If you
+want to publish your research, don’t ignore that warning lightly.</p>
+</div>
 </section>
-<section id="solvation">
-<h2>Solvation<a class="headerlink" href="#solvation" title="Permalink to this heading">#</a></h2>
+<section id="solvation-energy-measurement">
+<h2>Solvation energy measurement<a class="headerlink" href="#solvation-energy-measurement" title="Permalink to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>We are done with the first equilibration of the
 system. We are now going to perform the solvation
@@ -655,7 +662,7 @@ same method.</p>
 </li>
 <li><a class="reference internal" href="#energy-minimization">Energy minimization</a></li>
 <li><a class="reference internal" href="#equilibration">Equilibration</a></li>
-<li><a class="reference internal" href="#solvation">Solvation</a></li>
+<li><a class="reference internal" href="#solvation-energy-measurement">Solvation energy measurement</a></li>
 <li><a class="reference internal" href="#going-further-with-exercises">Going further with exercises</a></li>
 </ul>
 </li>

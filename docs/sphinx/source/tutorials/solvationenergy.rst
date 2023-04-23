@@ -219,12 +219,12 @@ Energy minimization
     ns_type = grid
 
     vdw-type = Cut-off
-    rvdw = 1.4
+    rvdw = 1.0
 
     coulombtype = pme
     fourierspacing = 0.1
     pme-order = 4
-    rcoulomb = 1.4
+    rcoulomb = 1.0
 
     constraint-algorithm = lincs
     constraints = hbonds
@@ -238,7 +238,7 @@ Energy minimization
     the energy and maximum force reach a reasonable
     value. 
     
-    Apply the minimisation to the solvated box using :
+    Apply the minimisation to the solvated box using:
 
 ..  code-block:: bash
 
@@ -303,18 +303,31 @@ Equilibration
 
 ..  container:: justify
 
-     The simulation looks like that:
+    The simulation looks like that:
 
-.. figure:: figures/solvationenergy/nvtnpt.gif
-    :alt: GROMACS tutorial : HBC (graphene) molecule during NVT and NPT equilibration
-    :height: 150
+.. figure:: figures/solvationenergy/nvtnpt-light.webp
+    :alt: Gromacs HBC (graphene) molecule during NVT and NPT equilibration
+    :class: only-light
+    :height: 400
+    :align: center
+
+.. figure:: figures/solvationenergy/nvtnpt-dark.webp
+    :alt: Gromacs HBC (graphene) molecule during NVT and NPT equilibration
+    :class: only-dark
+    :height: 400
+    :align: center
 
     Movie showing the motion of the atoms during the
     NVT and NPT equilibration steps. For clarity, the
     water molecules are represented as a continuum field.
 
-Solvation
-=========
+..  container:: justify
+
+    Here we use maxwarn 1 to disregard a GROMACS warning about the force field. If you 
+    want to publish your research, don't ignore that warning lightly. 
+
+Solvation energy measurement
+============================
 
 ..  container:: justify
 
@@ -481,16 +494,5 @@ Solvation
     energy of a molecule, use much longer equilibration
     (typically one nanosecond) and production runs
     (typically several nanoseconds).
-
-Going further with exercises
-============================
-
-..  container:: justify
-
-    **Solvation energy of another molecule**
-
-    Choose another molecule on the atb data base and
-    calculate its free energy of solvation using the
-    same method.
 
 .. include:: ../contact/contactme.rst

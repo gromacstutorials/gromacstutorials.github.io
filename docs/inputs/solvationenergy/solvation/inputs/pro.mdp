@@ -14,12 +14,12 @@ nstenergy = 1000
 nstlog = 1000
 
 vdw-type = Cut-off
-rvdw = 1.4
+rvdw = 1.0
 
 coulombtype = pme
 fourierspacing = 0.1
 pme-order = 4
-rcoulomb = 1.4
+rcoulomb = 1.0
 
 constraint-algorithm = lincs
 constraints = hbonds
