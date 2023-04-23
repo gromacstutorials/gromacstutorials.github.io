@@ -26,9 +26,9 @@ do
     # create a bash file to launch all the simulations
     echo 'cd '$DIRNAME >> runall.sh
     echo 'gmx grompp -f inputs/npt_bis.mdp -c preparedstate.gro -p topol.top -o npt_bis -pp npt_bis -po npt_bis -maxwarn 1' >> runall.sh
-    echo 'gmx mdrun -v -deffnm npt_bis -rdd 2' >> runall.sh
+    echo 'gmx mdrun -v -deffnm npt_bis -nt 4' >> runall.sh
     echo 'gmx grompp -f inputs/pro.mdp -c npt_bis.gro -p topol.top -o pro -pp pro -po pro -maxwarn 1' >> runall.sh
-    echo 'gmx mdrun -v -deffnm pro -rdd 2' >> runall.sh
+    echo 'gmx mdrun -v -deffnm pro -nt 4' >> runall.sh
     echo 'cd ..' >> runall.sh
     echo '' >> runall.sh
     # create links for the analysis
