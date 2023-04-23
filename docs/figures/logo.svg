@@ -2,24 +2,24 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
    id="svg2"
    width="1001"
    height="323"
    viewBox="0 0 1001 323"
    sodipodi:docname="logo.svg"
-   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   inkscape:export-filename="/tikhome/sgravelle/Git/GROMACStutorials/gromacstutorials.github.io/docs/figures/logo.png"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   inkscape:export-filename="/home/simon/Git/Gromacs/gromacstutorials.github.io/docs/figures/logo.png"
    inkscape:export-xdpi="47.851395"
-   inkscape:export-ydpi="47.851395">
+   inkscape:export-ydpi="47.851395"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/">
   <metadata
      id="metadata8">
     <rdf:RDF>
@@ -28,7 +28,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -55,26 +54,18 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1482"
-     inkscape:window-height="1187"
+     inkscape:window-width="1920"
+     inkscape:window-height="1136"
      id="namedview4"
      showgrid="false"
-     inkscape:zoom="0.575"
-     inkscape:cx="362.94512"
-     inkscape:cy="-167.64396"
-     inkscape:window-x="2059"
-     inkscape:window-y="163"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg2" />
-  <rect
-     style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:#ff0000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-     id="rect823"
-     width="1006.9565"
-     height="328.69565"
-     x="0"
-     y="-0.47826099"
-     inkscape:export-xdpi="47.851395"
-     inkscape:export-ydpi="47.851395" />
+     inkscape:zoom="0.8131728"
+     inkscape:cx="640.70023"
+     inkscape:cy="258.86257"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg2"
+     inkscape:pagecheckerboard="0" />
   <image
      y="286.9809"
      x="572.63116"
@@ -87,27 +78,33 @@
   <flowRoot
      xml:space="preserve"
      id="flowRoot4530"
-     style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#b3b3b3;fill-opacity:1;stroke:none"
      transform="translate(-42.33151,185.98174)"><flowRegion
-       id="flowRegion4532"><rect
+       id="flowRegion4532"
+       style="fill:#b3b3b3"><rect
          id="rect4534"
          width="1200.2369"
          height="762.44556"
          x="78.704056"
-         y="-166.71661" /></flowRegion><flowPara
+         y="-166.71661"
+         style="fill:#b3b3b3" /></flowRegion><flowPara
        id="flowPara4540"
-       style="font-weight:bold;font-size:133.33332825px;text-align:start;text-anchor:start">GROMACS</flowPara></flowRoot>  <flowRoot
+       style="font-weight:bold;font-size:133.333px;text-align:start;text-anchor:start;fill:#b3b3b3">GROMACS</flowPara></flowRoot>
+  <flowRoot
      xml:space="preserve"
      id="flowRoot4530-3"
-     style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-     transform="translate(-38.886595,277.81944)"><flowRegion
-       id="flowRegion4532-6"><rect
+     style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#b3b3b3;fill-opacity:1;stroke:none"
+     transform="translate(-32.319905,318.32046)"><flowRegion
+       id="flowRegion4532-6"
+       style="fill:#b3b3b3"><rect
          id="rect4534-7"
          width="1200.2369"
          height="762.44556"
          x="78.704056"
-         y="-166.71661" /></flowRegion><flowPara
+         y="-166.71661"
+         style="fill:#b3b3b3" /></flowRegion><flowPara
        id="flowPara4536-5"
-       style="font-weight:bold;font-size:133.33332825px;text-align:start;text-anchor:start" /><flowPara
+       style="font-weight:bold;font-size:133.333px;text-align:start;text-anchor:start;fill:#b3b3b3" /><flowPara
        id="flowPara4540-3"
-       style="font-size:133.33332825px;text-align:start;text-anchor:start">tutorials</flowPara></flowRoot></svg>
+       style="font-size:133.333px;text-align:start;text-anchor:start;fill:#b3b3b3">tutorials</flowPara></flowRoot>
+</svg>

@@ -17,7 +17,6 @@
 
 # -- Project information -----------------------------------------------------
 
-#project = 'lammpstutorials'
 copyright = 'All source code is available under the GNU General Public License v3.0'
 author = 'Simon Gravelle'
 
