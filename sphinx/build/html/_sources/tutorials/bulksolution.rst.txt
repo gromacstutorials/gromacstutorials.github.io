@@ -9,8 +9,15 @@ Bulk salt solution
     simple example: a bulk solution of
     SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+`.
 
-.. figure:: figures/bulksolution/binary_LJ_fluid.webp
+.. figure:: figures/bulksolution/first-light.png
     :alt: Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
+    :class: only-light
+    :height: 250
+    :align: right
+
+.. figure:: figures/bulksolution/first-dark.png
+    :alt: Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
+    :class: only-dark
     :height: 250
     :align: right
 
@@ -918,23 +925,5 @@ Diffusion coefficient measurement
     :class: only-dark
 
     MSDs for the three species, respectively.
-
-Going further with exercises
-============================
-
-Radial distribution function
-----------------------------
-
-..  container:: justify
-
-    Using GROMACS internal commands (the same way we used
-    'gmx msd'), extract the radial distribution function
-    between Na and SO4 ions. It should look like that:
-
-.. figure:: figures/bulksolution/RDF.png
-    :alt: Gromacs tutorial : RDF
-    :width: 400
-
-    RDF extracted from the Na2SO4 solution.
 
 .. include:: ../contact/contactme.rst
