@@ -61,11 +61,11 @@ Create the configuration file
 ..  container:: justify
 
     First, let us convert the pdb file into a gro file
-    within a box of finite size (3 nm by 3 nm by 3 nm) using trj conv:
+    within a box of finite size (4 nm by 4 nm by 4 nm) using trj conv:
 
 ..  code-block:: bw
 
-    gmx trjconv -f FJEW_allatom_optimised_geometry.pdb -s FJEW_allatom_optimised_geometry.pdb -o hbc.gro -box 3 3 3 -center  
+    gmx trjconv -f FJEW_allatom_optimised_geometry.pdb -s FJEW_allatom_optimised_geometry.pdb -o hbc.gro -box 4 4 4 -center  
 
 ..  container:: justify
 
@@ -155,17 +155,17 @@ Add the water
 ..  code-block:: bw
 
     Processing topology
-    Adding line for 887 solvent molecules with resname (SOL) to topology file (topol.top)
+    Adding line for 2186 solvent molecules with resname (SOL) to topology file (topol.top)
 
 ..  container:: justify
 
-    and a new line 'SOL 887' in the topology file:
+    and a new line 'SOL 2186' in the topology file:
 
 ..  code-block:: bw
 
     [ molecules ]
     FJEW 1
-    SOL 887
+    SOL 2186
 
 ..  container:: justify
 

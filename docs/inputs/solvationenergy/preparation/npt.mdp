@@ -2,7 +2,7 @@
 ;	File 'npt.mdp' was generated
 ;	By user: simon (1000)
 ;	On host: simon-laptop
-;	At date: Sun Apr 23 19:44:51 2023
+;	At date: Sun Apr 23 20:07:08 2023
 ;
 ;	Created by:
 ;	             :-) GROMACS - gmx grompp, 2022.2-Ubuntu_2022.2_1 (-:
@@ -169,7 +169,7 @@ annealing-temp           =
 ; GENERATE VELOCITIES FOR STARTUP RUN
 gen-vel                  = no
 gen-temp                 = 300
-gen-seed                 = -125964451
+gen-seed                 = -109388442
 
 ; OPTIONS FOR BONDS    
 constraints              = hbonds

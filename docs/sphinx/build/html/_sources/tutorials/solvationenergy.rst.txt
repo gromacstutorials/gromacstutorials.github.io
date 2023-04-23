@@ -61,11 +61,11 @@ Create the configuration file
 ..  container:: justify
 
     First, let us convert the pdb file into a gro file
-    within a box of finite size (3 nm by 3 nm by 3 nm) using trj conv:
+    within a box of finite size (4 nm by 4 nm by 4 nm) using trj conv:
 
 ..  code-block:: bw
 
-    gmx trjconv -f FJEW_allatom_optimised_geometry.pdb -s FJEW_allatom_optimised_geometry.pdb -o hbc.gro -box 3 3 3 -center  
+    gmx trjconv -f FJEW_allatom_optimised_geometry.pdb -s FJEW_allatom_optimised_geometry.pdb -o hbc.gro -box 4 4 4 -center  
 
 ..  container:: justify
 
@@ -494,16 +494,5 @@ Solvation energy measurement
     energy of a molecule, use much longer equilibration
     (typically one nanosecond) and production runs
     (typically several nanoseconds).
-
-Going further with exercises
-============================
-
-..  container:: justify
-
-    **Solvation energy of another molecule**
-
-    Choose another molecule on the atb data base and
-    calculate its free energy of solvation using the
-    same method.
 
 .. include:: ../contact/contactme.rst

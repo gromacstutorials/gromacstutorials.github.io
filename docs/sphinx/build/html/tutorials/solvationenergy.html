@@ -256,9 +256,9 @@ and place it in the ‘preparation/’ folder.</p>
 <h3>Create the configuration file<a class="headerlink" href="#create-the-configuration-file" title="Permalink to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>First, let us convert the pdb file into a gro file
-within a box of finite size (3 nm by 3 nm by 3 nm) using trj conv:</p>
+within a box of finite size (4 nm by 4 nm by 4 nm) using trj conv:</p>
 </div>
-<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx trjconv -f FJEW_allatom_optimised_geometry.pdb -s FJEW_allatom_optimised_geometry.pdb -o hbc.gro -box 3 3 3 -center
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx trjconv -f FJEW_allatom_optimised_geometry.pdb -s FJEW_allatom_optimised_geometry.pdb -o hbc.gro -box 4 4 4 -center
 </pre></div>
 </div>
 <div class="justify docutils container">
@@ -586,15 +586,6 @@ energy of a molecule, use much longer equilibration
 (typically one nanosecond) and production runs
 (typically several nanoseconds).</p>
 </div>
-</section>
-<section id="going-further-with-exercises">
-<h2>Going further with exercises<a class="headerlink" href="#going-further-with-exercises" title="Permalink to this heading">#</a></h2>
-<div class="justify docutils container">
-<p><strong>Solvation energy of another molecule</strong></p>
-<p>Choose another molecule on the atb data base and
-calculate its free energy of solvation using the
-same method.</p>
-</div>
 <div class="mail admonition">
 <p class="admonition-title">Contact me</p>
 <p><a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> me if you have any question or suggestion about these tutorials.</p>
@@ -663,7 +654,6 @@ same method.</p>
 <li><a class="reference internal" href="#energy-minimization">Energy minimization</a></li>
 <li><a class="reference internal" href="#equilibration">Equilibration</a></li>
 <li><a class="reference internal" href="#solvation-energy-measurement">Solvation energy measurement</a></li>
-<li><a class="reference internal" href="#going-further-with-exercises">Going further with exercises</a></li>
 </ul>
 </li>
 </ul>
