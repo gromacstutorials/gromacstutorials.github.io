@@ -2,11 +2,11 @@
 
 for file in untitled.*.ppm; 
 do 
-	convert $file -transparent black $file.png;
+	convert $file -transparent white $file.png;
 	rm $file
 done
 
-img2webp -o binary_LJ_fluid.webp -q 40 -mixed -d 66.66 *.png
+img2webp -o solution-light.webp -q 40 -mixed -d 66.66 *.png
 
 #ffmpeg -framerate 25 -i untitled.%05d.ppm.png -c copy binary_LJ_fluid.mov
 #img2webp -o binary_LJ_fluid.webp -q 40 -mixed -d 66.66 *.png

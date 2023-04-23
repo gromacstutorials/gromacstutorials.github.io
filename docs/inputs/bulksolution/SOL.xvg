@@ -1,0 +1,45 @@
+# This file was created Sun Apr 23 16:37:05 2023
+# Created by:
+#               :-) GROMACS - gmx msd, 2022.2-Ubuntu_2022.2_1 (-:
+# 
+# Executable:   /usr/bin/gmx
+# Data prefix:  /usr
+# Working dir:  /home/simon/Git/Gromacs/gromacstutorials.github.io/docs/inputs/bulksolution
+# Command line:
+#   gmx msd -f pro.xtc -s pro.tpr -o SOL.xvg
+# gmx msd is part of G R O M A C S:
+#
+# GROtesk MACabre and Sinister
+#
+@    title "Mean Squared Displacement"
+@    xaxis  label "tau (ps)"
+@    yaxis  label "MSD (nm\\S2\\N)"
+@TYPE xy
+@ view 0.15, 0.15, 0.75, 0.85
+@ legend on
+@ legend box on
+@ legend loctype view
+@ legend 0.78, 0.8
+@ legend length 2
+@ s0 legend "D[       SOL] = 5.0765 (+/- 0.2038) (1e-5 cm^2/s)"
+      0.000          0
+      5.000   0.167165
+     10.000   0.322986
+     15.000   0.477974
+     20.000   0.637005
+     25.000   0.790502
+     30.000    0.94944
+     35.000    1.10388
+     40.000    1.25299
+     45.000    1.40894
+     50.000    1.56067
+     55.000    1.72072
+     60.000    1.87238
+     65.000    2.03305
+     70.000    2.17815
+     75.000     2.3283
+     80.000    2.46926
+     85.000    2.59882
+     90.000    2.74235
+     95.000    2.86322
+    100.000     2.9732

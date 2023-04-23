@@ -1,4 +1,4 @@
-.. _bulk-solution-label:
+.. _ethanol-adsorption-label:
 
 Free energy profile
 *******************

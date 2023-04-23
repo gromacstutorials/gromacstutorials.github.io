@@ -355,10 +355,10 @@ typing in the terminal:</p>
 <p>This is what I see:</p>
 </div>
 <figure class="align-default">
-<a class="only-light reference internal image-reference" href="../_images/step0-light.png"><img alt="Gromacs initial configuration of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD" class="only-light" src="../_images/step0-light.png" style="height: 300px;" /></a>
+<img alt="Gromacs initial configuration of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD" class="only-light" src="../_images/step0-light.png" />
 </figure>
 <figure class="align-default" id="id1">
-<a class="only-dark reference internal image-reference" href="../_images/step0-dark.png"><img alt="Gromacs initial configuration of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD" class="only-dark" src="../_images/step0-dark.png" style="height: 300px;" /></a>
+<img alt="Gromacs initial configuration of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD" class="only-dark" src="../_images/step0-dark.png" />
 <figcaption>
 <p><span class="caption-text">Figure: SO<sub>4</sub><sup>2-</sup> ions (in yellow and
 red) and Na<sub>+</sub> ions (blue) in water (red and
@@ -528,10 +528,10 @@ minimization step using VMD by typing:</p>
 <p>This is what I see:</p>
 </div>
 <figure class="align-default">
-<img alt="Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization." class="only-light" src="../_images/solution-light.webp" />
+<a class="only-light reference internal image-reference" href="../_images/solution-light.webp"><img alt="Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization." class="only-light" src="../_images/solution-light.webp" style="height: 330px;" /></a>
 </figure>
 <figure class="align-default">
-<img alt="Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization." class="only-dark" src="../_images/solution-dark.webp" />
+<a class="only-dark reference internal image-reference" href="../_images/solution-dark.webp"><img alt="Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization." class="only-dark" src="../_images/solution-dark.webp" style="height: 330px;" /></a>
 </figure>
 <div class="justify docutils container">
 <p>Note for VMD user: You can avoid having
@@ -541,7 +541,8 @@ trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole’</p>
 <p>One can see that the molecules reorient themselves
 into more energetically favorable positions, and that
 the distances between the atoms are being
-progressively homogeneized. Let us have a look at the
+progressively homogeneized.</p>
+<p>Let us have a look at the
 evolution of the potential energy of the system. To do
 so, we can use the internal ‘energy’ command of
 GROMACS. In the terminal, type:</p>
@@ -550,31 +551,34 @@ GROMACS. In the terminal, type:</p>
 </pre></div>
 </div>
 <div class="justify docutils container">
-<p>and choose ‘potential’. Here the edr file produced
+<p>choose ‘potential’ by typing ‘5’ (or any number that is in front of ‘potential’),
+then press enter twice.</p>
+<p>Here the edr file produced
 by Gromacs during the last run is used, and the
 result is saved in the epotmin.xvg file.
 Let us plot it (xvg files can be easily opened
-using XmGrace, here I use pyplot and jupyter-notebook, all files are available on gitlab).</p>
+using XmGrace, here I use pyplot and jupyter-notebook):</p>
 </div>
+<figure class="align-default">
+<img alt="Gromacs tutorial : energy versus time." class="only-light" src="../_images/energy-light.png" />
+</figure>
 <figure class="align-default" id="id2">
-<a class="reference internal image-reference" href="../_images/epotmin.png"><img alt="Gromacs tutorial : energy versus time." src="../_images/epotmin.png" style="width: 400px;" /></a>
+<img alt="Gromacs tutorial : energy versus time." class="only-dark" src="../_images/energy-dark.png" />
 <figcaption>
 <p><span class="caption-text">Evolution of the potential energy as a function of the
 number of steps during energy minimization.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
-<p><strong>Observation:</strong> One can see from the energy plot that
+<p>One can see from the energy plot that
 the potential energy is initially huge and positive,
 which is the consequence of atoms being too close from
-one another, and to molecules being wrongly oriented.
+one another, as well as molecules being wrongly oriented.
 As the minimization progresses, the potential energy
 rapidly decreases and reaches a large and negative
 value, which is usually a good sign as it indicates
-that the atoms are now in an energetically favorable
-configuration.</p>
-<p>The system is now ready for the molecular dynamics
-simulation.</p>
+that the atoms are now at appropriate distances from each others.</p>
+<p>The system is ready for the molecular dynamics simulation.</p>
 </div>
 </section>
 <section id="minimalist-nvt-input-file">
@@ -584,7 +588,8 @@ simulation.</p>
 equilibration in the NVT ensemble. For this
 simulation, the number of atom (N) and volume (V) are
 maintained fixed, and the temperature (T) is adjusted
-using a thermostat. Let use write a new input script
+using a thermostat.</p>
+<p>Let use write a new input script
 called nvt.mdp, and save it in the ‘inputs/’ folder.
 Copy the following lines into it:</p>
 </div>
@@ -621,7 +626,7 @@ applied to the entire system (we could choose to
 apply it only to a certain group of atom, which we
 will do later), and that the damping constant for
 the thermostat is 0.5 ps.</p>
-<p><strong>Remark:</strong> The relatively high temperature of 360 K
+<p>Note that the relatively high temperature of 360 K
 has been chosen here in order to reduce the
 viscosity of the solution and converge toward
 the desired result (i.e. the diffusion coefficient) faster.
@@ -652,8 +657,11 @@ reaches a temperature slightly larger than the
 requested 360 K after a duration of a few
 picoseconds:</p>
 </div>
+<figure class="align-default">
+<img alt="Gromacs tutorial : temperature versus time." class="only-light" src="../_images/temperature-light.png" />
+</figure>
 <figure class="align-default" id="id3">
-<a class="reference internal image-reference" href="../_images/Tnvt.png"><img alt="Gromacs tutorial : temperature versus time." src="../_images/Tnvt.png" style="width: 400px;" /></a>
+<img alt="Gromacs tutorial : temperature versus time." class="only-dark" src="../_images/temperature-dark.png" />
 <figcaption>
 <p><span class="caption-text">Evolution of the temperature as a function of the time
 during the NVT equilibration. Dashed line is the
@@ -697,7 +705,7 @@ rcoulomb = 1.0
 </pre></div>
 </div>
 <div class="justify docutils container">
-<p><strong>Note:</strong> With PME, the cut-off specifies which
+<p>Note that with PME, the cut-off specifies which
 interactions are treated with Fourier transforms.
 Let us also specify the van der Waals interaction:</p>
 </div>
@@ -765,13 +773,14 @@ the temperature at the beginning of the run (orange
 curve). In addition, the final temperature is closer
 to the desired temperature:</p>
 </div>
+<figure class="align-default">
+<img alt="Gromacs tutorial : temperature versus time." class="only-light" src="../_images/temperature-improved-light.png" />
+</figure>
 <figure class="align-default" id="id4">
-<a class="reference internal image-reference" href="../_images/Tnvt_improved.png"><img alt="Gromacs tutorial : temperature versus time - improved input." src="../_images/Tnvt_improved.png" style="width: 400px;" /></a>
+<img alt="Gromacs tutorial : temperature versus time." class="only-dark" src="../_images/temperature-improved-dark.png" />
 <figcaption>
 <p><span class="caption-text">Evolution of the temperature as a function of the time
-during the NVT equilibration. The blue curve is from
-the minimalist NVT input file, and the orange curve is
-from the improved NVT input file.</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+during the NVT equilibration.</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -781,8 +790,8 @@ from the improved NVT input file.</span><a class="headerlink" href="#id4" title=
 <p>Now that the system is properly equilibrated in the
 NVT ensemble, let us perform an equilibration in the
 NPT ensemble, where the pressure is imposed and the
-volume of the box is free to relax, so that the
-density of the fluid converges toward equilibrium.
+volume of the box is free to relax. NPT relaxation ensures that the
+density of the fluid converges toward its equilibrium value.
 Create a new input script, call it ‘npt.mdp’, and
 copy the following lines in it:</p>
 </div>
@@ -818,7 +827,7 @@ tc-grps = Water non-Water
 tau-t = 0.5 0.5
 ref-t = 360 360
 
-pcoupl = berendsen
+pcoupl = C-rescale
 Pcoupltype = isotropic
 tau_p = 1.0
 ref_p = 1.0
@@ -827,8 +836,8 @@ compressibility = 4.5e-5
 </div>
 <div class="justify docutils container">
 <p>The main difference with the previous NVT script, is
-the addition of the isotropic Berendsen pressure
-coupling with a target pressure of 1 bar. Another
+the addition of the isotropic C-rescale pressure
+coupling with a target pressure of 1 bar. Some other
 differences are the addition of the ‘nstlog’ and
 ‘nstenergy’ commands to control the frequency at
 which information are printed in the log file and in
@@ -843,11 +852,20 @@ gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </spa
 <p>Let us have a look a both temperature, pressure and
 volume during the NPT step using the ‘gmx energy’
 command:</p>
+<p>gmx energy -f npt.edr -o Tnpt.xvg
+gmx energy -f npt.edr -o Pnpt.xvg
+gmx energy -f npt.edr -o Vnpt.xvg</p>
 </div>
+<div class="justify docutils container">
+<p>Choose respectively ‘temperature’, ‘pressure’ and ‘volume’.</p>
+</div>
+<figure class="align-default">
+<img alt="Gromacs tutorial : NPT equilibration" class="only-light" src="../_images/NPT-light.png" />
+</figure>
 <figure class="align-default" id="id5">
-<a class="reference internal image-reference" href="../_images/npt.png"><img alt="Gromacs tutorial : NPT equilibration" src="../_images/npt.png" style="width: 400px;" /></a>
+<img alt="Gromacs tutorial : NPT equilibration" class="only-dark" src="../_images/NPT-dark.png" />
 <figcaption>
-<p><span class="caption-text">From left to right: evolution of the temperature,
+<p><span class="caption-text">From top to bottom: evolution of the temperature,
 pressure, and volume of the simulation box as a
 function of the time during the NPT equilibration.</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
 </figcaption>
@@ -858,10 +876,10 @@ controlled during the NPT run. The results also show
 that the volume was initially too small for the
 desired pressure, and equilibrated itself at a
 slightly larger value after a few pico-seconds.
-Finally, the results show large oscillations of the
+Finally, the pressure curve reveal that large oscillations of the
 pressure with time. These large oscillations are
 typical in molecular dynamics, particularly with
-liquid water that is particularly uncompressible.</p>
+liquid water that is almost uncompressible.</p>
 </div>
 </section>
 <section id="diffusion-coefficient-measurement">
@@ -869,11 +887,12 @@ liquid water that is particularly uncompressible.</p>
 <div class="justify docutils container">
 <p>Now that the system is fully equilibrated, we can
 perform a longer simulation and extract quantities of
-interest. Here, as an illustration, the diffusion
-coefficients of all 3 species (water and ions) will be
+interest.</p>
+<p>Here, as an illustration, the diffusion
+coefficients of all 3 species (water and the two ions) will be
 measured. First, let us perform a longer run in the
 NVT ensemble. Create a new input file, call it
-‘pro.mdp’ (‘pro’ is for ‘production’), and copy the
+‘pro.mdp’ (‘pro’ is short for ‘production’), and copy the
 following lines into it:</p>
 </div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = md
@@ -924,22 +943,28 @@ displacement using:</p>
 </pre></div>
 </div>
 <div class="justify docutils container">
-<p>and select the SO4 ions. Fitting the slope of the
+<p>and select the SO4 ions by typing ‘SO4’, and then press ‘ctrl D’.</p>
+<p>Fitting the slope of the
 MSD gives a value of 1.3e-5 cm<sup>2</sup>/s for the
-diffusion coefficient. For Na, the value is 1.5e-5
+diffusion coefficient.</p>
+<p>Repeat the same for Na and water.</p>
+<p>For Na, the value is 1.5e-5
 cm<sup>2</sup>/s, and for water 5.2e-5 cm<sup>2</sup>/s
 (not too far from the experimental value of ~ 7e-5
-cm<sup>2</sup>/s for T=360 K).</p>
+cm<sup>2</sup>/s at temperature T=360 K).</p>
 <p><strong>Side note:</strong> Diffusion coefficients obtained from
 molecular dynamics simulations in a finite sized box
 must be corrected, but this is beyond the scope of
 the present tutorial, see this
 <a class="reference external" href="https://pubs.acs.org/doi/pdf/10.1021/acs.jpcb.1c05303">paper</a>
-for more details.
-The final MSDs plots look like this:</p>
+for more details.</p>
+<p>The final MSDs plots look like this:</p>
 </div>
+<figure class="align-default">
+<img alt="Gromacs tutorial : diffusion coefficient" class="only-light" src="../_images/D-light.png" />
+</figure>
 <figure class="align-default" id="id6">
-<a class="reference internal image-reference" href="../_images/MSD.png"><img alt="Gromacs tutorial : diffusion coefficient" src="../_images/MSD.png" style="width: 400px;" /></a>
+<img alt="Gromacs tutorial : diffusion coefficient" class="only-dark" src="../_images/D-dark.png" />
 <figcaption>
 <p><span class="caption-text">MSDs for the three species, respectively.</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
 </figcaption>

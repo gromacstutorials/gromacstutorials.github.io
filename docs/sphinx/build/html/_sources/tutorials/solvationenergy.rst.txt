@@ -1,4 +1,4 @@
-.. _bulk-solution-label:
+.. _solvation-energy-label:
 
 Molecule solvation energy
 *************************

@@ -185,12 +185,10 @@ The input files
 
 .. figure:: figures/bulksolution/step0-light.png
     :alt: Gromacs initial configuration of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
-    :height: 300
     :class: only-light
 
 .. figure:: figures/bulksolution/step0-dark.png
     :alt: Gromacs initial configuration of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
-    :height: 300
     :class: only-dark
 
     Figure: SO\ :sub:`4`\ :sup:`2-` ions (in yellow and
@@ -410,10 +408,12 @@ Energy minimization
 .. figure:: figures/bulksolution/solution-light.webp
     :alt: Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization.
     :class: only-light
+    :height: 330
 
 .. figure:: figures/bulksolution/solution-dark.webp
     :alt: Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization.
     :class: only-dark
+    :height: 330
 
 ..  container:: justify
 
@@ -425,7 +425,9 @@ Energy minimization
     One can see that the molecules reorient themselves
     into more energetically favorable positions, and that
     the distances between the atoms are being
-    progressively homogeneized. Let us have a look at the
+    progressively homogeneized.
+    
+    Let us have a look at the
     evolution of the potential energy of the system. To do
     so, we can use the internal 'energy' command of
     GROMACS. In the terminal, type:
@@ -436,33 +438,38 @@ Energy minimization
 
 ..  container:: justify
 
-    and choose 'potential'. Here the edr file produced
+    choose 'potential' by typing '5' (or any number that is in front of 'potential'), 
+    then press enter twice. 
+    
+    Here the edr file produced
     by Gromacs during the last run is used, and the
     result is saved in the epotmin.xvg file.
     Let us plot it (xvg files can be easily opened
-    using XmGrace, here I use pyplot and jupyter-notebook, all files are available on gitlab).
+    using XmGrace, here I use pyplot and jupyter-notebook):
 
-.. figure:: figures/bulksolution/epotmin.png
+.. figure:: figures/bulksolution/energy-light.png
     :alt: Gromacs tutorial : energy versus time.
-    :width: 400
+    :class: only-light
+
+.. figure:: figures/bulksolution/energy-dark.png
+    :alt: Gromacs tutorial : energy versus time.
+    :class: only-dark
 
     Evolution of the potential energy as a function of the
     number of steps during energy minimization.
 
 ..  container:: justify
 
-    **Observation:** One can see from the energy plot that
+    One can see from the energy plot that
     the potential energy is initially huge and positive,
     which is the consequence of atoms being too close from
-    one another, and to molecules being wrongly oriented.
+    one another, as well as molecules being wrongly oriented.
     As the minimization progresses, the potential energy
     rapidly decreases and reaches a large and negative
     value, which is usually a good sign as it indicates
-    that the atoms are now in an energetically favorable
-    configuration.
+    that the atoms are now at appropriate distances from each others. 
 
-    The system is now ready for the molecular dynamics
-    simulation.
+    The system is ready for the molecular dynamics simulation.
 
 Minimalist NVT input file
 =========================
@@ -473,7 +480,9 @@ Minimalist NVT input file
     equilibration in the NVT ensemble. For this
     simulation, the number of atom (N) and volume (V) are
     maintained fixed, and the temperature (T) is adjusted
-    using a thermostat. Let use write a new input script
+    using a thermostat.
+    
+    Let use write a new input script
     called nvt.mdp, and save it in the 'inputs/' folder.
     Copy the following lines into it:
 
@@ -517,7 +526,7 @@ Minimalist NVT input file
     will do later), and that the damping constant for
     the thermostat is 0.5 ps.
 
-    **Remark:** The relatively high temperature of 360 K
+    Note that the relatively high temperature of 360 K
     has been chosen here in order to reduce the
     viscosity of the solution and converge toward
     the desired result (i.e. the diffusion coefficient) faster.
@@ -554,9 +563,13 @@ Minimalist NVT input file
     requested 360 K after a duration of a few
     picoseconds:
 
-.. figure:: figures/bulksolution/Tnvt.png
+.. figure:: figures/bulksolution/temperature-light.png
     :alt: Gromacs tutorial : temperature versus time.
-    :width: 400
+    :class: only-light
+
+.. figure:: figures/bulksolution/temperature-dark.png
+    :alt: Gromacs tutorial : temperature versus time.
+    :class: only-dark
 
     Evolution of the temperature as a function of the time
     during the NVT equilibration. Dashed line is the
@@ -604,7 +617,7 @@ Improved NVT
 
 ..  container:: justify
 
-    **Note:** With PME, the cut-off specifies which
+    Note that with PME, the cut-off specifies which
     interactions are treated with Fourier transforms.
     Let us also specify the van der Waals interaction:
 
@@ -686,14 +699,16 @@ Improved NVT
     curve). In addition, the final temperature is closer
     to the desired temperature:
 
-.. figure:: figures/bulksolution/Tnvt_improved.png
-    :alt: Gromacs tutorial : temperature versus time - improved input.
-    :width: 400
+.. figure:: figures/bulksolution/temperature-improved-light.png
+    :alt: Gromacs tutorial : temperature versus time.
+    :class: only-light
+
+.. figure:: figures/bulksolution/temperature-improved-dark.png
+    :alt: Gromacs tutorial : temperature versus time.
+    :class: only-dark
 
     Evolution of the temperature as a function of the time
-    during the NVT equilibration. The blue curve is from
-    the minimalist NVT input file, and the orange curve is
-    from the improved NVT input file.
+    during the NVT equilibration.
 
 NPT
 ===
@@ -703,8 +718,8 @@ NPT
     Now that the system is properly equilibrated in the
     NVT ensemble, let us perform an equilibration in the
     NPT ensemble, where the pressure is imposed and the
-    volume of the box is free to relax, so that the
-    density of the fluid converges toward equilibrium.
+    volume of the box is free to relax. NPT relaxation ensures that the
+    density of the fluid converges toward its equilibrium value.
     Create a new input script, call it 'npt.mdp', and
     copy the following lines in it:
 
@@ -742,7 +757,7 @@ NPT
     tau-t = 0.5 0.5
     ref-t = 360 360
 
-    pcoupl = berendsen
+    pcoupl = C-rescale
     Pcoupltype = isotropic
     tau_p = 1.0
     ref_p = 1.0
@@ -751,8 +766,8 @@ NPT
 ..  container:: justify
 
     The main difference with the previous NVT script, is
-    the addition of the isotropic Berendsen pressure
-    coupling with a target pressure of 1 bar. Another
+    the addition of the isotropic C-rescale pressure
+    coupling with a target pressure of 1 bar. Some other
     differences are the addition of the 'nstlog' and
     'nstenergy' commands to control the frequency at
     which information are printed in the log file and in
@@ -770,11 +785,23 @@ NPT
     volume during the NPT step using the 'gmx energy'
     command:
 
-.. figure:: figures/bulksolution/npt.png
-    :alt: Gromacs tutorial : NPT equilibration
-    :width: 400
+    gmx energy -f npt.edr -o Tnpt.xvg
+    gmx energy -f npt.edr -o Pnpt.xvg
+    gmx energy -f npt.edr -o Vnpt.xvg
 
-    From left to right: evolution of the temperature,
+..  container:: justify
+
+    Choose respectively 'temperature', 'pressure' and 'volume'.
+
+.. figure:: figures/bulksolution/NPT-light.png
+    :alt: Gromacs tutorial : NPT equilibration
+    :class: only-light
+
+.. figure:: figures/bulksolution/NPT-dark.png
+    :alt: Gromacs tutorial : NPT equilibration
+    :class: only-dark
+
+    From top to bottom: evolution of the temperature,
     pressure, and volume of the simulation box as a
     function of the time during the NPT equilibration.
 
@@ -785,10 +812,10 @@ NPT
     that the volume was initially too small for the
     desired pressure, and equilibrated itself at a
     slightly larger value after a few pico-seconds.
-    Finally, the results show large oscillations of the
+    Finally, the pressure curve reveal that large oscillations of the
     pressure with time. These large oscillations are
     typical in molecular dynamics, particularly with
-    liquid water that is particularly uncompressible.
+    liquid water that is almost uncompressible.
 
 Diffusion coefficient measurement
 =================================
@@ -797,11 +824,13 @@ Diffusion coefficient measurement
 
     Now that the system is fully equilibrated, we can
     perform a longer simulation and extract quantities of
-    interest. Here, as an illustration, the diffusion
-    coefficients of all 3 species (water and ions) will be
+    interest.
+    
+    Here, as an illustration, the diffusion
+    coefficients of all 3 species (water and the two ions) will be
     measured. First, let us perform a longer run in the
     NVT ensemble. Create a new input file, call it
-    'pro.mdp' ('pro' is for 'production'), and copy the
+    'pro.mdp' ('pro' is short for 'production'), and copy the
     following lines into it:
 
 ..  code-block:: bw 
@@ -858,12 +887,18 @@ Diffusion coefficient measurement
 
 ..  container:: justify
 
-    and select the SO4 ions. Fitting the slope of the
+    and select the SO4 ions by typing 'SO4', and then press 'ctrl D'.
+    
+    Fitting the slope of the
     MSD gives a value of 1.3e-5 cm\ :sup:`2`/s for the
-    diffusion coefficient. For Na, the value is 1.5e-5
+    diffusion coefficient. 
+    
+    Repeat the same for Na and water. 
+    
+    For Na, the value is 1.5e-5
     cm\ :sup:`2`/s, and for water 5.2e-5 cm\ :sup:`2`/s
     (not too far from the experimental value of ~ 7e-5
-    cm\ :sup:`2`/s for T=360 K).
+    cm\ :sup:`2`/s at temperature T=360 K).
     
     **Side note:** Diffusion coefficients obtained from
     molecular dynamics simulations in a finite sized box
@@ -871,11 +906,16 @@ Diffusion coefficient measurement
     the present tutorial, see this
     `paper <https://pubs.acs.org/doi/pdf/10.1021/acs.jpcb.1c05303>`__
     for more details.
+
     The final MSDs plots look like this:
 
-.. figure:: figures/bulksolution/MSD.png
+.. figure:: figures/bulksolution/D-light.png
     :alt: Gromacs tutorial : diffusion coefficient
-    :width: 400
+    :class: only-light
+
+.. figure:: figures/bulksolution/D-dark.png
+    :alt: Gromacs tutorial : diffusion coefficient
+    :class: only-dark
 
     MSDs for the three species, respectively.
 
