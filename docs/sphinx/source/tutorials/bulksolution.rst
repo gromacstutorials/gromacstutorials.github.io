@@ -407,9 +407,13 @@ Energy minimization
 
     This is what I see:
 
-.. figure:: figures/bulksolution/min.gif
+.. figure:: figures/bulksolution/solution-light.webp
     :alt: Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization.
-    :height: 150
+    :class: only-light
+
+.. figure:: figures/bulksolution/solution-dark.webp
+    :alt: Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization.
+    :class: only-dark
 
 ..  container:: justify
 
