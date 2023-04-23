@@ -15,14 +15,17 @@ Molecule solvation energy
 
 ..  container:: justify
 
-    **The objective of this tutorial** is to use GROMACS
+    The objective of this tutorial is to use GROMACS
     to perform a molecular dynamics simulation, and to
     calculate the free energy of solvation of a
-    graphene-like molecule named hexabenzocoronene.
+    large molecule in water. 
 
-.. include:: ../../contact/recommand-lj.rst
+    The large molecule used here is a graphene-like and disk-like molecule
+    named hexabenzocoronene.
 
-.. include:: ../../contact/needhelp.rst
+.. include:: ../contact/recommand-bulk.rst
+
+.. include:: ../contact/needhelp.rst
 
 Input files
 ===========
@@ -30,14 +33,20 @@ Input files
 ..  container:: justify
 
     Create two folders named 'preparation/' and
-    'solvation' in the same directory. Go to
+    'solvation' in the same directory, and go to
     'preparation/'.
 
     Download the configuration files for the HBC molecule
-    from the atb repository: click
-    `here <https://atb.uq.edu.au/molecule.py?molid=151371#panel-md>`__,
-    download the structure file 'All-Atom PDB (optimised
-    geometry)' and place it in the 'preparation/' folder.
+    by clicking |FJEW_allatom_optimised_geometry.pdb| (its from the |atb-HBC|),
+    and place it in the 'preparation/' folder.
+
+.. |FJEW_allatom_optimised_geometry.pdb| raw:: html
+
+    <a href="../../../../inputs/solvationenergy/preparation/FJEW_allatom_optimised_geometry.pdb" target="_blank">here</a>
+
+.. |atb-HBC| raw:: html
+
+   <a href="https://atb.uq.edu.au/molecule.py?molid=151371#panel-md" target="_blank">atb</a>
 
 Create the configuration file
 -----------------------------
@@ -45,7 +54,7 @@ Create the configuration file
 ..  container:: justify
 
     First, let us convert the pdb file into a gro file
-    within a box of finite size using trj conv:
+    within a box of finite size (3 nm by 3 nm by 3 nm) using trj conv:
 
 ..  code-block:: bw
 
@@ -53,38 +62,51 @@ Create the configuration file
 
 ..  container:: justify
 
-    Select 'system' for both centering and output. If you
-    open the hbc.gro file with VMD, you will see:
+    Select 'system' for both centering and output.
+    
+    If you open the hbc.gro file with VMD, you will see:
 
-.. figure:: figures/solvationenergy/hbc.png
-    :alt: GROMACS tutorial : HBC (graphene) molecule with VMD
-    :height: 150
+.. figure:: figures/solvationenergy/hbc-light.png
+    :alt: Gromacs initial configuration of HBC molecule
+    :class: only-light
+    :height: 250
+    :align: center
+
+.. figure:: figures/solvationenergy/hbc-dark.png
+    :alt: Gromacs initial configuration of HBC molecule
+    :class: only-dark
+    :height: 250
+    :align: center
 
     HBC molecule with carbon atoms in gray and hydrogen
     atoms in white.
 
 ..  container:: justify
 
-    You can also download the |hbc.gro|
-    I have generated.
+    Alternatively, you can download the |solvation-hbc.gro|
+    I have generated and continue with the tutorial.
 
-.. |hbc.gro| raw:: html
+.. |solvation-hbc.gro| raw:: html
 
-    <a href="../../../../inputs/02-HBCSolvationEnergy/preparation/hbc.gro" target="_blank">here</a>
+    <a href="../../../../inputs/solvationenergy/preparation/hbc.gro" target="_blank">file</a>
 
 Create the topology file
 ------------------------
 
 ..  container:: justify
 
-    From the `same atb
-    page <https://atb.uq.edu.au/molecule.py?molid=151371#panel-md>`__,
-    copy the 'GROMACS G54A7FF All-Atom (ITP file)' and
-    place it in a folder named 'ff/' and located within
-    the 'preparation/' folder. Within 'ff/' download as
-    well the GROMACS top file named `Gromacs 4.5.x-5.x.x
-    54a7 <https://atb.uq.edu.au/forcefield_files/atb_gromacs/5/gromos54a7_atb.ff.tar.gz>`__
-    containing all the force field parameters.
+    Copy the force field files (ITP file)in a folder named 'ff/' and located within
+    the 'preparation/' folder. Force field parameters can be downloaded as a zip file by 
+    clicking |ff-itp.zip|.
+
+.. |ff-itp.zip| raw:: html
+
+    <a href="../../../../inputs/solvationenergy/preparation/ff-itp.zip" target="_blank">here</a>
+
+..  container:: justify
+
+    All the files contained in the ff folder were downloaded from the |atb-HBC|.
+
     Then, let us write the topology file by simply
     creating a blank file named 'topol.top' within the
     'preparation/' folder, and copying in it:
@@ -105,7 +127,7 @@ Add the water
 
 ..  container:: justify
 
-    Let us add water molecules. First download the tip4p
+    Let us add water molecules to the system. First, download the tip4p
     water configuration file |tip4p.gro|,
     and copy it in the 'preparation/' folder. Then, in
     order to add (tip4p) water molecules to both gro and
@@ -117,7 +139,7 @@ Add the water
 
 .. |tip4p.gro| raw:: html
 
-    <a href="../../../../inputs/02-HBCSolvationEnergy/preparation/tip4p.gro" target="_blank">here</a>
+    <a href="../../../../inputs/solvationenergy/preparation/tip4p.gro" target="_blank">here</a>
 
 ..  container:: justify
 
@@ -141,7 +163,7 @@ Add the water
 ..  container:: justify
 
     The created 'solvated.gro' file contains the positions
-    of both HBC (called FJEW) and water molecules , you
+    of both HBC (called FJEW) and water molecules . Alternatively, you
     can download the file I have generated by clicking |solvated.gro|.
 
     The only missing information is the force field for
@@ -158,11 +180,16 @@ Add the water
 
 .. |solvated.gro| raw:: html
 
-    <a href="../../../../inputs/02-HBCSolvationEnergy/preparation/solvated.gro" target="_blank">here</a>
+    <a href="../../../../inputs/solvationenergy/preparation/solvated.gro" target="_blank">here</a>
 
 .. |h2o.itp| raw:: html
 
-    <a href="../../../../inputs/02-HBCSolvationEnergy/preparation/ff/h2o.itp" target="_blank">h2o.itp</a>
+    <a href="../../../../inputs/solvationenergy/preparation/ff/h2o.itp" target="_blank">h2o.itp</a>
+
+..  container:: justify
+
+    The system is ready, let us equilibrate it before measuring the solvation energy of the 
+    HBC molecule. 
 
 Energy minimization
 ===================
@@ -250,11 +277,11 @@ Equilibration
 
 .. |solvation-nvt.mdp| raw:: html
 
-    <a href="../../../../inputs/02-HBCSolvationEnergy/preparation/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
+    <a href="../../../../inputs/solvationenergy/preparation/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
 
 .. |solvation-npt.mdp| raw:: html
 
-    <a href="../../../../inputs/02-HBCSolvationEnergy/preparation/inputs/npt.mdp" target="_blank">npt.mdp</a>
+    <a href="../../../../inputs/solvationenergy/preparation/inputs/npt.mdp" target="_blank">npt.mdp</a>
 
 ..  code-block:: bash
 
@@ -301,11 +328,11 @@ Solvation
 
 .. |solvation-nvt-bis.mdp| raw:: html
 
-    <a href="../../../../inputs/02-HBCSolvationEnergy/solvation/inputs/npt_bis.mdp" target="_blank">npt_bis.mdp</a>
+    <a href="../../../../inputs/solvationenergy/solvation/inputs/npt_bis.mdp" target="_blank">npt_bis.mdp</a>
 
 .. |solvation-pro.mdp| raw:: html
 
-    <a href="../../../../inputs/02-HBCSolvationEnergy/solvation/inputs/pro.mdp" target="_blank">pro.mdp</a>
+    <a href="../../../../inputs/solvationenergy/solvation/inputs/pro.mdp" target="_blank">pro.mdp</a>
 
 ..  container:: justify
 
@@ -346,7 +373,7 @@ Solvation
 
 .. |solvation-topol.top| raw:: html
 
-    <a href="../../../../inputs/02-HBCSolvationEnergy/solvation/topol.top" target="_blank">topol.top</a>
+    <a href="../../../../inputs/solvationenergy/solvation/topol.top" target="_blank">topol.top</a>
 
 ..  container:: justify
 
@@ -455,4 +482,4 @@ Going further with exercises
     calculate its free energy of solvation using the
     same method.
 
-.. include:: ../../contact/contactme.rst
+.. include:: ../contact/contactme.rst
