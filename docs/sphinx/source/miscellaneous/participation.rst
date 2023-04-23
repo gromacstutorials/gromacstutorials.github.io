@@ -32,7 +32,7 @@ and submit a |pull_request|.
    <a href="https://github.com/gromacstutorials/gromacstutorials.github.io/pulls" target="_blank">pull request</a>
 
 Build *gromacstutorial* locally
-==============================
+===============================
 
 *gromacstutorial* can be build locally on your computer using sphinx. Fork
 the repository by typing in a terminal:

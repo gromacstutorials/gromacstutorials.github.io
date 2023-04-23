@@ -155,17 +155,17 @@ Add the water
 ..  code-block:: bw
 
     Processing topology
-    Adding line for 887 solvent molecules with resname (SOL) to topology file (topol.top)
+    Adding line for 2186 solvent molecules with resname (SOL) to topology file (topol.top)
 
 ..  container:: justify
 
-    and a new line 'SOL 887' in the topology file:
+    and a new line 'SOL 2186' in the topology file:
 
 ..  code-block:: bw
 
     [ molecules ]
     FJEW 1
-    SOL 887
+    SOL 2186
 
 ..  container:: justify
 
@@ -218,13 +218,15 @@ Energy minimization
     nstlist = 10
     ns_type = grid
 
+    couple-intramol=yes
+
     vdw-type = Cut-off
-    rvdw = 1.0
+    rvdw = 1.2
 
     coulombtype = pme
     fourierspacing = 0.1
     pme-order = 4
-    rcoulomb = 1.0
+    rcoulomb = 1.2
 
     constraint-algorithm = lincs
     constraints = hbonds
@@ -438,9 +440,9 @@ Solvation energy measurement
         # create a bash file to launch all the simulations
         echo 'cd '$DIRNAME >> runall.sh
         echo 'gmx grompp -f inputs/npt_bis.mdp -c preparedstate.gro -p topol.top -o npt_bis -pp npt_bis -po npt_bis -maxwarn 1' >> runall.sh
-        echo 'gmx mdrun -v -deffnm npt_bis' >> runall.sh
+        echo 'gmx mdrun -v -deffnm npt_bis -nt 4' >> runall.sh
         echo 'gmx grompp -f inputs/pro.mdp -c npt_bis.gro -p topol.top -o pro -pp pro -po pro -maxwarn 1' >> runall.sh
-        echo 'gmx mdrun -v -deffnm pro' >> runall.sh
+        echo 'gmx mdrun -v -deffnm pro -nt 4' >> runall.sh
         echo 'cd ..' >> runall.sh
         echo '' >> runall.sh
         # create links for the analysis
@@ -450,6 +452,8 @@ Solvation energy measurement
     done
 
 ..  container:: justify
+
+    Change the '-nt 4' to use a different number of thread if necessary.
 
     Execute the bash script by typing:
 
@@ -472,8 +476,9 @@ Solvation energy measurement
 
 ..  container:: justify
 
-    This may take a while.
-    When its complete, go the dhdl folder, and type:
+    This may take a while, depending on your computer.
+
+    When the simulation is complete, go the dhdl folder, and type:
 
 ..  code-block:: bash
 
