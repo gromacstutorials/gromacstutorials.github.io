@@ -21,6 +21,8 @@ fourierspacing = 0.1
 pme-order = 4
 rcoulomb = 1.0
 
+couple-intramol=yes
+
 constraint-algorithm = lincs
 constraints = hbonds
 
