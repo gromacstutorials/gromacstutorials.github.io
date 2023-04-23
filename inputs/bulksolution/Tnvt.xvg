@@ -1,0 +1,45 @@
+# This file was created Sun Apr 23 15:55:32 2023
+# Created by:
+#              :-) GROMACS - gmx energy, 2022.2-Ubuntu_2022.2_1 (-:
+# 
+# Executable:   /usr/bin/gmx
+# Data prefix:  /usr
+# Working dir:  /home/simon/Git/Gromacs/gromacstutorials.github.io/docs/inputs/bulksolution
+# Command line:
+#   gmx energy -f nvt.edr -o Tnvt.xvg
+# gmx energy is part of G R O M A C S:
+#
+# Giant Rising Ordinary Mutants for A Clerical Setup
+#
+@    title "GROMACS Energies"
+@    xaxis  label "Time (ps)"
+@    yaxis  label "(K)"
+@TYPE xy
+@ view 0.15, 0.15, 0.75, 0.85
+@ legend on
+@ legend box on
+@ legend loctype view
+@ legend 0.78, 0.8
+@ legend length 2
+@ s0 legend "Temperature"
+    0.000000    0.066512
+    1.000000  307.317078
+    2.000000  361.463440
+    3.000000  372.819641
+    4.000000  362.101105
+    5.000000  376.165894
+    6.000000  390.846008
+    7.000000  379.212646
+    8.000000  380.062134
+    9.000000  375.325989
+   10.000000  372.779388
+   11.000000  386.387756
+   12.000000  371.151581
+   13.000000  395.368561
+   14.000000  378.255707
+   15.000000  380.999298
+   16.000000  376.462189
+   17.000000  384.518829
+   18.000000  377.438110
+   19.000000  378.030731
+   20.000000  367.956299

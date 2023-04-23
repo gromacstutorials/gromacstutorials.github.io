@@ -144,7 +144,7 @@
           <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
         </button>
       </div>
-      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
         <div class="visually-hidden">Toggle table of contents sidebar</div>
         <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
       </label>
@@ -210,7 +210,7 @@
               <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
             </button>
           </div>
-          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
             <div class="visually-hidden">Toggle table of contents sidebar</div>
             <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
           </label>
@@ -218,116 +218,32 @@
         <article role="main">
           <section id="how-to">
 <h1>How-to<a class="headerlink" href="#how-to" title="Permalink to this heading">#</a></h1>
-<p>This page describes the structure of the LAMMPStutorials.github.io.
-Tutorials are grouped by thematic. Here some specificity
-present in each tutorial are also listed.</p>
+<p>This page describes the structure of the gromacstutorials.github.io.</p>
 <p>You can access all the input scripts and data files that
 are used in these tutorials from <a href="https://github.com/lammpstutorials/lammpstutorials.github.io/tree/version2.0/docs/inputs" target="_blank">Github</a>.</p>
-<section id="bulk-fluids">
-<h2>Bulk fluids<a class="headerlink" href="#bulk-fluids" title="Permalink to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><dl class="simple">
-<dt><span class="xref std std-ref">lennard-jones-label</span> - beginners</dt><dd><ul class="simple">
-<li><p>list of required softwares</p></li>
-<li><p>simulation of neutral dots</p></li>
-<li><p>use of classic NVT ensemble</p></li>
-<li><p>overview of some basic LAMMPS aspect (input, trajectory, restart, etc.)</p></li>
+<dt><a class="reference internal" href="tutorials/bulksolution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a> - beginners</dt><dd><ul class="simple">
+<li></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><span class="xref std std-ref">all-atoms-label</span> - intermediate</dt><dd><ul class="simple">
-<li><p>simulation of charged and bonded atomic model</p></li>
-<li><p>use of isotropic and anisotropic NPT ensemble</p></li>
-<li><p>advanced control of subgroups of atoms</p></li>
+<dt><a class="reference internal" href="tutorials/solvationenergy.html#solvation-energy-label"><span class="std std-ref">Molecule solvation energy</span></a> - intermediate</dt><dd><ul class="simple">
+<li></li>
 </ul>
 </dd>
 </dl>
 </li>
 <li><dl class="simple">
-<dt><span class="xref std std-ref">sheared-confined-label</span> - intermediate</dt><dd><ul class="simple">
-<li><p>simulation of charged and bonded atomic model</p></li>
-<li><p>thermostating of individual groups</p></li>
-<li><p>advanced control of subgroups of atoms</p></li>
-<li><p>non-equilibrium dynamics</p></li>
+<dt><a class="reference internal" href="tutorials/ethanoladsorption.html#ethanol-adsorption-label"><span class="std std-ref">Free energy profile</span></a> - intermediate</dt><dd><ul class="simple">
+<li></li>
 </ul>
 </dd>
 </dl>
 </li>
 </ol>
-</section>
-<section id="d-materials">
-<h2>2D materials<a class="headerlink" href="#d-materials" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><dl class="simple">
-<dt><span class="xref std std-ref">graphene-label</span> - beginners</dt><dd><ul class="simple">
-<li><p>topology generation using VMD</p></li>
-<li><p>stepwise deformation of a structure</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><span class="xref std std-ref">carbon-nanotube-label</span> - intermediate</dt><dd><ul class="simple">
-<li><p>use of reactive force field</p></li>
-<li><p>constant velocity deformation of a structure</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ol>
-</section>
-<section id="monte-carlo">
-<h2>Monte Carlo<a class="headerlink" href="#monte-carlo" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><dl class="simple">
-<dt><span class="xref std std-ref">gcmc-silica-label</span> - advanced</dt><dd><ul class="simple">
-<li><p>simulation of charged and bonded atomic model</p></li>
-<li><p>use of the grand-canonical ensemble</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ol>
-</section>
-<section id="free-energy">
-<h2>Free energy<a class="headerlink" href="#free-energy" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><dl class="simple">
-<dt><span class="xref std std-ref">umbrella-sampling-label</span> - advanced</dt><dd><ul class="simple">
-<li><p>simulation of neutral dots</p></li>
-<li><p>use of biasing potential</p></li>
-<li><p>use of WHAM algorithm</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-<li><dl class="simple">
-<dt><span class="xref std std-ref">surface-profile-label</span> - advanced</dt><dd><ul class="simple">
-<li><p>simulation of charged and bonded atomic model</p></li>
-<li><p>use of biasing potential</p></li>
-<li><p>use of WHAM algorithm</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ol>
-</section>
-<section id="reaxff">
-<h2>Reaxff<a class="headerlink" href="#reaxff" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><dl class="simple">
-<dt><span class="xref std std-ref">reax-silica-label</span> - advanced</dt><dd><ul class="simple">
-<li><p>simulation of charged reactive species</p></li>
-<li><p>use of charge equilibration</p></li>
-<li><p>constant velocity deformation of a structure</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ol>
-</section>
 </section>
 
         </article>
@@ -369,31 +285,8 @@ are used in these tutorials from <a href="https://github.com/lammpstutorials/lam
         
       </footer>
     </div>
-    <aside class="toc-drawer">
+    <aside class="toc-drawer no-toc">
       
-      
-      <div class="toc-sticky toc-scroll">
-        <div class="toc-title-container">
-          <span class="toc-title">
-            On this page
-          </span>
-        </div>
-        <div class="toc-tree-container">
-          <div class="toc-tree">
-            <ul>
-<li><a class="reference internal" href="#">How-to</a><ul>
-<li><a class="reference internal" href="#bulk-fluids">Bulk fluids</a></li>
-<li><a class="reference internal" href="#d-materials">2D materials</a></li>
-<li><a class="reference internal" href="#monte-carlo">Monte Carlo</a></li>
-<li><a class="reference internal" href="#free-energy">Free energy</a></li>
-<li><a class="reference internal" href="#reaxff">Reaxff</a></li>
-</ul>
-</li>
-</ul>
-
-          </div>
-        </div>
-      </div>
       
       
     </aside>
