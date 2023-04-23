@@ -20,15 +20,14 @@ Bulk salt solution
     open-source code GROMACS to perform a simple molecular
     dynamics simulation: a liquid solution of water mixed
     with sodium (Na\ :sup:`+`) and sulfate
-    (SO\ :sub:`4`\ :sup:`2-`) ions. This tutorial
-    illustrates several major ingredients of molecular
+    (SO\ :sub:`4`\ :sup:`2-`) ions. 
+    
+    This tutorial illustrates several major ingredients of molecular
     dynamics simulations, such as energy minimization,
     thermostating, NVT and NPT equilibration, and
     trajectory visualisation.
 
-    There are **no prerequisite** to follow this tutorial,
-    but your life will be easier if you are familiar with
-    using the terminal.
+    There are **no prerequisite** to follow this tutorial.
 
 .. include:: ../../contact/needhelp.rst
 
@@ -38,10 +37,14 @@ Required softwares
 ..  container:: justify
 
     GROMACS must be installed on your machine. You can
-    install it following the instructions of the `GROMACS
-    website <https://manual.gromacs.org/current/index.html>`__.
+    install it following the instructions of the |gromacs-manual|.
+
     Alternatively, if you are using Ubuntu OS, you can
     simply execute the following command in a terminal:
+
+.. |gromacs-manual| raw:: html
+
+   <a href="https://manual.gromacs.org/current/index.html" target="_blank">GROMACS manual</a>
 
 ..  code-block:: bw
 
@@ -65,22 +68,28 @@ Required softwares
 
     :-) GROMACS - gmx, 2023 (-:
 
+    Executable:   /usr/bin/gmx
+    Data prefix:  /usr
+
+    (...)
+
 ..  container:: justify
 
 as well as a quote (at the bottom), such as
 
 ..  code-block:: bw
 
+    (...)
+
     GROMACS reminds you: "Computers are like humans - they do everything except think." (John von Neumann)
 
 ..  container:: justify
 
-    In addition to GROMACS, you will also need |(1) a basic text editing software|
-    such as Vim, Gedit, or Notepad++, |(2) a visualization software|, here I
-    will use VMD (note: VMD is free but you have to register to
-    the uiuc website in order to download it. If you don't want
-    to, you can also use Ovito.), |(3) a plotting tool| like
-    XmGrace or pyplot.
+    In addition to GROMACS, you will also need 
+    
+    - |(1) a basic text editing software| such as Vim, Gedit, or Notepad++,
+    - |(2) a visualization software|, here I will use VMD (note: VMD is free but you have to register to the uiuc website in order to download it. If you don't want to, you can also use Ovito.),
+    - |(3) a plotting tool| like XmGrace or pyplot.
 
 .. |LAMMPS website| raw:: html
 
@@ -117,21 +126,19 @@ The input files
          timestep).
 
 
-The configuration file (.gro)
------------------------------
+1) The configuration file (.gro)
+--------------------------------
 
 ..  container:: justify
 
     For the present simulation, the initial atoms
     positions and box size are given in a conf.gro file
-    (Gromos87 format) that you can download by clicking
-    |cong.gro|
-    Save the conf.gro file in a folder. The file looks
-    like that:
+    (Gromos87 format) that you can download by clicking |cong.gro|.
+    Save the conf.gro file in a folder. The file looks like that:
 
 .. |cong.gro| raw:: html
 
-    <a href="../../../../inputs/01-Na2SO4solution/conf.gro" target="_blank">here</a>
+    <a href="../../../../inputs/bulksolution/conf.gro" target="_blank">here</a>
 
 ..  code-block:: bw
 
@@ -150,10 +157,10 @@ The configuration file (.gro)
 
 ..  container:: justify
 
-    **Description:** The first line is a comment, the
-    second is the total number of atoms, and the last
-    line is the box dimension in nanometer (nm). Between
-    the second and the last line there is one line per
+    The first line 'Na2SO4 solution' is just a comment, the
+    second line is the total number of atoms, and the last
+    line is the box dimension in nanometer, here 3.1 nm by 3.1 nm by 3.1 nm. Between
+    the second and the last lines, there is one line per
     atom. Each line indicates, from left to right, the
     residue Id (the atoms of the same
     SO\ :sub:`4`\ :sup:`2-` ion have the same residue
@@ -161,10 +168,11 @@ The configuration file (.gro)
     and finally the atom position (x, y, and z
     coordinate in nm).
     
-    **Remark:** The format of conf.gro file is fixed,
+    Note that the format of conf.gro file is fixed,
     all columns are in a fixed position. For example,
     the first five columns are for the residue number.
-    This conf.gro file can be visualized using VMD by
+
+    A conf.gro file can be visualized using VMD by
     typing in the terminal:
 
 ..  code-block:: bash
@@ -173,16 +181,24 @@ The configuration file (.gro)
 
 ..  container:: justify
 
-    You have to play with atoms' representation and color
-    to make it look better than it is by default:
+    This is what I see:
 
-.. figure:: figures/bulksolution/system_step0.png
+.. figure:: figures/bulksolution/step0-light.png
     :alt: Gromacs initial configuration of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
     :height: 300
+    :class: only-light
+
+.. figure:: figures/bulksolution/step0-dark.png
+    :alt: Gromacs initial configuration of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
+    :height: 300
+    :class: only-dark
 
     Figure: SO\ :sub:`4`\ :sup:`2-` ions (in yellow and
     red) and Na\ :sub:`+` ions (blue) in water (red and
     white).
+
+    You have to play with atoms' representation and color
+    to make it look better than it is by default.
 
 ..  container:: justify
 
@@ -191,8 +207,10 @@ The configuration file (.gro)
     all dipoles facing in the same direction, and possibly
     some overlapping between some of the molecules and ions.
 
-The topology file (.top)
-------------------------
+    This will be fixed during energy minimization.
+
+2) The topology file (.top)
+---------------------------
 
 ..  container:: justify
 
@@ -200,11 +218,11 @@ The topology file (.top)
     interactions of the different atoms and molecules. You
     can download it by clicking |topol.top|.
     Place it in the same folder as the conf.gro file. The
-    top file looks like that:
+    topol.top file looks like that:
 
 .. |topol.top| raw:: html
 
-    <a href="../../../../inputs/01-Na2SO4solution/topol.top" target="_blank">here</a>
+    <a href="../../../../inputs/bulksolution/topol.top" target="_blank">here</a>
 
 ..  code-block:: bw
 
@@ -223,63 +241,69 @@ The topology file (.top)
 
 ..  container:: justify
 
-    The 4 first lines are used to include the values the
-    parameters given in separate files (it is usually better to use multiple
-    files for clarity). Create a folder named 'ff/', and copy
+    The 4 first lines are used to include the values of the
+    parameters that are given in 4 separate files (see below). 
+    
+    The rest of the topol.top file contains the system
+    name (Na2SO4 solution), and a list of the molecules. It is important
+    that the order of the molecules in the topology file
+    (here SO4 first, Na second, and SOL (H2O) last)
+    matches the order of the conf.gro file, otherwise GROMACS will throw us an error.
+    
+    Create a folder named 'ff/' next to the conf.gro and the topol.top files, and copy
     |forcefield.itp|, |h2o.itp|, |na.itp|, and |so4.itp|
     in it. These four files contain information about
     the atoms (names, masses, changes, Lennard-Jones
     coefficients) and residues (bond and angular
-    constraints).
-    The rest of the topol.top file contains the system
-    name, and a list of the molecules. Its important
-    that the order of the molecules in the topology file
-    (here SO4 first, Na second, and SOL (H2O) last)
-    matches the order of the conf.gro file.
+    constraints) for all the species that will be involved here.
 
 .. |forcefield.itp| raw:: html
 
-    <a href="../../../../inputs/01-Na2SO4solution/ff/forcefield.itp" target="_blank">forcefield.itp</a>
+    <a href="../../../../inputs/bulksolution/ff/forcefield.itp" target="_blank">forcefield.itp</a>
 
 .. |h2o.itp| raw:: html
 
-    <a href="../../../../inputs/01-Na2SO4solution/ff/h2o.itp" target="_blank">h2o.itp</a>
+    <a href="../../../../inputs/bulksolution/ff/h2o.itp" target="_blank">h2o.itp</a>
 
 .. |na.itp| raw:: html
 
-    <a href="../../../../inputs/01-Na2SO4solution/ff/na.itp" target="_blank">na.itp</a>
+    <a href="../../../../inputs/bulksolution/ff/na.itp" target="_blank">na.itp</a>
 
 .. |so4.itp| raw:: html
 
-    <a href="../../../../inputs/01-Na2SO4solution/ff/so4.itp" target="_blank">so4.itp</a>
+    <a href="../../../../inputs/bulksolution/ff/so4.itp" target="_blank">so4.itp</a>
 
-The input file (.mdp)
----------------------
+3) The input file (.mdp)
+------------------------
 
 ..  container:: justify
 
     The input file contains instructions about the
     simulation, such as
 
-    The input file contains instructions about the
-    simulation, such as
-
-    -  the thermostat to be used (e.g. Langevin, Berendsen),
-    -  the cut-off for the interactions (e.g. Lennard-Jones),
-    -  or the molecular dynamics integrator (e.g. steep-decent, molecular dynamics).
+    - the number of steps to perform,
+    - the thermostat to be used (e.g. Langevin, Berendsen),
+    - the cut-off for the interactions (e.g. Lennard-Jones),
+    - the molecular dynamics integrator (e.g. steep-decent, molecular dynamics).
 
     In this tutorial, 4 different input files will be
     written in order to perform respectively an energy
     minimization of the salt solution, an equilibration
-    in the NVT ensemble, an equilibration in the NPT
-    ensemble, and finally a production run.
+    in the NVT ensemble (with fixed box sized), an equilibration in the NPT
+    ensemble (with changing box size), and finally a production run.
     Input files will be placed in a 'inputs/' folder. 
 
     At this point, your folder should look like that:
 
-.. figure:: figures/bulksolution/gromacs_inputs.png
+.. figure:: figures/bulksolution/gromacs_inputs-light.png
     :alt: Gromacs files and structure folder
-    :height: 150
+    :height: 200
+    :class: only-light
+
+.. figure:: figures/bulksolution/gromacs_inputs-dark.png
+    :alt: Gromacs files and structure folder
+    :height: 200
+    :class: only-dark
 
 Energy minimization
 ===================
@@ -290,13 +314,12 @@ Energy minimization
     previous image) that the atoms are currently in a
     quite unphysical configuration. It would be risky to
     directly perform a molecular dynamics simulation;
-    atoms would undergo huge forces and the system would
-    explode.
+    atoms would undergo huge forces, accelerate, and the system would
+    eventually explode.
 
     In order to bring the system into a favorable state,
-    let us perform an energy minimization which consists
-    in moving the atoms until the forces between them
-    are reasonable.
+    let us perform an energy minimization, i.e. let us
+    move the atoms until the forces between them are reasonable.
 
     Open a blank file, call it min.mdp, and save it in the
     'inputs/' folder. Copy the following lines into min.mdp:
@@ -317,7 +340,7 @@ Energy minimization
     As we would like to be able to visualize
     the trajectory of the atoms during the minimization,
     let us add the following command to the input
-    file in order to print the atoms positions every 10 steps:
+    file in order to print the atoms positions every 10 steps in a .trr trajectory file:
 
 ..  code-block:: bw
 
@@ -335,14 +358,16 @@ Energy minimization
 
 ..  container:: justify
 
-    The first command (grompp) is used to preprocess the
+    The grompp command is used to preprocess the
     files in order to prepare the simulation. The grompp
-    command also checks the validity of the files. Using
+    command also checks the validity of the files. By using
     the '-f', '-c', and '-p' keywords, we specify which
     input, configuration, and topology files must be
     used, respectively. The other keywords '-o', '-pp', and '-po' are
     used to specify the names of the output that will be
-    produced during the run. The second command (mdrun) calls the engine
+    produced during the run. 
+    
+    The mdrun command calls the engine
     performing the computation from the preprocessed
     files (which is recognized thanks to the -deffnm keyword). The
     '-v' option is here to enable verbose and have more
@@ -351,6 +376,8 @@ Energy minimization
     If everything works, you should see something like :
 
 ..  code-block:: bw
+
+    (...)
 
     Steepest Descents converged to machine precision in 824 steps,
     but did not reach the requested Fmax < 10.
@@ -364,7 +391,9 @@ Energy minimization
     that energy minimization has been performed, even
     though the precision that was asked from the default
     parameters was not reached. We can ignore this
-    message. The final potential energy is large and
+    message. 
+    
+    The final potential energy is large and
     negative, and the maximum force is small: 240
     kJ/mol/nm (about 0.4 pN). Everything seems alright.
     Let us visualize the atoms' trajectories during the
@@ -384,7 +413,7 @@ Energy minimization
 
 ..  container:: justify
 
-    **Note for VMD user:** You can avoid having
+    Note for VMD user: You can avoid having
     molecules 'cut in half' by the periodic boundary
     conditions by rewriting the trajectory using 'gmx
     trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole'
