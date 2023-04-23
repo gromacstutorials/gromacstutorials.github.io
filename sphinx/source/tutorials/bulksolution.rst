@@ -6,8 +6,7 @@ Bulk salt solution
 .. container:: hatnote
 
     The very basics of GROMACS through a
-    simple example: a bulk solution of
-    SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+`.
+    simple example
 
 .. figure:: figures/bulksolution/first-light.png
     :alt: Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
@@ -23,7 +22,7 @@ Bulk salt solution
 
 ..  container:: justify
 
-    **The objective of this tutorial** is to use the
+    The objective of this tutorial is to use the
     open-source code GROMACS to perform a simple molecular
     dynamics simulation: a liquid solution of water mixed
     with sodium (Na\ :sup:`+`) and sulfate
@@ -34,9 +33,9 @@ Bulk salt solution
     thermostating, NVT and NPT equilibration, and
     trajectory visualisation.
 
-    There are **no prerequisite** to follow this tutorial.
+    There are no prerequisite to follow this tutorial.
 
-.. include:: ../../contact/needhelp.rst
+.. include:: ../contact/needhelp.rst
 
 Required softwares
 ==================

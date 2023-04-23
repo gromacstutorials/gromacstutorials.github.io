@@ -3,10 +3,7 @@
 Wanna contribute?
 *****************
 
-Your feedback is always useful. A particular thanks to Andrea Corradini who spontaneously send me a very detailed report of the 
-:ref:`umbrella-sampling-label` tutorial, and signaled some inconsistencies.
-
-You can also suggest idea for new a tutorial, or a new section to an existing tutorial, just keep in mind that:
+Your feedback is always useful. You can also suggest idea for new a tutorial, or a new section to an existing tutorial, just keep in mind that:
 
 - the content must be of interest for everyone, not just for the specific issue you are trying to solve,
 - the tutorials must remain relatively simple. 
