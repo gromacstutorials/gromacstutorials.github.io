@@ -4,13 +4,13 @@ This is the script of the webpage [GROMACS Tutorials](https://gromacstutorials.g
 All the files generated during the tutorials can be found in the [input/](inputs) folder. 
 
 <p float="left">
-  <a href="docs/doc-sphinx/build/html/tutorials/bulksolution.html">
+  <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
   <img src="docs/figures/01-Na2SO4solution/avatar.jpg" width="32%" /></a>
 
-  <a href="docs/doc-sphinx/build/html/tutorials/adsorptionenergy.html">
+  <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/adsorptionenergy.html">
   <img src="docs/figures/02-HBCSolvationEnergy/avatar.jpg" width="32%" /></a>
   
-   <a href="https://gromacstutorials.github.io/tutorials/ethanoladsorption.html">
+   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/solvationadsorption.html">
   <img src="docs/figures/03-EthanolAdsorption/avatar.jpg" width="32%" /></a>
 </p>
 
