@@ -25,8 +25,6 @@ Welcome to gromacstutorials's documentation!
    :caption: Extra content
 
    contact/contact.rst
-   miscellaneous/participation.rst
-   miscellaneous/vmd.rst
 
 Indices and tables
 ==================
