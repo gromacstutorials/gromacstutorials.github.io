@@ -7,7 +7,7 @@ Email
 =====
 
 Feel free to contact me by `email`_. I am always happy to read what you
-think about this website, or answer your LAMMPS-related questions.
+think about this website, or answer your GROMACS-related questions.
 
 .. _email: simon.gravelle@live.fr
 
@@ -24,8 +24,7 @@ Become a |patreon_simulation|, and:
 - Receive personalised advice for your project
 - Have your input scripts reviewed
 - Access a dedicated Discord forum
-- Obtain extra content such as the solutions to the exercises
-- Support the creation of content for LAMMPS
+- Support the creation of content for GROMACS
 
 .. |patreon_simulation| raw:: html
 
