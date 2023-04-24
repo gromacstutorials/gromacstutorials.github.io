@@ -32,7 +32,7 @@ jobs:
           pip install sphinx-togglebutton
       - name: Build
         run: |
-          cd docs/sphinx/
+          cd docs/doc-sphinx/
           make clean
           make html
           cp source/index_replace.html build/html/index.html

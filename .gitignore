@@ -15,4 +15,4 @@
 **/*#*
 **/step*pdb
 try
-docs/sphinx/build
+docs/doc-sphinx/build
