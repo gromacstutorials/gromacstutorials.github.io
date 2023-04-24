@@ -246,7 +246,7 @@ trajectory visualisation.</p>
 <h2>Required softwares<a class="headerlink" href="#required-softwares" title="Permalink to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>GROMACS must be installed on your machine. You can
-install it following the instructions of the <a href="https://manual.gromacs.org/current/index.html" target="_blank">GROMACS manual</a>.</p>
+install it following the instructions of the <a href="https://manual.gromacs.org/current/reference-manual/topologies/parameter-files.html" target="_blank">GROMACS manual</a>.</p>
 <p>Alternatively, if you are using Ubuntu OS, you can
 simply execute the following command in a terminal:</p>
 </div>
@@ -420,6 +420,48 @@ in it. These four files contain information about
 the atoms (names, masses, changes, Lennard-Jones
 coefficients) and residues (bond and angular
 constraints) for all the species that will be involved here.</p>
+<p>For instance, the <a href="../../../../inputs/bulksolution/ff/forcefield.itp" target="_blank">forcefield.itp</a> file defines the combination rules
+that are used:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ defaults ]
+; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+1             2               no              1.0     0.833
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>With comb-rule = 2, the mixing rule is calculated as
+<span class="math notranslate nohighlight">\(\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilon_{jj}}\)</span>,
+<span class="math notranslate nohighlight">\(\sigma_{ij} = (\sigma_{ii}+\sigma_{jj})/2\)</span>.
+FudgeLJ and fudgeQQ are the factors by which to multiply Lennard-Jones
+and Coulomb 1-4 interactions, respectively.
+You can refer to the <a href="https://manual.gromacs.org/current/reference-manual/topologies/parameter-files.html" target="_blank">GROMACS manual</a> for more information.</p>
+<p>The <a href="../../../../inputs/bulksolution/ff/forcefield.itp" target="_blank">forcefield.itp</a> file also contains information about the atoms,
+such as mass and Lennard-Jones parameters, as well as
+some parameters for the bond and angle constraints that will be
+necessary for the SO4 ions:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ atomtypes ]
+; name       at.num mass     charge  ptype sigma      epsilon
+Na           11     22.990   0.0000  A     0.23100    0.45000
+O            8      15.9994  0.0000  A     0.386      0.12
+S            16     32.0600  0.0000  A     0.355      1.0465
+HW           1       1.0079  0.0000  A     0.00000    0.00000
+OW           8      15.9994  0.0000  A     0.31650    0.77323
+MW           0       0.000   0.0000  D     0.00000    0.00000
+
+[ bondtypes ]
+; i    j  func       b0          kb
+S      O       1    0.15 3.7656e4
+
+[ angletypes ]
+; i    j  func       b0          kb
+O    S      O       1    109.5    520
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Notice that the particle with name MW is of type ‘D’ when all the other particles
+are of type ‘A’ for atoms. This is because MW is the virtual massless site of our 4 points
+rigid water model, see this <a href="http://www.sklogwiki.org/SklogWiki/index.php/TIP4P_model_of_water" target="_blank">wiki</a> page for details.</p>
 </div>
 </section>
 <section id="the-input-file-mdp">
@@ -790,8 +832,8 @@ during the NVT equilibration.</span><a class="headerlink" href="#id4" title="Per
 </figcaption>
 </figure>
 </section>
-<section id="npt">
-<h2>NPT<a class="headerlink" href="#npt" title="Permalink to this heading">#</a></h2>
+<section id="npt-adjusting-the-volume">
+<h2>NPT: adjusting the volume<a class="headerlink" href="#npt-adjusting-the-volume" title="Permalink to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Now that the system is properly equilibrated in the
 NVT ensemble, let us perform an equilibration in the
@@ -1044,7 +1086,7 @@ for more details.</p>
 <li><a class="reference internal" href="#energy-minimization">Energy minimization</a></li>
 <li><a class="reference internal" href="#minimalist-nvt-input-file">Minimalist NVT input file</a></li>
 <li><a class="reference internal" href="#improved-nvt">Improved NVT</a></li>
-<li><a class="reference internal" href="#npt">NPT</a></li>
+<li><a class="reference internal" href="#npt-adjusting-the-volume">NPT: adjusting the volume</a></li>
 <li><a class="reference internal" href="#diffusion-coefficient-measurement">Diffusion coefficient measurement</a></li>
 </ul>
 </li>
@@ -1061,5 +1103,6 @@ for more details.</p>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/scripts/furo.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>
 </html>
