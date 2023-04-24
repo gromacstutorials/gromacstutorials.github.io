@@ -7,10 +7,10 @@ All the files generated during the tutorials can be found in the [input/](inputs
   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
   <img src="docs/figures/01-Na2SO4solution/avatar.jpg" width="32%" /></a>
 
-  <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/adsorptionenergy.html">
+  <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/solvationenergy.html">
   <img src="docs/figures/02-HBCSolvationEnergy/avatar.jpg" width="32%" /></a>
   
-   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/solvationadsorption.html">
+   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/ethanoladsorption.html">
   <img src="docs/figures/03-EthanolAdsorption/avatar.jpg" width="32%" /></a>
 </p>
 
