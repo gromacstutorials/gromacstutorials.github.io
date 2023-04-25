@@ -1,14 +1,14 @@
 ;
 ;	File 'min.mdp' was generated
 ;	By user: simon (1000)
-;	On host: simon-laptop
-;	At date: Sun Apr 23 12:49:27 2023
+;	On host: simon-tower
+;	At date: Tue Apr 25 11:42:12 2023
 ;
 ;	Created by:
-;	             :-) GROMACS - gmx grompp, 2022.2-Ubuntu_2022.2_1 (-:
+;	                      :-) GROMACS - gmx grompp, 2023 (-:
 ;	
-;	Executable:   /usr/bin/gmx
-;	Data prefix:  /usr
+;	Executable:   /usr/local/bin/gmx
+;	Data prefix:  /usr/local
 ;	Working dir:  /home/simon/Git/Gromacs/gromacstutorials.github.io/docs/inputs/bulksolution
 ;	Command line:
 ;	  gmx grompp -f inputs/min.mdp -c conf.gro -p topol.top -o min -pp min -po min
@@ -130,6 +130,8 @@ epsilon-surface          = 0
 implicit-solvent         = no
 
 ; OPTIONS FOR WEAK COUPLING ALGORITHMS
+ensemble-temperature-setting = auto
+ensemble-temperature     = -1
 ; Temperature coupling  
 tcoupl                   = No
 nsttcouple               = -1
@@ -169,7 +171,7 @@ annealing-temp           =
 ; GENERATE VELOCITIES FOR STARTUP RUN
 gen-vel                  = no
 gen-temp                 = 300
-gen-seed                 = -1088985091
+gen-seed                 = -547701249
 
 ; OPTIONS FOR BONDS    
 constraints              = none
