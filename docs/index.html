@@ -26,6 +26,7 @@
                     <header>
                     <br><br><br>
                     <center>
+                        <!--
                         <span class="image">
                             <a href="">
                             <img width='700' src="figures/welcome.png"
@@ -33,12 +34,23 @@
                             Grenoble, France"/>
                             </a>
                         </span>
+                        -->
+                        <h1>GROMACS tutorials 2.0</h1>
+                        Author  : Simon Gravelle, LiPhy, Grenoble, France
                     </center>
                     </header>
+
+                    <br>
+
                     <section class="tiles">
                         <article class="style1">
                             <span class="image">
-                                <img src="figures/01-Na2SO4solution/avatar.jpg" alt="avatar-tutorial01" />
+                                <picture>
+                                    <source
+                                    srcset="doc-sphinx/source/tutorials/figures/bulksolution/logo-dark.png" 
+                                    media="(prefers-data-theme: dark)">
+                                    <img src="doc-sphinx/source/tutorials/figures/bulksolution/logo.png" alt="avatar-tutorial01" />
+                                </picture>
                             </span>
                             <a href="doc-sphinx/build/html/tutorials/bulksolution.html">
                             <div class="content">
@@ -107,8 +119,12 @@
                                     <span class="label">Email</span></a>
                                 </li>
                             </ul>
-                            <br>
-                            <FONT COLOR="#797979" >This template has been adapted from <a href="http://html5up.net" target="_blank">HTML5 UP</a></FONT>
+                            <FONT COLOR="#797979" >This template has been adapted from <a href="http://html5up.net" target="_blank">HTML5 UP</a>
+                                <ul class="icons2">
+                                    <li><a onclick="toggleTheme('dark');" class="icon2 solid fa-moon"></a></li> 
+                                    <li><a onclick="toggleTheme('light');" class="icon2 solid fa-sun"></a></li>
+                                </ul>
+                            </FONT>
                         </section>
                     </div>
                 </center>

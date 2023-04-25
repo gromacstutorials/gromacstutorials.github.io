@@ -4,6 +4,15 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 */
 
+
+
+const htmlEl = document.getElementsByTagName('html')[0];
+
+const toggleTheme = (theme) => {
+    htmlEl.dataset.theme = theme;
+}
+
+
 (function($) {
 
 	var	$window = $(window),

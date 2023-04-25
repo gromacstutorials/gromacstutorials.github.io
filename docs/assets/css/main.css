@@ -94,6 +94,16 @@ input, select, textarea {
 		box-sizing: border-box;
 	}
 
+    html[data-theme='dark'] {
+        background: #000;
+        filter: invert(1) hue-rotate(180deg)
+    }
+    
+    html[data-theme='dark'] img {
+        filter: invert(1) hue-rotate(180deg)
+    }
+    
+
 	*, *:before, *:after {
 		box-sizing: inherit;
 	}
@@ -1877,6 +1887,71 @@ input, select, textarea {
 				background-color: rgba(242, 132, 158, 0.1);
 			}
 
+
+    .icon2 {
+        text-decoration: none;
+        border-bottom: none;
+        position: relative;
+    }
+
+        .icon2:before {
+            -moz-osx-font-smoothing: grayscale;
+            -webkit-font-smoothing: antialiased;
+            display: inline-block;
+            font-style: normal;
+            font-variant: normal;
+            text-rendering: auto;
+            line-height: 1;
+            text-transform: none !important;
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 400;
+        }
+
+        .icon2 > .label {
+            display: none;
+        }
+
+        .icon2:before {
+            line-height: inherit;
+        }
+
+        .icon2.solid:before {
+            font-weight: 900;
+        }
+
+        .icon2.brands:before {
+            font-family: 'Font Awesome 5 Brands';
+        }
+
+        .icon2.style2 {
+            -moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            -webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            -ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+            background-color: transparent;
+            border: solid 1px #c9c9c9;
+            border-radius: 4px;
+            width: 1em;
+            height: 1em;
+            display: inline-block;
+            text-align: center;
+            line-height: 1em;
+            color: inherit;
+        }
+
+            .icon2.style2:before {
+                font-size: 0.5em;
+            }
+
+            .icon2.style2:hover {
+                color: #f2849e;
+                border-color: #f2849e;
+            }
+
+            .icon2.style2:active {
+                background-color: rgba(242, 132, 158, 0.1);
+            }
+
 /* List */
 
 	ol {
@@ -2063,6 +2138,18 @@ input, select, textarea {
 			display: inline-block;
 			padding: 1em 0 0 1em;
 		}
+
+    ul.icons2 {
+        cursor: default;
+        list-style: none;
+        padding-left: 0;
+        margin: -1em 0 2em -1em;
+    }
+
+        ul.icons2 li {
+            display: inline-block;
+            padding: 1em 0 0 1em;
+        }
 
 /* Form */
 
