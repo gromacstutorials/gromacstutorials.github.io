@@ -5,10 +5,10 @@ All the files generated during the tutorials can be found in the [input/](inputs
 
 <p float="left">
   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
-  <img src="docs/figures/01-Na2SO4solution/avatar.jpg" width="32%" /></a>
+  <img src="docs/doc-sphinx/source/tutorials/figures/bulksolution/test-01-dark.png" width="32%" /></a>
 
   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/solvationenergy.html">
-  <img src="docs/figures/02-HBCSolvationEnergy/avatar.jpg" width="32%" /></a>
+  <img src="docs/doc-sphinx/source/tutorials/figures/solvationenergy/test-dark.png" width="32%" /></a>
   
    <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/ethanoladsorption.html">
   <img src="docs/figures/03-EthanolAdsorption/avatar.jpg" width="32%" /></a>
@@ -28,3 +28,6 @@ find more information on my [personal webpage](https://simongravelle.github.io/)
 
 All the inputs, scripts, and data files are released under the 
 GNU general public license v3.0.
+
+
+
