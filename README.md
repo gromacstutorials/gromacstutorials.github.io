@@ -1,7 +1,7 @@
 # GROMACS tutorials
 
 This is the script of the webpage [GROMACS Tutorials](https://gromacstutorials.github.io/). 
-All the files generated during the tutorials can be found in the [docs/input/](inputs) folder. 
+All the files generated during the tutorials can be found in the [docs/input/](docs/inputs) folder. 
 
 <p float="left">
   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
