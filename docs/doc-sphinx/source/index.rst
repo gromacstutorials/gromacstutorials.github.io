@@ -7,24 +7,35 @@ Welcome to gromacstutorials's documentation!
 ============================================
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Main  
+    :maxdepth: 2
+    :caption: Main  
 
-   howto.rst
+    howto.rst
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Tutorials
+    :maxdepth: 2
+    :caption: Level 0
 
-   tutorials/bulksolution.rst
-   tutorials/solvationenergy.rst
-   tutorials/ethanoladsorption.rst
-  
+    tutorials/createsystem.rst
+
 .. toctree::
-   :maxdepth: 2
-   :caption: Extra content
+    :maxdepth: 2
+    :caption: Level 1
 
-   contact/contact.rst
+    tutorials/bulksolution.rst
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Level 2
+
+    tutorials/solvationenergy.rst
+    tutorials/ethanoladsorption.rst
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Extra content
+
+    contact/contact.rst
 
 Indices and tables
 ==================
