@@ -11,7 +11,7 @@ All the files generated during the tutorials can be found in the [docs/input/](d
   <img src="docs/doc-sphinx/source/tutorials/figures/solvationenergy/test-dark.png" width="32%" /></a>
   
    <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/ethanoladsorption.html">
-  <img src="docs/figures/03-EthanolAdsorption/avatar.jpg" width="32%" /></a>
+  <img src="docs/doc-sphinx/source/tutorials/figures/ethanoladsorption/test-dark.png" width="32%" /></a>
 </p>
 
 
