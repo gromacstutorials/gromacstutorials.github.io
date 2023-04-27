@@ -137,7 +137,7 @@ The input files
 
 ..  container:: justify
 
-    For the present simulation, the initial atoms
+    For the present simulation, the initial atom
     positions and box size are given in a conf.gro file
     (Gromos87 format) that you can download by clicking |cong.gro|.
     Save the conf.gro file in a folder. The file looks like that:
@@ -202,7 +202,12 @@ The input files
     white).
 
     You have to play with atoms' representation and color
-    to make it look better than it is by default.
+    to make it look better than it is by default. I wrote a 
+    small |vmd-tutorial| that explains how to obtain nice looking image.
+
+.. |vmd-tutorial| raw:: html
+
+    <a href="https://lammpstutorials.github.io/sphinx/build/html/miscellaneous/vmd.html" target="_blank">vmd tutorial</a>
 
 ..  container:: justify
 
@@ -401,7 +406,7 @@ Energy minimization
     As we would like to be able to visualize
     the trajectory of the atoms during the minimization,
     let us add the following command to the input
-    file in order to print the atoms positions every 10 steps in a .trr trajectory file:
+    file in order to print the atom positions every 10 steps in a .trr trajectory file:
 
 ..  code-block:: bw
 
