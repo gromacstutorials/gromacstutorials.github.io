@@ -5,13 +5,13 @@ All the files generated during the tutorials can be found in the [docs/input/](d
 
 <p float="left">
   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
-  <img src="docs/doc-sphinx/source/tutorials/figures/bulksolution/no-field-dark.tga" width="32%" /></a>
+  <img src="docs/doc-sphinx/source/tutorials/figures/bulksolution/no-field-dark.png" width="32%" /></a>
 
   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/solvationenergy.html">
-  <img src="docs/doc-sphinx/source/tutorials/figures/solvationenergy/no-field-dark.tga" width="32%" /></a>
+  <img src="docs/doc-sphinx/source/tutorials/figures/solvationenergy/no-field-dark.png" width="32%" /></a>
   
    <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/ethanoladsorption.html">
-  <img src="docs/doc-sphinx/source/tutorials/figures/ethanoladsorption/no-field-dark.tga" width="32%" /></a>
+  <img src="docs/doc-sphinx/source/tutorials/figures/ethanoladsorption/no-field-dark.png" width="32%" /></a>
 </p>
 
 
