@@ -201,13 +201,15 @@ The input files
     red) and Na\ :sub:`+` ions (blue) in water (red and
     white).
 
+..  container:: justify
+
     You have to play with atoms' representation and color
     to make it look better than it is by default. I wrote a 
     small |vmd-tutorial| that explains how to obtain nice looking image.
 
 .. |vmd-tutorial| raw:: html
 
-    <a href="https://lammpstutorials.github.io/sphinx/build/html/miscellaneous/vmd.html" target="_blank">vmd tutorial</a>
+    <a href="https://lammpstutorials.github.io/sphinx/build/html/miscellaneous/vmd.html" target="_blank">VMD tutorial</a>
 
 ..  container:: justify
 
@@ -257,7 +259,8 @@ The input files
     name (Na2SO4 solution), and a list of the molecules. It is important
     that the order of the molecules in the topology file
     (here SO4 first, Na second, and SOL (H2O) last)
-    matches the order of the conf.gro file, otherwise GROMACS will throw us an error.
+    matches the order of the conf.gro file, otherwise the simulation
+    will fail.
     
     Create a folder named 'ff/' next to the conf.gro and the topol.top files, and copy
     |forcefield.itp|, |h2o.itp|, |na.itp|, and |so4.itp|
@@ -265,7 +268,6 @@ The input files
     the atoms (names, masses, changes, Lennard-Jones
     coefficients) and residues (bond and angular
     constraints) for all the species that will be involved here.
-
     For instance, the |forcefield.itp| file defines the combination rules 
     that are used:
 
@@ -371,26 +373,33 @@ The input files
     :height: 200
     :class: only-dark
 
+..  container:: justify
+
+    The rest of the tutorial focusses on writing the input files and performing the
+    molecular dynamics simulation. 
+
 Energy minimization
 ===================
 
 ..  container:: justify
 
-    It is clear from the current conf file (see the
-    previous image) that the atoms are currently in a
-    quite unphysical configuration. It would be risky to
+    It is clear from the current configuration file (see the
+    previous image) that the molecules and ions are currently in a
+    quite unphysical configuration (i.e. too regularly aligned). It would be risky to
     directly perform a molecular dynamics simulation;
-    atoms would undergo huge forces, accelerate, and the system would
+    atoms would undergo huge forces, accelerate, and the system could
     eventually explode.
 
     In order to bring the system into a favorable state,
-    let us perform an energy minimization, i.e. let us
-    move the atoms until the forces between them are reasonable.
+    let us perform an energy minimization which
+    consists in moving the atoms until the forces between
+    them are reasonable.
 
     Open a blank file, call it min.mdp, and save it in the
     'inputs/' folder. Copy the following lines into min.mdp:
 
 ..  code-block:: bw
+    :caption: *to be copied in inputs/min.mdp*
 
     integrator = steep
     nsteps = 5000
@@ -398,10 +407,16 @@ Energy minimization
 ..  container:: justify
 
     These commands specify to GROMACS that the algorithm
-    to be used is the speepest-descent, which move the
+    to be used is the |speepest-descent|, which moves the
     atoms following the direction of the largest forces
-    until a stopping criterial is reached. Then, the 'nsteps' command 
+    until one of the stopping criterial is reached. The 'nsteps' command 
     specifies the maximum number of steps to perform.
+
+.. |speepest-descent| raw:: html
+
+    <a href="https://manual.gromacs.org/current/reference-manual/algorithms/energy-minimization.html" target="_blank">speepest-descent</a>
+
+..  container:: justify
 
     As we would like to be able to visualize
     the trajectory of the atoms during the minimization,
@@ -409,6 +424,7 @@ Energy minimization
     file in order to print the atom positions every 10 steps in a .trr trajectory file:
 
 ..  code-block:: bw
+    :caption: *to be copied in inputs/min.mdp*
 
     nstxout = 10
 
@@ -457,13 +473,14 @@ Energy minimization
     that energy minimization has been performed, even
     though the precision that was asked from the default
     parameters was not reached. We can ignore this
-    message. 
+    message, as long as the final energy is large and negative,
+    the simulation will work just fine. 
     
     The final potential energy is large and
     negative, and the maximum force is small: 240
     kJ/mol/nm (about 0.4 pN). Everything seems alright.
     Let us visualize the atoms' trajectories during the
-    minimization step using VMD by typing:
+    minimization step using VMD by typing in the terminal:
 
 ..  code-block:: bash
 
@@ -545,16 +562,16 @@ Minimalist NVT input file
 ..  container:: justify
 
     Let us first perform a small (20 picoseconds)
-    equilibration in the NVT ensemble. For this
-    simulation, the number of atom (N) and volume (V) are
-    maintained fixed, and the temperature (T) is adjusted
-    using a thermostat.
+    equilibration in the NVT ensemble. In the NVT ensemble, the number of
+    atom (N) and volume (V) are maintained fixed, and the
+    temperature (T) is adjusted using a thermostat.
     
     Let use write a new input script
     called nvt.mdp, and save it in the 'inputs/' folder.
     Copy the following lines into it:
 
 ..  code-block:: bw
+    :caption: *to be copied in inputs/nvt.mdp*
 
     integrator = md
     nsteps = 20000
@@ -569,6 +586,7 @@ Minimalist NVT input file
     trajectory in a xtc file every 1 ps by adding:
 
 ..  code-block:: bw
+    :caption: *to be copied in inputs/nvt.mdp*
 
     nstxout-compressed = 1000
 
@@ -580,6 +598,7 @@ Minimalist NVT input file
     term (it is known to give proper canonical ensemble):
 
 ..  code-block:: bw
+    :caption: *to be copied in inputs/nvt.mdp*
 
     tcoupl = v-rescale
     ref-t = 360
@@ -677,6 +696,7 @@ Improved NVT
     of 4, and cut-off of 4:
 
 ..  code-block:: bw
+    :caption: *to be copied in inputs/nvt.mdp*
 
     coulombtype = pme
     fourierspacing = 0.1
@@ -690,6 +710,7 @@ Improved NVT
     Let us also specify the van der Waals interaction:
 
 ..  code-block:: bw
+    :caption: *to be copied in inputs/nvt.mdp*
 
     vdw-type = Cut-off
     rvdw = 1.0
@@ -700,6 +721,7 @@ Improved NVT
     bonds of the water molecules:
 
 ..  code-block:: bw
+    :caption: *to be copied in inputs/nvt.mdp*
 
     constraint-algorithm = lincs
     constraints = hbonds
@@ -707,11 +729,12 @@ Improved NVT
 
 ..  container:: justify
 
-    Let us also perform separate temperature baths (for
-    water and ions (here corresponding to the gromacs group called non-water) respectively)
+    Let us also perform separate temperature baths for
+    water and ions (here corresponding to the gromacs group called non-water) respectively
     by replacing:
 
 ..  code-block:: bw
+    :caption: *to be removed from inputs/nvt.mdp*
 
     tcoupl = v-rescale
     ref-t = 360
@@ -723,6 +746,7 @@ Improved NVT
     by:
 
 ..  code-block:: bw
+    :caption: *to be copied in inputs/nvt.mdp*
 
     tcoupl = v-rescale
     tc-grps = Water non-Water
@@ -734,6 +758,7 @@ Improved NVT
     Let us specify neighbor searching parameters:
 
 ..  code-block:: bw
+    :caption: *to be copied in inputs/nvt.mdp*
 
     cutoff-scheme = Verlet
     nstlist = 10
@@ -745,6 +770,7 @@ Improved NVT
     total velocities give the desired temperature instead of 0):
 
 ..  code-block:: bw
+    :caption: *to be copied in inputs/nvt.mdp*
 
     gen-vel = yes
     gen-temp = 360
@@ -755,6 +781,7 @@ Improved NVT
     velocity of the whose system:
 
 ..  code-block:: bw
+    :caption: *to be copied in inputs/nvt.mdp*
 
     comm_mode = linear
     comm_grps = system
@@ -792,6 +819,7 @@ NPT: adjusting the volume
     copy the following lines in it:
 
 ..  code-block:: bw
+    :caption: *to be copied in inputs/npt.mdp*
 
     integrator = md
     nsteps = 50000
@@ -851,7 +879,9 @@ NPT: adjusting the volume
 
     Let us have a look a both temperature, pressure and
     volume during the NPT step using the 'gmx energy'
-    command:
+    command 3 times:
+
+..  code-block:: bash 
 
     gmx energy -f npt.edr -o Tnpt.xvg
     gmx energy -f npt.edr -o Pnpt.xvg
@@ -902,6 +932,7 @@ Diffusion coefficient measurement
     following lines into it:
 
 ..  code-block:: bw 
+    :caption: *to be copied in inputs/pro.mdp*
 
     integrator = md
     nsteps = 200000
