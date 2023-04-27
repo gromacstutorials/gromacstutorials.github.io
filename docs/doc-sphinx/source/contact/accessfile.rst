@@ -3,4 +3,4 @@ are used in these tutorials from |Github_repository|.
 
 .. |Github_repository| raw:: html
 
-   <a href="https://github.com/lammpstutorials/lammpstutorials.github.io/tree/version2.0/docs/inputs" target="_blank">Github</a>
+   <a href="https://github.com/gromacstutorials/gromacstutorials.github.io/tree/version2.0/docs/inputs" target="_blank">Github</a>
