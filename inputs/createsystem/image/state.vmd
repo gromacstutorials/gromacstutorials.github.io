@@ -12,9 +12,9 @@ proc vmdrestoremymaterials {} {
     }
   }
   material change ambient Opaque 0.000000
-  material change diffuse Opaque 0.520000
-  material change specular Opaque 0.230000
-  material change shininess Opaque 0.390000
+  material change diffuse Opaque 0.620000
+  material change specular Opaque 0.180000
+  material change shininess Opaque 0.410000
   material change mirror Opaque 0.000000
   material change opacity Opaque 1.000000
   material change outline Opaque 0.000000
@@ -25,7 +25,7 @@ proc vmdrestoremymaterials {} {
   material change specular Transparent 0.500000
   material change shininess Transparent 0.534020
   material change mirror Transparent 0.000000
-  material change opacity Transparent 0.150000
+  material change opacity Transparent 0.300000
   material change outline Transparent 0.000000
   material change outlinewidth Transparent 0.000000
   material change transmode Transparent 0.000000
@@ -342,7 +342,7 @@ display dof_fnumber 64.000000
 display dof_focaldist 0.700000
 mol new conf.gro type gro first 0 last -1 step 1 filebonds 1 autobonds 1 waitfor all
 mol delrep 0 top
-mol representation VDW 0.900000 37.000000
+mol representation VDW 1.000000 47.000000
 mol color Name
 mol selection {resid 1}
 mol material Opaque
@@ -376,9 +376,10 @@ mol clipplane center 5 0 top {0.0 0.0 0.0}
 mol clipplane color  5 0 top {0.5 0.5 0.5 }
 mol clipplane normal 5 0 top {0.0 0.0 1.0}
 mol clipplane status 5 0 top {0}
-mol representation VDW 0.800000 57.000000
+mol showrep top 0 0
+mol representation VDW 1.000000 47.000000
 mol color Name
-mol selection {(within 3.8 of resid 1) and name OW}
+mol selection {resid 10}
 mol material Opaque
 mol addrep top
 mol selupdate 1 top 0
@@ -410,9 +411,10 @@ mol clipplane center 5 1 top {0.0 0.0 0.0}
 mol clipplane color  5 1 top {0.5 0.5 0.5 }
 mol clipplane normal 5 1 top {0.0 0.0 1.0}
 mol clipplane status 5 1 top {0}
-mol representation VDW 0.600000 62.000000
+mol showrep top 1 0
+mol representation VDW 0.500000 47.000000
 mol color Name
-mol selection {(within 3.8 of resid 1) and name HW1 HW2}
+mol selection {resid 30 and type HW1 HW2}
 mol material Opaque
 mol addrep top
 mol selupdate 2 top 0
@@ -444,10 +446,10 @@ mol clipplane center 5 2 top {0.0 0.0 0.0}
 mol clipplane color  5 2 top {0.5 0.5 0.5 }
 mol clipplane normal 5 2 top {0.0 0.0 1.0}
 mol clipplane status 5 2 top {0}
-mol representation QuickSurf 0.900000 1.000000 0.500000 3.000000
+mol representation VDW 0.800000 47.000000
 mol color Name
-mol selection {resid 1 or (within 3.8 of resid 1)}
-mol material Transparent
+mol selection {resid 30 and type OW}
+mol material Opaque
 mol addrep top
 mol selupdate 3 top 0
 mol colupdate 3 top 0
@@ -478,11 +480,45 @@ mol clipplane center 5 3 top {0.0 0.0 0.0}
 mol clipplane color  5 3 top {0.5 0.5 0.5 }
 mol clipplane normal 5 3 top {0.0 0.0 1.0}
 mol clipplane status 5 3 top {0}
+mol representation VDW 0.100000 47.000000
+mol color Name
+mol selection {resid 30 and type MW}
+mol material Opaque
+mol addrep top
+mol selupdate 4 top 0
+mol colupdate 4 top 0
+mol scaleminmax top 4 0.000000 0.000000
+mol smoothrep top 4 0
+mol drawframes top 4 {now}
+mol clipplane center 0 4 top {0.0 0.0 0.0}
+mol clipplane color  0 4 top {0.5 0.5 0.5 }
+mol clipplane normal 0 4 top {0.0 0.0 1.0}
+mol clipplane status 0 4 top {0}
+mol clipplane center 1 4 top {0.0 0.0 0.0}
+mol clipplane color  1 4 top {0.5 0.5 0.5 }
+mol clipplane normal 1 4 top {0.0 0.0 1.0}
+mol clipplane status 1 4 top {0}
+mol clipplane center 2 4 top {0.0 0.0 0.0}
+mol clipplane color  2 4 top {0.5 0.5 0.5 }
+mol clipplane normal 2 4 top {0.0 0.0 1.0}
+mol clipplane status 2 4 top {0}
+mol clipplane center 3 4 top {0.0 0.0 0.0}
+mol clipplane color  3 4 top {0.5 0.5 0.5 }
+mol clipplane normal 3 4 top {0.0 0.0 1.0}
+mol clipplane status 3 4 top {0}
+mol clipplane center 4 4 top {0.0 0.0 0.0}
+mol clipplane color  4 4 top {0.5 0.5 0.5 }
+mol clipplane normal 4 4 top {0.0 0.0 1.0}
+mol clipplane status 4 4 top {0}
+mol clipplane center 5 4 top {0.0 0.0 0.0}
+mol clipplane color  5 4 top {0.5 0.5 0.5 }
+mol clipplane normal 5 4 top {0.0 0.0 1.0}
+mol clipplane status 5 4 top {0}
 mol rename top conf.gro
-set viewpoints([molinfo top]) {{{1 0 0 -14.3302} {0 1 0 -16.0654} {0 0 1 -25.5175} {0 0 0 1}} {{-0.242671 0.717169 0.653291 0} {0.709134 0.590677 -0.385011 0} {-0.661998 0.369838 -0.651909 0} {0 0 0 1}} {{0.0306561 0 0 0} {0 0.0306561 0 0} {0 0 0.0306561 0} {0 0 0 1}} {{1 0 0 0.01} {0 1 0 2.42144e-08} {0 0 1 0} {0 0 0 1}}}
+set viewpoints([molinfo top]) {{{1 0 0 -1.72} {0 1 0 -4.2} {0 0 1 -4.2} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}} {{0.110063 0 0 0} {0 0.110063 0 0} {0 0 0.110063 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}}}
 lappend viewplist [molinfo top]
 set topmol [molinfo top]
-# done with molecule 1
+# done with molecule 0
 foreach v $viewplist {
   molinfo $v set {center_matrix rotate_matrix scale_matrix global_matrix} $viewpoints($v)
 }
@@ -625,12 +661,11 @@ color scale colors WBlk {1.0 1.0 1.0} {0.5 0.5 0.5} {0.0 0.0 0.0}
     {color Element {Zr} ochre}
     {color Resname {SO4} silver}
     {color Resname {Na} green}
+    {color Resname {Sol} white}
     {color Chain {X} blue}
     {color Segname {} blue}
     {color Conformation {all} blue}
     {color Molecule {0} blue}
-    {color Molecule {1} red}
-    {color Molecule {conf.gro} red}
     {color Structure {3_10_Helix} blue}
     {color Surface {Grasp} gray}
     {color Labels {Springs} orange}
