@@ -36,7 +36,7 @@ Input files
 
 .. |BIPQ_allatom_optimised_geometry.pdb| raw:: html
 
-    <a href="../../../../inputs/03-EthanolAdsorption/preparation/BIPQ_allatom_optimised_geometry.pdb" target="_blank">BIPQ_allatom_optimised_geometry.pdb</a>
+    <a href="../../../../inputs/ethanoladsorption/preparation/BIPQ_allatom_optimised_geometry.pdb" target="_blank">BIPQ_allatom_optimised_geometry.pdb</a>
 
 Create the configuration file
 -----------------------------
@@ -97,7 +97,7 @@ Create the topology file
     From the `same atb
     page <https://atb.uq.edu.au/molecule.py?molid=902261#panel-md>`__,
     copy the `'GROMACS G54A7FF All-Atom (ITP
-    file)' <https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/03-EthanolAdsorption/preparation/ff/BIPQ_GROMACS_G54A7FF_allatom.itp>`__
+    file)' <https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/main/inputs/ethanoladsorption/preparation/ff/BIPQ_GROMACS_G54A7FF_allatom.itp>`__
     and place it in a folder named 'ff/' and located
     within the 'preparation/' folder. Within 'ff/',
     download as well the GROMACS top file named `Gromacs
@@ -111,7 +111,7 @@ Create the topology file
 
 .. |ethanol-h2o.itp| raw:: html
 
-    <a href="../../../../inputs/03-EthanolAdsorption/preparation/ff/h2o.itp" target="_blank">h2o.itp</a>
+    <a href="../../../../inputs/ethanoladsorption/preparation/ff/h2o.itp" target="_blank">h2o.itp</a>
 
 ..  code-block:: bash
 
@@ -139,7 +139,7 @@ Add the water
 
 .. |ethanol-tip4p.gro| raw:: html
 
-    <a href="../../../../inputs/03-EthanolAdsorption/preparation/tip4p.gro" target="_blank">here</a>
+    <a href="../../../../inputs/ethanoladsorption/preparation/tip4p.gro" target="_blank">here</a>
 
 ..  code-block:: bash
 
@@ -189,7 +189,7 @@ Add the water
 
 .. |ethanol-solvated_vacuum| raw:: html
 
-    <a href="../../../../inputs/03-EthanolAdsorption/preparation/solvated_vacuum.gro" target="_blank">here</a>
+    <a href="../../../../inputs/ethanoladsorption/preparation/solvated_vacuum.gro" target="_blank">here</a>
 
 Energy minimization
 ===================
@@ -202,11 +202,11 @@ Energy minimization
 
 .. |ethanol-min.mdp| raw:: html
 
-    <a href="../../../../inputs/03-EthanolAdsorption/preparation/inputs/min.mdp" target="_blank">min.mdp</a>
+    <a href="../../../../inputs/ethanoladsorption/preparation/inputs/min.mdp" target="_blank">min.mdp</a>
 
 .. |ethanol-nvt.mdp| raw:: html
 
-    <a href="../../../../inputs/03-EthanolAdsorption/preparation/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
+    <a href="../../../../inputs/ethanoladsorption/preparation/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
 
 ..  container:: justify
 
@@ -296,7 +296,7 @@ Equilibration
 
 .. |ethanol-nvt_1ns.gro| raw:: html
 
-    <a href="../../../../inputs/03-EthanolAdsorption/preparation/nvt_1ns.gro" target="_blank">here</a>
+    <a href="../../../../inputs/ethanoladsorption/preparation/nvt_1ns.gro" target="_blank">here</a>
 
 ..  container:: justify
 
@@ -335,15 +335,15 @@ Imposed forcing
 
 .. |ethanol-min.mdp-2| raw:: html
 
-    <a href="../../../../inputs/03-EthanolAdsorption/singleposition/inputs/min.mdp" target="_blank">min.mdp</a>
+    <a href="../../../../inputs/ethanoladsorption/singleposition/inputs/min.mdp" target="_blank">min.mdp</a>
 
 .. |ethanol-nvt.mdp-2| raw:: html
 
-    <a href="../../../../inputs/03-EthanolAdsorption/singleposition/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
+    <a href="../../../../inputs/ethanoladsorption/singleposition/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
 
 .. |ethanol-pro.mdp-2| raw:: html
 
-    <a href="../../../../inputs/03-EthanolAdsorption/singleposition/inputs/pro.mdp" target="_blank">pro.mdp</a>
+    <a href="../../../../inputs/ethanoladsorption/singleposition/inputs/pro.mdp" target="_blank">pro.mdp</a>
 
 ..  container:: justify
 
@@ -506,15 +506,15 @@ Free energy profile calculation
 
 .. |ethanol-min.mdp-3| raw:: html
 
-    <a href="../../../../inputs/03-EthanolAdsorption/adsorption/inputs/min.mdp" target="_blank">min.mdp</a>
+    <a href="../../../../inputs/ethanoladsorption/adsorption/inputs/min.mdp" target="_blank">min.mdp</a>
 
 .. |ethanol-nvt.mdp-3| raw:: html
 
-    <a href="../../../../inputs/03-EthanolAdsorption/adsorption/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
+    <a href="../../../../inputs/ethanoladsorption/adsorption/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
 
 .. |ethanol-pro.mdp-3| raw:: html
 
-    <a href="../../../../inputs/03-EthanolAdsorption/adsorption/inputs/pro.mdp" target="_blank">pro.mdp</a>
+    <a href="../../../../inputs/ethanoladsorption/adsorption/inputs/pro.mdp" target="_blank">pro.mdp</a>
 
 ..  code-block:: bash
 
