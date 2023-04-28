@@ -273,36 +273,40 @@ box-size (x3)
 
 <span class="c1"># define SO4 ion</span>
 <span class="k">def</span> <span class="nf">SO4_ion</span><span class="p">():</span>
-    <span class="n">Position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.238</span><span class="p">,</span>   <span class="mf">0.587</span><span class="p">,</span>   <span class="mf">1.119</span><span class="p">],</span> \
-        <span class="p">[</span><span class="mf">0.778</span><span class="p">,</span>   <span class="mf">1.501</span><span class="p">,</span>  <span class="o">-</span><span class="mf">1.263</span><span class="p">],</span> \
-        <span class="p">[</span><span class="o">-</span><span class="mf">0.962</span><span class="p">,</span>   <span class="mf">1.866</span><span class="p">,</span>   <span class="mf">0.623</span><span class="p">],</span> \
-        <span class="p">[</span><span class="o">-</span><span class="mf">0.592</span><span class="p">,</span>  <span class="o">-</span><span class="mf">0.506</span><span class="p">,</span>  <span class="o">-</span><span class="mf">0.358</span><span class="p">],</span>\
-        <span class="p">[</span><span class="mf">0.115</span><span class="p">,</span>   <span class="mf">0.862</span><span class="p">,</span>   <span class="mf">0.030</span><span class="p">]])</span>
-    <span class="n">Type</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;O1&#39;</span><span class="p">,</span> <span class="s1">&#39;O2&#39;</span><span class="p">,</span> <span class="s1">&#39;O3&#39;</span><span class="p">,</span> <span class="s1">&#39;O4&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">]</span>
+    <span class="n">Position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.1238</span><span class="p">,</span>  <span class="mf">0.0587</span><span class="p">,</span>   <span class="mf">0.1119</span><span class="p">],</span> \
+        <span class="p">[</span><span class="mf">0.0778</span><span class="p">,</span>   <span class="mf">0.1501</span><span class="p">,</span>  <span class="o">-</span><span class="mf">0.1263</span><span class="p">],</span> \
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.0962</span><span class="p">,</span>   <span class="mf">0.1866</span><span class="p">,</span>   <span class="mf">0.0623</span><span class="p">],</span> \
+        <span class="p">[</span><span class="o">-</span><span class="mf">0.0592</span><span class="p">,</span>  <span class="o">-</span><span class="mf">0.0506</span><span class="p">,</span>  <span class="o">-</span><span class="mf">0.0358</span><span class="p">],</span>\
+        <span class="p">[</span><span class="mf">0.0115</span><span class="p">,</span>   <span class="mf">0.0862</span><span class="p">,</span>   <span class="mf">0.0030</span><span class="p">]])</span>
+    <span class="n">Type</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;OS&#39;</span><span class="p">,</span> <span class="s1">&#39;OS&#39;</span><span class="p">,</span> <span class="s1">&#39;OS&#39;</span><span class="p">,</span> <span class="s1">&#39;OS&#39;</span><span class="p">,</span> <span class="s1">&#39;SO&#39;</span><span class="p">]</span>
+    <span class="n">Name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;O1&#39;</span><span class="p">,</span> <span class="s1">&#39;O2&#39;</span><span class="p">,</span> <span class="s1">&#39;O3&#39;</span><span class="p">,</span> <span class="s1">&#39;O4&#39;</span><span class="p">,</span> <span class="s1">&#39;S1&#39;</span><span class="p">]</span>
     <span class="n">Resname</span> <span class="o">=</span> <span class="s1">&#39;SO4&#39;</span>
-    <span class="k">return</span> <span class="n">Position</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Resname</span>
+    <span class="k">return</span> <span class="n">Position</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Resname</span><span class="p">,</span> <span class="n">Name</span>
 
 <span class="c1"># define Na ion</span>
 <span class="k">def</span> <span class="nf">Na_ion</span><span class="p">():</span>
     <span class="n">Position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span>
     <span class="n">Type</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Na&#39;</span><span class="p">]</span>
+    <span class="n">Name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Na1&#39;</span><span class="p">]</span>
     <span class="n">Resname</span> <span class="o">=</span> <span class="s1">&#39;Na&#39;</span>
-    <span class="k">return</span> <span class="n">Position</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Resname</span>
+    <span class="k">return</span> <span class="n">Position</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Resname</span><span class="p">,</span> <span class="n">Name</span>
 
+<span class="c1"># define water molecule</span>
 <span class="k">def</span> <span class="nf">H20_molecule</span><span class="p">():</span>
     <span class="n">Position</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span> <span class="mf">0.</span>    <span class="p">,</span>  <span class="mf">0.</span>    <span class="p">,</span>  <span class="mf">0.</span>    <span class="p">],</span> \
-        <span class="p">[</span> <span class="mf">0.5858</span><span class="p">,</span>  <span class="mf">0.757</span> <span class="p">,</span>  <span class="mf">0.</span>    <span class="p">],</span> \
-        <span class="p">[</span> <span class="mf">0.5858</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.757</span> <span class="p">,</span>  <span class="mf">0.</span>    <span class="p">],</span> \
-        <span class="p">[</span> <span class="mf">0.104</span> <span class="p">,</span>  <span class="mf">0.</span>    <span class="p">,</span>  <span class="mf">0.</span>    <span class="p">]])</span>
-    <span class="n">Type</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;OW&#39;</span><span class="p">,</span> <span class="s1">&#39;HW1&#39;</span><span class="p">,</span> <span class="s1">&#39;HW2&#39;</span><span class="p">,</span> <span class="s1">&#39;MW&#39;</span><span class="p">]</span>
+        <span class="p">[</span> <span class="mf">0.05858</span><span class="p">,</span>  <span class="mf">0.0757</span> <span class="p">,</span>  <span class="mf">0.</span>    <span class="p">],</span> \
+        <span class="p">[</span> <span class="mf">0.05858</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.0757</span> <span class="p">,</span>  <span class="mf">0.</span>    <span class="p">],</span> \
+        <span class="p">[</span> <span class="mf">0.0104</span> <span class="p">,</span>  <span class="mf">0.</span>    <span class="p">,</span>  <span class="mf">0.</span>    <span class="p">]])</span>
+    <span class="n">Type</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;OW&#39;</span><span class="p">,</span> <span class="s1">&#39;HW&#39;</span><span class="p">,</span> <span class="s1">&#39;HW&#39;</span><span class="p">,</span> <span class="s1">&#39;MW&#39;</span><span class="p">]</span>
+    <span class="n">Name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;OW1&#39;</span><span class="p">,</span> <span class="s1">&#39;HW1&#39;</span><span class="p">,</span> <span class="s1">&#39;HW2&#39;</span><span class="p">,</span> <span class="s1">&#39;MW1&#39;</span><span class="p">]</span>
     <span class="n">Resname</span> <span class="o">=</span> <span class="s1">&#39;Sol&#39;</span>
-    <span class="k">return</span> <span class="n">Position</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Resname</span>
+    <span class="k">return</span> <span class="n">Position</span><span class="p">,</span> <span class="n">Type</span><span class="p">,</span> <span class="n">Resname</span><span class="p">,</span> <span class="n">Name</span>
 </pre></div>
 </div>
 </div>
 <div class="justify docutils container">
-<p>Each residue, namely SO4_ion(), Na_ion(), and H20_molecule(), contains
-the positions and type of all the atoms, as well as the name of the residue.
+<p>Each function corresponds to a residue, and contains
+the positions, type, and name of all the atoms, as well as the name of the residue.
 These function will be called every time we will need to place a residue in
 our system.</p>
 <p>The sulfide (<span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span>), sodium (<span class="math notranslate nohighlight">\(\text{Na}^{+}\)</span>) and water
@@ -319,6 +323,31 @@ sulfur atom in yellow. The fourth point (MW) of the water molecule is not
 visible.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+</section>
+<section id="preparing-the-system">
+<h2>Preparing the system<a class="headerlink" href="#preparing-the-system" title="Permalink to this heading">#</a></h2>
+<div class="justify docutils container">
+<p>We first need to define the basic parameters, such as
+the number of residue we want, or the box size, and
+initialize some lists and counters.</p>
+<p>Next to <em>molecule.py</em>, create a nez Python file called
+<em>generategro.py</em>, and copy the following lines into it:</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id3" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">molecules</span> <span class="kn">import</span> <span class="n">SO4_ion</span><span class="p">,</span> <span class="n">Na_ion</span><span class="p">,</span> <span class="n">H20_molecule</span>
+
+<span class="c1"># define the box size</span>
+<span class="n">Lx</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="n">Lz</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.6</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span>
+<span class="n">box</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Lx</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="n">Lz</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="justify docutils container">
+<p>Here box is an array containing the box size along all 3 coordinates of space,
+respectively Lx, Ly, and Lz. Here a cubic box of lateral dimension 3.6 nm is used.</p>
+</div>
 <div class="mail admonition">
 <p class="admonition-title">Contact me</p>
 <p><a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> me if you have any question or suggestion about these tutorials.</p>
@@ -380,6 +409,7 @@ visible.</span><a class="headerlink" href="#id2" title="Permalink to this image"
 <li><a class="reference internal" href="#">Create topology</a><ul>
 <li><a class="reference internal" href="#what-is-a-gro-file">What is a .gro file?</a></li>
 <li><a class="reference internal" href="#molecule-ions-definitions">Molecule/ions definitions</a></li>
+<li><a class="reference internal" href="#preparing-the-system">Preparing the system</a></li>
 </ul>
 </li>
 </ul>

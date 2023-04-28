@@ -2,19 +2,15 @@
 import numpy as np
 from numpy.linalg import norm
 
-def generate_random_location(Lx, Ly, Lz):
-    """
-    generate a random location within a given box
-    """  
-    x = np.random.rand()*Lx
-    y = np.random.rand()*Ly
-    z = np.random.rand()*Lz
-    return x, y, z
+def generate_random_location(box):
+    """Generate a random location within a given box."""  
+    return np.random.rand(3)*box
 
 def search_closest_neighbor(XYZ_neighbor, XYZ_molecule, box):
-    """
-        Search neighbor in a box and return the closest distance with a molecule
-        Periodic boundary conditions are automatically accounted
+    """Search neighbor in a box and return the closest distance.
+        
+    If the neighbor list is empty, then the box size is returned.
+    Periodic boundary conditions are automatically accounted
     """
     if len(np.array(XYZ_neighbor)) == 0:
         min_distance = np.max(box)
