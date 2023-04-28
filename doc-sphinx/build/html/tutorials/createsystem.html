@@ -236,9 +236,9 @@
 <p>The objective of this tutorial is to write a
 simple topology file using python, by placing
 molecules and ions in an empty box.</p>
-<p>The topology file will be used in ref:<cite>bulk-solution-label</cite>.
+<p>The topology file will be used in <a class="reference internal" href="bulksolution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a>.
 If you are only interested in learning GROMACS, jump directly
-in ref:<cite>bulk-solution-label</cite>.</p>
+in <a class="reference internal" href="bulksolution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a>.</p>
 </div>
 <div class="patreon admonition">
 <p class="admonition-title">Looking for help with your project?</p>
@@ -324,8 +324,8 @@ visible.</span><a class="headerlink" href="#id2" title="Permalink to this image"
 </figcaption>
 </figure>
 </section>
-<section id="preparing-the-system">
-<h2>Preparing the system<a class="headerlink" href="#preparing-the-system" title="Permalink to this heading">#</a></h2>
+<section id="creating-the-gro-file">
+<h2>Creating the gro file<a class="headerlink" href="#creating-the-gro-file" title="Permalink to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>We first need to define the basic parameters, such as
 the number of residue we want, or the box size, and
@@ -339,7 +339,7 @@ initialize some lists and counters.</p>
 <span class="kn">from</span> <span class="nn">molecules</span> <span class="kn">import</span> <span class="n">SO4_ion</span><span class="p">,</span> <span class="n">Na_ion</span><span class="p">,</span> <span class="n">H20_molecule</span>
 
 <span class="c1"># define the box size</span>
-<span class="n">Lx</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="n">Lz</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.6</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span>
+<span class="n">Lx</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="n">Lz</span> <span class="o">=</span> <span class="p">[</span><span class="mf">3.36</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span>
 <span class="n">box</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">Lx</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="n">Lz</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -347,6 +347,284 @@ initialize some lists and counters.</p>
 <div class="justify docutils container">
 <p>Here box is an array containing the box size along all 3 coordinates of space,
 respectively Lx, Ly, and Lz. Here a cubic box of lateral dimension 3.6 nm is used.</p>
+<p>Now, let us choose a salt concentration, and calculate the number of ions and water molecules
+accordingly, while also choosing the total number of residue (here I call residue
+either a molecule or an ion):</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id4" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Mh2o</span> <span class="o">=</span> <span class="mf">0.018053</span> <span class="c1"># kg/mol - water</span>
+<span class="n">ntotal</span> <span class="o">=</span> <span class="mi">720</span> <span class="c1"># total number of molecule</span>
+<span class="n">c</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="c1"># desired concentration in mol/L</span>
+<span class="n">nion</span> <span class="o">=</span> <span class="n">c</span><span class="o">*</span><span class="n">ntotal</span><span class="o">*</span><span class="n">Mh2o</span><span class="o">/</span><span class="p">(</span><span class="mi">3</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">Mh2o</span><span class="o">*</span><span class="n">c</span><span class="p">))</span> <span class="c1"># desired number for the SO4 ion</span>
+<span class="n">nwater</span> <span class="o">=</span> <span class="n">ntotal</span> <span class="o">-</span> <span class="mi">3</span><span class="o">*</span><span class="n">nion</span> <span class="c1"># desired number of water</span>
+</pre></div>
+</div>
+</div>
+<div class="justify docutils container">
+<p>Let us also choose typical cutoff distances for each species. These
+cutoffs will be used to ensure that no species are inserted too close
+from one another:</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id5" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dSO4</span> <span class="o">=</span> <span class="mf">0.45</span>
+<span class="n">dNa</span> <span class="o">=</span> <span class="mf">0.28</span>
+<span class="n">dSol</span> <span class="o">=</span> <span class="mf">0.28</span>
+</pre></div>
+</div>
+</div>
+<div class="justify docutils container">
+<p>Let us initialized counters and lists for storing
+all the necessary data:</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id6" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cpt_residue</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">cpt_atoms</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">cpt_SO4</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">cpt_Na</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">cpt_Sol</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">all_positions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_resnum</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_resname</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_atname</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">all_attype</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+<div class="justify docutils container">
+<p>Let us add a number <em>nion</em> of <span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span> ions at random locations.
+To avoid overlap, let us only insert ion if no other ions is located at
+a distance closer than <em>dSO4</em>:</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id7" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># add SO4 randomly</span>
+<span class="n">atpositions</span><span class="p">,</span> <span class="n">attypes</span><span class="p">,</span> <span class="n">resname</span><span class="p">,</span> <span class="n">atnames</span> <span class="o">=</span> <span class="n">SO4_ion</span><span class="p">()</span>
+<span class="k">while</span> <span class="n">cpt_SO4</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">nion</span><span class="p">):</span>
+    <span class="n">x_com</span><span class="p">,</span> <span class="n">y_com</span><span class="p">,</span> <span class="n">z_com</span> <span class="o">=</span> <span class="n">generate_random_location</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">search_closest_neighbor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_positions</span><span class="p">),</span> <span class="n">atpositions</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x_com</span><span class="p">,</span> <span class="n">y_com</span><span class="p">,</span> <span class="n">z_com</span><span class="p">]),</span> <span class="n">box</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="n">dSO4</span><span class="p">:</span>
+        <span class="n">add_residue</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">add_residue</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">add_residue</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">cpt_SO4</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">cpt_residue</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">atposition</span><span class="p">,</span> <span class="n">attype</span><span class="p">,</span> <span class="n">atname</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">atpositions</span><span class="p">,</span> <span class="n">attypes</span><span class="p">,</span> <span class="n">atnames</span><span class="p">):</span>
+            <span class="n">cpt_atoms</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">x_at</span><span class="p">,</span> <span class="n">y_at</span><span class="p">,</span> <span class="n">z_at</span> <span class="o">=</span> <span class="n">atposition</span>
+            <span class="n">all_positions</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">x_com</span><span class="o">+</span><span class="n">x_at</span><span class="p">,</span> <span class="n">y_com</span><span class="o">+</span><span class="n">y_at</span><span class="p">,</span> <span class="n">z_com</span><span class="o">+</span><span class="n">z_at</span><span class="p">])</span>
+            <span class="n">all_resnum</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cpt_residue</span><span class="p">)</span>
+            <span class="n">all_resname</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resname</span><span class="p">)</span>
+            <span class="n">all_atname</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atname</span><span class="p">)</span>
+            <span class="n">all_attype</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attype</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="justify docutils container">
+<p>Here, two functions are used: <em>generate_random_location</em> and <em>search_closest_neighbor</em>.
+Let us define those two functions. Create a new Python script, call it <em>utils.py</em>,
+and copy the following lines in it:</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in utils.py</em></span><a class="headerlink" href="#id8" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="k">def</span> <span class="nf">generate_random_location</span><span class="p">(</span><span class="n">box</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate a random location within a given box.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="n">box</span>
+
+<span class="k">def</span> <span class="nf">search_closest_neighbor</span><span class="p">(</span><span class="n">XYZ_neighbor</span><span class="p">,</span> <span class="n">XYZ_molecule</span><span class="p">,</span> <span class="n">box</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Search neighbor in a box and return the closest distance.</span>
+
+<span class="sd">    If the neighbor list is empty, then the box size is returned.</span>
+<span class="sd">    Periodic boundary conditions are automatically accounted</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">XYZ_neighbor</span><span class="p">))</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">min_distance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">min_distance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">XYZ_atom</span> <span class="ow">in</span> <span class="n">XYZ_molecule</span><span class="p">:</span>
+            <span class="n">dxdydz</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">remainder</span><span class="p">(</span><span class="n">XYZ_neighbor</span> <span class="o">-</span> <span class="n">XYZ_atom</span> <span class="o">+</span> <span class="n">box</span><span class="o">/</span><span class="mf">2.</span><span class="p">,</span> <span class="n">box</span><span class="p">)</span> <span class="o">-</span> <span class="n">box</span><span class="o">/</span><span class="mf">2.</span>
+            <span class="n">min_distance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">([</span><span class="n">min_distance</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">norm</span><span class="p">(</span><span class="n">dxdydz</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))])</span>
+    <span class="k">return</span> <span class="n">min_distance</span>
+</pre></div>
+</div>
+</div>
+<div class="justify docutils container">
+<p>The <em>generate_random_location</em> function simply generates 3 random values
+within the box. The <em>search_closest_neighbor</em> looks for the minimum distance
+between existing atoms (if any) and the new residue.</p>
+<p>Let us do the same for the <span class="math notranslate nohighlight">\(\text{Na}^{+}\)</span> ion :</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id9" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># add Na randomly</span>
+<span class="n">atpositions</span><span class="p">,</span> <span class="n">attypes</span><span class="p">,</span> <span class="n">resname</span><span class="p">,</span> <span class="n">atnames</span> <span class="o">=</span> <span class="n">Na_ion</span><span class="p">()</span>
+<span class="k">while</span> <span class="n">cpt_Na</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">nion</span><span class="o">*</span><span class="mi">2</span><span class="p">):</span>
+    <span class="n">x_com</span><span class="p">,</span> <span class="n">y_com</span><span class="p">,</span> <span class="n">z_com</span> <span class="o">=</span> <span class="n">generate_random_location</span><span class="p">(</span><span class="n">box</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">search_closest_neighbor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_positions</span><span class="p">),</span> <span class="n">atpositions</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x_com</span><span class="p">,</span> <span class="n">y_com</span><span class="p">,</span> <span class="n">z_com</span><span class="p">]),</span> <span class="n">box</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="n">dNa</span><span class="p">:</span>
+        <span class="n">add_residue</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">add_residue</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">add_residue</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">cpt_Na</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">cpt_residue</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">for</span> <span class="n">atposition</span><span class="p">,</span> <span class="n">attype</span><span class="p">,</span> <span class="n">atname</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">atpositions</span><span class="p">,</span> <span class="n">attypes</span><span class="p">,</span> <span class="n">atnames</span><span class="p">):</span>
+            <span class="n">cpt_atoms</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">x_at</span><span class="p">,</span> <span class="n">y_at</span><span class="p">,</span> <span class="n">z_at</span> <span class="o">=</span> <span class="n">atposition</span>
+            <span class="n">all_positions</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">x_com</span><span class="o">+</span><span class="n">x_at</span><span class="p">,</span> <span class="n">y_com</span><span class="o">+</span><span class="n">y_at</span><span class="p">,</span> <span class="n">z_com</span><span class="o">+</span><span class="n">z_at</span><span class="p">])</span>
+            <span class="n">all_resnum</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cpt_residue</span><span class="p">)</span>
+            <span class="n">all_resname</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resname</span><span class="p">)</span>
+            <span class="n">all_atname</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atname</span><span class="p">)</span>
+            <span class="n">all_attype</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attype</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="justify docutils container">
+<p>Let us also insert water molecules on a 3D regular grid with
+spacing of <em>dSol</em> (only if no overlap exists):</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id10" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># add water randomly</span>
+<span class="n">atpositions</span><span class="p">,</span> <span class="n">attypes</span><span class="p">,</span> <span class="n">resname</span><span class="p">,</span> <span class="n">atnames</span> <span class="o">=</span> <span class="n">H20_molecule</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">x_com</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dSol</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">Lx</span><span class="p">,</span> <span class="n">dSol</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">y_com</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dSol</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">Ly</span><span class="p">,</span> <span class="n">dSol</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">z_com</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dSol</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">Lz</span><span class="p">,</span> <span class="n">dSol</span><span class="p">):</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">search_closest_neighbor</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">all_positions</span><span class="p">),</span> <span class="n">atpositions</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x_com</span><span class="p">,</span> <span class="n">y_com</span><span class="p">,</span> <span class="n">z_com</span><span class="p">]),</span> <span class="n">box</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="n">dSol</span><span class="p">:</span>
+                <span class="n">add_residue</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">add_residue</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">add_residue</span> <span class="o">==</span> <span class="kc">True</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">cpt_Sol</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">nwater</span><span class="p">)):</span>
+                <span class="n">cpt_Sol</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">cpt_residue</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">for</span> <span class="n">atposition</span><span class="p">,</span> <span class="n">attype</span><span class="p">,</span> <span class="n">atname</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">atpositions</span><span class="p">,</span> <span class="n">attypes</span><span class="p">,</span> <span class="n">atnames</span><span class="p">):</span>
+                    <span class="n">cpt_atoms</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">x_at</span><span class="p">,</span> <span class="n">y_at</span><span class="p">,</span> <span class="n">z_at</span> <span class="o">=</span> <span class="n">atposition</span>
+                    <span class="n">all_positions</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">x_com</span><span class="o">+</span><span class="n">x_at</span><span class="p">,</span> <span class="n">y_com</span><span class="o">+</span><span class="n">y_at</span><span class="p">,</span> <span class="n">z_com</span><span class="o">+</span><span class="n">z_at</span><span class="p">])</span>
+                    <span class="n">all_resnum</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cpt_residue</span><span class="p">)</span>
+                    <span class="n">all_resname</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resname</span><span class="p">)</span>
+                    <span class="n">all_atname</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atname</span><span class="p">)</span>
+                    <span class="n">all_attype</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">attype</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">cpt_Sol</span> <span class="o">&gt;=</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">nwater</span><span class="p">):</span>
+                <span class="k">break</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cpt_Sol</span><span class="p">,</span> <span class="s1">&#39;out of&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">nwater</span><span class="p">),</span> <span class="s1">&#39;water molecules created&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="justify docutils container">
+<p>Let us ask Python to print a few information such as the
+actual concentration:</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id11">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id11" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Lx = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">Lx</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; nm, Ly = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">Ly</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; nm, Lz = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">Lz</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; nm&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cpt_Na</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; Na ions&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cpt_SO4</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; SO4 ions&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cpt_Sol</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; Sol mols&#39;</span><span class="p">)</span>
+<span class="n">Vwater</span> <span class="o">=</span> <span class="n">cpt_Sol</span><span class="o">/</span><span class="mf">6.022e23</span><span class="o">*</span><span class="mf">0.018</span> <span class="c1"># kg or litter</span>
+<span class="n">Naddion</span> <span class="o">=</span> <span class="p">(</span><span class="n">cpt_Na</span><span class="o">+</span><span class="n">cpt_SO4</span><span class="p">)</span><span class="o">/</span><span class="mf">6.022e23</span> <span class="c1"># mol</span>
+<span class="n">cion</span> <span class="o">=</span> <span class="n">Naddion</span><span class="o">/</span><span class="n">Vwater</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;The ion concentration is &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">cion</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39; mol per litter&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="justify docutils container">
+<p>Finally, let us write the configuration (.gro) file:</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id12">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id12" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># write conf.gro</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;conf.gro&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Na2SO4 solution</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cpt_atoms</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">cpt</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">resnum</span><span class="p">,</span> <span class="n">resname</span><span class="p">,</span> <span class="n">attype</span><span class="p">,</span> <span class="n">position</span>  <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">all_resnum</span><span class="p">,</span> <span class="n">all_resname</span><span class="p">,</span> <span class="n">all_attype</span><span class="p">,</span> <span class="n">all_positions</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span> <span class="o">=</span> <span class="n">position</span>
+    <span class="n">cpt</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{: &gt;5}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">resnum</span><span class="p">)))</span> <span class="c1"># residue number (5 positions, integer)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{: &gt;5}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">resname</span><span class="p">))</span> <span class="c1"># residue name (5 characters)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{: &gt;5}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">attype</span><span class="p">))</span> <span class="c1"># atom name (5 characters)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{: &gt;5}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cpt</span><span class="p">)))</span> <span class="c1"># atom number (5 positions, integer)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{: &gt;8}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))))</span> <span class="c1"># position (in nm, x y z in 3 columns, each 8 positions with 3 decimal places)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{: &gt;8}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y</span><span class="p">))))</span> <span class="c1"># position (in nm, x y z in 3 columns, each 8 positions with 3 decimal places)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{: &gt;8}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.3f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">z</span><span class="p">))))</span> <span class="c1"># position (in nm, x y z in 3 columns, each 8 positions with 3 decimal places)</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{: &gt;10}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.5f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Lx</span><span class="p">))))</span> <span class="c1"># box size</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{: &gt;10}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.5f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Ly</span><span class="p">))))</span> <span class="c1"># box size</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{: &gt;10}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{:.5f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Lz</span><span class="p">))))</span> <span class="c1"># box size</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="creating-the-top-file">
+<h2>Creating the top file<a class="headerlink" href="#creating-the-top-file" title="Permalink to this heading">#</a></h2>
+<div class="justify docutils container">
+<p>Gromacs needs a topology file containing both
+force field information and number of residue,
+let us create it from the same Python script:</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id13">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id13" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># write topol.top</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;topol.top&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#include &quot;ff/forcefield.itp&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#include &quot;ff/h2o.itp&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#include &quot;ff/na.itp&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#include &quot;ff/so4.itp&quot;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[ System ]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Na2SO4 solution</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[ Molecules ]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SO4 &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cpt_SO4</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Na &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cpt_Na</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SOL &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cpt_Sol</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="final-system">
+<h2>Final system<a class="headerlink" href="#final-system" title="Permalink to this heading">#</a></h2>
+<div class="justify docutils container">
+<p>Run the <em>generategro.py</em> file using Python.
+I see the following in the terminal:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>701 out of 701 water molecules created
+Lx = 3.36 nm, Ly = 3.36 nm, Lz = 3.36 nm
+12 Na ions
+6 SO4 ions
+701 Sol mols
+The ion concentration is 1.43 mol per litter
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>You can look at the final system by typing in a terminal:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>conf.gro
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="Gromacs tutorial - generated topology" class="only-light" src="../_images/system-light.png" />
+</figure>
+<figure class="align-default" id="id14">
+<img alt="Gromacs tutorial - generated topology" class="only-dark" src="../_images/system-dark.png" />
+<figcaption>
+<p><span class="caption-text">The primary system is located within the blue box. The replicated periodic
+images are also represented.</span><a class="headerlink" href="#id14" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="justify docutils container">
+<p>Note that there is some vacuum left in the box. Its not a big problem and
+the initial configuration we created is good enough.
+To use the configuration and topology file, go to <a class="reference internal" href="bulksolution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a>.</p>
 </div>
 <div class="mail admonition">
 <p class="admonition-title">Contact me</p>
@@ -409,7 +687,9 @@ respectively Lx, Ly, and Lz. Here a cubic box of lateral dimension 3.6 nm is use
 <li><a class="reference internal" href="#">Create topology</a><ul>
 <li><a class="reference internal" href="#what-is-a-gro-file">What is a .gro file?</a></li>
 <li><a class="reference internal" href="#molecule-ions-definitions">Molecule/ions definitions</a></li>
-<li><a class="reference internal" href="#preparing-the-system">Preparing the system</a></li>
+<li><a class="reference internal" href="#creating-the-gro-file">Creating the gro file</a></li>
+<li><a class="reference internal" href="#creating-the-top-file">Creating the top file</a></li>
+<li><a class="reference internal" href="#final-system">Final system</a></li>
 </ul>
 </li>
 </ul>
