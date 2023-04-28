@@ -4,10 +4,10 @@ SOL   2
 
 [ atoms ]
 ; id  at type     res nr  res name  at name  cg nr  charge    mass
-  1   OW	  1       SOL       OW       1       0        15.9994
+  1   OW	  1       SOL       OW1       1      0        15.9994
   2   HW          1       SOL       HW1      1       0.527     1.0079
   3   HW          1       SOL       HW2      1       0.527     1.0079
-  4   MW          1       SOL       MW       1      -1.054     0.0000
+  4   MW          1       SOL       MW1       1     -1.054     0.0000
 
 [ settles ]
 ; i funct doh dhh

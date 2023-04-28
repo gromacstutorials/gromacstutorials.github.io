@@ -115,12 +115,12 @@ f = open('conf.gro', 'w')
 f.write('Na2SO4 solution\n')
 f.write(str(cpt_atoms)+'\n')
 cpt = 0
-for resnum, resname, attype, position  in zip(all_resnum, all_resname, all_attype, all_positions):
+for resnum, resname, atname, position  in zip(all_resnum, all_resname, all_atname, all_positions):
     x, y, z = position
     cpt += 1
     f.write("{: >5}".format(str(resnum))) # residue number (5 positions, integer) 
     f.write("{: >5}".format(resname)) # residue name (5 characters) 
-    f.write("{: >5}".format(attype)) # atom name (5 characters) 
+    f.write("{: >5}".format(atname)) # atom name (5 characters) 
     f.write("{: >5}".format(str(cpt))) # atom number (5 positions, integer)
     f.write("{: >8}".format(str("{:.3f}".format(x)))) # position (in nm, x y z in 3 columns, each 8 positions with 3 decimal places)
     f.write("{: >8}".format(str("{:.3f}".format(y)))) # position (in nm, x y z in 3 columns, each 8 positions with 3 decimal places) 
