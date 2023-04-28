@@ -433,6 +433,6 @@ Final system
 
     Note that there is some vacuum left in the box. Its not a big problem and
     the initial configuration we created is good enough. 
-    To use the configuration and topology file, go to :ref:`bulk-solution-label`.
+    To use the configuration and topology files, go to :ref:`bulk-solution-label`.
 
 .. include:: ../contact/contactme.rst
