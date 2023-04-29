@@ -1,7 +1,7 @@
-.. _create-forcefield-label:
+.. _create-conf-label:
 
-Create topol.top (using Python)
-*******************************
+Create conf.gro
+***************
 
 .. container:: hatnote
 
@@ -21,8 +21,9 @@ Create topol.top (using Python)
 
 ..  container:: justify
 
-    The objective of this tutorial is to write
-    the force field parameters for a simple system. 
+    The objective of this tutorial is to write a 
+    simple topology file using python, by placing
+    molecules and ions in an empty box. 
 
     The topology file will be used in :ref:`bulk-solution-label`. 
     If you are only interested in learning GROMACS, jump directly
@@ -108,11 +109,11 @@ Open a blank python script, call it *molecules.py*, and copy the following lines
     The sulfide (:math:`\text{SO}_4^{2-}`), sodium (:math:`\text{Na}^{+}`) and water
     molecules (:math:`\text{H}_2\text{O}`) look like that, respectively:
 
-.. figure:: figures/createsystem/molecule-light.png
+.. figure:: figures/creategrofile/molecule-light.png
     :alt: Gromacs tutorial : Initial water molecule, sodium, and sulfide ions.
     :class: only-light
 
-.. figure:: figures/createsystem/molecule-dark.png
+.. figure:: figures/creategrofile/molecule-dark.png
     :alt: Gromacs tutorial : Initial water molecule, sodium, and sulfide ions.
     :class: only-dark
 
@@ -364,32 +365,6 @@ Creating the gro file
     f.write("\n")
     f.close()
 
-Creating the top file
-=====================
-
-..  container:: justify
-
-    Gromacs needs a topology file containing both 
-    force field information and number of residue,
-    let us create it from the same Python script:
-
-..  code-block:: python
-    :caption: *to be copied in generategro.py*
-
-    # write topol.top
-    f = open('topol.top', 'w')
-    f.write('#include "ff/forcefield.itp"\n')
-    f.write('#include "ff/h2o.itp"\n')
-    f.write('#include "ff/na.itp"\n')
-    f.write('#include "ff/so4.itp"\n\n')
-    f.write('[ System ]\n')
-    f.write('Na2SO4 solution\n\n')
-    f.write('[ Molecules ]\n')
-    f.write('SO4 '+ str(cpt_SO4)+'\n')
-    f.write('Na '+ str(cpt_Na)+'\n')
-    f.write('SOL '+ str(cpt_Sol)+'\n')
-    f.close()
-
 Final system
 ============
 
@@ -417,11 +392,11 @@ Final system
 
 ..  container:: justify
 
-.. figure:: figures/createsystem/system-light.png
+.. figure:: figures/creategrofile/system-light.png
     :alt: Gromacs tutorial - generated topology
     :class: only-light
 
-.. figure:: figures/createsystem/system-dark.png
+.. figure:: figures/creategrofile/system-dark.png
     :alt: Gromacs tutorial - generated topology
     :class: only-dark
 
@@ -434,5 +409,39 @@ Final system
     the initial configuration we created is good enough. 
     The topology file *conf.gro* will be used as the initial 
     configuration for the :ref:`bulk-solution-label` tutorial.
+
+
+Writing a .top file
+===================
+
+A topology (.top) file defines the parameters required
+for the simulation, such as masses, Lennard-Jones parameters,
+or bonds.
+
+..  container:: justify
+
+    Within the same Python script, write:
+
+..  code-block:: python
+    :caption: *to be copied in generategro.py*
+
+    # write topol.top
+    f = open('topol.top', 'w')
+    f.write('#include "ff/forcefield.itp"\n')
+    f.write('#include "ff/h2o.itp"\n')
+    f.write('#include "ff/na.itp"\n')
+    f.write('#include "ff/so4.itp"\n\n')
+    f.write('[ System ]\n')
+    f.write('Na2SO4 solution\n\n')
+    f.write('[ Molecules ]\n')
+    f.write('SO4 '+ str(cpt_SO4)+'\n')
+    f.write('Na '+ str(cpt_Na)+'\n')
+    f.write('SOL '+ str(cpt_Sol)+'\n')
+    f.close()
+
+..  container:: justify
+
+    All the parameter files located in the *ff* folder
+    will be written in the :ref:`create-topol-label` tutorial.
 
 .. include:: ../contact/contactme.rst
