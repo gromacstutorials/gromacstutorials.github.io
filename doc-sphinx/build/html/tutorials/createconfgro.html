@@ -12,10 +12,10 @@
         gtag('js', new Date());
         gtag('config', 'G-BFND91CYC2');
     </script>
-    <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Bulk salt solution" href="bulksolution.html" /><link rel="prev" title="Create conf.gro (using Python)" href="createsystem.html" />
+    <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Write parameters" href="createtopoltop.html" /><link rel="prev" title="How-to" href="../howto.html" />
 
     <!-- Generated with Sphinx 6.2.1 and Furo 2023.03.27 -->
-        <title>Create topol.top (using Python) - </title>
+        <title>Create conf.gro - </title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?digest=fad236701ea90a88636c2a8c73b44ae642ed2a53" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?digest=30d1aed668e5c3a91c3e3bf6a60b675221979f0e" />
@@ -173,8 +173,8 @@
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Level 0</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="createsystem.html">Create conf.gro (using Python)</a></li>
-<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Create topol.top (using Python)</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Create conf.gro</a></li>
+<li class="toctree-l1"><a class="reference internal" href="createtopoltop.html">Write parameters</a></li>
 </ul>
 <p class="caption" role="heading"><span class="caption-text">Level 1</span></p>
 <ul>
@@ -222,8 +222,8 @@
           </label>
         </div>
         <article role="main">
-          <section id="create-topol-top-using-python">
-<span id="create-forcefield-label"></span><h1>Create topol.top (using Python)<a class="headerlink" href="#create-topol-top-using-python" title="Permalink to this heading">#</a></h1>
+          <section id="create-conf-gro">
+<span id="create-conf-label"></span><h1>Create conf.gro<a class="headerlink" href="#create-conf-gro" title="Permalink to this heading">#</a></h1>
 <div class="hatnote docutils container">
 <p>Writing the topology file.</p>
 </div>
@@ -234,8 +234,9 @@
 <a class="only-dark reference internal image-reference" href="../_images/first-dark.png"><img alt="Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD" class="only-dark" src="../_images/first-dark.png" style="height: 250px;" /></a>
 </figure>
 <div class="justify docutils container">
-<p>The objective of this tutorial is to write
-the force field parameters for a simple system.</p>
+<p>The objective of this tutorial is to write a
+simple topology file using python, by placing
+molecules and ions in an empty box.</p>
 <p>The topology file will be used in <a class="reference internal" href="bulksolution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a>.
 If you are only interested in learning GROMACS, jump directly
 in <a class="reference internal" href="bulksolution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a>.</p>
@@ -565,32 +566,6 @@ actual concentration:</p>
 </div>
 </div>
 </section>
-<section id="creating-the-top-file">
-<h2>Creating the top file<a class="headerlink" href="#creating-the-top-file" title="Permalink to this heading">#</a></h2>
-<div class="justify docutils container">
-<p>Gromacs needs a topology file containing both
-force field information and number of residue,
-let us create it from the same Python script:</p>
-</div>
-<div class="literal-block-wrapper docutils container" id="id13">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id13" title="Permalink to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># write topol.top</span>
-<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;topol.top&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#include &quot;ff/forcefield.itp&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#include &quot;ff/h2o.itp&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#include &quot;ff/na.itp&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#include &quot;ff/so4.itp&quot;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[ System ]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Na2SO4 solution</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[ Molecules ]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SO4 &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cpt_SO4</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Na &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cpt_Na</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SOL &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cpt_Sol</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-</section>
 <section id="final-system">
 <h2>Final system<a class="headerlink" href="#final-system" title="Permalink to this heading">#</a></h2>
 <div class="justify docutils container">
@@ -614,11 +589,11 @@ The ion concentration is 1.43 mol per litter
 <figure class="align-default">
 <img alt="Gromacs tutorial - generated topology" class="only-light" src="../_images/system-light.png" />
 </figure>
-<figure class="align-default" id="id14">
+<figure class="align-default" id="id13">
 <img alt="Gromacs tutorial - generated topology" class="only-dark" src="../_images/system-dark.png" />
 <figcaption>
 <p><span class="caption-text">The primary system is located within the blue box. The replicated periodic
-images are also represented.</span><a class="headerlink" href="#id14" title="Permalink to this image">#</a></p>
+images are also represented.</span><a class="headerlink" href="#id13" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -626,6 +601,37 @@ images are also represented.</span><a class="headerlink" href="#id14" title="Per
 the initial configuration we created is good enough.
 The topology file <em>conf.gro</em> will be used as the initial
 configuration for the <a class="reference internal" href="bulksolution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a> tutorial.</p>
+</div>
+</section>
+<section id="writing-a-top-file">
+<h2>Writing a .top file<a class="headerlink" href="#writing-a-top-file" title="Permalink to this heading">#</a></h2>
+<p>A topology (.top) file defines the parameters required
+for the simulation, such as masses, Lennard-Jones parameters,
+or bonds.</p>
+<div class="justify docutils container">
+<p>Within the same Python script, write:</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id14">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id14" title="Permalink to this code">#</a></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># write topol.top</span>
+<span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;topol.top&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#include &quot;ff/forcefield.itp&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#include &quot;ff/h2o.itp&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#include &quot;ff/na.itp&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#include &quot;ff/so4.itp&quot;</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[ System ]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Na2SO4 solution</span><span class="se">\n\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;[ Molecules ]</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SO4 &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cpt_SO4</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Na &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cpt_Na</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;SOL &#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">cpt_Sol</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="justify docutils container">
+<p>All the parameter files located in the <em>ff</em> folder
+will be written in the <a class="reference internal" href="createtopoltop.html#create-topol-label"><span class="std std-ref">Write parameters</span></a> tutorial.</p>
 </div>
 <div class="mail admonition">
 <p class="admonition-title">Contact me</p>
@@ -639,23 +645,23 @@ configuration for the <a class="reference internal" href="bulksolution.html#bulk
       <footer>
         
         <div class="related-pages">
-          <a class="next-page" href="bulksolution.html">
+          <a class="next-page" href="createtopoltop.html">
               <div class="page-info">
                 <div class="context">
                   <span>Next</span>
                 </div>
-                <div class="title">Bulk salt solution</div>
+                <div class="title">Write parameters</div>
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="createsystem.html">
+          <a class="prev-page" href="../howto.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">Create conf.gro (using Python)</div>
+                <div class="title">How-to</div>
                 
               </div>
             </a>
@@ -685,12 +691,12 @@ configuration for the <a class="reference internal" href="bulksolution.html#bulk
         <div class="toc-tree-container">
           <div class="toc-tree">
             <ul>
-<li><a class="reference internal" href="#">Create topol.top (using Python)</a><ul>
+<li><a class="reference internal" href="#">Create conf.gro</a><ul>
 <li><a class="reference internal" href="#what-is-a-gro-file">What is a .gro file?</a></li>
 <li><a class="reference internal" href="#molecule-ions-definitions">Molecule/ions definitions</a></li>
 <li><a class="reference internal" href="#creating-the-gro-file">Creating the gro file</a></li>
-<li><a class="reference internal" href="#creating-the-top-file">Creating the top file</a></li>
 <li><a class="reference internal" href="#final-system">Final system</a></li>
+<li><a class="reference internal" href="#writing-a-top-file">Writing a .top file</a></li>
 </ul>
 </li>
 </ul>
