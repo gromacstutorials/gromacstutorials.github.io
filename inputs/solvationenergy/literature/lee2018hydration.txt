@@ -1,0 +1,9 @@
+# Hydration Thermodynamics of Non-Polar Aromatic Hydrocarbons: Comparison of Implicit and Explicit Solvation Models
+# number of carbon atoms - energy in kcal/mol
+6 -1.14 # benzene
+7 -0.72 # toluene
+12 -2.29 # biphenyl
+10 -2.65 # naphthalene
+13 -3.01 # fluorene
+16 -4.67 # pyrene
+17 -3.65 # anthracene

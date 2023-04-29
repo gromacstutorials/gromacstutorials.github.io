@@ -1,0 +1,32 @@
+integrator = md
+nsteps = 100000
+dt = 0.001
+
+comm_mode = linear
+comm_grps = system
+
+gen-vel = yes
+gen-temp = 290
+
+cutoff-scheme = Verlet
+nstlist = 10
+ns_type = grid
+
+nstxout-compressed = 1000
+
+vdw-type = Cut-off
+rvdw = 1.0
+
+coulombtype = pme
+fourierspacing = 0.1
+pme-order = 4
+rcoulomb = 1.0
+
+constraint-algorithm = lincs
+constraints = hbonds
+
+tcoupl = v-rescale
+ld-seed = 48456
+tc-grps = Water non-Water
+tau-t = 0.5 0.5
+ref-t = 310 310

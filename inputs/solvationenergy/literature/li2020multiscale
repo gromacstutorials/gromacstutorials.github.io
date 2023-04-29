@@ -1,0 +1,7 @@
+# A Multiscale Procedure for Predicting the Hydration Free Energies of Polycyclic Aromatic Hydrocarbons
+# number of ring - energy in kcal/mol 
+1 -0.8
+2 -2.2
+3 -4
+4 -5
+5 -5.1
