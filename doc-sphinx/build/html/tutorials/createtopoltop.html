@@ -296,50 +296,64 @@ rigid water model, see this <a href="http://www.sklogwiki.org/SklogWiki/index.ph
 </section>
 <section id="sodium-ion">
 <h2>Sodium ion<a class="headerlink" href="#sodium-ion" title="Permalink to this heading">#</a></h2>
+<div class="justify docutils container">
+<p>Let us create a file named <em>na.itp</em> for the Sodium ion:</p>
+</div>
 <div class="literal-block-wrapper docutils container" id="id2">
 <div class="code-block-caption"><span class="caption-text"><em>to be copied in ff/na.itp</em></span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ moleculetype ]
 ; molname nrexcl
-Na      1
+  Na      1
 
 [ atoms ]
 ; id  at-type  res-nr  res-name  at-name  cg-nr  charge  mass
-1   Na       1       Na        Na1      1      1.000   22.9900
+  1   Na       1       Na        Na1      1      1.000   22.9900
 </pre></div>
 </div>
+</div>
+<div class="justify docutils container">
+<p>The ‘molecule’ named <em>Na</em> for a residue with one single atom,
+of type <em>Na</em> and name <em>Na1</em>, charge +1.0 and mass 22.990 g/mol.</p>
 </div>
 </section>
 <section id="sulfate-ion">
 <h2>Sulfate ion<a class="headerlink" href="#sulfate-ion" title="Permalink to this heading">#</a></h2>
+<div class="justify docutils container">
+<p>The file <em>so4.itp</em> for the sulfate ion is more complicated,
+as the residue is made of 5 atoms that are bonded together
+and maintained by angular constrained.</p>
+<p>The <em>exclusions</em> ensures that atoms from the same residue do not
+interact through LJ and Coulomb interactions.</p>
+</div>
 <div class="literal-block-wrapper docutils container" id="id3">
 <div class="code-block-caption"><span class="caption-text"><em>to be copied in ff/so4.itp</em></span><a class="headerlink" href="#id3" title="Permalink to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[moleculetype]
 ; name  nrexcl
-SO4   1
+  SO4   1
 
 [ atoms ]
 ; id  at-type  res-nr  res-name  at-name  cg-nr  charge  mass
-1   OS       1       SO4       O1       1     -1.000   15.9994
-2   OS       1       SO4       O2       1     -1.000   15.9994
-3   OS       1       SO4       O3       1     -1.000   15.9994
-4   OS       1       SO4       O4       1     -1.000   15.9994
-5   SO       1       SO4       S1       1      2.000   32.0600
+  1   OS       1       SO4       O1       1     -1.000   15.9994
+  2   OS       1       SO4       O2       1     -1.000   15.9994
+  3   OS       1       SO4       O3       1     -1.000   15.9994
+  4   OS       1       SO4       O4       1     -1.000   15.9994
+  5   SO       1       SO4       S1       1      2.000   32.0600
 
 [ bonds ]
 ;  ai   aj  funct   c0         c1
-    1    5    1   0.1520   3.7656e4
-    2    5    1   0.1520   3.7656e4
-    3    5    1   0.1520   3.7656e4
-    4    5    1   0.1520   3.7656e4
+   1    5   1       0.1520     3.7656e4
+   2    5   1       0.1520     3.7656e4
+   3    5   1       0.1520     3.7656e4
+   4    5   1       0.1520     3.7656e4
 
 [ angles ]
 ;  ai   aj   ak  funct   angle     fc
-    1    5    2    1    109.5  520
-    1    5    3    1    109.5  520
-    1    5    4    1    109.5  520
-    2    5    3    1    109.5  520
-    2    5    4    1    109.5  520
-    3    5    4    1    109.5  520
+   1    5    2    1    109.5  520
+   1    5    3    1    109.5  520
+   1    5    4    1    109.5  520
+   2    5    3    1    109.5  520
+   2    5    4    1    109.5  520
+   3    5    4    1    109.5  520
 
 [exclusions]
 1       2       3       4       5
@@ -353,6 +367,11 @@ SO4   1
 </section>
 <section id="water-molecule">
 <h2>Water molecule<a class="headerlink" href="#water-molecule" title="Permalink to this heading">#</a></h2>
+<div class="justify docutils container">
+<p>Finally, create a file named <em>h2o.itp</em> for the water molecule.
+Settles parameters are added to ensure that the residue remains
+rigid:</p>
+</div>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text"><em>to be copied in ff/h2o.itp</em></span><a class="headerlink" href="#id4" title="Permalink to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ moleculetype ]
@@ -361,18 +380,18 @@ SOL      2
 
 [ atoms ]
 ; id  at-type  res-nr  res-name  at-name  cg-nr  charge  mass
-1   OW         1       SOL       OW1      1      0.000    15.9994
-2   HW       1       SOL       HW1      1      0.527     1.0079
-3   HW       1       SOL       HW2      1      0.527     1.0079
-4   MW       1       SOL       MW1      1     -1.054     0.0000
+  1   OW       1       SOL       OW1      1      0.000    15.9994
+  2   HW       1       SOL       HW1      1      0.527     1.0079
+  3   HW       1       SOL       HW2      1      0.527     1.0079
+  4   MW       1       SOL       MW1      1     -1.054     0.0000
 
 [ settles ]
 ; i  funct  doh      dhh
-1  1      0.09572  0.15139
+  1  1      0.09572  0.15139
 
 [ virtual_sites3 ]
 ; Vsite from          funct        a               b
-4     1     2     3     1       0.089608       0.089608
+  4     1     2     3     1       0.089608       0.089608
 
 [ exclusions ]
 1 2 3 4

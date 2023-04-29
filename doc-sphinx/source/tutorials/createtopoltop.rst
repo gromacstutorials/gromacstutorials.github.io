@@ -88,8 +88,6 @@ Default parameters
 
     <a href="http://www.sklogwiki.org/SklogWiki/index.php/TIP4P_model_of_water" target="_blank">wiki</a>
 
-
-
 .. |gromacs-manual| raw:: html
 
     <a href="https://manual.gromacs.org/current/reference-manual/topologies/parameter-files.html" target="_blank">GROMACS manual</a>
@@ -97,50 +95,68 @@ Default parameters
 Sodium ion
 ==========
 
+..  container:: justify
+
+    Let us create a file named *na.itp* for the Sodium ion:
+
 ..  code-block:: bw
     :caption: *to be copied in ff/na.itp*
 
     [ moleculetype ]
     ; molname nrexcl
-    Na      1
+      Na      1
 
     [ atoms ]
     ; id  at-type  res-nr  res-name  at-name  cg-nr  charge  mass
-    1   Na       1       Na        Na1      1      1.000   22.9900
+      1   Na       1       Na        Na1      1      1.000   22.9900
+
+..  container:: justify
+
+    The 'molecule' named *Na* for a residue with one single atom,
+    of type *Na* and name *Na1*, charge +1.0 and mass 22.990 g/mol.
 
 Sulfate ion
 ===========
+
+..  container:: justify
+
+    The file *so4.itp* for the sulfate ion is more complicated,
+    as the residue is made of 5 atoms that are bonded together
+    and maintained by angular constrained.
+
+    The *exclusions* ensures that atoms from the same residue do not 
+    interact through LJ and Coulomb interactions. 
 
 ..  code-block:: bw
     :caption: *to be copied in ff/so4.itp*
 
     [moleculetype]
     ; name  nrexcl
-    SO4   1
+      SO4   1
 
     [ atoms ]
     ; id  at-type  res-nr  res-name  at-name  cg-nr  charge  mass
-    1   OS       1       SO4       O1       1     -1.000   15.9994
-    2   OS       1       SO4       O2       1     -1.000   15.9994
-    3   OS       1       SO4       O3       1     -1.000   15.9994
-    4   OS       1       SO4       O4       1     -1.000   15.9994
-    5   SO       1       SO4       S1       1      2.000   32.0600
+      1   OS       1       SO4       O1       1     -1.000   15.9994
+      2   OS       1       SO4       O2       1     -1.000   15.9994
+      3   OS       1       SO4       O3       1     -1.000   15.9994
+      4   OS       1       SO4       O4       1     -1.000   15.9994
+      5   SO       1       SO4       S1       1      2.000   32.0600
 
     [ bonds ]
     ;  ai   aj  funct   c0         c1
-        1    5    1   0.1520   3.7656e4
-        2    5    1   0.1520   3.7656e4
-        3    5    1   0.1520   3.7656e4
-        4    5    1   0.1520   3.7656e4
+       1    5   1       0.1520     3.7656e4
+       2    5   1       0.1520     3.7656e4
+       3    5   1       0.1520     3.7656e4
+       4    5   1       0.1520     3.7656e4
 
     [ angles ]
     ;  ai   aj   ak  funct   angle     fc
-        1    5    2    1    109.5  520
-        1    5    3    1    109.5  520
-        1    5    4    1    109.5  520
-        2    5    3    1    109.5  520
-        2    5    4    1    109.5  520
-        3    5    4    1    109.5  520
+       1    5    2    1    109.5  520
+       1    5    3    1    109.5  520
+       1    5    4    1    109.5  520
+       2    5    3    1    109.5  520
+       2    5    4    1    109.5  520
+       3    5    4    1    109.5  520
         
     [exclusions]
     1       2       3       4       5
@@ -152,6 +168,12 @@ Sulfate ion
 Water molecule
 ==============
 
+..  container:: justify
+
+    Finally, create a file named *h2o.itp* for the water molecule.
+    Settles parameters are added to ensure that the residue remains 
+    rigid:
+
 ..  code-block:: bw
     :caption: *to be copied in ff/h2o.itp*
 
@@ -161,25 +183,24 @@ Water molecule
 
     [ atoms ]
     ; id  at-type  res-nr  res-name  at-name  cg-nr  charge  mass
-    1   OW	   1       SOL       OW1      1      0.000    15.9994
-    2   HW       1       SOL       HW1      1      0.527     1.0079
-    3   HW       1       SOL       HW2      1      0.527     1.0079
-    4   MW       1       SOL       MW1      1     -1.054     0.0000
+      1   OW	   1       SOL       OW1      1      0.000    15.9994
+      2   HW       1       SOL       HW1      1      0.527     1.0079
+      3   HW       1       SOL       HW2      1      0.527     1.0079
+      4   MW       1       SOL       MW1      1     -1.054     0.0000
 
     [ settles ]
     ; i  funct  doh      dhh
-    1  1      0.09572  0.15139
+      1  1      0.09572  0.15139
 
     [ virtual_sites3 ]
     ; Vsite from          funct        a               b
-    4     1     2     3     1       0.089608       0.089608
+      4     1     2     3     1       0.089608       0.089608
 
     [ exclusions ]
     1 2 3 4
     2 1 3 4
     3 1 2 4
     4 1 2 3
-
 
 .. include:: ../contact/contactme.rst
 
