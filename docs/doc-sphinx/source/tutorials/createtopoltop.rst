@@ -5,19 +5,7 @@ Write parameters
 
 .. container:: hatnote
 
-    Writing the topology file.
-
-.. figure:: figures/bulksolution/first-light.png
-    :alt: Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
-    :class: only-light
-    :height: 250
-    :align: right
-
-.. figure:: figures/bulksolution/first-dark.png
-    :alt: Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
-    :class: only-dark
-    :height: 250
-    :align: right
+    Writing the topology file for GROMACS.
 
 ..  container:: justify
 
