@@ -29,6 +29,97 @@ Write parameters
     If you are only interested in running GROMACS, jump directly
     in :ref:`bulk-solution-label`.
 
+
+
+
+
+
+
+
+
+    For instance, the |forcefield.itp| file defines the combination rules 
+    that are used:
+
+..  code-block:: bw
+
+    [ defaults ]
+    ; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
+    1             2               no              1.0     0.833
+
+..  container:: justify
+
+    With comb-rule = 2, the mixing rule is calculated as 
+    :math:`\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilon_{jj}}`,
+    :math:`\sigma_{ij} = (\sigma_{ii}+\sigma_{jj})/2`.
+    FudgeLJ and fudgeQQ are the factors by which to multiply Lennard-Jones
+    and Coulomb 1-4 interactions, respectively. 
+    You can refer to the |gromacs-manual| for more information.
+
+    The |forcefield.itp| file also contains information about the atoms, 
+    such as mass and Lennard-Jones parameters, as well as 
+    some parameters for the bond and angle constraints that will be 
+    necessary for the SO4 ions:
+
+.. |gromacs-manual| raw:: html
+
+    <a href="https://manual.gromacs.org/current/reference-manual/topologies/parameter-files.html" target="_blank">GROMACS manual</a>
+
+..  code-block:: bw
+
+    [ atomtypes ]
+    ; name       at.num mass     charge  ptype sigma      epsilon
+    Na           11     22.990   0.0000  A     0.23100    0.45000
+    O	         8      15.9994  0.0000  A     0.386      0.12
+    S	         16     32.0600  0.0000  A     0.355      1.0465
+    HW           1       1.0079  0.0000  A     0.00000    0.00000
+    OW           8      15.9994  0.0000  A     0.31650    0.77323
+    MW           0       0.000   0.0000  D     0.00000    0.00000
+
+    [ bondtypes ]
+    ; i    j  func       b0          kb
+    S      O       1    0.15 3.7656e4
+
+    [ angletypes ]
+    ; i    j  func       b0          kb
+    O    S      O       1    109.5    520
+
+.. |forcefield.itp| raw:: html
+
+    <a href="../../../../inputs/bulksolution/ff/forcefield.itp" target="_blank">forcefield.itp</a>
+
+.. |h2o.itp| raw:: html
+
+    <a href="../../../../inputs/bulksolution/ff/h2o.itp" target="_blank">h2o.itp</a>
+
+.. |na.itp| raw:: html
+
+    <a href="../../../../inputs/bulksolution/ff/na.itp" target="_blank">na.itp</a>
+
+.. |so4.itp| raw:: html
+
+    <a href="../../../../inputs/bulksolution/ff/so4.itp" target="_blank">so4.itp</a>
+
+..  container:: justify
+
+    Notice that the particle with name MW is of type 'D' when all the other particles 
+    are of type 'A' for atoms. This is because MW is the virtual massless site of our 4 points
+    rigid water model, see this |tip4p-wiki| page for details.
+
+.. |tip4p-wiki| raw:: html
+
+    <a href="http://www.sklogwiki.org/SklogWiki/index.php/TIP4P_model_of_water" target="_blank">wiki</a>
+
+
+
+
+
+
+
+
+
+
+
+
 Default parameters
 ==================
 
@@ -117,7 +208,7 @@ Water molecule
 ==============
 
 ..  code-block:: bw
-    :caption: *to be copied in ff/h2O.itp*
+    :caption: *to be copied in ff/h2o.itp*
 
     [ moleculetype ]
     ; molname  nrexcl

@@ -139,10 +139,12 @@ The input files
 
     For the present simulation, the initial atom
     positions and box size are given in a conf.gro file
-    (Gromos87 format) that you can download by clicking |cong.gro|.
+    (Gromos87 format) that you can download by clicking |conf-SO4.gro|.
+    The conf.gro file was created using Python, explanation are given
+    here: :ref:`create-conf-label`.
     Save the conf.gro file in a folder. The file looks like that:
 
-.. |cong.gro| raw:: html
+.. |conf-SO4.gro| raw:: html
 
     <a href="../../../../inputs/bulksolution/conf.gro" target="_blank">here</a>
 
@@ -227,11 +229,13 @@ The input files
 
     The topology file contains information about the
     interactions of the different atoms and molecules. You
-    can download it by clicking |topol.top|.
+    can download it by clicking |topol-SO4.top|.
+    The topol.top file was created using Python, explanation are given
+    here: :ref:`create-conf-label`.
     Place it in the same folder as the conf.gro file. The
     topol.top file looks like that:
 
-.. |topol.top| raw:: html
+.. |topol-SO4.top| raw:: html
 
     <a href="../../../../inputs/bulksolution/topol.top" target="_blank">here</a>
 
@@ -246,9 +250,9 @@ The input files
     Na2SO4 solution
 
     [ Molecules ]
-    SO4 7
-    Na 14
-    SOL 875
+    SO4 6
+    Na 12
+    SOL 701
 
 ..  container:: justify
 
@@ -268,51 +272,8 @@ The input files
     the atoms (names, masses, changes, Lennard-Jones
     coefficients) and residues (bond and angular
     constraints) for all the species that will be involved here.
-    For instance, the |forcefield.itp| file defines the combination rules 
-    that are used:
-
-..  code-block:: bw
-
-    [ defaults ]
-    ; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
-    1             2               no              1.0     0.833
-
-..  container:: justify
-
-    With comb-rule = 2, the mixing rule is calculated as 
-    :math:`\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilon_{jj}}`,
-    :math:`\sigma_{ij} = (\sigma_{ii}+\sigma_{jj})/2`.
-    FudgeLJ and fudgeQQ are the factors by which to multiply Lennard-Jones
-    and Coulomb 1-4 interactions, respectively. 
-    You can refer to the |gromacs-manual| for more information.
-
-    The |forcefield.itp| file also contains information about the atoms, 
-    such as mass and Lennard-Jones parameters, as well as 
-    some parameters for the bond and angle constraints that will be 
-    necessary for the SO4 ions:
-
-.. |gromacs-manual| raw:: html
-
-    <a href="https://manual.gromacs.org/current/reference-manual/topologies/parameter-files.html" target="_blank">GROMACS manual</a>
-
-..  code-block:: bw
-
-    [ atomtypes ]
-    ; name       at.num mass     charge  ptype sigma      epsilon
-    Na           11     22.990   0.0000  A     0.23100    0.45000
-    O	         8      15.9994  0.0000  A     0.386      0.12
-    S	         16     32.0600  0.0000  A     0.355      1.0465
-    HW           1       1.0079  0.0000  A     0.00000    0.00000
-    OW           8      15.9994  0.0000  A     0.31650    0.77323
-    MW           0       0.000   0.0000  D     0.00000    0.00000
-
-    [ bondtypes ]
-    ; i    j  func       b0          kb
-    S      O       1    0.15 3.7656e4
-
-    [ angletypes ]
-    ; i    j  func       b0          kb
-    O    S      O       1    109.5    520
+    More details about those files are given in
+    this tutorial: :ref:`create-topol-label`.
 
 .. |forcefield.itp| raw:: html
 
@@ -329,17 +290,6 @@ The input files
 .. |so4.itp| raw:: html
 
     <a href="../../../../inputs/bulksolution/ff/so4.itp" target="_blank">so4.itp</a>
-
-..  container:: justify
-
-    Notice that the particle with name MW is of type 'D' when all the other particles 
-    are of type 'A' for atoms. This is because MW is the virtual massless site of our 4 points
-    rigid water model, see this |tip4p-wiki| page for details.
-
-.. |tip4p-wiki| raw:: html
-
-    <a href="http://www.sklogwiki.org/SklogWiki/index.php/TIP4P_model_of_water" target="_blank">wiki</a>
-
 
 3) The input file (.mdp)
 ------------------------
