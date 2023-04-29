@@ -1,7 +1,7 @@
 .. _create-system-label:
 
-Create topology
-***************
+Create conf.gro (using Python)
+******************************
 
 .. container:: hatnote
 
@@ -433,6 +433,7 @@ Final system
 
     Note that there is some vacuum left in the box. Its not a big problem and
     the initial configuration we created is good enough. 
-    To use the configuration and topology files, go to :ref:`bulk-solution-label`.
+    The topology file *conf.gro* will be used as the initial 
+    configuration for the :ref:`bulk-solution-label` tutorial.
 
 .. include:: ../contact/contactme.rst
