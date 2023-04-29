@@ -29,24 +29,44 @@ Write parameters
     If you are only interested in running GROMACS, jump directly
     in :ref:`bulk-solution-label`.
 
+.. include:: ../contact/needhelp.rst
 
-
-
-
-
-
-
-
-    For instance, the |forcefield.itp| file defines the combination rules 
-    that are used:
-
-..  code-block:: bw
-
-    [ defaults ]
-    ; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
-    1             2               no              1.0     0.833
+Default parameters
+==================
 
 ..  container:: justify
+
+    Create a folder called *ff/*. Within *ff/*, create a new empty file named 
+    *forcefield.itp*, and copy the following in it:
+
+..  code-block:: bw
+    :caption: *to be copied in ff/forcefield.itp*
+
+    [ defaults ]
+    ; nbfunc  comb-rule  gen-pairs  fudgeLJ  fudgeQQ
+      1       2          no         1.0      0.833
+
+    [ atomtypes ]
+    ; name  at.num  mass      charge  ptype  sigma    epsilon
+      Na    11      22.9900   1.0000  A      0.23100  0.45000
+      OS     8      15.9994  -1.0000  A      0.38600  0.12
+      SO    16      32.0600   2.0000  A      0.35500  1.0465
+      HW     1       1.0079   0.5270  A      0.00000  0.00000
+      OW     8      15.9994   0.0000  A      0.31650  0.77323
+      MW     0       0.0000  -1.0540  D      0.00000  0.00000
+
+    [ bondtypes ]
+    ; i   j   func  b0    kb
+      SO  OS  1     0.15  3.7656e4
+
+    [ angletypes ]
+    ; i   j   k   func  theta  k0          
+      OS  SO  OS  1     109.5  520
+
+..  container:: justify
+
+    The |forcefield.itp| file is used to define basic combination rules, as well as 
+    atom types, bond types, and angle types. 
 
     With comb-rule = 2, the mixing rule is calculated as 
     :math:`\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilon_{jj}}`,
@@ -56,50 +76,9 @@ Write parameters
     You can refer to the |gromacs-manual| for more information.
 
     The |forcefield.itp| file also contains information about the atoms, 
-    such as mass and Lennard-Jones parameters, as well as 
-    some parameters for the bond and angle constraints that will be 
-    necessary for the SO4 ions:
-
-.. |gromacs-manual| raw:: html
-
-    <a href="https://manual.gromacs.org/current/reference-manual/topologies/parameter-files.html" target="_blank">GROMACS manual</a>
-
-..  code-block:: bw
-
-    [ atomtypes ]
-    ; name       at.num mass     charge  ptype sigma      epsilon
-    Na           11     22.990   0.0000  A     0.23100    0.45000
-    O	         8      15.9994  0.0000  A     0.386      0.12
-    S	         16     32.0600  0.0000  A     0.355      1.0465
-    HW           1       1.0079  0.0000  A     0.00000    0.00000
-    OW           8      15.9994  0.0000  A     0.31650    0.77323
-    MW           0       0.000   0.0000  D     0.00000    0.00000
-
-    [ bondtypes ]
-    ; i    j  func       b0          kb
-    S      O       1    0.15 3.7656e4
-
-    [ angletypes ]
-    ; i    j  func       b0          kb
-    O    S      O       1    109.5    520
-
-.. |forcefield.itp| raw:: html
-
-    <a href="../../../../inputs/bulksolution/ff/forcefield.itp" target="_blank">forcefield.itp</a>
-
-.. |h2o.itp| raw:: html
-
-    <a href="../../../../inputs/bulksolution/ff/h2o.itp" target="_blank">h2o.itp</a>
-
-.. |na.itp| raw:: html
-
-    <a href="../../../../inputs/bulksolution/ff/na.itp" target="_blank">na.itp</a>
-
-.. |so4.itp| raw:: html
-
-    <a href="../../../../inputs/bulksolution/ff/so4.itp" target="_blank">so4.itp</a>
-
-..  container:: justify
+    such their masses and Lennard-Jones parameters sigma and epsilon,
+    as well as some parameters for the bond and angle constraints that will be 
+    necessary for the SO4 ions.
 
     Notice that the particle with name MW is of type 'D' when all the other particles 
     are of type 'A' for atoms. This is because MW is the virtual massless site of our 4 points
@@ -111,43 +90,9 @@ Write parameters
 
 
 
+.. |gromacs-manual| raw:: html
 
-
-
-
-
-
-
-
-
-Default parameters
-==================
-
-.. include:: ../contact/needhelp.rst
-
-..  code-block:: bw
-    :caption: *to be copied in ff/forcefield.itp*
-
-    [ defaults ]
-    ; nbfunc  comb-rule  gen-pairs  fudgeLJ  fudgeQQ
-    1       2          no         1.0      0.833
-
-    [ atomtypes ]
-    ; name  at.num  mass      charge  ptype  sigma    epsilon
-    Na    11      22.9900   1.0000  A      0.23100  0.45000
-    OS     8      15.9994  -1.0000  A      0.38600  0.12
-    SO    16      32.0600   2.0000  A      0.35500  1.0465
-    HW     1       1.0079   0.5270  A      0.00000  0.00000
-    OW     8      15.9994   0.0000  A      0.31650  0.77323
-    MW     0       0.0000  -1.0540  D      0.00000  0.00000
-
-    [ bondtypes ]
-    ; i   j   func  b0    kb
-    SO  OS  1     0.15  3.7656e4
-
-    [ angletypes ]
-    ; i   j   k   func  theta  k0          
-    OS  SO  OS  1     109.5  520
+    <a href="https://manual.gromacs.org/current/reference-manual/topologies/parameter-files.html" target="_blank">GROMACS manual</a>
 
 Sodium ion
 ==========
@@ -237,3 +182,19 @@ Water molecule
 
 
 .. include:: ../contact/contactme.rst
+
+.. |forcefield.itp| raw:: html
+
+    <a href="../../../../inputs/bulksolution/ff/forcefield.itp" target="_blank">forcefield.itp</a>
+
+.. |h2o.itp| raw:: html
+
+    <a href="../../../../inputs/bulksolution/ff/h2o.itp" target="_blank">h2o.itp</a>
+
+.. |na.itp| raw:: html
+
+    <a href="../../../../inputs/bulksolution/ff/na.itp" target="_blank">na.itp</a>
+
+.. |so4.itp| raw:: html
+
+    <a href="../../../../inputs/bulksolution/ff/so4.itp" target="_blank">so4.itp</a>
