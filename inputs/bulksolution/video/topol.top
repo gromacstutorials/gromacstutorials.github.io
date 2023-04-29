@@ -1,0 +1,12 @@
+#include "../ff/forcefield.itp"
+#include "../ff/h2o.itp"
+#include "../ff/na.itp"
+#include "../ff/so4.itp"
+
+[ System ]
+Na2SO4 solution
+
+[ Molecules ]
+SO4 4
+Na 9
+SOL 386
