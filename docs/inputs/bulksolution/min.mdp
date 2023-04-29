@@ -2,7 +2,7 @@
 ;	File 'min.mdp' was generated
 ;	By user: simon (1000)
 ;	On host: simon-laptop
-;	At date: Sat Apr 29 18:01:43 2023
+;	At date: Sat Apr 29 18:25:12 2023
 ;
 ;	Created by:
 ;	             :-) GROMACS - gmx grompp, 2022.2-Ubuntu_2022.2_1 (-:
@@ -169,7 +169,7 @@ annealing-temp           =
 ; GENERATE VELOCITIES FOR STARTUP RUN
 gen-vel                  = no
 gen-temp                 = 300
-gen-seed                 = -1074828315
+gen-seed                 = -147867649
 
 ; OPTIONS FOR BONDS    
 constraints              = none

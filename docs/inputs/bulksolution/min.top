@@ -1,37 +1,37 @@
 [ defaults ]
-; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
-  1             2               no              1.0     0.833
+; nbfunc  comb-rule  gen-pairs  fudgeLJ  fudgeQQ
+  1       2          no         1.0      0.833
 
 [ atomtypes ]
-; name       at.num mass     charge  ptype sigma      epsilon
-Na           11     22.9900  0.0000  A     0.23100    0.45000
-OS	         8      15.9994  0.0000  A     0.386      0.12
-SO	         16     32.0600  0.0000  A     0.355      1.0465
-HW           1       1.0079  0.5270  A     0.00000    0.00000
-OW           8      15.9994  0.0000  A     0.31650    0.77323
-MW           0       0.000  -1.0540  D     0.00000    0.00000
+; name  at.num  mass      charge  ptype  sigma    epsilon
+  Na    11      22.9900   1.0000  A      0.23100  0.45000
+  OS     8      15.9994  -1.0000  A      0.38600  0.12
+  SO    16      32.0600   2.0000  A      0.35500  1.0465
+  HW     1       1.0079   0.5270  A      0.00000  0.00000
+  OW     8      15.9994   0.0000  A      0.31650  0.77323
+  MW     0       0.0000  -1.0540  D      0.00000  0.00000
 
 [ bondtypes ]
-; i    j  func       b0          kb
-SO      OS       1    0.15 3.7656e4
+; i   j   func  b0    kb
+  SO  OS  1     0.15  3.7656e4
 
 [ angletypes ]
-; i    j  func       b0          kb
-OS    SO      OS       1    109.5    520
+; i   j   k   func  theta  k0          
+  OS  SO  OS  1     109.5  520
 [ moleculetype ]
-; molname nrexcl
-SOL   2
+; molname  nrexcl
+  SOL      2
 
 [ atoms ]
-; id  at type     res nr  res name  at name  cg nr  charge    mass
-  1   OW	      1       SOL       OW1       1      0        15.9994
-  2   HW          1       SOL       HW1       1      0.527     1.0079
-  3   HW          1       SOL       HW2       1      0.527     1.0079
-  4   MW          1       SOL       MW1       1     -1.054     0.0000
+; id  at-type  res-nr  res-name  at-name  cg-nr  charge  mass
+  1   OW	   1       SOL       OW1      1      0.000    15.9994
+  2   HW       1       SOL       HW1      1      0.527     1.0079
+  3   HW       1       SOL       HW2      1      0.527     1.0079
+  4   MW       1       SOL       MW1      1     -1.054     0.0000
 
 [ settles ]
-; i funct doh dhh
-1 1 0.09572 0.15139
+; i  funct  doh      dhh
+  1  1      0.09572  0.15139
 
 [ virtual_sites3 ]
 ; Vsite from          funct        a               b
@@ -43,26 +43,23 @@ SOL   2
 3 1 2 4
 4 1 2 3
 [ moleculetype ]
-; molname       nrexcl
-Na               1
+; molname nrexcl
+  Na      1
 
 [ atoms ]
-; id    at type res nr  residu name     at name  cg nr  charge 
-;  1       Na       1       Na              Na1        1      1
-
-; id  at type     res nr  res name  at name  cg nr  charge    mass
-  1   Na          1        Na       Na1       1      1.000    22.9900
+; id  at-type  res-nr  res-name  at-name  cg-nr  charge  mass
+  1   Na       1       Na        Na1      1      1.000   22.9900
 [moleculetype]
-; name nrexcl
-SO4   1
+; name  nrexcl
+  SO4   1
 
 [ atoms ]
-;nr   type resnr residu atom cgnr  charge
-1     OS 1     SO4    O1   1    -1      15.9994
-2     OS 1     SO4    O2   1    -1      15.9994
-3     OS 1     SO4    O3   1    -1      15.9994
-4     OS 1     SO4    O4   1    -1      15.9994
-5     SO 1     SO4    S1   1     2      32.0600
+; id  at-type  res-nr  res-name  at-name  cg-nr  charge  mass
+  1   OS       1       SO4       O1       1     -1.000   15.9994
+  2   OS       1       SO4       O2       1     -1.000   15.9994
+  3   OS       1       SO4       O3       1     -1.000   15.9994
+  4   OS       1       SO4       O4       1     -1.000   15.9994
+  5   SO       1       SO4       S1       1      2.000   32.0600
 
 [ bonds ]
 ;  ai   aj  funct   c0         c1
