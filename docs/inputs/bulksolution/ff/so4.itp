@@ -1,14 +1,14 @@
 [moleculetype]
-; name nrexcl
-SO4   1
+; name  nrexcl
+  SO4   1
 
 [ atoms ]
-;nr   type resnr residu atom cgnr  charge
-1     OS 1     SO4    O1   1    -1      15.9994
-2     OS 1     SO4    O2   1    -1      15.9994
-3     OS 1     SO4    O3   1    -1      15.9994
-4     OS 1     SO4    O4   1    -1      15.9994
-5     SO 1     SO4    S1   1     2      32.0600
+; id  at-type  res-nr  res-name  at-name  cg-nr  charge  mass
+  1   OS       1       SO4       O1       1     -1.000   15.9994
+  2   OS       1       SO4       O2       1     -1.000   15.9994
+  3   OS       1       SO4       O3       1     -1.000   15.9994
+  4   OS       1       SO4       O4       1     -1.000   15.9994
+  5   SO       1       SO4       S1       1      2.000   32.0600
 
 [ bonds ]
 ;  ai   aj  funct   c0         c1

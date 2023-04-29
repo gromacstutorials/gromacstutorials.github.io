@@ -4,12 +4,12 @@
 
 [ atomtypes ]
 ; name       at.num mass     charge  ptype sigma      epsilon
-Na           11     22.990   0.0000  A     0.23100    0.45000
-OS	     8      15.9994  0.0000  A     0.386      0.12
-SO	     16     32.0600  0.0000  A     0.355      1.0465
-HW           1       1.0079  0.0000  A     0.00000    0.00000
+Na           11     22.9900  0.0000  A     0.23100    0.45000
+OS	         8      15.9994  0.0000  A     0.386      0.12
+SO	         16     32.0600  0.0000  A     0.355      1.0465
+HW           1       1.0079  0.5270  A     0.00000    0.00000
 OW           8      15.9994  0.0000  A     0.31650    0.77323
-MW           0       0.000   0.0000  D     0.00000    0.00000
+MW           0       0.000  -1.0540  D     0.00000    0.00000
 
 [ bondtypes ]
 ; i    j  func       b0          kb
@@ -24,9 +24,9 @@ SOL   2
 
 [ atoms ]
 ; id  at type     res nr  res name  at name  cg nr  charge    mass
-  1   OW	  1       SOL       OW1       1      0        15.9994
-  2   HW          1       SOL       HW1      1       0.527     1.0079
-  3   HW          1       SOL       HW2      1       0.527     1.0079
+  1   OW	      1       SOL       OW1       1      0        15.9994
+  2   HW          1       SOL       HW1       1      0.527     1.0079
+  3   HW          1       SOL       HW2       1      0.527     1.0079
   4   MW          1       SOL       MW1       1     -1.054     0.0000
 
 [ settles ]
@@ -48,7 +48,10 @@ Na               1
 
 [ atoms ]
 ; id    at type res nr  residu name     at name  cg nr  charge 
-1       Na       1       Na              Na1        1      1
+;  1       Na       1       Na              Na1        1      1
+
+; id  at type     res nr  res name  at name  cg nr  charge    mass
+  1   Na          1        Na       Na1       1      1.000    22.9900
 [moleculetype]
 ; name nrexcl
 SO4   1
