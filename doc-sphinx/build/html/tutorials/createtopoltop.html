@@ -240,15 +240,45 @@ If follows directly the writing of the gro file in <a class="reference internal"
 <p>The parameter files created here will be used in <a class="reference internal" href="bulksolution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a>.
 If you are only interested in running GROMACS, jump directly
 in <a class="reference internal" href="bulksolution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a>.</p>
-<p>For instance, the <a href="../../../../inputs/bulksolution/ff/forcefield.itp" target="_blank">forcefield.itp</a> file defines the combination rules
-that are used:</p>
 </div>
+<div class="patreon admonition">
+<p class="admonition-title">Looking for help with your project?</p>
+<p>See the <a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> page.</p>
+</div>
+<section id="default-parameters">
+<h2>Default parameters<a class="headerlink" href="#default-parameters" title="Permalink to this heading">#</a></h2>
+<div class="justify docutils container">
+<p>Create a folder called <em>ff/</em>. Within <em>ff/</em>, create a new empty file named
+<em>forcefield.itp</em>, and copy the following in it:</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in ff/forcefield.itp</em></span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ defaults ]
-; nbfunc        comb-rule       gen-pairs       fudgeLJ fudgeQQ
-1             2               no              1.0     0.833
+; nbfunc  comb-rule  gen-pairs  fudgeLJ  fudgeQQ
+  1       2          no         1.0      0.833
+
+[ atomtypes ]
+; name  at.num  mass      charge  ptype  sigma    epsilon
+  Na    11      22.9900   1.0000  A      0.23100  0.45000
+  OS     8      15.9994  -1.0000  A      0.38600  0.12
+  SO    16      32.0600   2.0000  A      0.35500  1.0465
+  HW     1       1.0079   0.5270  A      0.00000  0.00000
+  OW     8      15.9994   0.0000  A      0.31650  0.77323
+  MW     0       0.0000  -1.0540  D      0.00000  0.00000
+
+[ bondtypes ]
+; i   j   func  b0    kb
+  SO  OS  1     0.15  3.7656e4
+
+[ angletypes ]
+; i   j   k   func  theta  k0
+  OS  SO  OS  1     109.5  520
 </pre></div>
 </div>
+</div>
 <div class="justify docutils container">
+<p>The <a href="../../../../inputs/bulksolution/ff/forcefield.itp" target="_blank">forcefield.itp</a> file is used to define basic combination rules, as well as
+atom types, bond types, and angle types.</p>
 <p>With comb-rule = 2, the mixing rule is calculated as
 <span class="math notranslate nohighlight">\(\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilon_{jj}}\)</span>,
 <span class="math notranslate nohighlight">\(\sigma_{ij} = (\sigma_{ii}+\sigma_{jj})/2\)</span>.
@@ -256,63 +286,12 @@ FudgeLJ and fudgeQQ are the factors by which to multiply Lennard-Jones
 and Coulomb 1-4 interactions, respectively.
 You can refer to the <a href="https://manual.gromacs.org/current/reference-manual/topologies/parameter-files.html" target="_blank">GROMACS manual</a> for more information.</p>
 <p>The <a href="../../../../inputs/bulksolution/ff/forcefield.itp" target="_blank">forcefield.itp</a> file also contains information about the atoms,
-such as mass and Lennard-Jones parameters, as well as
-some parameters for the bond and angle constraints that will be
-necessary for the SO4 ions:</p>
-</div>
-<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ atomtypes ]
-; name       at.num mass     charge  ptype sigma      epsilon
-Na           11     22.990   0.0000  A     0.23100    0.45000
-O            8      15.9994  0.0000  A     0.386      0.12
-S            16     32.0600  0.0000  A     0.355      1.0465
-HW           1       1.0079  0.0000  A     0.00000    0.00000
-OW           8      15.9994  0.0000  A     0.31650    0.77323
-MW           0       0.000   0.0000  D     0.00000    0.00000
-
-[ bondtypes ]
-; i    j  func       b0          kb
-S      O       1    0.15 3.7656e4
-
-[ angletypes ]
-; i    j  func       b0          kb
-O    S      O       1    109.5    520
-</pre></div>
-</div>
-<div class="justify docutils container">
+such their masses and Lennard-Jones parameters sigma and epsilon,
+as well as some parameters for the bond and angle constraints that will be
+necessary for the SO4 ions.</p>
 <p>Notice that the particle with name MW is of type ‘D’ when all the other particles
 are of type ‘A’ for atoms. This is because MW is the virtual massless site of our 4 points
 rigid water model, see this <a href="http://www.sklogwiki.org/SklogWiki/index.php/TIP4P_model_of_water" target="_blank">wiki</a> page for details.</p>
-</div>
-<section id="default-parameters">
-<h2>Default parameters<a class="headerlink" href="#default-parameters" title="Permalink to this heading">#</a></h2>
-<div class="patreon admonition">
-<p class="admonition-title">Looking for help with your project?</p>
-<p>See the <a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> page.</p>
-</div>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in ff/forcefield.itp</em></span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
-<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ defaults ]
-; nbfunc  comb-rule  gen-pairs  fudgeLJ  fudgeQQ
-1       2          no         1.0      0.833
-
-[ atomtypes ]
-; name  at.num  mass      charge  ptype  sigma    epsilon
-Na    11      22.9900   1.0000  A      0.23100  0.45000
-OS     8      15.9994  -1.0000  A      0.38600  0.12
-SO    16      32.0600   2.0000  A      0.35500  1.0465
-HW     1       1.0079   0.5270  A      0.00000  0.00000
-OW     8      15.9994   0.0000  A      0.31650  0.77323
-MW     0       0.0000  -1.0540  D      0.00000  0.00000
-
-[ bondtypes ]
-; i   j   func  b0    kb
-SO  OS  1     0.15  3.7656e4
-
-[ angletypes ]
-; i   j   k   func  theta  k0
-OS  SO  OS  1     109.5  520
-</pre></div>
-</div>
 </div>
 </section>
 <section id="sodium-ion">
