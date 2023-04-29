@@ -17,6 +17,7 @@ Welcome to gromacstutorials's documentation!
     :caption: Level 0
 
     tutorials/createsystem.rst
+    tutorials/createforcefield.rst
 
 .. toctree::
     :maxdepth: 2
