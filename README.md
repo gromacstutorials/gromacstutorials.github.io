@@ -5,7 +5,7 @@ All the files generated during the tutorials can be found in the [docs/input/](d
 
 <p float="left">
   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
-  <img src="docs/doc-sphinx/source/tutorials/figures/bulksolution/no-field-dark.png" width="32%" /></a>
+  <img src="docs/doc-sphinx/source/tutorials/figures/bulksolution/avatar-gromacs.png" width="32%" /></a>
 
   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/solvationenergy.html">
   <img src="docs/doc-sphinx/source/tutorials/figures/solvationenergy/no-field-dark.png" width="32%" /></a>
@@ -19,12 +19,12 @@ All the files generated during the tutorials can be found in the [docs/input/](d
 
 You can report issue here on Github, or send me an [email](https://simongravelle.github.io/). Your feedback is always highly appreciated.
 
-### About me ###
+### About me
 
 I am a computer physicist in soft matter and fluids at interfaces. You can 
 find more information on my [personal webpage](https://simongravelle.github.io/).
 
-### License ###
+### License
 
 All the inputs, scripts, and data files are released under the 
 GNU general public license v3.0.
