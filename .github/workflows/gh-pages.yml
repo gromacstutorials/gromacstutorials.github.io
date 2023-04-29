@@ -30,6 +30,7 @@ jobs:
           pip install furo
           pip install sphinxcontrib-googleanalytics
           pip install sphinx-togglebutton
+          pip install sphinx-favicon
       - name: Build
         run: |
           cd docs/doc-sphinx/
