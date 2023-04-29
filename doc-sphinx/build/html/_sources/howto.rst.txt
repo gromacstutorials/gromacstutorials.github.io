@@ -8,10 +8,10 @@ This page describes the structure of the gromacstutorials.github.io.
 Level 0
 -------
 
-#. :ref:`create-system-label`
+#. :ref:`create-conf-label`
     * file preparation
 
-#. :ref:`create-forcefield-label`
+#. :ref:`create-topol-label`
     * file preparation
 
 Level 1

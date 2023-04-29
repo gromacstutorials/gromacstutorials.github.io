@@ -378,8 +378,6 @@ Final system
 
     vmd conf.gro
 
-..  container:: justify
-
 .. figure:: figures/creategrofile/system-light.png
     :alt: Gromacs tutorial - generated topology
     :class: only-light
