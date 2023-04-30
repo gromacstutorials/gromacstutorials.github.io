@@ -165,7 +165,9 @@ PEG molecule in vacuum
 
 ..  container:: justify
 
-    You should see the PEG molecule moving. 
+    You should see the PEG molecule moving due to thermal agitation. 
+
+.. include:: ../contact/supportme.rst
 
 Angle distribution
 ------------------
@@ -450,5 +452,78 @@ PEG molecule in water
 
     <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/ff/tip3p.itp" target="_blank">here</a>
 
+Equilibrating the system
+------------------------
+
+..  container:: justify
+
+    Here we perform a 3-step equilibration of the solvated PEG system
+    (energy minimization, NVT run, and NPT run, respectively).
+
+    First, perform an energy minimization of the system:
+
+..  code-block:: bash
+
+      gmx grompp -f inputs/em.mdp -c peg_h2o.gro -p topol.top -o em
+      gmx mdrun -deffnm em -v
+
+..  container:: justify
+
+    The *em.mdp* is defined as follow:
+
+..  code-block:: bw
+
+    integrator = steep
+    emtol = 10
+    emstep = 0.0001
+    nsteps = 5000
+
+    nstenergy = 1000
+    nstxout = 100
+
+    cutoff-scheme = Verlet
+    coulombtype = PME
+    rcoulomb = 1
+    rvdw = 1
+    pbc = xyz
+
+    define = -DFLEXIBLE
+
+..  container:: justify
+
+    The *define = -DFLEXIBLE* commands triggers the *if* condition
+    within the *tip3p.itp* file. Therefore the water molecules 
+    behave as flexible during the minimization. For the next steps,
+    rigid water molecules will be used by not including this command.
+
+    Then, let us perform a NVT (constant number of particles, constant volume,
+    constant temperature) run:
+
+..  code-block:: bash
+
+    gmx grompp -f inputs/nvt.mdp -c em.gro -p topol.top -o nvt
+    gmx mdrun -deffnm nvt -v
+
+..  container:: justify
+
+    Here the *nvt.mdp* file can be downloaded by clicking |download_nvt.mdp|.
+
+.. |download_nvt.mdp| raw:: html
+
+    <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/inputs/nvt.mdp" target="_blank">here</a>
+
+..  container:: justify
+
+    Finally, perform a NPT (constant number of particles, constant pressure,
+    constant temperature) equilibration run, using this |download_npt.mdp|:
+
+..  code-block:: bash
+
+    gmx grompp -f inputs/npt.mdp -c nvt.gro -p topol.top -o npt
+    gmx mdrun -deffnm npt -v
+
+.. |download_npt.mdp| raw:: html
+
+    <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/inputs/npt.mdp" target="_blank">npt file</a>
 
 .. include:: ../contact/contactme.rst

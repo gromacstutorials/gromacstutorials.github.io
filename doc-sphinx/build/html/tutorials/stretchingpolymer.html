@@ -354,7 +354,11 @@ gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </spa
 </pre></div>
 </div>
 <div class="justify docutils container">
-<p>You should see the PEG molecule moving.</p>
+<p>You should see the PEG molecule moving due to thermal agitation.</p>
+</div>
+<div class="patreon admonition">
+<p class="admonition-title">Support me for 1 euro per month</p>
+<p>Become a Patreon and support the creation of content for GROMACS</p>
 </div>
 <section id="angle-distribution">
 <h3>Angle distribution<a class="headerlink" href="#angle-distribution" title="Permalink to this heading">#</a></h3>
@@ -595,10 +599,65 @@ SOL             853
 and can be downloaded by clicking <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/ff/tip3p.itp" target="_blank">here</a>, and then placed
 within the <em>ff/</em> folder.</p>
 </div>
+<section id="equilibrating-the-system">
+<h3>Equilibrating the system<a class="headerlink" href="#equilibrating-the-system" title="Permalink to this heading">#</a></h3>
+<div class="justify docutils container">
+<p>Here we perform a 3-step equilibration of the solvated PEG system
+(energy minimization, NVT run, and NPT run, respectively).</p>
+<p>First, perform an energy minimization of the system:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/em.mdp<span class="w"> </span>-c<span class="w"> </span>peg_h2o.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>em
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>em<span class="w"> </span>-v
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>The <em>em.mdp</em> is defined as follow:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = steep
+emtol = 10
+emstep = 0.0001
+nsteps = 5000
+
+nstenergy = 1000
+nstxout = 100
+
+cutoff-scheme = Verlet
+coulombtype = PME
+rcoulomb = 1
+rvdw = 1
+pbc = xyz
+
+define = -DFLEXIBLE
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>The <em>define = -DFLEXIBLE</em> commands triggers the <em>if</em> condition
+within the <em>tip3p.itp</em> file. Therefore the water molecules
+behave as flexible during the minimization. For the next steps,
+rigid water molecules will be used by not including this command.</p>
+<p>Then, let us perform a NVT (constant number of particles, constant volume,
+constant temperature) run:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/nvt.mdp<span class="w"> </span>-c<span class="w"> </span>em.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>nvt
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>nvt<span class="w"> </span>-v
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Here the <em>nvt.mdp</em> file can be downloaded by clicking <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/inputs/nvt.mdp" target="_blank">here</a>.</p>
+</div>
+<div class="justify docutils container">
+<p>Finally, perform a NPT (constant number of particles, constant pressure,
+constant temperature) equilibration run, using this <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/inputs/npt.mdp" target="_blank">npt file</a>:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/npt.mdp<span class="w"> </span>-c<span class="w"> </span>nvt.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>npt
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>npt<span class="w"> </span>-v
+</pre></div>
+</div>
 <div class="mail admonition">
 <p class="admonition-title">Contact me</p>
 <p><a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> me if you have any question or suggestion about these tutorials.</p>
 </div>
+</section>
 </section>
 </section>
 
@@ -659,7 +718,10 @@ within the <em>ff/</em> folder.</p>
 <li><a class="reference internal" href="#pull-on-the-peg">Pull on the PEG</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#peg-molecule-in-water">PEG molecule in water</a></li>
+<li><a class="reference internal" href="#peg-molecule-in-water">PEG molecule in water</a><ul>
+<li><a class="reference internal" href="#equilibrating-the-system">Equilibrating the system</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
