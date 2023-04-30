@@ -350,9 +350,9 @@ Solvation energy measurement
 
     Within the 'solvation/' folder, create an 'inputs/'
     folders. Copy the two following
-    |solvation-nvt-bis.mdp| and |solvation-pro.mdp| files in it.
+    |solvation-npt-bis.mdp| and |solvation-pro.mdp| files in it.
 
-.. |solvation-nvt-bis.mdp| raw:: html
+.. |solvation-npt-bis.mdp| raw:: html
 
     <a href="../../../../inputs/solvationenergy/solvation/inputs/npt_bis.mdp" target="_blank">npt_bis.mdp</a>
 
