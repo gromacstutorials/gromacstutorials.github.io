@@ -5,6 +5,7 @@
 ; Include forcefield parameters
 #include "ff/charmm35r.itp"
 #include "ff/peg.itp"
+#include "ff/tip3p.itp
 
 [ system ]
 ; Name
@@ -13,4 +14,4 @@ PEG in water
 [ molecules ]
 ; Compound        #mols
   PEG             1
-  SOL               853
+  SOL             853
