@@ -477,6 +477,83 @@ contains 2 additional group, with one oxygen atom each:</p>
 5
 </pre></div>
 </div>
+<div class="justify docutils container">
+<p>Then, duplicate the <code class="docutils literal notranslate"><span class="pre">nvt.mdp</span></code> file, call the duplicate <code class="docutils literal notranslate"><span class="pre">pull.mdp</span></code>.
+Remove the <code class="docutils literal notranslate"><span class="pre">comm-mode</span> <span class="pre">=</span> <span class="pre">angular</span></code> line. Then, add the following lines
+to <code class="docutils literal notranslate"><span class="pre">pull.mdp</span></code>:</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in pulled-peg-in-vacuum/inputs/pull.mdp</em></span><a class="headerlink" href="#id5" title="Permalink to this code">#</a></div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>pull = yes
+pull-coord1-type = constant-force
+pull-ncoords = 1
+pull-ngroups = 2
+pull-group1-name = End1
+pull-group2-name = End2
+pull-coord1-groups = 1 2
+pull-coord1-geometry = direction-periodic
+pull-coord1-dim = N N Y
+pull-coord1-vec = 0 0 1
+pull-coord1-k = 50
+pull-coord1-start = yes
+pull-print-com = yes
+</pre></div>
+</div>
+</div>
+<div class="justify docutils container">
+<p>These lines are ensuring that a force is applied along the <em>z</em> direction
+to both groups <em>End1</em> and <em>End2</em>. Turn off the velocity generator
+as well:</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text"><em>to be modified in pulled-peg-in-vacuum/inputs/pull.mdp</em></span><a class="headerlink" href="#id6" title="Permalink to this code">#</a></div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gen_vel = no
+</pre></div>
+</div>
+</div>
+<div class="justify docutils container">
+<p>Re-equilibrate the system using the previous <em>npt.mdp</em> script, and then
+run the <em>pull.mdp</em> file:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/nvt.mdp<span class="w"> </span>-c<span class="w"> </span>peg-centered.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>nvt<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">1</span>
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>nvt
+
+gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/pull.mdp<span class="w"> </span>-c<span class="w"> </span>nvt.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>pull<span class="w"> </span>-n<span class="w"> </span>index.ndx
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>pull<span class="w"> </span>-px<span class="w"> </span>position.xvg<span class="w"> </span>-pf<span class="w"> </span>force.xvg
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Here, the <em>-n index.ndx</em> command is used to refer to the previously created
+index file, so that GROMACS finds the <em>End1</em> and <em>End2</em> groups.
+The <em>-px position_$force.xvg</em> and <em>-pf force_$force.xvg</em> are used
+to print positions and forces of the 2 end groups in files.</p>
+</div>
+<div class="justify docutils container">
+<p>Looking at the evolution of the position with time, one can see
+that the polymer stretches very quickly:</p>
+</div>
+<figure class="align-default">
+<img alt="End to end position from molecular dynamics simulation in GROMACS" class="only-light" src="../_images/position-light.png" />
+</figure>
+<figure class="align-default" id="id7">
+<img alt="End to end position from molecular dynamics simulation in GROMACS" class="only-dark" src="../_images/position-dark.png" />
+<figcaption>
+<p><span class="caption-text">Evolution of the end-to-end distance with time.</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="justify docutils container">
+<p>You can also visualize the PEG molecule during the stretching, this is
+what I see:</p>
+</div>
+<figure class="align-default">
+<img alt="PEG polymer for molecular dynamics simulation in GROMACS" class="only-light" src="../_images/light-PEG-stretched.png" />
+</figure>
+<figure class="align-default" id="id8">
+<img alt="PEG polymer for molecular dynamics simulation in GROMACS" class="only-dark" src="../_images/dark-PEG-stretched.png" />
+<figcaption>
+<p><span class="caption-text">The PEG molecule under stretching in vacuum.</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
 <div class="mail admonition">
 <p class="admonition-title">Contact me</p>
 <p><a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> me if you have any question or suggestion about these tutorials.</p>
