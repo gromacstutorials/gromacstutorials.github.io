@@ -53,16 +53,7 @@ Create the configuration file
 
 ..  container:: justify
 
-    Select 'system' for both centering and output. If you
-    open the single_ethanol.gro file with VMD, you will
-    see (after some aesthetical improvement):
-
-.. figure:: figures/ethanoladsorption/single_ethanol.png
-    :alt: GROMACS tutorial : Ethanol molecule with VMD
-    :height: 250
-
-    Ethanol molecule with carbon atoms in gray, oxygen
-    atom in red, and hydrogen atoms in white.
+    Select 'system' for both centering and output.
 
 Replicate the ethanol molecule
 ------------------------------
@@ -82,9 +73,15 @@ Replicate the ethanol molecule
     If you open the replicated_ethanol.gro file with VMD,
     you will see:
 
-.. figure:: figures/ethanoladsorption/replicated_ethanol.png
-    :alt: GROMACS tutorial : Replicated ethanol molecule with VMD
-    :height: 250
+.. figure:: figures/ethanoladsorption/replicated-ethanol-light.png
+    :alt: Gromacs HBC (graphene) molecule after minimisation in water
+    :class: only-light
+    :height: 450
+
+.. figure:: figures/ethanoladsorption/replicated-ethanol-dark.png
+    :alt: Gromacs HBC (graphene) molecule after minimisation in water
+    :class: only-dark
+    :height: 450
 
     Replicated ethanol molecules with carbon atoms in
     gray, oxygen atom in red, and hydrogen atoms in white.
@@ -164,11 +161,17 @@ Add the water
     The created 'solvated.gro' file contains the positions
     of both Ethanol and water molecules, it looks like that:
 
-.. figure:: figures/ethanoladsorption/solvated.png
+.. figure:: figures/ethanoladsorption/solvated-light.png
     :alt: GROMACS tutorial : Ethanol molecules in water with VMD
-    :height: 250
+    :class: only-light
+    :height: 450
 
-    Replicated ethanol molecules within water.
+.. figure:: figures/ethanoladsorption/solvated-dark.png
+    :alt: GROMACS tutorial : Ethanol molecules in water with VMD
+    :class: only-dark
+    :height: 450
+
+    Replicated ethanol molecules within water. Water molecules appear in light blue.
 
 ..  container:: justify
 
@@ -235,9 +238,15 @@ Energy minimization
 
     This is what I see:
 
-.. figure:: figures/ethanoladsorption/min.gif
+.. figure:: figures/ethanoladsorption/video-min-light.webp
     :alt: GROMACS tutorial : Ethanol molecules during minimisation
-    :height: 250
+    :class: only-light
+    :height: 450
+
+.. figure:: figures/ethanoladsorption/video-min-dark.webp
+    :alt: GROMACS tutorial : Ethanol molecules during minimisation
+    :class: only-dark
+    :height: 450
 
     Movie showing the motion of the atoms during the
     energy minimization. The two fluid/vacuum interfaces
@@ -303,11 +312,15 @@ Equilibration
     The density profile I get for both water and ethanol
     during the last 500 ps of the 1 ns run is :
 
-.. figure:: figures/ethanoladsorption/density_profile.png
+.. figure:: figures/ethanoladsorption/position-light.png
     :alt: GROMACS tutorial : Density profile water and ethanol
-    :height: 250
+    :class: only-light
 
-    Water and ethanol density profile along x.
+.. figure:: figures/ethanoladsorption/position-dark.png
+    :alt: GROMACS tutorial : Density profile water and ethanol
+    :class: only-dark
+
+    Water (blue) and ethanol (gray) density profile along the x direction.
 
     The density profiles show an excess of
     ethanol at the 2 interfaces, which is expected as
