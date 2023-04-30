@@ -343,7 +343,7 @@ display dof_focaldist 0.700000
 mol new conf.gro type gro first 0 last -1 step 1 filebonds 1 autobonds 1 waitfor all
 mol delrep 0 top
 mol representation DynamicBonds 1.600000 0.300000 37.000000
-mol color Name
+mol color Element
 mol selection {all}
 mol material Opaque
 mol addrep top
@@ -376,8 +376,8 @@ mol clipplane center 5 0 top {0.0 0.0 0.0}
 mol clipplane color  5 0 top {0.5 0.5 0.5 }
 mol clipplane normal 5 0 top {0.0 0.0 1.0}
 mol clipplane status 5 0 top {0}
-mol representation VDW 0.200000 52.000000
-mol color Name
+mol representation VDW 0.300000 52.000000
+mol color Element
 mol selection {all}
 mol material Opaque
 mol addrep top
@@ -444,8 +444,111 @@ mol clipplane center 5 2 top {0.0 0.0 0.0}
 mol clipplane color  5 2 top {0.5 0.5 0.5 }
 mol clipplane normal 5 2 top {0.0 0.0 1.0}
 mol clipplane status 5 2 top {0}
+mol showrep top 2 0
+mol representation VDW 0.900000 52.000000
+mol color Element
+mol selection {type 1}
+mol material Opaque
+mol addrep top
+mol selupdate 3 top 0
+mol colupdate 3 top 0
+mol scaleminmax top 3 0.000000 0.000000
+mol smoothrep top 3 0
+mol drawframes top 3 {now}
+mol clipplane center 0 3 top {0.0 0.0 0.0}
+mol clipplane color  0 3 top {0.5 0.5 0.5 }
+mol clipplane normal 0 3 top {0.0 0.0 1.0}
+mol clipplane status 0 3 top {0}
+mol clipplane center 1 3 top {0.0 0.0 0.0}
+mol clipplane color  1 3 top {0.5 0.5 0.5 }
+mol clipplane normal 1 3 top {0.0 0.0 1.0}
+mol clipplane status 1 3 top {0}
+mol clipplane center 2 3 top {0.0 0.0 0.0}
+mol clipplane color  2 3 top {0.5 0.5 0.5 }
+mol clipplane normal 2 3 top {0.0 0.0 1.0}
+mol clipplane status 2 3 top {0}
+mol clipplane center 3 3 top {0.0 0.0 0.0}
+mol clipplane color  3 3 top {0.5 0.5 0.5 }
+mol clipplane normal 3 3 top {0.0 0.0 1.0}
+mol clipplane status 3 3 top {0}
+mol clipplane center 4 3 top {0.0 0.0 0.0}
+mol clipplane color  4 3 top {0.5 0.5 0.5 }
+mol clipplane normal 4 3 top {0.0 0.0 1.0}
+mol clipplane status 4 3 top {0}
+mol clipplane center 5 3 top {0.0 0.0 0.0}
+mol clipplane color  5 3 top {0.5 0.5 0.5 }
+mol clipplane normal 5 3 top {0.0 0.0 1.0}
+mol clipplane status 5 3 top {0}
+mol representation VDW 0.900000 52.000000
+mol color Element
+mol selection {type 4}
+mol material Opaque
+mol addrep top
+mol selupdate 4 top 0
+mol colupdate 4 top 0
+mol scaleminmax top 4 0.000000 0.000000
+mol smoothrep top 4 0
+mol drawframes top 4 {now}
+mol clipplane center 0 4 top {0.0 0.0 0.0}
+mol clipplane color  0 4 top {0.5 0.5 0.5 }
+mol clipplane normal 0 4 top {0.0 0.0 1.0}
+mol clipplane status 0 4 top {0}
+mol clipplane center 1 4 top {0.0 0.0 0.0}
+mol clipplane color  1 4 top {0.5 0.5 0.5 }
+mol clipplane normal 1 4 top {0.0 0.0 1.0}
+mol clipplane status 1 4 top {0}
+mol clipplane center 2 4 top {0.0 0.0 0.0}
+mol clipplane color  2 4 top {0.5 0.5 0.5 }
+mol clipplane normal 2 4 top {0.0 0.0 1.0}
+mol clipplane status 2 4 top {0}
+mol clipplane center 3 4 top {0.0 0.0 0.0}
+mol clipplane color  3 4 top {0.5 0.5 0.5 }
+mol clipplane normal 3 4 top {0.0 0.0 1.0}
+mol clipplane status 3 4 top {0}
+mol clipplane center 4 4 top {0.0 0.0 0.0}
+mol clipplane color  4 4 top {0.5 0.5 0.5 }
+mol clipplane normal 4 4 top {0.0 0.0 1.0}
+mol clipplane status 4 4 top {0}
+mol clipplane center 5 4 top {0.0 0.0 0.0}
+mol clipplane color  5 4 top {0.5 0.5 0.5 }
+mol clipplane normal 5 4 top {0.0 0.0 1.0}
+mol clipplane status 5 4 top {0}
+mol representation VDW 0.700000 52.000000
+mol color Element
+mol selection {type 5}
+mol material Opaque
+mol addrep top
+mol selupdate 5 top 0
+mol colupdate 5 top 0
+mol scaleminmax top 5 0.000000 0.000000
+mol smoothrep top 5 0
+mol drawframes top 5 {now}
+mol clipplane center 0 5 top {0.0 0.0 0.0}
+mol clipplane color  0 5 top {0.5 0.5 0.5 }
+mol clipplane normal 0 5 top {0.0 0.0 1.0}
+mol clipplane status 0 5 top {0}
+mol clipplane center 1 5 top {0.0 0.0 0.0}
+mol clipplane color  1 5 top {0.5 0.5 0.5 }
+mol clipplane normal 1 5 top {0.0 0.0 1.0}
+mol clipplane status 1 5 top {0}
+mol clipplane center 2 5 top {0.0 0.0 0.0}
+mol clipplane color  2 5 top {0.5 0.5 0.5 }
+mol clipplane normal 2 5 top {0.0 0.0 1.0}
+mol clipplane status 2 5 top {0}
+mol clipplane center 3 5 top {0.0 0.0 0.0}
+mol clipplane color  3 5 top {0.5 0.5 0.5 }
+mol clipplane normal 3 5 top {0.0 0.0 1.0}
+mol clipplane status 3 5 top {0}
+mol clipplane center 4 5 top {0.0 0.0 0.0}
+mol clipplane color  4 5 top {0.5 0.5 0.5 }
+mol clipplane normal 4 5 top {0.0 0.0 1.0}
+mol clipplane status 4 5 top {0}
+mol clipplane center 5 5 top {0.0 0.0 0.0}
+mol clipplane color  5 5 top {0.5 0.5 0.5 }
+mol clipplane normal 5 5 top {0.0 0.0 1.0}
+mol clipplane status 5 5 top {0}
 mol rename top conf.gro
-set viewpoints([molinfo top]) {{{1 0 0 -0.23} {0 1 0 -0.0277778} {0 0 1 -0.266667} {0 0 0 1}} {{-0.261423 -0.938193 0.226827 0} {-0.398517 -0.109123 -0.910646 0} {0.879115 -0.328459 -0.34536 0} {0 0 0 1}} {{0.413246 0 0 0} {0 0.413246 0 0} {0 0 0.413246 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 -0.0500001} {0 0 1 0} {0 0 0 1}}}
+set viewpoints([molinfo top]) {{{1 0 0 -0.23} {0 1 0 -0.0277778} {0 0 1 -0.266667} {0 0 0 1}} {{-0.773277 -0.528334 0.350581 0} {-0.394946 -0.0312092 -0.918173 0} {0.496042 -0.848466 -0.184532 0} {0 0 0 1}} {{0.412585 0 0 0} {0 0.412585 0 0} {0 0 0.412585 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 -0.0500001} {0 0 1 0} {0 0 0 1}}}
 lappend viewplist [molinfo top]
 set topmol [molinfo top]
 # done with molecule 1
@@ -474,6 +577,7 @@ color scale colors BlkW {0.0 0.0 0.0} {0.5 0.5 0.5} {1.0 1.0 1.0}
 color scale colors WBlk {1.0 1.0 1.0} {0.5 0.5 0.5} {0.0 0.0 0.0}
   color scale method RWB
   set colorcmds {
+    {color Display {Background} white}
     {color Display {BackgroundTop} black}
     {color Display {BackgroundBot} blue2}
     {color Display {FPS} white}
@@ -620,6 +724,7 @@ color scale colors WBlk {1.0 1.0 1.0} {0.5 0.5 0.5} {0.0 0.0 0.0}
   color change rgb 6 0.7699999809265137 0.7699999809265137 0.7599999904632568
   color change rgb 7 0.0 1.0 0.0
   color change rgb 9 1.0 0.6000000238418579 0.6000000238418579
+  color change rgb 10 0.17000000178813934 0.550000011920929 0.8999999761581421
   color change rgb 11 0.6499999761581421 0.0 0.6499999761581421
   color change rgb 12 0.5 0.8999999761581421 0.4000000059604645
   color change rgb 13 0.8999999761581421 0.4000000059604645 0.699999988079071
