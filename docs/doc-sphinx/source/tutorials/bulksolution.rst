@@ -328,6 +328,8 @@ The input files
     The rest of the tutorial focusses on writing the input files and performing the
     molecular dynamics simulation. 
 
+.. include:: ../contact/supportme.rst
+
 Energy minimization
 ===================
 
