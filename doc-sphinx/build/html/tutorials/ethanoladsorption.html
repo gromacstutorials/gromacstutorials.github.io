@@ -586,7 +586,7 @@ chosen, or even the full ethanol molecule.</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/min.mdp<span class="w"> </span>-c<span class="w"> </span>../preparation/nvt_1ns.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>min<span class="w"> </span>-pp<span class="w"> </span>min<span class="w"> </span>-po<span class="w"> </span>min<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">1</span><span class="w"> </span>-n<span class="w"> </span>index.ndx
 gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>min
-/gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/nvt.mdp<span class="w"> </span>-c<span class="w"> </span>min.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>nvt<span class="w"> </span>-pp<span class="w"> </span>nvt<span class="w"> </span>-po<span class="w"> </span>nvt<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">1</span><span class="w"> </span>-n<span class="w"> </span>index.ndx
+gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/nvt.mdp<span class="w"> </span>-c<span class="w"> </span>min.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>nvt<span class="w"> </span>-pp<span class="w"> </span>nvt<span class="w"> </span>-po<span class="w"> </span>nvt<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">1</span><span class="w"> </span>-n<span class="w"> </span>index.ndx
 gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>nvt
 gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/pro.mdp<span class="w"> </span>-c<span class="w"> </span>nvt.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>pro<span class="w"> </span>-pp<span class="w"> </span>pro<span class="w"> </span>-po<span class="w"> </span>pro<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">1</span><span class="w"> </span>-n<span class="w"> </span>index.ndx
 gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>pro
@@ -597,8 +597,11 @@ gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </spa
 from the rest of the fluid until the distance between
 the center-of-mass of the 2 groups is 2 nm:</p>
 </div>
+<figure class="align-default">
+<a class="only-light reference internal image-reference" href="../_images/video-pulled-light-2.webp"><img alt="GROMACS tutorial : ethanol molecule being pulled" class="only-light" src="../_images/video-pulled-light-2.webp" style="height: 400px;" /></a>
+</figure>
 <figure class="align-default" id="id5">
-<a class="reference internal image-reference" href="../_images/umbrella.gif"><img alt="GROMACS tutorial : thanol molecule being pulled" src="../_images/umbrella.gif" style="height: 250px;" /></a>
+<a class="only-dark reference internal image-reference" href="../_images/video-pulled-dark-2.webp"><img alt="GROMACS tutorial : ethanol molecule being pulled" class="only-dark" src="../_images/video-pulled-dark-2.webp" style="height: 400px;" /></a>
 <figcaption>
 <p><span class="caption-text">Ethanol molecule being pulled from the rest of the
 fluid during minimisation and nvt equilibration.</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>

@@ -461,7 +461,7 @@ Imposed forcing
 
     gmx grompp -f inputs/min.mdp -c ../preparation/nvt_1ns.gro -p topol.top -o min -pp min -po min -maxwarn 1 -n index.ndx
     gmx mdrun -v -deffnm min
-    /gmx grompp -f inputs/nvt.mdp -c min.gro -p topol.top -o nvt -pp nvt -po nvt -maxwarn 1 -n index.ndx 
+    gmx grompp -f inputs/nvt.mdp -c min.gro -p topol.top -o nvt -pp nvt -po nvt -maxwarn 1 -n index.ndx 
     gmx mdrun -v -deffnm nvt
     gmx grompp -f inputs/pro.mdp -c nvt.gro -p topol.top -o pro -pp pro -po pro -maxwarn 1 -n index.ndx 
     gmx mdrun -v -deffnm pro
@@ -472,9 +472,15 @@ Imposed forcing
     from the rest of the fluid until the distance between
     the center-of-mass of the 2 groups is 2 nm:
 
-.. figure:: figures/ethanoladsorption/umbrella.gif
-    :alt: GROMACS tutorial : thanol molecule being pulled
-    :height: 250
+.. figure:: figures/ethanoladsorption/video-pulled-light-2.webp
+    :alt: GROMACS tutorial : ethanol molecule being pulled
+    :class: only-light
+    :height: 400
+
+.. figure:: figures/ethanoladsorption/video-pulled-dark-2.webp
+    :alt: GROMACS tutorial : ethanol molecule being pulled
+    :class: only-dark
+    :height: 400
 
     Ethanol molecule being pulled from the rest of the
     fluid during minimisation and nvt equilibration.
