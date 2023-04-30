@@ -491,9 +491,13 @@ Imposed forcing
     between the 2 groups is measured over time. Let us
     plot the histogram of this distance:
 
-.. figure:: figures/ethanoladsorption/probability_position.png
+.. figure:: figures/ethanoladsorption/probability-light.png
     :alt: GROMACS tutorial : Probability distribution of the distance
-    :height: 250
+    :class: only-light
+
+.. figure:: figures/ethanoladsorption/probability-dark.png
+    :alt: GROMACS tutorial : Probability distribution of the distance
+    :class: only-dark
 
     Probability distribution of the distance between the
     two center-of-mass. Short (50 ps) and long (1.5 ns)
@@ -505,9 +509,10 @@ Imposed forcing
     If you have a good computer, feel free to run longer
     production run than 50 ps.
 
-    The distribution is not centered around x = 2 nm
-    because of the interaction between the CO2 and the
-    rest of the fluid.
+    Note that the distribution is not centered around x = 2 nm.
+    This is due to the interaction between the pulled ethanol molecule and the
+    rest of the fluid, that are shifting away the average position of the 
+    ethanol molecule from the center of harmonic potential.
 
 Free energy profile calculation
 ===============================
