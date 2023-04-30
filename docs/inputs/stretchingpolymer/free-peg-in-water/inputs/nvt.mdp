@@ -1,6 +1,6 @@
 integrator = md 
 dt = 0.002
-nsteps = 500000
+nsteps = 10000
 
 nstenergy = 1000
 nstlog = 1000
@@ -16,13 +16,12 @@ vdwtype = Cut-off
 rvdw = 1.0
 
 tcoupl = v-rescale
-tau_t = 0.1
-ref_t = 300
-tc_grps = PEG
+tau_t = 0.1 0.1
+ref_t = 300 300
+tc_grps = PEG Water
 
 gen_vel = yes
 gen-temp = 300
 gen-seed = 65823
 
-comm-mode = angular
-
+comm_mode = linear

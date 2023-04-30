@@ -2,16 +2,16 @@
 ;	File 'mdout.mdp' was generated
 ;	By user: simon (1000)
 ;	On host: simon-laptop
-;	At date: Sun Apr 30 13:05:31 2023
+;	At date: Sun Apr 30 16:46:19 2023
 ;
 ;	Created by:
 ;	             :-) GROMACS - gmx grompp, 2022.2-Ubuntu_2022.2_1 (-:
 ;	
 ;	Executable:   /usr/bin/gmx
 ;	Data prefix:  /usr
-;	Working dir:  /home/simon/Git/Gromacs/gromacstutorials.github.io/docs/inputs/stretchingpolymer/peg-in-vacuum
+;	Working dir:  /home/simon/Git/Gromacs/gromacstutorials.github.io/docs/inputs/stretchingpolymer/free-peg-in-water
 ;	Command line:
-;	  gmx grompp -f inputs/nvt.mdp -c peg.gro -p topol.top -o nvt -maxwarn 1
+;	  gmx grompp -f inputs/npt.mdp -c nvt.gro -p topol.top -o npt
 
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
@@ -25,7 +25,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.002
-nsteps                   = 500000
+nsteps                   = 50000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -33,7 +33,7 @@ simulation-part          = 1
 ; Multiple time-stepping
 mts                      = no
 ; mode for center of mass motion removal
-comm-mode                = angular
+comm_mode                = linear
 ; number of steps for center of mass motion removal
 nstcomm                  = 100
 ; group(s) for center of mass motion removal
@@ -136,18 +136,18 @@ nsttcouple               = -1
 nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
 ; Groups to couple separately
-tc_grps                  = PEG
+tc_grps                  = PEG Water
 ; Time constant (ps) and reference temperature (K)
-tau_t                    = 0.1
-ref_t                    = 300
+tau_t                    = 0.1 0.1
+ref_t                    = 300 300
 ; pressure coupling     
-pcoupl                   = No
-pcoupltype               = Isotropic
+pcoupl                   = parrinello-rahman
+pcoupltype               = isotropic
 nstpcouple               = -1
 ; Time constant (ps), compressibility (1/bar) and reference P (bar)
-tau-p                    = 1
-compressibility          = 
-ref-p                    = 
+tau-p                    = 0.5
+compressibility          = 4.5e-5
+ref-p                    = 1.0
 ; Scaling of reference coordinates, No, All or COM
 refcoord-scaling         = No
 
@@ -167,9 +167,9 @@ annealing-time           =
 annealing-temp           = 
 
 ; GENERATE VELOCITIES FOR STARTUP RUN
-gen_vel                  = yes
+gen_vel                  = no
 gen-temp                 = 300
-gen-seed                 = 65823
+gen-seed                 = 2019295213
 
 ; OPTIONS FOR BONDS    
 constraints              = hbonds
