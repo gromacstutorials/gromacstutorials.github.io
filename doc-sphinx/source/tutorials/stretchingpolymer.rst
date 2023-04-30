@@ -550,4 +550,13 @@ Equilibrating the system
     Notice that the angle distribution is slightly shifted in water, compared to
     when the peg molecule is in vacuum.
 
+Pull on the PEG
+---------------
+
+..  container:: justify
+
+    Using the same procedure as previously, let us apply a force to
+    the polymer ends and pull it inside water. Do not forget to 
+    extend the box to make space for the pulling.
+
 .. include:: ../contact/contactme.rst
