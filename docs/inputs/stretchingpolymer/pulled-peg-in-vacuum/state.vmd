@@ -323,7 +323,7 @@ display eyesep       0.065000
 display focallength  2.000000
 display height       1.000000
 display distance     -2.000000
-display projection   Perspective
+display projection   Orthographic
 display nearclip set 0.500000
 display farclip  set 10.000000
 display depthcue   off
@@ -340,7 +340,7 @@ display aodirect 0.300000
 display dof off
 display dof_fnumber 64.000000
 display dof_focaldist 0.700000
-mol new peg.gro type gro first 0 last -1 step 1 filebonds 1 autobonds 1 waitfor all
+mol new pull.gro type gro first 0 last -1 step 1 filebonds 1 autobonds 1 waitfor all
 mol delrep 0 top
 mol representation VDW 0.900000 42.000000
 mol color Name
@@ -444,8 +444,8 @@ mol clipplane center 5 2 top {0.0 0.0 0.0}
 mol clipplane color  5 2 top {0.5 0.5 0.5 }
 mol clipplane normal 5 2 top {0.0 0.0 1.0}
 mol clipplane status 5 2 top {0}
-mol rename top peg.gro
-set viewpoints([molinfo top]) {{{1 0 0 -14.3992} {0 1 0 -14.2021} {0 0 1 -14.4426} {0 0 0 1}} {{0.285069 -0.84434 -0.45368 0} {0.174733 -0.419612 0.890727 0} {-0.942448 -0.333191 0.0279155 0} {0 0 0 1}} {{0.0303215 0 0 0} {0 0.0303215 0 0} {0 0 0.0303215 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}}}
+mol rename top pull.gro
+set viewpoints([molinfo top]) {{{1 0 0 -14.4414} {0 1 0 -14.1194} {0 0 1 -39.39} {0 0 0 1}} {{-0.031424 -0.00987701 -0.999457 0} {0.697628 -0.716303 -0.0148567 0} {-0.715767 -0.697719 0.029401 0} {0 0 0 1}} {{0.0446731 0 0 0} {0 0.0446731 0 0} {0 0 0.0446731 0} {0 0 0 1}} {{1 0 0 0} {0 1 0 0} {0 0 1 0} {0 0 0 1}}}
 lappend viewplist [molinfo top]
 set topmol [molinfo top]
 # done with molecule 0
@@ -474,7 +474,6 @@ color scale colors BlkW {0.0 0.0 0.0} {0.5 0.5 0.5} {1.0 1.0 1.0}
 color scale colors WBlk {1.0 1.0 1.0} {0.5 0.5 0.5} {0.0 0.0 0.0}
   color scale method RWB
   set colorcmds {
-    {color Display {Background} white}
     {color Display {BackgroundTop} black}
     {color Display {BackgroundBot} blue2}
     {color Display {FPS} white}
@@ -593,6 +592,7 @@ color scale colors WBlk {1.0 1.0 1.0} {0.5 0.5 0.5} {0.0 0.0 0.0}
     {color Segname {} blue}
     {color Conformation {all} blue}
     {color Molecule {0} blue}
+    {color Molecule {pull.gro} blue}
     {color Structure {3_10_Helix} blue}
     {color Surface {Grasp} gray}
     {color Labels {Springs} orange}

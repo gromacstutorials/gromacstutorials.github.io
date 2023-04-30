@@ -2,16 +2,16 @@
 ;	File 'mdout.mdp' was generated
 ;	By user: simon (1000)
 ;	On host: simon-laptop
-;	At date: Sun Apr 30 13:05:31 2023
+;	At date: Sun Apr 30 15:33:54 2023
 ;
 ;	Created by:
 ;	             :-) GROMACS - gmx grompp, 2022.2-Ubuntu_2022.2_1 (-:
 ;	
 ;	Executable:   /usr/bin/gmx
 ;	Data prefix:  /usr
-;	Working dir:  /home/simon/Git/Gromacs/gromacstutorials.github.io/docs/inputs/stretchingpolymer/peg-in-vacuum
+;	Working dir:  /home/simon/Git/Gromacs/gromacstutorials.github.io/docs/inputs/stretchingpolymer/pulled-peg-in-vacuum
 ;	Command line:
-;	  gmx grompp -f inputs/nvt.mdp -c peg.gro -p topol.top -o nvt -maxwarn 1
+;	  gmx grompp -f inputs/pull.mdp -c nvt.gro -p topol.top -o pull -n index.ndx
 
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
@@ -33,7 +33,7 @@ simulation-part          = 1
 ; Multiple time-stepping
 mts                      = no
 ; mode for center of mass motion removal
-comm-mode                = angular
+comm-mode                = Linear
 ; number of steps for center of mass motion removal
 nstcomm                  = 100
 ; group(s) for center of mass motion removal
@@ -167,7 +167,7 @@ annealing-time           =
 annealing-temp           = 
 
 ; GENERATE VELOCITIES FOR STARTUP RUN
-gen_vel                  = yes
+gen_vel                  = no
 gen-temp                 = 300
 gen-seed                 = 65823
 
@@ -207,7 +207,43 @@ wall-density             =
 wall-ewald-zfac          = 3
 
 ; COM PULLING          
-pull                     = no
+pull                     = yes
+; Cylinder radius for dynamic reaction force groups (nm)
+pull-cylinder-r          = 1.5
+pull-constr-tol          = 1e-06
+pull-print-com           = yes
+pull-print-ref-value     = no
+pull-print-components    = no
+pull-nstxout             = 50
+pull-nstfout             = 50
+pull-pbc-ref-prev-step-com = no
+pull-xout-average        = no
+pull-fout-average        = no
+; Number of pull groups 
+pull-ngroups             = 2
+; Number of pull coordinates
+pull-ncoords             = 1
+; Group and coordinate parameters
+pull-group1-name         = End1
+pull-group1-weights      = 
+pull-group1-pbcatom      = 0
+pull-group2-name         = End2
+pull-group2-weights      = 
+pull-group2-pbcatom      = 0
+pull-coord1-type         = constant-force
+pull-coord1-potential-provider = 
+pull-coord1-expression   = 
+pull-coord1-dx           = 1e-09
+pull-coord1-geometry     = direction-periodic
+pull-coord1-groups       = 1 2
+pull-coord1-dim          = N N Y
+pull-coord1-origin       = 0.0 0.0 0.0
+pull-coord1-vec          = 0 0 1
+pull-coord1-start        = yes
+pull-coord1-init         = 0
+pull-coord1-rate         = 0
+pull-coord1-k            = 50
+pull-coord1-kB           = 50
 
 ; AWH biasing          
 awh                      = no

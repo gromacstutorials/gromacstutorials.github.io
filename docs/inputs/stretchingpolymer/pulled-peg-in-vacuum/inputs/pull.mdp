@@ -1,0 +1,39 @@
+integrator = md 
+dt = 0.002
+nsteps = 500000
+
+nstenergy = 1000
+nstlog = 1000
+nstxout = 1000
+
+constraints = hbonds 
+
+coulombtype = pme
+rcoulomb = 1.0
+rlist = 1.0
+
+vdwtype = Cut-off 
+rvdw = 1.0
+
+tcoupl = v-rescale
+tau_t = 0.1
+ref_t = 300
+tc_grps = PEG
+
+gen_vel = no
+gen-temp = 300
+gen-seed = 65823
+
+pull = yes
+pull-coord1-type = constant-force
+pull-ncoords = 1
+pull-ngroups = 2
+pull-group1-name = End1
+pull-group2-name = End2
+pull-coord1-groups = 1 2
+pull-coord1-geometry = direction-periodic
+pull-coord1-dim = N N Y
+pull-coord1-vec = 0 0 1
+pull-coord1-k = 50
+pull-coord1-start = yes
+pull-print-com = yes

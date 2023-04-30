@@ -313,4 +313,89 @@ Pull on the PEG
     [ End2 ]
     5
 
+..  container:: justify
+
+    Then, duplicate the ``nvt.mdp`` file, call the duplicate ``pull.mdp``.
+    Remove the ``comm-mode = angular`` line. Then, add the following lines
+    to ``pull.mdp``:
+
+..  code-block:: bw
+    :caption: *to be copied in pulled-peg-in-vacuum/inputs/pull.mdp*
+
+    pull = yes
+    pull-coord1-type = constant-force
+    pull-ncoords = 1
+    pull-ngroups = 2
+    pull-group1-name = End1
+    pull-group2-name = End2
+    pull-coord1-groups = 1 2
+    pull-coord1-geometry = direction-periodic
+    pull-coord1-dim = N N Y
+    pull-coord1-vec = 0 0 1
+    pull-coord1-k = 50
+    pull-coord1-start = yes
+    pull-print-com = yes
+
+..  container:: justify
+
+    These lines are ensuring that a force is applied along the *z* direction
+    to both groups *End1* and *End2*. Turn off the velocity generator
+    as well:
+
+..  code-block:: bw
+    :caption: *to be modified in pulled-peg-in-vacuum/inputs/pull.mdp*
+
+    gen_vel = no
+
+..  container:: justify
+
+    Re-equilibrate the system using the previous *npt.mdp* script, and then 
+    run the *pull.mdp* file:
+
+..  code-block:: bash
+
+    gmx grompp -f inputs/nvt.mdp -c peg-centered.gro -p topol.top -o nvt -maxwarn 1
+    gmx mdrun -v -deffnm nvt
+
+    gmx grompp -f inputs/pull.mdp -c nvt.gro -p topol.top -o pull -n index.ndx
+    gmx mdrun -v -deffnm pull -px position.xvg -pf force.xvg
+
+..  container:: justify
+
+    Here, the *-n index.ndx* command is used to refer to the previously created 
+    index file, so that GROMACS finds the *End1* and *End2* groups.
+    The *-px position_$force.xvg* and *-pf force_$force.xvg* are used 
+    to print positions and forces of the 2 end groups in files. 
+
+..  container:: justify
+
+    Looking at the evolution of the position with time, one can see
+    that the polymer stretches very quickly:
+
+.. figure:: figures/stretchingpolymer/position-light.png
+    :alt: End to end position from molecular dynamics simulation in GROMACS
+    :class: only-light
+
+.. figure:: figures/stretchingpolymer/position-dark.png
+    :alt: End to end position from molecular dynamics simulation in GROMACS
+    :class: only-dark
+
+    Evolution of the end-to-end distance with time. 
+
+..  container:: justify
+
+    You can also visualize the PEG molecule during the stretching, this is
+    what I see:
+
+.. figure:: figures/stretchingpolymer/light-PEG-stretched.png
+   :alt: PEG polymer for molecular dynamics simulation in GROMACS
+   :class: only-light
+
+.. figure:: figures/stretchingpolymer/dark-PEG-stretched.png
+   :alt: PEG polymer for molecular dynamics simulation in GROMACS
+   :class: only-dark
+
+   The PEG molecule under stretching in vacuum.
+
+
 .. include:: ../contact/contactme.rst
