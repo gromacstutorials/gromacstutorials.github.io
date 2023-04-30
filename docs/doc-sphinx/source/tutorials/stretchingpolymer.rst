@@ -48,7 +48,7 @@ PEG molecule in vacuum
 
 .. |download_H2O.data| raw:: html
 
-   <a href="../../../../inputs/stretchingpolymer/peg.gro" target="_blank">here</a>
+   <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/peg.gro" target="_blank">here</a>
 
 ..  container:: justify
 
@@ -101,11 +101,11 @@ PEG molecule in vacuum
 
 .. |download_charmm35r.itp| raw:: html
 
-   <a href="../../../../inputs/stretchingpolymer/ff/charmm35r.itp" target="_blank">charmm35r.itp</a>
+   <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/ff/charmm35r.itp" target="_blank">charmm35r.itp</a>
    
 .. |download_peg.itp| raw:: html
 
-   <a href="../../../../inputs/stretchingpolymer/ff/peg.itp" target="_blank">peg.itp</a>
+   <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/ff/peg.itp" target="_blank">peg.itp</a>
 
 ..  container:: justify
 
@@ -364,7 +364,7 @@ Pull on the PEG
 
     Here, the *-n index.ndx* command is used to refer to the previously created 
     index file, so that GROMACS finds the *End1* and *End2* groups.
-    The *-px position_$force.xvg* and *-pf force_$force.xvg* are used 
+    The *-px position.xvg* and *-pf force.xvg* are used 
     to print positions and forces of the 2 end groups in files. 
 
 ..  container:: justify
@@ -397,5 +397,36 @@ Pull on the PEG
 
    The PEG molecule under stretching in vacuum.
 
+PEG molecule in water
+=====================
+
+..  container:: justify
+
+    The PEG molecule is now going to be solvated in water.
+    Duplicate the *free-peg-in-vacuum/* folder, and call the 
+    copy *free-peg-in-water/*.
+
+..  container:: justify
+
+    Add water molecules to the system by using *gmx solvate*:
+
+..  code-block:: bash
+
+    gmx solvate -cp peg.gro -cs spc216.gro -o peg_h2o.gro -p topol.top
+
+..  container:: justify
+
+    Here *spc216.gro* is a default GROMACS file containing a pre-equilibrated
+    water reservoir.
+
+    Note the differences between *peg.gro* and *peg_h2o.gro*,
+    as well as the new line in *topol.top*:
+
+..  code-block:: bw
+
+    [ molecules ]
+    ; Compound        #mols
+    PEG             1
+    SOL               853
 
 .. include:: ../contact/contactme.rst
