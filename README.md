@@ -5,6 +5,11 @@ All the files generated during the tutorials can be found in the [docs/input/](d
 
 <p float="left">
   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
+  <img src="docs/doc-sphinx/source/_static/screenshot_readme_gromacs_tutorials.png" width="100%" /></a>
+</p>
+
+<p float="left">
+  <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
   <img src="docs/doc-sphinx/source/tutorials/figures/bulksolution/avatar-gromacs.png" width="32%" /></a>
 
   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/solvationenergy.html">
@@ -13,7 +18,6 @@ All the files generated during the tutorials can be found in the [docs/input/](d
    <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/ethanoladsorption.html">
   <img src="docs/doc-sphinx/source/tutorials/figures/ethanoladsorption/no-field-dark.png" width="32%" /></a>
 </p>
-
 
 ### You noticed a mistake in one of the tutorial?
 
