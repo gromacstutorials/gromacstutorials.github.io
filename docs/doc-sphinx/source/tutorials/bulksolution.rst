@@ -119,17 +119,15 @@ The input files
 ..  container:: justify
 
     In order to run the present simulation using GROMACS,
-    we need the 3 following files:
+    we need the 3 following files (or sets of files):
 
     - 1) a **configuration file** (.gro) containing the
          initial positions of the atoms and the box
          dimensions,
-    - 2) a **topology file** (.top) containing
-         information about the force field (e.g. interaction
-         parameters, molecular constraints),
-    - 3) and an **input file** (.mdp) containing the
-         parameters of the simulation (e.g. temperature,
-         timestep).
+    - 2) a **topology file** (.top) specifying the
+         location of the force field files (.itp),
+    - 3) an **input file** (.mdp) containing the
+         parameters of the simulation (e.g. temperature, timestep).
 
 
 1) The configuration file (.gro)
@@ -137,11 +135,13 @@ The input files
 
 ..  container:: justify
 
+    If you already followed the previous tutorial, :ref:`create-conf-label`,
+    simply skip this part.
+
     For the present simulation, the initial atom
     positions and box size are given in a conf.gro file
     (Gromos87 format) that you can download by clicking |conf-SO4.gro|.
-    The conf.gro file was created using Python, explanation are given
-    here: :ref:`create-conf-label`.
+
     Save the conf.gro file in a folder. The file looks like that:
 
 .. |conf-SO4.gro| raw:: html
@@ -151,24 +151,26 @@ The input files
 ..  code-block:: bw
 
     Na2SO4 solution
-    3557
-        1  SO4   O1    1   2.725   1.999   2.077
-        1  SO4   O2    2   2.679   2.091   1.839
-        1  SO4   O3    3   2.505   2.127   2.028
-        1  SO4   O4    4   2.542   1.890   1.930
-        1  SO4    S    5   2.612   2.027   1.968
+    2846
+       1  SO4   O1    1   2.608   3.089   2.389
+       1  SO4   O2    2   2.562   3.181   2.150
+       1  SO4   O3    3   2.388   3.217   2.339
+       1  SO4   O4    4   2.425   2.980   2.241
+       1  SO4   S1    5   2.496   3.117   2.280
     (...)
-    898  SOL  HW1 3555   3.004   3.021   2.945
-    898  SOL  HW2 3556   3.004   2.869   2.945
-    898  SOL   MW 3557   2.955   2.945   2.945
-    3.10000   3.10000   3.10000
+     719  Sol  OW1 2843   3.220   2.380   1.540
+     719  Sol  HW1 2844   3.279   2.456   1.540
+     719  Sol  HW2 2845   3.279   2.304   1.540
+     719  Sol  MW1 2846   3.230   2.380   1.540
+   3.36000   3.36000   3.36000
 
 ..  container:: justify
 
     The first line 'Na2SO4 solution' is just a comment, the
     second line is the total number of atoms, and the last
-    line is the box dimension in nanometer, here 3.1 nm by 3.1 nm by 3.1 nm. Between
-    the second and the last lines, there is one line per
+    line is the box dimension in nanometer, here 3.36 nm
+    by 3.36 nm by 3.36 nm. Between the second and the
+    last lines, there is one line per
     atom. Each line indicates, from left to right, the
     residue Id (the atoms of the same
     SO\ :sub:`4`\ :sup:`2-` ion have the same residue
@@ -218,20 +220,21 @@ The input files
     As can be seen in this figure, the water molecules are
     arranged in a quite unrealistic and regular manner, with
     all dipoles facing in the same direction, and possibly
-    some overlapping between some of the molecules and ions.
+    wrong distances between some of the molecules and ions.
 
-    This will be fixed during energy minimization.
+    This will be fixed during energy minimization, see below.
 
 2) The topology file (.top)
 ---------------------------
 
 ..  container:: justify
 
+    If you already followed the previous tutorial, :ref:`create-topol-label`,
+    you can also skip this part.
+
     The topology file contains information about the
     interactions of the different atoms and molecules. You
     can download it by clicking |topol-SO4.top|.
-    The topol.top file was created using Python, explanation are given
-    here: :ref:`create-conf-label`.
     Place it in the same folder as the conf.gro file. The
     topol.top file looks like that:
 
@@ -272,8 +275,6 @@ The input files
     the atoms (names, masses, changes, Lennard-Jones
     coefficients) and residues (bond and angular
     constraints) for all the species that will be involved here.
-    More details about those files are given in
-    this tutorial: :ref:`create-topol-label`.
 
 .. |forcefield.itp| raw:: html
 
