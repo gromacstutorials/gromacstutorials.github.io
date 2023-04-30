@@ -7,8 +7,15 @@ Free energy profile
 
     Free energy profile calculation using umbrella sampling and WHAM
 
-.. figure:: figures/solvationenergy/banner.png
-    :alt: HBC (graphene-like) molecule in water
+.. figure:: figures/ethanoladsorption/video-avatar-light.webp
+    :alt: GROMACS tutorial : water ethanol mixture interface vacuum
+    :class: only-light
+    :height: 250
+    :align: right
+
+.. figure:: figures/ethanoladsorption/video-avatar-dark.webp
+    :alt: GROMACS tutorial : water ethanol mixture interface with vacuum
+    :class: only-dark
     :height: 250
     :align: right
 
@@ -608,11 +615,15 @@ Free energy profile calculation
     and it should contain a PMF profile resembling the
     red curve below:
 
-.. figure:: figures/ethanoladsorption/PMF.png
-    :alt: GROMACS tutorial : PMF
-    :height: 250
+.. figure:: figures/ethanoladsorption/PMF-light.png
+    :alt: GROMACS tutorial : PMF for the ethanol molecule
+    :class: only-light
 
-    PMF for the ethanol molecule accross the interface
+.. figure:: figures/ethanoladsorption/PMF-dark.png
+    :alt: GROMACS tutorial : PMF for the ethanol molecule
+    :class: only-dark
+
+    PMF for the ethanol molecule across the interface
     between a water/ethanol mixture and vapor.
 
 ..  container:: justify
