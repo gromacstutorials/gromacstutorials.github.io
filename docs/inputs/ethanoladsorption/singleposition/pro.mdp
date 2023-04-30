@@ -1,8 +1,8 @@
 ;
-;	File 'min.mdp' was generated
+;	File 'pro.mdp' was generated
 ;	By user: simon (1000)
 ;	On host: simon-laptop
-;	At date: Mon May  1 00:00:46 2023
+;	At date: Sun Apr 30 23:51:07 2023
 ;
 ;	Created by:
 ;	             :-) GROMACS - gmx grompp, 2022.2-Ubuntu_2022.2_1 (-:
@@ -11,7 +11,7 @@
 ;	Data prefix:  /usr
 ;	Working dir:  /home/simon/Git/Gromacs/gromacstutorials.github.io/docs/inputs/ethanoladsorption/singleposition
 ;	Command line:
-;	  gmx grompp -f inputs/min.mdp -c ../preparation/nvt_1ns.gro -p topol.top -o min -pp min -po min -maxwarn 1 -n index.ndx
+;	  gmx grompp -f inputs/pro.mdp -c nvt.gro -p topol.top -o pro -pp pro -po pro -maxwarn 1 -n index.ndx
 
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
@@ -21,11 +21,11 @@ include                  =
 define                   = 
 
 ; RUN CONTROL PARAMETERS
-integrator               = steep
+integrator               = sd
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 15000
+nsteps                   = 50000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -33,16 +33,16 @@ simulation-part          = 1
 ; Multiple time-stepping
 mts                      = no
 ; mode for center of mass motion removal
-comm-mode                = Linear
+comm_mode                = linear
 ; number of steps for center of mass motion removal
 nstcomm                  = 100
 ; group(s) for center of mass motion removal
-comm-grps                = 
+comm_grps                = system
 
 ; LANGEVIN DYNAMICS OPTIONS
 ; Friction coefficient (amu/ps) and random seed
 bd-fric                  = 0
-ld-seed                  = -1
+ld-seed                  = 48456
 
 ; ENERGY MINIMIZATION OPTIONS
 ; Force tolerance and initial step-size
@@ -61,15 +61,15 @@ rtpi                     = 0.05
 
 ; OUTPUT CONTROL OPTIONS
 ; Output frequency for coords (x), velocities (v) and forces (f)
-nstxout                  = 10
+nstxout                  = 0
 nstvout                  = 0
 nstfout                  = 0
 ; Output frequency for energies to log file and energy file
-nstlog                   = 1000
+nstlog                   = 5000
 nstcalcenergy            = 100
-nstenergy                = 1000
+nstenergy                = 5000
 ; Output frequency and precision for .xtc file
-nstxout-compressed       = 0
+nstxout-compressed       = 500
 compressed-x-precision   = 1000
 ; This selects the subset of atoms for the compressed
 ; trajectory file. You can select multiple groups. By
@@ -131,15 +131,15 @@ implicit-solvent         = no
 
 ; OPTIONS FOR WEAK COUPLING ALGORITHMS
 ; Temperature coupling  
-tcoupl                   = No
+tcoupl                   = no
 nsttcouple               = -1
 nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
 ; Groups to couple separately
-tc-grps                  = 
+tc-grps                  = Water non-Water
 ; Time constant (ps) and reference temperature (K)
-tau-t                    = 
-ref-t                    = 
+tau-t                    = 0.5 0.5
+ref-t                    = 300 300
 ; pressure coupling     
 pcoupl                   = No
 pcoupltype               = Isotropic
@@ -169,7 +169,7 @@ annealing-temp           =
 ; GENERATE VELOCITIES FOR STARTUP RUN
 gen-vel                  = no
 gen-temp                 = 300
-gen-seed                 = -64161803
+gen-seed                 = 1999109687
 
 ; OPTIONS FOR BONDS    
 constraints              = hbonds
@@ -242,8 +242,8 @@ pull-coord1-vec          = 0.0 0.0 0.0
 pull-coord1-start        = no
 pull-coord1-init         = 2
 pull-coord1-rate         = 0.0
-pull-coord1-k            = 10000
-pull-coord1-kB           = 10000
+pull-coord1-k            = 1000
+pull-coord1-kB           = 1000
 
 ; AWH biasing          
 awh                      = no

@@ -1,15 +1,15 @@
 ;
 ;	File 'nvt.mdp' was generated
-;	By user: sgravelle (1198)
-;	On host: caribou
-;	At date: Thu Aug 18 12:30:37 2022
+;	By user: simon (1000)
+;	On host: simon-laptop
+;	At date: Mon May  1 00:00:50 2023
 ;
 ;	Created by:
-;	                     :-) GROMACS - gmx grompp, 2021.4 (-:
+;	             :-) GROMACS - gmx grompp, 2022.2-Ubuntu_2022.2_1 (-:
 ;	
-;	Executable:   /work/sgravelle/Softwares/gromacs-install/bin/gmx
-;	Data prefix:  /work/sgravelle/Softwares/gromacs-install
-;	Working dir:  /media/sgravelle/Simon/gromacstutorials.github.io/inputs/03-EthanolAdsorption/singleposition
+;	Executable:   /usr/bin/gmx
+;	Data prefix:  /usr
+;	Working dir:  /home/simon/Git/Gromacs/gromacstutorials.github.io/docs/inputs/ethanoladsorption/singleposition
 ;	Command line:
 ;	  gmx grompp -f inputs/nvt.mdp -c min.gro -p topol.top -o nvt -pp nvt -po nvt -maxwarn 1 -n index.ndx
 
@@ -25,7 +25,7 @@ integrator               = sd
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 20000
+nsteps                   = 2000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -69,7 +69,7 @@ nstlog                   = 5000
 nstcalcenergy            = 100
 nstenergy                = 5000
 ; Output frequency and precision for .xtc file
-nstxout-compressed       = 500
+nstxout-compressed       = 50
 compressed-x-precision   = 1000
 ; This selects the subset of atoms for the compressed
 ; trajectory file. You can select multiple groups. By
@@ -131,7 +131,7 @@ implicit-solvent         = no
 
 ; OPTIONS FOR WEAK COUPLING ALGORITHMS
 ; Temperature coupling  
-tcoupl                   = v-rescale
+tcoupl                   = no
 nsttcouple               = -1
 nh-chain-length          = 10
 print-nose-hoover-chain-variables = no
@@ -169,7 +169,7 @@ annealing-temp           =
 ; GENERATE VELOCITIES FOR STARTUP RUN
 gen-vel                  = yes
 gen-temp                 = 300
-gen-seed                 = -1
+gen-seed                 = -898249123
 
 ; OPTIONS FOR BONDS    
 constraints              = hbonds
@@ -232,6 +232,8 @@ pull-group2-weights      =
 pull-group2-pbcatom      = 0
 pull-coord1-type         = umbrella
 pull-coord1-potential-provider = 
+pull-coord1-expression   = 
+pull-coord1-dx           = 1e-09
 pull-coord1-geometry     = distance
 pull-coord1-groups       = 1 2
 pull-coord1-dim          = Y N N
@@ -293,11 +295,15 @@ temperature-lambdas      =
 calc-lambda-neighbors    = 1
 init-lambda-weights      = 
 dhdl-print-energy        = no
+sc-function              = beutler
 sc-alpha                 = 0
 sc-power                 = 1
 sc-r-power               = 6
 sc-sigma                 = 0.3
 sc-coul                  = no
+sc-gapsys-scale-linpoint-lj = 0.85
+sc-gapsys-scale-linpoint-q = 0.3
+sc-gapsys-sigma-lj       = 0.3
 separate-dhdl-file       = yes
 dhdl-derivatives         = yes
 dh_hist_size             = 0
@@ -344,3 +350,6 @@ electric-field-z         = 0 0 0 0
 
 ; Density guided simulation
 density-guided-simulation-active = false
+
+; QM/MM with CP2K
+qmmm-cp2k-active         = false
