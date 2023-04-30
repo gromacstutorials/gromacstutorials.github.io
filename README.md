@@ -9,6 +9,11 @@ in the [docs/input/](docs/inputs) folder.
   <img src="docs/doc-sphinx/source/_static/screenshot_readme_gromacs_tutorials.png" width="100%" /></a>
 </p>
 
+<p float="left">
+  <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
+  <img src="docs/doc-sphinx/source/_static/screenshot_readme_gromacs_tutorials_2.png" width="100%" /></a>
+</p>
+
 ### You noticed a mistake in one of the tutorial?
 
 You can report issue here on Github, or send me an [email](https://simongravelle.github.io/). Your feedback is always highly appreciated.
