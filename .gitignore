@@ -16,3 +16,4 @@
 **/step*pdb
 try
 docs/doc-sphinx/build
+**/__pycache__
