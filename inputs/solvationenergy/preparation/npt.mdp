@@ -2,7 +2,7 @@
 ;	File 'npt.mdp' was generated
 ;	By user: simon (1000)
 ;	On host: simon-laptop
-;	At date: Sun Apr 23 20:07:08 2023
+;	At date: Sun Apr 30 21:52:45 2023
 ;
 ;	Created by:
 ;	             :-) GROMACS - gmx grompp, 2022.2-Ubuntu_2022.2_1 (-:
@@ -11,7 +11,7 @@
 ;	Data prefix:  /usr
 ;	Working dir:  /home/simon/Git/Gromacs/gromacstutorials.github.io/docs/inputs/solvationenergy/preparation
 ;	Command line:
-;	  gmx grompp -f inputs/npt.mdp -c nvt.gro -p topol.top -o npt -pp npt -po npt -maxwarn 1
+;	  gmx grompp -f inputs/npt.mdp -c npt.gro -p topol.top -o npt -pp npt -po npt -maxwarn 1
 
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
@@ -25,7 +25,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.001
-nsteps                   = 20000
+nsteps                   = 2000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -69,7 +69,7 @@ nstlog                   = 100
 nstcalcenergy            = 100
 nstenergy                = 100
 ; Output frequency and precision for .xtc file
-nstxout-compressed       = 1000
+nstxout-compressed       = 50
 compressed-x-precision   = 1000
 ; This selects the subset of atoms for the compressed
 ; trajectory file. You can select multiple groups. By
@@ -98,7 +98,7 @@ rlist                    = 1
 coulombtype              = pme
 coulomb-modifier         = Potential-shift-Verlet
 rcoulomb-switch          = 0
-rcoulomb                 = 1.0
+rcoulomb                 = 1.2
 ; Relative dielectric constant for the medium and the reaction field
 epsilon-r                = 1
 epsilon-rf               = 0
@@ -107,7 +107,7 @@ vdw-type                 = Cut-off
 vdw-modifier             = Potential-shift-Verlet
 ; cut-off lengths       
 rvdw-switch              = 0
-rvdw                     = 1.0
+rvdw                     = 1.2
 ; Apply long range dispersion corrections for Energy and Pressure
 DispCorr                 = No
 ; Extension of the potential lookup tables beyond the cut-off
@@ -169,7 +169,7 @@ annealing-temp           =
 ; GENERATE VELOCITIES FOR STARTUP RUN
 gen-vel                  = no
 gen-temp                 = 300
-gen-seed                 = -109388442
+gen-seed                 = -133425
 
 ; OPTIONS FOR BONDS    
 constraints              = hbonds
@@ -244,7 +244,7 @@ free-energy              = no
 couple-moltype           = 
 couple-lambda0           = vdw-q
 couple-lambda1           = vdw-q
-couple-intramol          = no
+couple-intramol          = yes
 init-lambda              = -1
 init-lambda-state        = -1
 delta-lambda             = 0
