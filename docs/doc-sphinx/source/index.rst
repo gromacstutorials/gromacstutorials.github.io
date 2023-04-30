@@ -24,6 +24,7 @@ Welcome to gromacstutorials's documentation!
     :caption: Level 1
 
     tutorials/bulksolution.rst
+    tutorials/stretchingpolymer.rst
 
 .. toctree::
     :maxdepth: 2
