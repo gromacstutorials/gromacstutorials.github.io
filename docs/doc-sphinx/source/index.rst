@@ -44,6 +44,12 @@ Welcome to gromacstutorials's documentation!
 
     contact/contact.rst
 
+.. toctree::
+    :maxdepth: 2
+    :caption: Alternative
+
+    miscellaneous/lammps.rst
+
 Indices and tables
 ==================
 
