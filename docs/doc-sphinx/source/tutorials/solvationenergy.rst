@@ -8,13 +8,13 @@ Molecule solvation energy
     Free energy solvation calculation of a
     disk-like molecule
 
-.. figure:: figures/solvationenergy/minimize-light.png
+.. figure:: figures/solvationenergy/video-HBC-light-2.webp
     :alt: HBC (graphene-like) molecule in water
     :class: only-light
     :height: 250
     :align: right
 
-.. figure:: figures/solvationenergy/minimize-dark.png
+.. figure:: figures/solvationenergy/video-HBC-dark-2.webp
     :alt: HBC (graphene-like) molecule in water
     :class: only-dark
     :height: 250
