@@ -274,12 +274,12 @@ and 50 hydrogen atoms.</span><a class="headerlink" href="#id1" title="Permalink 
 </figcaption>
 </figure>
 <div class="justify docutils container">
-<p>Create a folder named <em>peg-in-vacuum/</em>, and copy
+<p>Create a folder named <em>free-peg-in-vacuum/</em>, and copy
 <em>peg.gro</em> in it. Next to <em>peg.gro</em> create an empty
 file named <em>topol.top</em>, and copy the following lines in it:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in topol.top</em></span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in free-peg-in-vacuum/topol.top</em></span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ defaults ]
 ; nbfunc    comb-rule       gen-pairs       fudgeLJ fudgeQQ
   1         1           no          1.0     1.0
@@ -309,7 +309,7 @@ that will be added later.</p>
 Copy the following lines into it:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in nvt.mdp</em></span><a class="headerlink" href="#id3" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in free-peg-in-vacuum/inputs/nvt.mdp</em></span><a class="headerlink" href="#id3" title="Permalink to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = md
 dt = 0.002
 nsteps = 500000
@@ -356,9 +356,8 @@ gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </spa
 <div class="justify docutils container">
 <p>You should see the PEG molecule moving.</p>
 </div>
-</section>
 <section id="angle-distribution">
-<h2>Angle distribution<a class="headerlink" href="#angle-distribution" title="Permalink to this heading">#</a></h2>
+<h3>Angle distribution<a class="headerlink" href="#angle-distribution" title="Permalink to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>Let us use the power of GROMACS to extract the angular
 distribution between triplets of atoms during the run.
@@ -415,10 +414,74 @@ was created, it looks like it:</p>
 vacuum.</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+</section>
+<section id="pull-on-the-peg">
+<h3>Pull on the PEG<a class="headerlink" href="#pull-on-the-peg" title="Permalink to this heading">#</a></h3>
+<div class="justify docutils container">
+<p>Let us apply a force and pull on the PEG polymer.
+Duplicate the <em>free-peg-in-vacuum/</em> folder, and call the
+copy <em>pulled-peg-in-vacuum/</em>.</p>
+<p>First, change the box size to make room for the pulling by replacing
+the last line of peg.gro from</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>3.00000   3.00000   3.00000
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>to</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>3.00000   3.00000   8.00000
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Then, for convenience, let us center the PEG molecule
+in the box by typing:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>trjconv<span class="w"> </span>-f<span class="w"> </span>peg.gro<span class="w"> </span>-o<span class="w"> </span>peg-centered.gro<span class="w"> </span>-s<span class="w"> </span>nvt.tpr<span class="w"> </span>-center<span class="w"> </span>-pbc<span class="w"> </span>mol
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>And choose <em>System</em> for both centering and output. Then, let us
+specify to GROMACS which atoms are going to be pulled. This can be done
+by adding 2 additional groups named <em>End1</em> and <em>End2</em>
+to the index file <em>index.ndx</em>:</p>
+<p>Create an index file by typing:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>peg-centered.gro<span class="w"> </span>-o<span class="w"> </span>index.ndx
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>And create the 2 additional groups by typing:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>a 82
+a 5
+name 3 End1
+name 4 End2
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Then press <em>q</em> to save and quit. The index file <em>index.ndx</em>
+contains 2 additional group, with one oxygen atom each:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>(...)
+[ PEG ]
+1    2    3    4    5    6    7    8    9   10   11   12   13   14   15
+16   17   18   19   20   21   22   23   24   25   26   27   28   29   30
+31   32   33   34   35   36   37   38   39   40   41   42   43   44   45
+46   47   48   49   50   51   52   53   54   55   56   57   58   59   60
+61   62   63   64   65   66   67   68   69   70   71   72   73   74   75
+76   77   78   79   80   81   82   83   84   85   86
+[ End1 ]
+82
+[ End2 ]
+5
+</pre></div>
+</div>
 <div class="mail admonition">
 <p class="admonition-title">Contact me</p>
 <p><a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> me if you have any question or suggestion about these tutorials.</p>
 </div>
+</section>
 </section>
 </section>
 
@@ -474,8 +537,11 @@ vacuum.</span><a class="headerlink" href="#id4" title="Permalink to this image">
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Polymer in water</a><ul>
-<li><a class="reference internal" href="#peg-molecule-in-vacuum">PEG molecule in vacuum</a></li>
+<li><a class="reference internal" href="#peg-molecule-in-vacuum">PEG molecule in vacuum</a><ul>
 <li><a class="reference internal" href="#angle-distribution">Angle distribution</a></li>
+<li><a class="reference internal" href="#pull-on-the-peg">Pull on the PEG</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
