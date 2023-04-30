@@ -71,12 +71,12 @@ PEG molecule in vacuum
 
 ..  container:: justify
 
-    Create a folder named *peg-in-vacuum/*, and copy
+    Create a folder named *free-peg-in-vacuum/*, and copy
     *peg.gro* in it. Next to *peg.gro* create an empty
     file named *topol.top*, and copy the following lines in it:
 
 ..  code-block:: bw
-    :caption: *to be copied in topol.top*
+    :caption: *to be copied in free-peg-in-vacuum/topol.top*
 
     [ defaults ]
     ; nbfunc	comb-rule	gen-pairs	fudgeLJ	fudgeQQ
@@ -116,7 +116,7 @@ PEG molecule in vacuum
     Copy the following lines into it:
 
 ..  code-block:: bw
-    :caption: *to be copied in nvt.mdp*
+    :caption: *to be copied in free-peg-in-vacuum/inputs/nvt.mdp*
 
     integrator = md 
     dt = 0.002
@@ -168,7 +168,7 @@ PEG molecule in vacuum
     You should see the PEG molecule moving. 
 
 Angle distribution
-==================
+------------------
 
 ..  container:: justify
 
@@ -236,6 +236,81 @@ Angle distribution
    Angle distribution for the Carbon and oxygen atoms of the PEG molecule in
    vacuum.
 
+Pull on the PEG
+---------------
 
+..  container:: justify
+
+    Let us apply a force and pull on the PEG polymer. 
+    Duplicate the *free-peg-in-vacuum/* folder, and call the 
+    copy *pulled-peg-in-vacuum/*.
+
+    First, change the box size to make room for the pulling by replacing
+    the last line of peg.gro from
+
+..  code-block:: bw
+
+    3.00000   3.00000   3.00000
+
+..  container:: justify
+
+    to
+
+..  code-block:: bw
+
+    3.00000   3.00000   8.00000
+
+..  container:: justify
+
+    Then, for convenience, let us center the PEG molecule
+    in the box by typing:
+
+..  code-block:: bash
+
+    gmx trjconv -f peg.gro -o peg-centered.gro -s nvt.tpr -center -pbc mol
+
+..  container:: justify
+
+    And choose *System* for both centering and output. Then, let us
+    specify to GROMACS which atoms are going to be pulled. This can be done
+    by adding 2 additional groups named *End1* and *End2*
+    to the index file *index.ndx*:
+
+    Create an index file by typing:
+
+..  code-block:: bash
+
+    gmx make_ndx -f peg-centered.gro -o index.ndx
+
+..  container:: justify
+
+    And create the 2 additional groups by typing:
+
+..  code-block:: bw
+
+    a 82
+    a 5
+    name 3 End1
+    name 4 End2
+
+..  container:: justify
+
+    Then press *q* to save and quit. The index file *index.ndx*
+    contains 2 additional group, with one oxygen atom each:
+
+..  code-block:: bw
+
+    (...)
+    [ PEG ]
+    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15
+    16   17   18   19   20   21   22   23   24   25   26   27   28   29   30
+    31   32   33   34   35   36   37   38   39   40   41   42   43   44   45
+    46   47   48   49   50   51   52   53   54   55   56   57   58   59   60
+    61   62   63   64   65   66   67   68   69   70   71   72   73   74   75
+    76   77   78   79   80   81   82   83   84   85   86
+    [ End1 ]
+    82
+    [ End2 ]
+    5
 
 .. include:: ../contact/contactme.rst
