@@ -48,7 +48,7 @@ PEG molecule in vacuum
 
 .. |download_H2O.data| raw:: html
 
-   <a href="../../../../inputs/stretchingpolymer/free-peg-in-vacuum/peg.gro" target="_blank">here</a>
+   <a href="../../../../inputs/polymerstretching/free-peg-in-vacuum/peg.gro" target="_blank">here</a>
 
 ..  container:: justify
 
@@ -101,11 +101,11 @@ PEG molecule in vacuum
 
 .. |download_charmm35r.itp| raw:: html
 
-   <a href="../../../../inputs/stretchingpolymer/free-peg-in-vacuum/ff/charmm35r.itp" target="_blank">charmm35r.itp</a>
+   <a href="../../../../inputs/polymerstretching/free-peg-in-vacuum/ff/charmm35r.itp" target="_blank">charmm35r.itp</a>
    
 .. |download_peg.itp| raw:: html
 
-   <a href="../../../../inputs/stretchingpolymer/free-peg-in-vacuum/ff/peg.itp" target="_blank">peg.itp</a>
+   <a href="../../../../inputs/polymerstretching/free-peg-in-vacuum/ff/peg.itp" target="_blank">peg.itp</a>
 
 ..  container:: justify
 
@@ -450,7 +450,7 @@ PEG molecule in water
 
 .. |download_tip3p.itp| raw:: html
 
-    <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/ff/tip3p.itp" target="_blank">here</a>
+    <a href="../../../../inputs/polymerstretching/free-peg-in-water/ff/tip3p.itp" target="_blank">here</a>
 
 Equilibrating the system
 ------------------------
@@ -510,7 +510,7 @@ Equilibrating the system
 
 .. |download_nvt.mdp| raw:: html
 
-    <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/inputs/nvt.mdp" target="_blank">here</a>
+    <a href="../../../../inputs/polymerstretching/free-peg-in-water/inputs/nvt.mdp" target="_blank">here</a>
 
 ..  container:: justify
 
@@ -524,7 +524,7 @@ Equilibrating the system
 
 .. |download_npt.mdp| raw:: html
 
-    <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/inputs/npt.mdp" target="_blank">npt file</a>
+    <a href="../../../../inputs/polymerstretching/free-peg-in-water/inputs/npt.mdp" target="_blank">npt file</a>
 
 ..  container:: justify
 
