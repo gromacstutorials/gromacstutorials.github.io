@@ -7,13 +7,13 @@ Polymer in water
 
     Solvating a small molecule in water before stretching it
 
-.. figure:: figures/stretchingpolymer/main-dark.png
+.. figure:: figures/stretchingpolymer/first-dark.png
     :alt: peg molecule in water
     :height: 250
     :align: right
     :class: only-dark
 
-.. figure:: figures/stretchingpolymer/main-light.png
+.. figure:: figures/stretchingpolymer/first-light.png
     :alt: peg molecule in water
     :height: 250
     :align: right
