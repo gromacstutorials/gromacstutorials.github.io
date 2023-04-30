@@ -295,6 +295,60 @@ file named <em>topol.top</em>, and copy the following lines in it:</p>
 <p>Next to <em>conf.gro</em> and <em>topol.top</em>, create a folder named <em>ff/</em>, and copy the
 following files into it: <a href="../../../../inputs/stretchingpolymer/ff/charmm35r.itp" target="_blank">charmm35r.itp</a> and <a href="../../../../inputs/stretchingpolymer/ff/peg.itp" target="_blank">peg.itp</a></p>
 </div>
+<div class="justify docutils container">
+<p>These 2 files contain the parameters for the PEG molecules, as well as extra parameters for the water molecules
+that will be added later.</p>
+<p>Create an <em>inputs/</em> folder next to <em>ff/</em>, and create a new empty file called nvt.mdp.
+Copy the following lines into it:</p>
+</div>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in nvt.mdp</em></span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = md
+dt = 0.002
+nsteps = 500000
+
+nstenergy = 1000
+nstlog = 1000
+nstxout = 1000
+
+constraints = hbonds
+
+coulombtype = pme
+rcoulomb = 1.0
+rlist = 1.0
+
+vdwtype = Cut-off
+rvdw = 1.0
+
+tcoupl = v-rescale
+tau_t = 0.1
+ref_t = 300
+tc_grps = PEG
+
+gen_vel = yes
+gen-temp = 300
+gen-seed = 65823
+
+comm-mode = angular
+</pre></div>
+</div>
+</div>
+<div class="justify docutils container">
+<p>Run the simulation using GROMACS by typing in a terminal:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/nvt.mdp<span class="w"> </span>-c<span class="w"> </span>peg.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>nvt<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">1</span>
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>nvt
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>After the simulation is over, open the trajectory file with VMD by typing:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>peg.gro<span class="w"> </span>nvt.trr
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>You should see the PEG molecule moving.</p>
+</div>
 <div class="mail admonition">
 <p class="admonition-title">Contact me</p>
 <p><a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> me if you have any question or suggestion about these tutorials.</p>

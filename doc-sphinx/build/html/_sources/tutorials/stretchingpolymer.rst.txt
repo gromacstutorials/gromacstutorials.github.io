@@ -104,4 +104,64 @@ PEG molecule in vacuum
 
    <a href="../../../../inputs/stretchingpolymer/ff/peg.itp" target="_blank">peg.itp</a>
 
+..  container:: justify
+
+    These 2 files contain the parameters for the PEG molecules, as well as extra parameters for the water molecules 
+    that will be added later. 
+
+    Create an *inputs/* folder next to *ff/*, and create a new empty file called nvt.mdp.
+    Copy the following lines into it:
+
+..  code-block:: bw
+    :caption: *to be copied in nvt.mdp*
+
+    integrator = md 
+    dt = 0.002
+    nsteps = 500000
+
+    nstenergy = 1000
+    nstlog = 1000
+    nstxout = 1000
+
+    constraints = hbonds 
+
+    coulombtype = pme
+    rcoulomb = 1.0
+    rlist = 1.0
+
+    vdwtype = Cut-off 
+    rvdw = 1.0
+
+    tcoupl = v-rescale
+    tau_t = 0.1
+    ref_t = 300
+    tc_grps = PEG
+
+    gen_vel = yes
+    gen-temp = 300
+    gen-seed = 65823
+
+    comm-mode = angular
+
+..  container:: justify
+
+    Run the simulation using GROMACS by typing in a terminal:
+
+..  code-block:: bash
+
+    gmx grompp -f inputs/nvt.mdp -c peg.gro -p topol.top -o nvt -maxwarn 1
+    gmx mdrun -v -deffnm nvt
+
+..  container:: justify
+
+    After the simulation is over, open the trajectory file with VMD by typing:
+
+..  code-block:: bash
+
+    vmd peg.gro nvt.trr
+
+..  container:: justify
+
+    You should see the PEG molecule moving. 
+
 .. include:: ../contact/contactme.rst
