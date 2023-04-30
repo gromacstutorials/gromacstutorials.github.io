@@ -612,8 +612,11 @@ fluid during minimisation and nvt equilibration.</span><a class="headerlink" hre
 between the 2 groups is measured over time. Let us
 plot the histogram of this distance:</p>
 </div>
+<figure class="align-default">
+<img alt="GROMACS tutorial : Probability distribution of the distance" class="only-light" src="../_images/probability-light.png" />
+</figure>
 <figure class="align-default" id="id6">
-<a class="reference internal image-reference" href="../_images/probability_position.png"><img alt="GROMACS tutorial : Probability distribution of the distance" src="../_images/probability_position.png" style="height: 250px;" /></a>
+<img alt="GROMACS tutorial : Probability distribution of the distance" class="only-dark" src="../_images/probability-dark.png" />
 <figcaption>
 <p><span class="caption-text">Probability distribution of the distance between the
 two center-of-mass. Short (50 ps) and long (1.5 ns)
@@ -624,9 +627,10 @@ runs are compared.</span><a class="headerlink" href="#id6" title="Permalink to t
 <p>A longer run has been added for comparison.
 If you have a good computer, feel free to run longer
 production run than 50 ps.</p>
-<p>The distribution is not centered around x = 2 nm
-because of the interaction between the CO2 and the
-rest of the fluid.</p>
+<p>Note that the distribution is not centered around x = 2 nm.
+This is due to the interaction between the pulled ethanol molecule and the
+rest of the fluid, that are shifting away the average position of the
+ethanol molecule from the center of harmonic potential.</p>
 </div>
 </section>
 <section id="free-energy-profile-calculation">
