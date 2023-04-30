@@ -66,6 +66,9 @@ PEG molecule in vacuum
    :class: only-dark
    :width: 500
 
+   This PEG molecule contains 24 carbon atoms, 12 oxygen atoms,
+   and 50 hydrogen atoms.
+
 ..  container:: justify
 
     Create a folder named *peg-in-vacuum/*, and copy
@@ -163,5 +166,76 @@ PEG molecule in vacuum
 ..  container:: justify
 
     You should see the PEG molecule moving. 
+
+Angle distribution
+==================
+
+..  container:: justify
+
+    Let us use the power of GROMACS to extract the angular 
+    distribution between triplets of atoms during the run.
+    First, let us create an index file from the *peg.gro* file:
+
+..  code-block:: bash
+
+    gmx mk_angndx -s nvt.tpr -n index.ndx -hyd no
+
+..  container:: justify
+
+    The first group created contains all the carbon and oxygen atoms
+    (a total of 36 atoms), as can be seen from the *index.ndx* file:
+
+..  code-block:: bw
+
+    [ Theta=109.7_795.49 ]
+        2     5     7    10    12    14    17    19    21    24    26    28
+        31    33    35    38    40    42    45    47    49    52    54    56
+        59    61    63    66    68    70    73    75    77    80    82    84
+
+..  container:: justify
+
+    Here each number corresponds to the atom index, as can be seen from the 
+    *peg.gro* file. For instance, atom of id 2 is a carbon atom, and 
+    five in an oxygen:
+
+..  code-block:: bw
+
+    PEG in water
+    86
+        1PEG      H    1   2.032   1.593   1.545  0.6568  2.5734  1.2192
+        1PEG      C    2   1.929   1.614   1.508  0.1558 -0.2184  0.8547
+        1PEG     H1    3   1.902   1.721   1.523 -3.6848 -0.3932 -3.0658
+        1PEG     H2    4   1.921   1.588   1.400 -1.5891  1.4960  0.5057
+        1PEG      O    5   1.831   1.544   1.576  0.0564 -0.5300 -0.6094
+        1PEG     H3    6   1.676   1.665   1.494 -2.6585 -0.5997  0.3128
+        1PEG     C1    7   1.699   1.559   1.519  0.6996  0.0066  0.2900
+        1PEG     H4    8   1.699   1.500   1.425  4.2893  1.6837 -0.9462
+
+..  container:: justify
+
+    Using the index file, one can extract the angle distribution between 
+    all the species in the group *Theta=109.7_795.49*, by typing:
+
+..  code-block:: bash
+
+    gmx angle -n index.ndx  -f nvt.trr -od angdist.xvg -binwidth 0.25
+
+..  container:: justify
+
+    Select the first group by typing *0*. A file named *angdist.xvg*
+    was created, it looks like it:
+
+.. figure:: figures/stretchingpolymer/angle-distribution-light.png
+   :alt: Angle distribution from molecular dynamics simulation in GROMACS
+   :class: only-light
+
+.. figure:: figures/stretchingpolymer/angle-distribution-dark.png
+   :alt: Angle distribution from molecular dynamics simulation in GROMACS
+   :class: only-dark
+
+   Angle distribution for the Carbon and oxygen atoms of the PEG molecule in
+   vacuum.
+
+
 
 .. include:: ../contact/contactme.rst
