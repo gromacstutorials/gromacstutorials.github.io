@@ -526,4 +526,28 @@ Equilibrating the system
 
     <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/inputs/npt.mdp" target="_blank">npt file</a>
 
+..  container:: justify
+
+    Extract the angular distribution again, and compare it to the
+    previous vacuum simulation. Here I increased the duration of both 
+    simulation to 1 ns (for the PEG in water) and 2 ns (for PEG in vacuum)
+    to improve the statistic (feel free to do the same if your
+    computer allows it):
+
+.. figure:: figures/stretchingpolymer/angle-distribution-comparison-light.png
+   :alt: Angle distribution from molecular dynamics simulation in GROMACS
+   :class: only-light
+
+.. figure:: figures/stretchingpolymer/angle-distribution-comparison-dark.png
+   :alt: Angle distribution from molecular dynamics simulation in GROMACS
+   :class: only-dark
+
+   Angle distribution comparing the PEG molecule in vacuum (gray) and 
+   the PEG molecule in water (blue).
+
+..  container:: justify
+
+    Notice that the angle distribution is slightly shifted in water, compared to
+    when the peg molecule is in vacuum.
+
 .. include:: ../contact/contactme.rst

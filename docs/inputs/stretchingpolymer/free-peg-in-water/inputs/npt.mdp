@@ -1,6 +1,6 @@
 integrator = md 
 dt = 0.002
-nsteps = 50000
+nsteps = 100000
 
 nstenergy = 1000
 nstlog = 1000

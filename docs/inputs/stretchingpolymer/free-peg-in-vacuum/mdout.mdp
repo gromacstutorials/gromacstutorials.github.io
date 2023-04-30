@@ -2,14 +2,14 @@
 ;	File 'mdout.mdp' was generated
 ;	By user: simon (1000)
 ;	On host: simon-laptop
-;	At date: Sun Apr 30 13:05:31 2023
+;	At date: Sun Apr 30 17:11:39 2023
 ;
 ;	Created by:
-;	             :-) GROMACS - gmx grompp, 2022.2-Ubuntu_2022.2_1 (-:
+;	      :-) GROMACS - gmx grompp, 2024-dev-20230207-1b9e69bb16-unknown (-:
 ;	
-;	Executable:   /usr/bin/gmx
-;	Data prefix:  /usr
-;	Working dir:  /home/simon/Git/Gromacs/gromacstutorials.github.io/docs/inputs/stretchingpolymer/peg-in-vacuum
+;	Executable:   /home/simon/Softwares/gromacs/build-gpu/bin/gmx
+;	Data prefix:  /home/simon/Softwares/gromacs (source tree)
+;	Working dir:  /home/simon/Git/Gromacs/gromacstutorials.github.io/docs/inputs/stretchingpolymer/free-peg-in-vacuum
 ;	Command line:
 ;	  gmx grompp -f inputs/nvt.mdp -c peg.gro -p topol.top -o nvt -maxwarn 1
 
@@ -25,7 +25,7 @@ integrator               = md
 ; Start time and timestep in ps
 tinit                    = 0
 dt                       = 0.002
-nsteps                   = 500000
+nsteps                   = 2000000
 ; For exact run continuation or redoing part of a run
 init-step                = 0
 ; Part index is updated automatically on checkpointing (keeps files separate)
@@ -130,6 +130,8 @@ epsilon-surface          = 0
 implicit-solvent         = no
 
 ; OPTIONS FOR WEAK COUPLING ALGORITHMS
+ensemble-temperature-setting = auto
+ensemble-temperature     = -1
 ; Temperature coupling  
 tcoupl                   = v-rescale
 nsttcouple               = -1
