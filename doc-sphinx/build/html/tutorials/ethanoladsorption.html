@@ -270,17 +270,8 @@ of a small box using trjconv:</p>
 </pre></div>
 </div>
 <div class="justify docutils container">
-<p>Select ‘system’ for both centering and output. If you
-open the single_ethanol.gro file with VMD, you will
-see (after some aesthetical improvement):</p>
+<p>Select ‘system’ for both centering and output.</p>
 </div>
-<figure class="align-default" id="id1">
-<a class="reference internal image-reference" href="../_images/single_ethanol.png"><img alt="GROMACS tutorial : Ethanol molecule with VMD" src="../_images/single_ethanol.png" style="height: 250px;" /></a>
-<figcaption>
-<p><span class="caption-text">Ethanol molecule with carbon atoms in gray, oxygen
-atom in red, and hydrogen atoms in white.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
-</figcaption>
-</figure>
 </section>
 <section id="replicate-the-ethanol-molecule">
 <h3>Replicate the ethanol molecule<a class="headerlink" href="#replicate-the-ethanol-molecule" title="Permalink to this heading">#</a></h3>
@@ -296,11 +287,14 @@ times) using genconf:</p>
 <p>If you open the replicated_ethanol.gro file with VMD,
 you will see:</p>
 </div>
-<figure class="align-default" id="id2">
-<a class="reference internal image-reference" href="../_images/replicated_ethanol.png"><img alt="GROMACS tutorial : Replicated ethanol molecule with VMD" src="../_images/replicated_ethanol.png" style="height: 250px;" /></a>
+<figure class="align-default">
+<a class="only-light reference internal image-reference" href="../_images/replicated-ethanol-light.png"><img alt="Gromacs HBC (graphene) molecule after minimisation in water" class="only-light" src="../_images/replicated-ethanol-light.png" style="height: 450px;" /></a>
+</figure>
+<figure class="align-default" id="id1">
+<a class="only-dark reference internal image-reference" href="../_images/replicated-ethanol-dark.png"><img alt="Gromacs HBC (graphene) molecule after minimisation in water" class="only-dark" src="../_images/replicated-ethanol-dark.png" style="height: 450px;" /></a>
 <figcaption>
 <p><span class="caption-text">Replicated ethanol molecules with carbon atoms in
-gray, oxygen atom in red, and hydrogen atoms in white.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+gray, oxygen atom in red, and hydrogen atoms in white.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -361,10 +355,13 @@ SOL<span class="w"> </span><span class="m">858</span>
 <p>The created ‘solvated.gro’ file contains the positions
 of both Ethanol and water molecules, it looks like that:</p>
 </div>
-<figure class="align-default" id="id3">
-<a class="reference internal image-reference" href="../_images/solvated.png"><img alt="GROMACS tutorial : Ethanol molecules in water with VMD" src="../_images/solvated.png" style="height: 250px;" /></a>
+<figure class="align-default">
+<a class="only-light reference internal image-reference" href="../_images/solvated-light.png"><img alt="GROMACS tutorial : Ethanol molecules in water with VMD" class="only-light" src="../_images/solvated-light.png" style="height: 450px;" /></a>
+</figure>
+<figure class="align-default" id="id2">
+<a class="only-dark reference internal image-reference" href="../_images/solvated-dark.png"><img alt="GROMACS tutorial : Ethanol molecules in water with VMD" class="only-dark" src="../_images/solvated-dark.png" style="height: 450px;" /></a>
 <figcaption>
-<p><span class="caption-text">Replicated ethanol molecules within water.</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Replicated ethanol molecules within water. Water molecules appear in light blue.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -412,12 +409,15 @@ minimization step using VMD by typing:</p>
 <div class="justify docutils container">
 <p>This is what I see:</p>
 </div>
-<figure class="align-default" id="id4">
-<a class="reference internal image-reference" href="../_images/min.gif"><img alt="GROMACS tutorial : Ethanol molecules during minimisation" src="../_images/min.gif" style="height: 250px;" /></a>
+<figure class="align-default">
+<a class="only-light reference internal image-reference" href="../_images/video-min-light.webp"><img alt="GROMACS tutorial : Ethanol molecules during minimisation" class="only-light" src="../_images/video-min-light.webp" style="height: 450px;" /></a>
+</figure>
+<figure class="align-default" id="id3">
+<a class="only-dark reference internal image-reference" href="../_images/video-min-dark.webp"><img alt="GROMACS tutorial : Ethanol molecules during minimisation" class="only-dark" src="../_images/video-min-dark.webp" style="height: 450px;" /></a>
 <figcaption>
 <p><span class="caption-text">Movie showing the motion of the atoms during the
 energy minimization. The two fluid/vacuum interfaces
-are on the left and or the right sides, respectively.</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+are on the left and or the right sides, respectively.</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -467,10 +467,13 @@ have generated after a 1 ns run by clicking <a href="../../../../inputs/ethanola
 <p>The density profile I get for both water and ethanol
 during the last 500 ps of the 1 ns run is :</p>
 </div>
-<figure class="align-default" id="id5">
-<a class="reference internal image-reference" href="../_images/density_profile.png"><img alt="GROMACS tutorial : Density profile water and ethanol" src="../_images/density_profile.png" style="height: 250px;" /></a>
+<figure class="align-default">
+<img alt="GROMACS tutorial : Density profile water and ethanol" class="only-light" src="../_images/position-light.png" />
+</figure>
+<figure class="align-default" id="id4">
+<img alt="GROMACS tutorial : Density profile water and ethanol" class="only-dark" src="../_images/position-dark.png" />
 <figcaption>
-<p><span class="caption-text">Water and ethanol density profile along x.</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Water (blue) and ethanol (gray) density profile along the x direction.</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
 <div class="legend">
 <p>The density profiles show an excess of
 ethanol at the 2 interfaces, which is expected as
@@ -594,11 +597,11 @@ gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </spa
 from the rest of the fluid until the distance between
 the center-of-mass of the 2 groups is 2 nm:</p>
 </div>
-<figure class="align-default" id="id6">
+<figure class="align-default" id="id5">
 <a class="reference internal image-reference" href="../_images/umbrella.gif"><img alt="GROMACS tutorial : thanol molecule being pulled" src="../_images/umbrella.gif" style="height: 250px;" /></a>
 <figcaption>
 <p><span class="caption-text">Ethanol molecule being pulled from the rest of the
-fluid during minimisation and nvt equilibration.</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
+fluid during minimisation and nvt equilibration.</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -606,12 +609,12 @@ fluid during minimisation and nvt equilibration.</span><a class="headerlink" hre
 between the 2 groups is measured over time. Let us
 plot the histogram of this distance:</p>
 </div>
-<figure class="align-default" id="id7">
+<figure class="align-default" id="id6">
 <a class="reference internal image-reference" href="../_images/probability_position.png"><img alt="GROMACS tutorial : Probability distribution of the distance" src="../_images/probability_position.png" style="height: 250px;" /></a>
 <figcaption>
 <p><span class="caption-text">Probability distribution of the distance between the
 two center-of-mass. Short (50 ps) and long (1.5 ns)
-runs are compared.</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
+runs are compared.</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -692,11 +695,11 @@ of GROMACS:</p>
 and it should contain a PMF profile resembling the
 red curve below:</p>
 </div>
-<figure class="align-default" id="id8">
+<figure class="align-default" id="id7">
 <a class="reference internal image-reference" href="../_images/PMF.png"><img alt="GROMACS tutorial : PMF" src="../_images/PMF.png" style="height: 250px;" /></a>
 <figcaption>
 <p><span class="caption-text">PMF for the ethanol molecule accross the interface
-between a water/ethanol mixture and vapor.</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
+between a water/ethanol mixture and vapor.</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
