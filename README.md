@@ -5,12 +5,12 @@ All the GROMACS input files used or generated during the tutorials can be found
 in the [docs/input/](docs/inputs) folder. 
 
 <p float="left">
-  <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
+  <a href="https://gromacstutorials.github.io">
   <img src="docs/doc-sphinx/source/_static/screenshot_readme_gromacs_tutorials.png" width="100%" /></a>
 </p>
 
 <p float="left">
-  <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
+  <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/stretchingpolymer.html">
   <img src="docs/doc-sphinx/source/_static/screenshot_readme_gromacs_tutorials_2.png" width="100%" /></a>
 </p>
 
