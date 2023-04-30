@@ -1,22 +1,12 @@
 # GROMACS tutorials
 
-This is the script of the webpage [GROMACS Tutorials](https://gromacstutorials.github.io/). 
-All the files generated during the tutorials can be found in the [docs/input/](docs/inputs) folder. 
+This is the script of the [GROMACS Tutorials](https://gromacstutorials.github.io/) webpage. 
+All the GROMACS input files used or generated during the tutorials can be found
+in the [docs/input/](docs/inputs) folder. 
 
 <p float="left">
   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
   <img src="docs/doc-sphinx/source/_static/screenshot_readme_gromacs_tutorials.png" width="100%" /></a>
-</p>
-
-<p float="left">
-  <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
-  <img src="docs/doc-sphinx/source/tutorials/figures/bulksolution/avatar-gromacs.png" width="32%" /></a>
-
-  <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/solvationenergy.html">
-  <img src="docs/doc-sphinx/source/tutorials/figures/solvationenergy/no-field-dark.png" width="32%" /></a>
-  
-   <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/ethanoladsorption.html">
-  <img src="docs/doc-sphinx/source/tutorials/figures/ethanoladsorption/no-field-dark.png" width="32%" /></a>
 </p>
 
 ### You noticed a mistake in one of the tutorial?
