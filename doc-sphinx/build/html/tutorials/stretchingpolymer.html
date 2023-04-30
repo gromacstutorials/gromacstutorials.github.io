@@ -256,7 +256,7 @@ they compare MD simulations with force spectroscopy experiments.</p>
 <section id="peg-molecule-in-vacuum">
 <h2>PEG molecule in vacuum<a class="headerlink" href="#peg-molecule-in-vacuum" title="Permalink to this heading">#</a></h2>
 <div class="justify docutils container">
-<p>Download the <em>peg.gro</em> file for the PEG molecule by clicking <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/peg.gro" target="_blank">here</a>.</p>
+<p>Download the <em>peg.gro</em> file for the PEG molecule by clicking <a href="../../../../inputs/stretchingpolymer/free-peg-in-vacuum/peg.gro" target="_blank">here</a>.</p>
 </div>
 <div class="justify docutils container">
 <p>Opening <em>peg.gro</em> using VMD, one can see that it consists of
@@ -300,7 +300,7 @@ file named <em>topol.top</em>, and copy the following lines in it:</p>
 </div>
 <div class="justify docutils container">
 <p>Next to <em>conf.gro</em> and <em>topol.top</em>, create a folder named <em>ff/</em>, and copy the
-following files into it: <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/ff/charmm35r.itp" target="_blank">charmm35r.itp</a> and <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/ff/peg.itp" target="_blank">peg.itp</a></p>
+following files into it: <a href="../../../../inputs/stretchingpolymer/free-peg-in-vacuum/ff/charmm35r.itp" target="_blank">charmm35r.itp</a> and <a href="../../../../inputs/stretchingpolymer/free-peg-in-vacuum/ff/peg.itp" target="_blank">peg.itp</a></p>
 </div>
 <div class="justify docutils container">
 <p>These 2 files contain the parameters for the PEG molecules, as well as extra parameters for the water molecules
@@ -576,10 +576,24 @@ water reservoir.</p>
 as well as the new line in <em>topol.top</em>:</p>
 </div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ molecules ]
-; Compound        #mols
+; Compound      #mols
 PEG             1
-SOL               853
+SOL             853
 </pre></div>
+</div>
+<div class="justify docutils container">
+<p>Add the line <em>#include “ff/tip3p.itp”</em> to the topol.top file:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>; Include forcefield parameters
+#include &quot;ff/charmm35r.itp&quot;
+#include &quot;ff/peg.itp&quot;
+#include &quot;ff/tip3p.itp
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>The <em>tip3p.itp</em> contains the information about the water molecule,
+and can be downloaded by clicking <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/ff/tip3p.itp" target="_blank">here</a>, and then placed
+within the <em>ff/</em> folder.</p>
 </div>
 <div class="mail admonition">
 <p class="admonition-title">Contact me</p>

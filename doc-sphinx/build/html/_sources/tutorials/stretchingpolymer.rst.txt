@@ -48,7 +48,7 @@ PEG molecule in vacuum
 
 .. |download_H2O.data| raw:: html
 
-   <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/peg.gro" target="_blank">here</a>
+   <a href="../../../../inputs/stretchingpolymer/free-peg-in-vacuum/peg.gro" target="_blank">here</a>
 
 ..  container:: justify
 
@@ -101,11 +101,11 @@ PEG molecule in vacuum
 
 .. |download_charmm35r.itp| raw:: html
 
-   <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/ff/charmm35r.itp" target="_blank">charmm35r.itp</a>
+   <a href="../../../../inputs/stretchingpolymer/free-peg-in-vacuum/ff/charmm35r.itp" target="_blank">charmm35r.itp</a>
    
 .. |download_peg.itp| raw:: html
 
-   <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/ff/peg.itp" target="_blank">peg.itp</a>
+   <a href="../../../../inputs/stretchingpolymer/free-peg-in-vacuum/ff/peg.itp" target="_blank">peg.itp</a>
 
 ..  container:: justify
 
@@ -425,8 +425,30 @@ PEG molecule in water
 ..  code-block:: bw
 
     [ molecules ]
-    ; Compound        #mols
+    ; Compound      #mols
     PEG             1
-    SOL               853
+    SOL             853
+
+..  container:: justify
+
+    Add the line *#include "ff/tip3p.itp"* to the topol.top file:
+
+..  code-block:: bw
+
+    ; Include forcefield parameters
+    #include "ff/charmm35r.itp"
+    #include "ff/peg.itp"
+    #include "ff/tip3p.itp
+
+..  container:: justify
+
+    The *tip3p.itp* contains the information about the water molecule,
+    and can be downloaded by clicking |download_tip3p.itp|, and then placed 
+    within the *ff/* folder. 
+
+.. |download_tip3p.itp| raw:: html
+
+    <a href="../../../../inputs/stretchingpolymer/free-peg-in-water/ff/tip3p.itp" target="_blank">here</a>
+
 
 .. include:: ../contact/contactme.rst
