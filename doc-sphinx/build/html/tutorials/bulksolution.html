@@ -302,7 +302,7 @@ GROMACS reminds you: &quot;Computers are like humans - they do everything except
 <h2>The input files<a class="headerlink" href="#the-input-files" title="Permalink to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>In order to run the present simulation using GROMACS,
-we need the 3 following files:</p>
+we need the 3 following files (or sets of files):</p>
 <ul class="simple">
 <li><ol class="arabic simple">
 <li><p>a <strong>configuration file</strong> (.gro) containing the
@@ -311,15 +311,13 @@ dimensions,</p></li>
 </ol>
 </li>
 <li><ol class="arabic simple" start="2">
-<li><p>a <strong>topology file</strong> (.top) containing
-information about the force field (e.g. interaction
-parameters, molecular constraints),</p></li>
+<li><p>a <strong>topology file</strong> (.top) specifying the
+location of the force field files (.itp),</p></li>
 </ol>
 </li>
 <li><ol class="arabic simple" start="3">
-<li><p>and an <strong>input file</strong> (.mdp) containing the
-parameters of the simulation (e.g. temperature,
-timestep).</p></li>
+<li><p>an <strong>input file</strong> (.mdp) containing the
+parameters of the simulation (e.g. temperature, timestep).</p></li>
 </ol>
 </li>
 </ul>
@@ -327,32 +325,34 @@ timestep).</p></li>
 <section id="the-configuration-file-gro">
 <h3>1) The configuration file (.gro)<a class="headerlink" href="#the-configuration-file-gro" title="Permalink to this heading">#</a></h3>
 <div class="justify docutils container">
+<p>If you already followed the previous tutorial, <a class="reference internal" href="createconfgro.html#create-conf-label"><span class="std std-ref">Create conf.gro</span></a>,
+simply skip this part.</p>
 <p>For the present simulation, the initial atom
 positions and box size are given in a conf.gro file
-(Gromos87 format) that you can download by clicking <a href="../../../../inputs/bulksolution/conf.gro" target="_blank">here</a>.
-The conf.gro file was created using Python, explanation are given
-here: <a class="reference internal" href="createconfgro.html#create-conf-label"><span class="std std-ref">Create conf.gro</span></a>.
-Save the conf.gro file in a folder. The file looks like that:</p>
+(Gromos87 format) that you can download by clicking <a href="../../../../inputs/bulksolution/conf.gro" target="_blank">here</a>.</p>
+<p>Save the conf.gro file in a folder. The file looks like that:</p>
 </div>
-<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>Na2SO4 solution
-3557
-    1  SO4   O1    1   2.725   1.999   2.077
-    1  SO4   O2    2   2.679   2.091   1.839
-    1  SO4   O3    3   2.505   2.127   2.028
-    1  SO4   O4    4   2.542   1.890   1.930
-    1  SO4    S    5   2.612   2.027   1.968
-(...)
-898  SOL  HW1 3555   3.004   3.021   2.945
-898  SOL  HW2 3556   3.004   2.869   2.945
-898  SOL   MW 3557   2.955   2.945   2.945
-3.10000   3.10000   3.10000
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span> Na2SO4 solution
+ 2846
+    1  SO4   O1    1   2.608   3.089   2.389
+    1  SO4   O2    2   2.562   3.181   2.150
+    1  SO4   O3    3   2.388   3.217   2.339
+    1  SO4   O4    4   2.425   2.980   2.241
+    1  SO4   S1    5   2.496   3.117   2.280
+ (...)
+  719  Sol  OW1 2843   3.220   2.380   1.540
+  719  Sol  HW1 2844   3.279   2.456   1.540
+  719  Sol  HW2 2845   3.279   2.304   1.540
+  719  Sol  MW1 2846   3.230   2.380   1.540
+3.36000   3.36000   3.36000
 </pre></div>
 </div>
 <div class="justify docutils container">
 <p>The first line ‘Na2SO4 solution’ is just a comment, the
 second line is the total number of atoms, and the last
-line is the box dimension in nanometer, here 3.1 nm by 3.1 nm by 3.1 nm. Between
-the second and the last lines, there is one line per
+line is the box dimension in nanometer, here 3.36 nm
+by 3.36 nm by 3.36 nm. Between the second and the
+last lines, there is one line per
 atom. Each line indicates, from left to right, the
 residue Id (the atoms of the same
 SO<sub>4</sub><sup>2-</sup> ion have the same residue
@@ -391,18 +391,18 @@ small <a href="https://lammpstutorials.github.io/sphinx/build/html/miscellaneous
 <p>As can be seen in this figure, the water molecules are
 arranged in a quite unrealistic and regular manner, with
 all dipoles facing in the same direction, and possibly
-some overlapping between some of the molecules and ions.</p>
-<p>This will be fixed during energy minimization.</p>
+wrong distances between some of the molecules and ions.</p>
+<p>This will be fixed during energy minimization, see below.</p>
 </div>
 </section>
 <section id="the-topology-file-top">
 <h3>2) The topology file (.top)<a class="headerlink" href="#the-topology-file-top" title="Permalink to this heading">#</a></h3>
 <div class="justify docutils container">
+<p>If you already followed the previous tutorial, <a class="reference internal" href="createtopoltop.html#create-topol-label"><span class="std std-ref">Write parameters</span></a>,
+you can also skip this part.</p>
 <p>The topology file contains information about the
 interactions of the different atoms and molecules. You
 can download it by clicking <a href="../../../../inputs/bulksolution/topol.top" target="_blank">here</a>.
-The topol.top file was created using Python, explanation are given
-here: <a class="reference internal" href="createconfgro.html#create-conf-label"><span class="std std-ref">Create conf.gro</span></a>.
 Place it in the same folder as the conf.gro file. The
 topol.top file looks like that:</p>
 </div>
@@ -434,9 +434,7 @@ will fail.</p>
 in it. These four files contain information about
 the atoms (names, masses, changes, Lennard-Jones
 coefficients) and residues (bond and angular
-constraints) for all the species that will be involved here.
-More details about those files are given in
-this tutorial: <a class="reference internal" href="createtopoltop.html#create-topol-label"><span class="std std-ref">Write parameters</span></a>.</p>
+constraints) for all the species that will be involved here.</p>
 </div>
 </section>
 <section id="the-input-file-mdp">
