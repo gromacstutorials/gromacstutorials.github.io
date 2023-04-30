@@ -336,8 +336,7 @@ Energy minimization
 
 ..  container:: justify
 
-    It is clear from the current configuration file (see the
-    previous image) that the molecules and ions are currently in a
+    It is clear from the configuration (.gro) file that the molecules and ions are currently in a
     quite unphysical configuration (i.e. too regularly aligned). It would be risky to
     directly perform a molecular dynamics simulation;
     atoms would undergo huge forces, accelerate, and the system could
@@ -371,7 +370,7 @@ Energy minimization
 
 ..  container:: justify
 
-    As we would like to be able to visualize
+    In order to visualize
     the trajectory of the atoms during the minimization,
     let us add the following command to the input
     file in order to print the atom positions every 10 steps in a .trr trajectory file:
@@ -615,6 +614,10 @@ Minimalist NVT input file
     during the NVT equilibration. Dashed line is the
     requested temperature of 360 K.
 
+..  container:: justify
+
+    A better control of the temperature is achieved in the next section.
+
 Improved NVT
 ============
 
@@ -639,11 +642,11 @@ Improved NVT
 ..  container:: justify
 
     For this system, long range Coulomb interaction is a
-    better choice. We could also perform better thermostating the
-    system by thermostating water and ions separately.
+    better choice. We could also improve the thermostating of the
+    system by applying a separate thermostat to water molecules and ions.
     Therefore, let us improve the NVT step by specifying
     more options in the input file.
-    First, in nvt.mdp, let us impose the use of the
+    First, in the nvt.mdp file, let us impose the use of the
     long-range Fast smooth Particle-Mesh Ewald (SPME)
     electrostatics with Fourier spacing of 0.1 nm, order
     of 4, and cut-off of 4:
@@ -682,7 +685,7 @@ Improved NVT
 
 ..  container:: justify
 
-    Let us also perform separate temperature baths for
+    Let us also use separate temperature baths for
     water and ions (here corresponding to the gromacs group called non-water) respectively
     by replacing:
 
