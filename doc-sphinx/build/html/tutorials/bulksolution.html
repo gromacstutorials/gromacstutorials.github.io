@@ -718,8 +718,8 @@ requested temperature of 360 K.</span><a class="headerlink" href="#id8" title="P
 <p>A better control of the temperature is achieved in the next section.</p>
 </div>
 </section>
-<section id="improved-nvt">
-<h2>Improved NVT<a class="headerlink" href="#improved-nvt" title="Permalink to this heading">#</a></h2>
+<section id="improving-the-nvt">
+<h2>Improving the NVT<a class="headerlink" href="#improving-the-nvt" title="Permalink to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>So far, a very few commands have been placed in the
 NVT input file, meaning that most of the instruction
@@ -843,7 +843,7 @@ comm_grps = system
 <p>Run the new version of the input script. One obvious
 difference with the previous (minimalist) NVT run is
 the temperature at the beginning of the run (orange
-curve). In addition, the final temperature is closer
+curve). The final temperature is also closer
 to the desired temperature:</p>
 </div>
 <figure class="align-default">
@@ -857,8 +857,8 @@ during the NVT equilibration.</span><a class="headerlink" href="#id17" title="Pe
 </figcaption>
 </figure>
 </section>
-<section id="npt-adjusting-the-volume">
-<h2>NPT: adjusting the volume<a class="headerlink" href="#npt-adjusting-the-volume" title="Permalink to this heading">#</a></h2>
+<section id="adjust-the-density-using-npt">
+<h2>Adjust the density using NPT<a class="headerlink" href="#adjust-the-density-using-npt" title="Permalink to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Now that the system is properly equilibrated in the
 NVT ensemble, let us perform an equilibration in the
@@ -918,7 +918,7 @@ differences are the addition of the ‘nstlog’ and
 ‘nstenergy’ commands to control the frequency at
 which information are printed in the log file and in
 the energy file (edr), and the removing the
-‘gen-vel’ commands. Run it using :</p>
+‘gen-vel’ commands. Run it using:</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/npt.mdp<span class="w"> </span>-c<span class="w"> </span>nvt.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>npt<span class="w"> </span>-pp<span class="w"> </span>npt<span class="w"> </span>-po<span class="w"> </span>npt
 gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>npt
@@ -935,7 +935,8 @@ gmx<span class="w"> </span>energy<span class="w"> </span>-f<span class="w"> </sp
 </pre></div>
 </div>
 <div class="justify docutils container">
-<p>Choose respectively ‘temperature’, ‘pressure’ and ‘volume’.</p>
+<p>Choose respectively ‘temperature’, ‘pressure’ and ‘volume’.
+This is what I see:</p>
 </div>
 <figure class="align-default">
 <img alt="Gromacs tutorial : NPT equilibration" class="only-light" src="../_images/NPT-light.png" />
@@ -958,10 +959,11 @@ Finally, the pressure curve reveal that large oscillations of the
 pressure with time. These large oscillations are
 typical in molecular dynamics, particularly with
 liquid water that is almost uncompressible.</p>
+<p>Exact results may differ depending on the actual <em>.gro</em> file geenrated.</p>
 </div>
 </section>
-<section id="diffusion-coefficient-measurement">
-<h2>Diffusion coefficient measurement<a class="headerlink" href="#diffusion-coefficient-measurement" title="Permalink to this heading">#</a></h2>
+<section id="measurement-diffusion-coefficient">
+<h2>Measurement diffusion coefficient<a class="headerlink" href="#measurement-diffusion-coefficient" title="Permalink to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Now that the system is fully equilibrated, we can
 perform a longer simulation and extract quantities of
@@ -1033,12 +1035,17 @@ diffusion coefficient.</p>
 cm<sup>2</sup>/s, and for water 5.2e-5 cm<sup>2</sup>/s
 (not too far from the experimental value of ~ 7e-5
 cm<sup>2</sup>/s at temperature T=360 K).</p>
-<p><strong>Side note:</strong> Diffusion coefficients obtained from
-molecular dynamics simulations in a finite sized box
+</div>
+<div class="info admonition">
+<p class="admonition-title">About MSD in molecular simulations</p>
+<p>In principle, diffusion coefficients obtained from
+molecular dynamics simulations in a finite-sized box
 must be corrected, but this is beyond the scope of
 the present tutorial, see this
 <a class="reference external" href="https://pubs.acs.org/doi/pdf/10.1021/acs.jpcb.1c05303">paper</a>
 for more details.</p>
+</div>
+<div class="justify docutils container">
 <p>The final MSDs plots look like this:</p>
 </div>
 <figure class="align-default">
@@ -1050,6 +1057,14 @@ for more details.</p>
 <p><span class="caption-text">MSDs for the three species, respectively.</span><a class="headerlink" href="#id21" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
+</section>
+<section id="going-further">
+<h2>Going further<a class="headerlink" href="#going-further" title="Permalink to this heading">#</a></h2>
+<div class="justify docutils container">
+<p>Take advantage of the generated production run to extract more
+equilibrium quantities. For instance, Gromacs allows you to
+extract Radial Distribution Functions (RDF) using the <em>gmx rdf</em> commands.</p>
+</div>
 <div class="mail admonition">
 <p class="admonition-title">Contact me</p>
 <p><a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> me if you have any question or suggestion about these tutorials.</p>
@@ -1118,9 +1133,10 @@ for more details.</p>
 </li>
 <li><a class="reference internal" href="#energy-minimization">Energy minimization</a></li>
 <li><a class="reference internal" href="#minimalist-nvt-input-file">Minimalist NVT input file</a></li>
-<li><a class="reference internal" href="#improved-nvt">Improved NVT</a></li>
-<li><a class="reference internal" href="#npt-adjusting-the-volume">NPT: adjusting the volume</a></li>
-<li><a class="reference internal" href="#diffusion-coefficient-measurement">Diffusion coefficient measurement</a></li>
+<li><a class="reference internal" href="#improving-the-nvt">Improving the NVT</a></li>
+<li><a class="reference internal" href="#adjust-the-density-using-npt">Adjust the density using NPT</a></li>
+<li><a class="reference internal" href="#measurement-diffusion-coefficient">Measurement diffusion coefficient</a></li>
+<li><a class="reference internal" href="#going-further">Going further</a></li>
 </ul>
 </li>
 </ul>

@@ -618,8 +618,8 @@ Minimalist NVT input file
 
     A better control of the temperature is achieved in the next section.
 
-Improved NVT
-============
+Improving the NVT
+=================
 
 ..  container:: justify
 
@@ -747,7 +747,7 @@ Improved NVT
     Run the new version of the input script. One obvious
     difference with the previous (minimalist) NVT run is
     the temperature at the beginning of the run (orange
-    curve). In addition, the final temperature is closer
+    curve). The final temperature is also closer
     to the desired temperature:
 
 .. figure:: figures/bulksolution/temperature-improved-light.png
@@ -761,8 +761,8 @@ Improved NVT
     Evolution of the temperature as a function of the time
     during the NVT equilibration.
 
-NPT: adjusting the volume
-=========================
+Adjust the density using NPT
+============================
 
 ..  container:: justify
 
@@ -824,7 +824,7 @@ NPT: adjusting the volume
     'nstenergy' commands to control the frequency at
     which information are printed in the log file and in
     the energy file (edr), and the removing the
-    'gen-vel' commands. Run it using :
+    'gen-vel' commands. Run it using:
 
 ..  code-block:: bash 
 
@@ -846,6 +846,7 @@ NPT: adjusting the volume
 ..  container:: justify
 
     Choose respectively 'temperature', 'pressure' and 'volume'.
+    This is what I see:
 
 .. figure:: figures/bulksolution/NPT-light.png
     :alt: Gromacs tutorial : NPT equilibration
@@ -871,7 +872,9 @@ NPT: adjusting the volume
     typical in molecular dynamics, particularly with
     liquid water that is almost uncompressible.
 
-Diffusion coefficient measurement
+    Exact results may differ depending on the actual *.gro* file geenrated.
+
+Measurement diffusion coefficient
 =================================
 
 ..  container:: justify
@@ -955,12 +958,17 @@ Diffusion coefficient measurement
     (not too far from the experimental value of ~ 7e-5
     cm\ :sup:`2`/s at temperature T=360 K).
     
-    **Side note:** Diffusion coefficients obtained from
-    molecular dynamics simulations in a finite sized box
+.. admonition:: About MSD in molecular simulations
+    :class: info
+
+    In principle, diffusion coefficients obtained from
+    molecular dynamics simulations in a finite-sized box
     must be corrected, but this is beyond the scope of
     the present tutorial, see this
     `paper <https://pubs.acs.org/doi/pdf/10.1021/acs.jpcb.1c05303>`__
     for more details.
+
+..  container:: justify
 
     The final MSDs plots look like this:
 
@@ -973,5 +981,14 @@ Diffusion coefficient measurement
     :class: only-dark
 
     MSDs for the three species, respectively.
+
+Going further
+=============
+
+..  container:: justify
+
+    Take advantage of the generated production run to extract more 
+    equilibrium quantities. For instance, Gromacs allows you to
+    extract Radial Distribution Functions (RDF) using the *gmx rdf* commands.
 
 .. include:: ../contact/contactme.rst
