@@ -1,0 +1,15 @@
+integrator = steep
+emtol = 10
+emstep = 0.0001
+nsteps = 5000
+
+nstenergy = 1000
+nstxout = 100
+
+cutoff-scheme = Verlet
+coulombtype = PME
+rcoulomb = 1
+rvdw = 1
+pbc = xyz
+
+define = -DFLEXIBLE
