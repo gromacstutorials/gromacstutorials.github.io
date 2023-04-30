@@ -653,6 +653,27 @@ constant temperature) equilibration run, using this <a href="../../../../inputs/
 gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>npt<span class="w"> </span>-v
 </pre></div>
 </div>
+<div class="justify docutils container">
+<p>Extract the angular distribution again, and compare it to the
+previous vacuum simulation. Here I increased the duration of both
+simulation to 1 ns (for the PEG in water) and 2 ns (for PEG in vacuum)
+to improve the statistic (feel free to do the same if your
+computer allows it):</p>
+</div>
+<figure class="align-default">
+<img alt="Angle distribution from molecular dynamics simulation in GROMACS" class="only-light" src="../_images/angle-distribution-comparison-light.png" />
+</figure>
+<figure class="align-default" id="id9">
+<img alt="Angle distribution from molecular dynamics simulation in GROMACS" class="only-dark" src="../_images/angle-distribution-comparison-dark.png" />
+<figcaption>
+<p><span class="caption-text">Angle distribution comparing the PEG molecule in vacuum (gray) and
+the PEG molecule in water (blue).</span><a class="headerlink" href="#id9" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="justify docutils container">
+<p>Notice that the angle distribution is slightly shifted in water, compared to
+when the peg molecule is in vacuum.</p>
+</div>
 <div class="mail admonition">
 <p class="admonition-title">Contact me</p>
 <p><a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> me if you have any question or suggestion about these tutorials.</p>
