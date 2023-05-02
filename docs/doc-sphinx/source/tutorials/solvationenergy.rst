@@ -27,8 +27,8 @@ Molecule solvation energy
     calculate the free energy of solvation of a
     large molecule in water. 
 
-    The large molecule used here is a graphene-like and disk-like molecule
-    named hexabenzocoronene.
+    The large molecule used here is a graphene-like and
+    disk-like molecule named hexabenzocoronene.
 
 .. include:: ../contact/recommand-bulk.rst
 
@@ -74,19 +74,20 @@ Create the configuration file
     If you open the hbc.gro file with VMD, you will see:
 
 .. figure:: figures/solvationenergy/hbc-light.png
-    :alt: Gromacs initial configuration of HBC molecule
+    :alt: Gromacs initial configuration of HBC graphene molecule
     :class: only-light
     :height: 250
     :align: center
 
 .. figure:: figures/solvationenergy/hbc-dark.png
-    :alt: Gromacs initial configuration of HBC molecule
+    :alt: Gromacs initial configuration of HBC graphene molecule
     :class: only-dark
     :height: 250
     :align: center
 
     HBC molecule with carbon atoms in gray and hydrogen
-    atoms in white.
+    atoms in white. The honey-comb structure of HBC is similar 
+    to that of graphene.
 
 ..  container:: justify
 

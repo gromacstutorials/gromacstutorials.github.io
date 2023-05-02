@@ -1,4 +1,5 @@
-# Configuration file for the Sphinx documentation builder.
+# Configuration file for the Sphinx documentation builder
+# for GROMACS tutorials website
 
 copyright = 'All source code is available under the GNU General Public License v3.0'
 author = 'Simon Gravelle'
@@ -25,9 +26,7 @@ source_suffix = ['.rst']
 
 html_logo = "_static/logo.png"
 
-favicons = [
-    {"href": "favicon-32x32.png"},
-]
+favicons = [{"href": "favicon-32x32.png"}]
 
 html_show_copyright = False
 html_show_sphinx = False
