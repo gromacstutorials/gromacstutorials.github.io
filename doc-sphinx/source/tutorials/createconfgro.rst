@@ -10,12 +10,12 @@ Create conf.gro
 ..  container:: justify
 
     The objective of this tutorial is to write a 
-    simple topology file using python, by placing
-    molecules and ions in an empty box. 
+    simple topology file by placing
+    molecules and ions in an empty box using Python.
 
-    The topology file will be used in :ref:`bulk-solution-label`. 
+    The topology file created here will be used in :ref:`bulk-solution-label`. 
     If you are only interested in learning GROMACS, jump directly
-    in :ref:`bulk-solution-label`.
+    to the actual GROMACS tutorial: :ref:`bulk-solution-label`.
 
 .. include:: ../contact/needhelp.rst
 
