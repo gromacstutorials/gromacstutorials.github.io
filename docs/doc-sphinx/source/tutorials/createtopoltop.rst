@@ -15,7 +15,7 @@ Write parameters
 
     The parameter files created here will be used in :ref:`bulk-solution-label`. 
     If you are only interested in running GROMACS, jump directly
-    in :ref:`bulk-solution-label`.
+    to :ref:`bulk-solution-label`.
 
 .. include:: ../contact/needhelp.rst
 
@@ -159,7 +159,7 @@ Water molecule
 ..  container:: justify
 
     Finally, create a file named *h2o.itp* for the water molecule.
-    Settles parameters are added to ensure that the residue remains 
+    Settle parameters are added to ensure that the residue remains 
     rigid:
 
 ..  code-block:: bw
@@ -207,3 +207,10 @@ Water molecule
 .. |so4.itp| raw:: html
 
     <a href="../../../../inputs/bulksolution/ff/so4.itp" target="_blank">so4.itp</a>
+
+..  container:: justify
+
+    To continue and use those files for running a molecular dynamics simulation 
+    with GROMACS, go to :ref:`bulk-solution-label`.
+
+.. include:: ../contact/contactme.rst

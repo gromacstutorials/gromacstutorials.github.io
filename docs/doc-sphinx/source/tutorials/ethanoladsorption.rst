@@ -22,7 +22,8 @@ Free energy profile
 ..  container:: justify
 
     **The objective of this tutorial** is to use GROMACS to perform
-    a molecular dynamics simulation, and to calculate the free energy of adsorption of a ethanol at the water-vapor interface. 
+    a molecular dynamics simulation, and to calculate the free energy of adsorption
+    of ethanol at the water-vapor interface. 
 
 .. include:: ../contact/recommand-bulk.rst
 
