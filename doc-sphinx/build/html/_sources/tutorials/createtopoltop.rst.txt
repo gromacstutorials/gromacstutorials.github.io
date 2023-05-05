@@ -190,8 +190,6 @@ Water molecule
     3 1 2 4
     4 1 2 3
 
-.. include:: ../contact/contactme.rst
-
 .. |forcefield.itp| raw:: html
 
     <a href="../../../../inputs/bulksolution/ff/forcefield.itp" target="_blank">forcefield.itp</a>
