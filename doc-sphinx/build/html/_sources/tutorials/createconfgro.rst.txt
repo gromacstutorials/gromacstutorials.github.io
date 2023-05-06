@@ -13,18 +13,20 @@ Create conf.gro
     simple topology file by placing
     molecules and ions in an empty box using Python.
 
-    The topology file created here will be used in :ref:`bulk-solution-label`. 
     If you are only interested in learning GROMACS, jump directly
-    to the actual GROMACS tutorial: :ref:`bulk-solution-label`.
+    to the actual GROMACS tutorial: :ref:`bulk-solution-label`, 
+    in which the topology file created here will be used.
 
 .. include:: ../contact/needhelp.rst
 
 What is a .gro file?
 ====================
 
-A .gro file contains the initial positions of all the atoms 
-of a simulation, and can be read by GROMACS. Its structure 
-is the following:
+..  container:: justify
+
+    A .gro file contains the initial positions and name of all the atoms 
+    of a simulation, as well as the box size and can be read by
+    GROMACS. Its structure is the following:
 
 ..  code-block:: bw
 
@@ -40,16 +42,26 @@ is the following:
 
 ..  container:: justify
 
-    One particularity of .gro file format, each column must be located at a fixed position, see |conf.gro-manual|.
+    One particularity of .gro file format, each column must be located at
+    a fixed position, see |conf.gro-manual|.
 
 .. |conf.gro-manual| raw:: html
 
     <a href="https://manual.gromacs.org/documentation/current/reference-manual/file-formats.html#gro" target="_blank">the GROMACS manual</a>
 
-Molecule/ions definitions
-=========================
+Residue definitions
+===================
 
-Open a blank python script, call it *molecules.py*, and copy the following lines in it:
+.. admonition:: About residue
+    :class: dropdown
+
+    In GROMACS, a residue refers to a group of one or more atoms that are
+    covalently linked and considered as a single unit within a molecule, ion, etc.
+
+..  container:: justify
+
+    Open a blank Python script, call it *molecules.py*, and copy the
+    following lines in it:
 
 ..  code-block:: python
     :caption: *to be copied in molecules.py*
@@ -90,8 +102,8 @@ Open a blank python script, call it *molecules.py*, and copy the following lines
 ..  container:: justify
 
     Each function corresponds to a residue, and contains 
-    the positions, type, and name of all the atoms, as well as the name of the residue. 
-    These function will be called every time we will need to place a residue in
+    the positions, types, and names of all the atoms, as well as the names of the residues. 
+    These functions will be called every time we will need to place a residue in
     our system.
 
     The sulfide (:math:`\text{SO}_4^{2-}`), sodium (:math:`\text{Na}^{+}`) and water
@@ -114,11 +126,11 @@ Creating the gro file
 
 ..  container:: justify
 
-    We first need to define the basic parameters, such as 
-    the number of residue we want, or the box size, and
+    Here we first define the basic parameters, such as 
+    the number of residues we want, or the box size, and
     initialize some lists and counters. 
 
-    Next to *molecule.py*, create a nez Python file called
+    Next to *molecule.py*, create a new Python file called
     *generategro.py*, and copy the following lines into it:
 
 ..  code-block:: python
@@ -136,9 +148,9 @@ Creating the gro file
     Here box is an array containing the box size along all 3 coordinates of space,
     respectively Lx, Ly, and Lz. Here a cubic box of lateral dimension 3.6 nm is used.
 
-    Now, let us choose a salt concentration, and calculate the number of ions and water molecules
-    accordingly, while also choosing the total number of residue (here I call residue
-    either a molecule or an ion):
+    Now, let us choose a salt concentration, and calculate the number of
+    ions and water molecules accordingly, while also choosing the total
+    number of residues (here I call residue either a molecule or an ion):
 
 ..  code-block:: python
     :caption: *to be copied in generategro.py*
@@ -151,7 +163,7 @@ Creating the gro file
     
 ..  container:: justify
 
-    Let us also choose typical cutoff distances for each species. These
+    Let us also choose typical cutoff distances (in nanometer) for each species. These
     cutoffs will be used to ensure that no species are inserted too close 
     from one another:
 
@@ -184,7 +196,7 @@ Creating the gro file
 ..  container:: justify
 
     Let us add a number *nion* of :math:`\text{SO}_4^{2-}` ions at random locations.
-    To avoid overlap, let us only insert ion if no other ions is located at 
+    To avoid overlap, let us only insert ion if no other ions is already located at 
     a distance closer than *dSO4*:
 
 ..  code-block:: python
@@ -359,7 +371,7 @@ Final system
 ..  container:: justify
 
     Run the *generategro.py* file using Python.
-    I see the following in the terminal:
+    This is what I in the terminal:
 
 ..  code-block:: bw
 
@@ -372,7 +384,8 @@ Final system
 
 ..  container:: justify
 
-    You can look at the final system by typing in a terminal:
+    You can look at the final system using vmd (or any other MD visualization software)
+    by typing in a terminal:
 
 ..  code-block:: bash
 
@@ -391,7 +404,7 @@ Final system
 
 ..  container:: justify
 
-    Note that there is some vacuum left in the box. Its not a big problem and
+    There is some vacuum left in the box. It is not a big problem and
     the initial configuration we created is good enough. 
     The topology file *conf.gro* will be used as the initial 
     configuration for the :ref:`bulk-solution-label` tutorial.
@@ -400,9 +413,11 @@ Final system
 Writing a .top file
 ===================
 
-A topology (.top) file defines the parameters required
-for the simulation, such as masses, Lennard-Jones parameters,
-or bonds.
+..  container:: justify
+
+    A topology (.top) file defines the parameters required
+    for the simulation, such as masses, Lennard-Jones parameters,
+    or bonds.
 
 ..  container:: justify
 

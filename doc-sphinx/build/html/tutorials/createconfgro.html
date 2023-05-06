@@ -240,9 +240,9 @@
 <p>The objective of this tutorial is to write a
 simple topology file by placing
 molecules and ions in an empty box using Python.</p>
-<p>The topology file created here will be used in <a class="reference internal" href="bulksolution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a>.
-If you are only interested in learning GROMACS, jump directly
-to the actual GROMACS tutorial: <a class="reference internal" href="bulksolution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a>.</p>
+<p>If you are only interested in learning GROMACS, jump directly
+to the actual GROMACS tutorial: <a class="reference internal" href="bulksolution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a>,
+in which the topology file created here will be used.</p>
 </div>
 <div class="patreon admonition">
 <p class="admonition-title">Looking for help with your project?</p>
@@ -250,9 +250,11 @@ to the actual GROMACS tutorial: <a class="reference internal" href="bulksolution
 </div>
 <section id="what-is-a-gro-file">
 <h2>What is a .gro file?<a class="headerlink" href="#what-is-a-gro-file" title="Permalink to this heading">#</a></h2>
-<p>A .gro file contains the initial positions of all the atoms
-of a simulation, and can be read by GROMACS. Its structure
-is the following:</p>
+<div class="justify docutils container">
+<p>A .gro file contains the initial positions and name of all the atoms
+of a simulation, as well as the box size and can be read by
+GROMACS. Its structure is the following:</p>
+</div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>Name of the system
 number-of-atoms
 residue-number residue-name atom-name atom-number atom-positions (x3) # first atom
@@ -265,12 +267,21 @@ box-size (x3)
 </pre></div>
 </div>
 <div class="justify docutils container">
-<p>One particularity of .gro file format, each column must be located at a fixed position, see <a href="https://manual.gromacs.org/documentation/current/reference-manual/file-formats.html#gro" target="_blank">the GROMACS manual</a>.</p>
+<p>One particularity of .gro file format, each column must be located at
+a fixed position, see <a href="https://manual.gromacs.org/documentation/current/reference-manual/file-formats.html#gro" target="_blank">the GROMACS manual</a>.</p>
 </div>
 </section>
-<section id="molecule-ions-definitions">
-<h2>Molecule/ions definitions<a class="headerlink" href="#molecule-ions-definitions" title="Permalink to this heading">#</a></h2>
-<p>Open a blank python script, call it <em>molecules.py</em>, and copy the following lines in it:</p>
+<section id="residue-definitions">
+<h2>Residue definitions<a class="headerlink" href="#residue-definitions" title="Permalink to this heading">#</a></h2>
+<div class="dropdown admonition">
+<p class="admonition-title">About residue</p>
+<p>In GROMACS, a residue refers to a group of one or more atoms that are
+covalently linked and considered as a single unit within a molecule, ion, etc.</p>
+</div>
+<div class="justify docutils container">
+<p>Open a blank Python script, call it <em>molecules.py</em>, and copy the
+following lines in it:</p>
+</div>
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text"><em>to be copied in molecules.py</em></span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -310,8 +321,8 @@ box-size (x3)
 </div>
 <div class="justify docutils container">
 <p>Each function corresponds to a residue, and contains
-the positions, type, and name of all the atoms, as well as the name of the residue.
-These function will be called every time we will need to place a residue in
+the positions, types, and names of all the atoms, as well as the names of the residues.
+These functions will be called every time we will need to place a residue in
 our system.</p>
 <p>The sulfide (<span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span>), sodium (<span class="math notranslate nohighlight">\(\text{Na}^{+}\)</span>) and water
 molecules (<span class="math notranslate nohighlight">\(\text{H}_2\text{O}\)</span>) look like that, respectively:</p>
@@ -331,10 +342,10 @@ visible.</span><a class="headerlink" href="#id2" title="Permalink to this image"
 <section id="creating-the-gro-file">
 <h2>Creating the gro file<a class="headerlink" href="#creating-the-gro-file" title="Permalink to this heading">#</a></h2>
 <div class="justify docutils container">
-<p>We first need to define the basic parameters, such as
-the number of residue we want, or the box size, and
+<p>Here we first define the basic parameters, such as
+the number of residues we want, or the box size, and
 initialize some lists and counters.</p>
-<p>Next to <em>molecule.py</em>, create a nez Python file called
+<p>Next to <em>molecule.py</em>, create a new Python file called
 <em>generategro.py</em>, and copy the following lines into it:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id3">
@@ -351,9 +362,9 @@ initialize some lists and counters.</p>
 <div class="justify docutils container">
 <p>Here box is an array containing the box size along all 3 coordinates of space,
 respectively Lx, Ly, and Lz. Here a cubic box of lateral dimension 3.6 nm is used.</p>
-<p>Now, let us choose a salt concentration, and calculate the number of ions and water molecules
-accordingly, while also choosing the total number of residue (here I call residue
-either a molecule or an ion):</p>
+<p>Now, let us choose a salt concentration, and calculate the number of
+ions and water molecules accordingly, while also choosing the total
+number of residues (here I call residue either a molecule or an ion):</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id4">
 <div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id4" title="Permalink to this code">#</a></div>
@@ -366,7 +377,7 @@ either a molecule or an ion):</p>
 </div>
 </div>
 <div class="justify docutils container">
-<p>Let us also choose typical cutoff distances for each species. These
+<p>Let us also choose typical cutoff distances (in nanometer) for each species. These
 cutoffs will be used to ensure that no species are inserted too close
 from one another:</p>
 </div>
@@ -399,7 +410,7 @@ all the necessary data:</p>
 </div>
 <div class="justify docutils container">
 <p>Let us add a number <em>nion</em> of <span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span> ions at random locations.
-To avoid overlap, let us only insert ion if no other ions is located at
+To avoid overlap, let us only insert ion if no other ions is already located at
 a distance closer than <em>dSO4</em>:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id7">
@@ -573,7 +584,7 @@ actual concentration:</p>
 <h2>Final system<a class="headerlink" href="#final-system" title="Permalink to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Run the <em>generategro.py</em> file using Python.
-I see the following in the terminal:</p>
+This is what I in the terminal:</p>
 </div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>701 out of 701 water molecules created
 Lx = 3.36 nm, Ly = 3.36 nm, Lz = 3.36 nm
@@ -584,7 +595,8 @@ The ion concentration is 1.43 mol per litter
 </pre></div>
 </div>
 <div class="justify docutils container">
-<p>You can look at the final system by typing in a terminal:</p>
+<p>You can look at the final system using vmd (or any other MD visualization software)
+by typing in a terminal:</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>conf.gro
 </pre></div>
@@ -600,7 +612,7 @@ images are also represented.</span><a class="headerlink" href="#id13" title="Per
 </figcaption>
 </figure>
 <div class="justify docutils container">
-<p>Note that there is some vacuum left in the box. Its not a big problem and
+<p>There is some vacuum left in the box. It is not a big problem and
 the initial configuration we created is good enough.
 The topology file <em>conf.gro</em> will be used as the initial
 configuration for the <a class="reference internal" href="bulksolution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a> tutorial.</p>
@@ -608,9 +620,11 @@ configuration for the <a class="reference internal" href="bulksolution.html#bulk
 </section>
 <section id="writing-a-top-file">
 <h2>Writing a .top file<a class="headerlink" href="#writing-a-top-file" title="Permalink to this heading">#</a></h2>
+<div class="justify docutils container">
 <p>A topology (.top) file defines the parameters required
 for the simulation, such as masses, Lennard-Jones parameters,
 or bonds.</p>
+</div>
 <div class="justify docutils container">
 <p>Within the same Python script, write:</p>
 </div>
@@ -696,7 +710,7 @@ will be written in the <a class="reference internal" href="createtopoltop.html#c
             <ul>
 <li><a class="reference internal" href="#">Create conf.gro</a><ul>
 <li><a class="reference internal" href="#what-is-a-gro-file">What is a .gro file?</a></li>
-<li><a class="reference internal" href="#molecule-ions-definitions">Molecule/ions definitions</a></li>
+<li><a class="reference internal" href="#residue-definitions">Residue definitions</a></li>
 <li><a class="reference internal" href="#creating-the-gro-file">Creating the gro file</a></li>
 <li><a class="reference internal" href="#final-system">Final system</a></li>
 <li><a class="reference internal" href="#writing-a-top-file">Writing a .top file</a></li>
