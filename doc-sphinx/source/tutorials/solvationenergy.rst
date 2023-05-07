@@ -386,13 +386,13 @@ Solvation energy measurement
     molecule of interest (here FJEW) and the rest of
     the system (here water) must be done by
     progressively turning off van der Waals and Coulomb
-    interactions. The  parameter controls the frequency at
+    interactions. The parameter nstdhdl controls the frequency at
     which information are being printed in a xvg file during
     the production run.
 
     In addition, the stochastic integrator 'sd' is used
     instead of 'md', as it provides a better sampling,
-    which is crutial here, particularly when the HBC
+    which is crucial here, particularly when the HBC
     and the water are not coupled.
 
     Copy as well the following |solvation-topol.top| file within the 'solvation/' folder (the only
