@@ -872,7 +872,7 @@ Adjust the density using NPT
     typical in molecular dynamics, particularly with
     liquid water that is almost uncompressible.
 
-    Exact results may differ depending on the actual *.gro* file geenrated.
+    Exact results may differ depending on the actual *.gro* file generated.
 
 Measurement diffusion coefficient
 =================================
