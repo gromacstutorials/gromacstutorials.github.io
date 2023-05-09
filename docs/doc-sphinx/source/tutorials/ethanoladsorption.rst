@@ -167,7 +167,7 @@ Add the water
 ..  container:: justify
 
     The created 'solvated.gro' file contains the positions
-    of both Ethanol and water molecules, it looks like that:
+    of both ethanol and water molecules, it looks like that:
 
 .. figure:: figures/ethanoladsorption/solvated-light.png
     :alt: GROMACS tutorial : Ethanol molecules in water with VMD
