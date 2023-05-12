@@ -271,6 +271,8 @@ Energy minimization
     molecules move until the forces between the atoms are
     reasonable.
 
+.. include:: ../contact/supportme.rst
+
 Equilibration
 =============
 

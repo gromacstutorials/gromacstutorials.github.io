@@ -452,6 +452,8 @@ PEG molecule in water
 
     <a href="../../../../inputs/polymerstretching/free-peg-in-water/ff/tip3p.itp" target="_blank">here</a>
 
+.. include:: ../contact/supportme.rst
+
 Equilibrating the system
 ------------------------
 

@@ -365,6 +365,8 @@ Creating the gro file
     f.write("\n")
     f.close()
 
+.. include:: ../contact/supportme.rst
+
 Final system
 ============
 
