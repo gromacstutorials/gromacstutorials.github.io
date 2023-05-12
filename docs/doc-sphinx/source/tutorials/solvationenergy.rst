@@ -393,7 +393,7 @@ Solvation energy measurement
     In addition, the stochastic integrator 'sd' is used
     instead of 'md', as it provides a better sampling,
     which is crucial here, particularly when the HBC
-    and the water are not coupled.
+    and the water molecules are not coupled.
 
     Copy as well the following |solvation-topol.top| file within the 'solvation/' folder (the only
     difference with the previous one if the path to the ff folder).
