@@ -153,6 +153,8 @@ Sulfate ion
     4       1       2       3       5
     5       1       2       3       4
 
+.. include:: ../contact/supportme.rst
+
 Water molecule
 ==============
 

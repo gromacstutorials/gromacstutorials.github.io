@@ -329,6 +329,8 @@ Equilibration
     Here we use maxwarn 1 to disregard a GROMACS warning about the force field. If you 
     want to publish your research, don't ignore that warning lightly. 
 
+.. include:: ../contact/supportme.rst
+
 Solvation energy measurement
 ============================
 
