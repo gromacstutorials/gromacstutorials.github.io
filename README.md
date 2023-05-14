@@ -16,7 +16,8 @@ in the [docs/input/](docs/inputs) folder.
 
 ### You noticed a mistake in one of the tutorial?
 
-You can report issue here on Github, or send me an [email](https://simongravelle.github.io/). Your feedback is always highly appreciated.
+You can report issue here on Github, or send me an [email](https://simongravelle.github.io/).
+Your feedback is always highly appreciated.
 
 ### About me
 
