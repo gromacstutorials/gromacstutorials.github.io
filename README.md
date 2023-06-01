@@ -1,6 +1,6 @@
 # GROMACS tutorials
 
-This is the script of the [GROMACS Tutorials](https://gromacstutorials.github.io/) webpage. 
+This is the script of the [GROMACS tutorials](https://gromacstutorials.github.io/) webpage. 
 All the GROMACS input files used or generated during the tutorials can be found
 in the [docs/input/](docs/inputs) folder. 
 
