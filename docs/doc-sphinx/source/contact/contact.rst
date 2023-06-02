@@ -18,6 +18,7 @@ Get help with your project:
     :height: 100
     :alt: Simon gravelle patreon for lammps/gromacs material
     :align: right
+    :target: https://www.patreon.com/molecularsimulations
 
 Become a |patreon_simulation|, and:
 
