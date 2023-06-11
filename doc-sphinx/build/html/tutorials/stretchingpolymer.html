@@ -610,16 +610,16 @@ within the <em>ff/</em> folder.</p>
 <section id="equilibrating-the-system">
 <h3>Equilibrating the system<a class="headerlink" href="#equilibrating-the-system" title="Permalink to this heading">#</a></h3>
 <div class="justify docutils container">
-<p>Here we perform a 3-step equilibration of the solvated PEG system
-(energy minimization, NVT run, and NPT run, respectively).</p>
-<p>First, perform an energy minimization of the system:</p>
+<p>Here we perform a 3 steps equilibration of the solvated PEG system, starting with
+an energy minimization, followed by a NVT run, and finally with a NPT run.</p>
+<p>First, let us perform an energy minimization of the system:</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/em.mdp<span class="w"> </span>-c<span class="w"> </span>peg_h2o.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>em
 gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>em<span class="w"> </span>-v
 </pre></div>
 </div>
 <div class="justify docutils container">
-<p>The <em>em.mdp</em> is defined as follow:</p>
+<p>The <em>em.mdp</em> file contains the following commands:</p>
 </div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = steep
 emtol = 10
@@ -641,7 +641,8 @@ define = -DFLEXIBLE
 <div class="justify docutils container">
 <p>The <em>define = -DFLEXIBLE</em> commands triggers the <em>if</em> condition
 within the <em>tip3p.itp</em> file. Therefore the water molecules
-behave as flexible during the minimization. For the next steps,
+behave as flexible during the minimization (rigid molecules and
+energy minimization usually don’t go along well). For the next steps,
 rigid water molecules will be used by not including this command.</p>
 <p>Then, let us perform a NVT (constant number of particles, constant volume,
 constant temperature) run:</p>
@@ -664,7 +665,7 @@ gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> 
 <div class="justify docutils container">
 <p>Extract the angular distribution again, and compare it to the
 previous vacuum simulation. Here I increased the duration of both
-simulation to 1 ns (for the PEG in water) and 2 ns (for PEG in vacuum)
+simulations to 1 ns (for the PEG in water) and 2 ns (for PEG in vacuum)
 to improve the statistic (feel free to do the same if your
 computer allows it):</p>
 </div>
@@ -680,13 +681,14 @@ the PEG molecule in water (blue).</span><a class="headerlink" href="#id10" title
 </figure>
 <div class="justify docutils container">
 <p>Notice that the angle distribution is slightly shifted in water, compared to
-when the peg molecule is in vacuum.</p>
+when the peg molecule is in vacuum. This indicates that the polymer has a slightly
+different conformation when in contact with a solvent.</p>
 </div>
 </section>
 <section id="id1">
 <h3>Pull on the PEG<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <div class="justify docutils container">
-<p>Using the same procedure as previously, let us apply a force to
+<p>Using the same procedure as previously, apply a force to
 the polymer ends and pull it inside water. Do not forget to
 extend the box to make space for the pulling.</p>
 </div>

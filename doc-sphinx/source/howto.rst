@@ -22,6 +22,7 @@ Level 1
     * for beginners
     * basics of Gromacs
     * bulk mixture
+    * simple NVT/NPT simulation
 
 Level 2
 -------

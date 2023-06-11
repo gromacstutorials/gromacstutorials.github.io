@@ -459,10 +459,10 @@ Equilibrating the system
 
 ..  container:: justify
 
-    Here we perform a 3-step equilibration of the solvated PEG system
-    (energy minimization, NVT run, and NPT run, respectively).
+    Here we perform a 3 steps equilibration of the solvated PEG system, starting with
+    an energy minimization, followed by a NVT run, and finally with a NPT run.
 
-    First, perform an energy minimization of the system:
+    First, let us perform an energy minimization of the system:
 
 ..  code-block:: bash
 
@@ -471,7 +471,7 @@ Equilibrating the system
 
 ..  container:: justify
 
-    The *em.mdp* is defined as follow:
+    The *em.mdp* file contains the following commands:
 
 ..  code-block:: bw
 
@@ -495,7 +495,8 @@ Equilibrating the system
 
     The *define = -DFLEXIBLE* commands triggers the *if* condition
     within the *tip3p.itp* file. Therefore the water molecules 
-    behave as flexible during the minimization. For the next steps,
+    behave as flexible during the minimization (rigid molecules and 
+    energy minimization usually don't go along well). For the next steps,
     rigid water molecules will be used by not including this command.
 
     Then, let us perform a NVT (constant number of particles, constant volume,
@@ -532,7 +533,7 @@ Equilibrating the system
 
     Extract the angular distribution again, and compare it to the
     previous vacuum simulation. Here I increased the duration of both 
-    simulation to 1 ns (for the PEG in water) and 2 ns (for PEG in vacuum)
+    simulations to 1 ns (for the PEG in water) and 2 ns (for PEG in vacuum)
     to improve the statistic (feel free to do the same if your
     computer allows it):
 
@@ -550,14 +551,15 @@ Equilibrating the system
 ..  container:: justify
 
     Notice that the angle distribution is slightly shifted in water, compared to
-    when the peg molecule is in vacuum.
+    when the peg molecule is in vacuum. This indicates that the polymer has a slightly 
+    different conformation when in contact with a solvent.
 
 Pull on the PEG
 ---------------
 
 ..  container:: justify
 
-    Using the same procedure as previously, let us apply a force to
+    Using the same procedure as previously, apply a force to
     the polymer ends and pull it inside water. Do not forget to 
     extend the box to make space for the pulling.
 
