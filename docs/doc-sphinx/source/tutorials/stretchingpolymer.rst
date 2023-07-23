@@ -31,7 +31,7 @@ Polymer in water
     ends of the polymer, and its length will be measured with time.
 
     This tutorial was inspired by a very nice |Liese2017| by Liese and coworkers, in which
-    they compare MD simulations with force spectroscopy experiments.
+    they compare MD simulations of a PEG molecule in water with force spectroscopy experiments.
 
 .. |Liese2017| raw:: html
 
