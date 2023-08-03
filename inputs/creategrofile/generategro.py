@@ -3,7 +3,6 @@
 
 import numpy as np
 from molecules import SO4_ion, Na_ion, H20_molecule
-from utils import generate_random_location, search_closest_neighbor
 
 # define the box size
 Lx, Ly, Lz = [3.36]*3
@@ -32,6 +31,9 @@ all_resnum = []
 all_resname = []
 all_atname = []
 all_attype = []
+
+# Import the functions from the utils file
+from utils import generate_random_location, search_closest_neighbor
 
 # add SO4 randomly
 atpositions, attypes, resname, atnames = SO4_ion()

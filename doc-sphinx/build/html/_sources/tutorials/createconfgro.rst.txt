@@ -265,6 +265,9 @@ Creating the gro file
 ..  code-block:: python
     :caption: *to be copied in generategro.py*
 
+    # Import the functions from the utils file
+    from utils import generate_random_location, search_closest_neighbor
+
     # add Na randomly
     atpositions, attypes, resname, atnames = Na_ion()
     while cpt_Na < np.int32(nion*2):
