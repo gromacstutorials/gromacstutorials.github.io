@@ -25,7 +25,7 @@ Polymer in water
     create a small hydrophilic polymer (PEG -
     PolyEthylene Glycol) in a reservoir of water. 
     An all-atom description is used, therefore all species considered here
-    are made of charged atoms connected by bonds constraints.
+    are made of charged atoms connected by bond constraints.
 
     Once the system is created, a constant stretching force will be applied to both
     ends of the polymer, and its length will be measured with time.

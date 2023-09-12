@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,9 +14,9 @@
     </script>
         <link href="../_static/favicon-32x32.png" sizes="32x32" rel="icon" type="image/png"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Free energy profile" href="ethanoladsorption.html" /><link rel="prev" title="Polymer in water" href="stretchingpolymer.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2023.07.26 -->
+    <!-- Generated with Sphinx 7.2.5 and Furo 2023.09.10 -->
         <title>Molecule solvation energy - </title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=362ab14a" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -232,7 +232,7 @@
         </div>
         <article role="main">
           <section id="molecule-solvation-energy">
-<span id="solvation-energy-label"></span><h1>Molecule solvation energy<a class="headerlink" href="#molecule-solvation-energy" title="Permalink to this heading">#</a></h1>
+<span id="solvation-energy-label"></span><h1>Molecule solvation energy<a class="headerlink" href="#molecule-solvation-energy" title="Link to this heading">#</a></h1>
 <div class="hatnote docutils container">
 <p>Free energy solvation calculation of a
 disk-like molecule</p>
@@ -258,7 +258,7 @@ this simpler tutorial first : <a class="reference internal" href="bulksolution.h
 <p>See the <a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> page.</p>
 </div>
 <section id="input-files">
-<h2>Input files<a class="headerlink" href="#input-files" title="Permalink to this heading">#</a></h2>
+<h2>Input files<a class="headerlink" href="#input-files" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Create two folders named ‘preparation/’ and
 ‘solvation’ in the same directory, and go to
@@ -268,7 +268,7 @@ by clicking <a href="../../../../inputs/solvationenergy/preparation/FJEW_allatom
 and place it in the ‘preparation/’ folder.</p>
 </div>
 <section id="create-the-configuration-file">
-<h3>Create the configuration file<a class="headerlink" href="#create-the-configuration-file" title="Permalink to this heading">#</a></h3>
+<h3>Create the configuration file<a class="headerlink" href="#create-the-configuration-file" title="Link to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>First, let us convert the pdb file into a gro file
 within a box of finite size (4 nm by 4 nm by 4 nm) using trj conv:</p>
@@ -288,7 +288,7 @@ within a box of finite size (4 nm by 4 nm by 4 nm) using trj conv:</p>
 <figcaption>
 <p><span class="caption-text">HBC molecule with carbon atoms in gray and hydrogen
 atoms in white. The honey-comb structure of HBC is similar
-to that of graphene.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+to that of graphene.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -297,7 +297,7 @@ I have generated and continue with the tutorial.</p>
 </div>
 </section>
 <section id="create-the-topology-file">
-<h3>Create the topology file<a class="headerlink" href="#create-the-topology-file" title="Permalink to this heading">#</a></h3>
+<h3>Create the topology file<a class="headerlink" href="#create-the-topology-file" title="Link to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>Copy the force field files (ITP file)in a folder named ‘ff/’ and located within
 the ‘preparation/’ folder. Force field parameters can be downloaded as a zip file by
@@ -321,7 +321,7 @@ FJEW 1
 </div>
 </section>
 <section id="add-the-water">
-<h3>Add the water<a class="headerlink" href="#add-the-water" title="Permalink to this heading">#</a></h3>
+<h3>Add the water<a class="headerlink" href="#add-the-water" title="Link to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>Let us add water molecules to the system. First, download the tip4p
 water configuration file <a href="../../../../inputs/solvationenergy/preparation/tip4p.gro" target="_blank">here</a>,
@@ -369,7 +369,7 @@ HBC molecule.</p>
 </section>
 </section>
 <section id="energy-minimization">
-<h2>Energy minimization<a class="headerlink" href="#energy-minimization" title="Permalink to this heading">#</a></h2>
+<h2>Energy minimization<a class="headerlink" href="#energy-minimization" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Create a new folder in the preparation/’ folder, call
 it ‘inputs’, and save a new blank file, called
@@ -432,12 +432,12 @@ minimization step using VMD by typing:</p>
 <a class="only-dark reference internal image-reference" href="../_images/minimize-dark.png"><img alt="Gromacs HBC (graphene) molecule after minimisation in water" class="only-dark" src="../_images/minimize-dark.png" style="height: 400px;" /></a>
 <figcaption>
 <p><span class="caption-text">HBC molecule in water after
-energy minimization. Water is represented as a transparent field.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+energy minimization. Water is represented as a transparent field.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="equilibration">
-<h2>Equilibration<a class="headerlink" href="#equilibration" title="Permalink to this heading">#</a></h2>
+<h2>Equilibration<a class="headerlink" href="#equilibration" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Let us perform successively a NVT and a NPT relaxation. Copy the <a href="../../../../inputs/solvationenergy/preparation/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
 and the <a href="../../../../inputs/solvationenergy/preparation/inputs/npt.mdp" target="_blank">npt.mdp</a> files into the inputs folder, and run them both using:</p>
@@ -459,7 +459,7 @@ gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </spa
 <figcaption>
 <p><span class="caption-text">Movie showing the motion of the atoms during the
 NVT and NPT equilibration steps. For clarity, the
-water molecules are represented as a continuum field.</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+water molecules are represented as a continuum field.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -472,7 +472,7 @@ want to publish your research, don’t ignore that warning lightly.</p>
 </div>
 </section>
 <section id="solvation-energy-measurement">
-<h2>Solvation energy measurement<a class="headerlink" href="#solvation-energy-measurement" title="Permalink to this heading">#</a></h2>
+<h2>Solvation energy measurement<a class="headerlink" href="#solvation-energy-measurement" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>We are done with the first equilibration of the
 system. We are now going to perform the solvation
@@ -688,14 +688,15 @@ energy of a molecule, use much longer equilibration
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     </body>
 </html>

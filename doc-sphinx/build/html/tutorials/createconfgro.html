@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,9 +14,9 @@
     </script>
         <link href="../_static/favicon-32x32.png" sizes="32x32" rel="icon" type="image/png"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Write parameters" href="createtopoltop.html" /><link rel="prev" title="How-to" href="../howto.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2023.07.26 -->
+    <!-- Generated with Sphinx 7.2.5 and Furo 2023.09.10 -->
         <title>Create conf.gro - </title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=362ab14a" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -232,7 +232,7 @@
         </div>
         <article role="main">
           <section id="create-conf-gro">
-<span id="create-conf-label"></span><h1>Create conf.gro<a class="headerlink" href="#create-conf-gro" title="Permalink to this heading">#</a></h1>
+<span id="create-conf-label"></span><h1>Create conf.gro<a class="headerlink" href="#create-conf-gro" title="Link to this heading">#</a></h1>
 <div class="hatnote docutils container">
 <p>Writing the .gro file for GROMACS.</p>
 </div>
@@ -249,7 +249,7 @@ in which the topology file created here will be used.</p>
 <p>See the <a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> page.</p>
 </div>
 <section id="what-is-a-gro-file">
-<h2>What is a .gro file?<a class="headerlink" href="#what-is-a-gro-file" title="Permalink to this heading">#</a></h2>
+<h2>What is a .gro file?<a class="headerlink" href="#what-is-a-gro-file" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>A .gro file contains the initial positions and name of all the atoms
 of a simulation, as well as the box size and can be read by
@@ -272,7 +272,7 @@ a fixed position, see <a href="https://manual.gromacs.org/documentation/current/
 </div>
 </section>
 <section id="residue-definitions">
-<h2>Residue definitions<a class="headerlink" href="#residue-definitions" title="Permalink to this heading">#</a></h2>
+<h2>Residue definitions<a class="headerlink" href="#residue-definitions" title="Link to this heading">#</a></h2>
 <div class="dropdown admonition">
 <p class="admonition-title">About residue</p>
 <p>In GROMACS, a residue refers to a group of one or more atoms that are
@@ -283,7 +283,7 @@ covalently linked and considered as a single unit within a molecule, ion, etc.</
 following lines in it:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in molecules.py</em></span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in molecules.py</em></span><a class="headerlink" href="#id1" title="Link to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="c1"># define SO4 ion</span>
@@ -335,12 +335,12 @@ molecules (<span class="math notranslate nohighlight">\(\text{H}_2\text{O}\)</sp
 <figcaption>
 <p><span class="caption-text">Oxygen atoms are in red, hydrogen atoms in white, sodium atom in blue, and
 sulfur atom in yellow. The fourth point (MW) of the water molecule is not
-visible.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+visible.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="creating-the-gro-file">
-<h2>Creating the gro file<a class="headerlink" href="#creating-the-gro-file" title="Permalink to this heading">#</a></h2>
+<h2>Creating the gro file<a class="headerlink" href="#creating-the-gro-file" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Here we first define the basic parameters, such as
 the number of residues we want, or the box size, and
@@ -349,7 +349,7 @@ initialize some lists and counters.</p>
 <em>generategro.py</em>, and copy the following lines into it:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id3" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id3" title="Link to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">molecules</span> <span class="kn">import</span> <span class="n">SO4_ion</span><span class="p">,</span> <span class="n">Na_ion</span><span class="p">,</span> <span class="n">H20_molecule</span>
 
@@ -367,7 +367,7 @@ ions and water molecules accordingly, while also choosing the total
 number of residues (here I call residue either a molecule or an ion):</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id4" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id4" title="Link to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Mh2o</span> <span class="o">=</span> <span class="mf">0.018053</span> <span class="c1"># kg/mol - water</span>
 <span class="n">ntotal</span> <span class="o">=</span> <span class="mi">720</span> <span class="c1"># total number of molecule</span>
 <span class="n">c</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="c1"># desired concentration in mol/L</span>
@@ -382,7 +382,7 @@ cutoffs will be used to ensure that no species are inserted too close
 from one another:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id5" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id5" title="Link to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dSO4</span> <span class="o">=</span> <span class="mf">0.45</span>
 <span class="n">dNa</span> <span class="o">=</span> <span class="mf">0.28</span>
 <span class="n">dSol</span> <span class="o">=</span> <span class="mf">0.28</span>
@@ -394,7 +394,7 @@ from one another:</p>
 all the necessary data:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id6" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id6" title="Link to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cpt_residue</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">cpt_atoms</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">cpt_SO4</span> <span class="o">=</span> <span class="mi">0</span>
@@ -414,7 +414,7 @@ To avoid overlap, let us only insert ion if no other ions is already located at
 a distance closer than <em>dSO4</em>:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id7" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id7" title="Link to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># add SO4 randomly</span>
 <span class="n">atpositions</span><span class="p">,</span> <span class="n">attypes</span><span class="p">,</span> <span class="n">resname</span><span class="p">,</span> <span class="n">atnames</span> <span class="o">=</span> <span class="n">SO4_ion</span><span class="p">()</span>
 <span class="k">while</span> <span class="n">cpt_SO4</span> <span class="o">&lt;</span> <span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">(</span><span class="n">nion</span><span class="p">):</span>
@@ -444,7 +444,7 @@ Let us define those two functions. Create a new Python script, call it <em>utils
 and copy the following lines in it:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id8">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in utils.py</em></span><a class="headerlink" href="#id8" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in utils.py</em></span><a class="headerlink" href="#id8" title="Link to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">norm</span>
 
@@ -476,7 +476,7 @@ between existing atoms (if any) and the new residue.</p>
 <p>Let us do the same for the <span class="math notranslate nohighlight">\(\text{Na}^{+}\)</span> ion :</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id9" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id9" title="Link to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the functions from the utils file</span>
 <span class="kn">from</span> <span class="nn">utils</span> <span class="kn">import</span> <span class="n">generate_random_location</span><span class="p">,</span> <span class="n">search_closest_neighbor</span>
 
@@ -508,7 +508,7 @@ between existing atoms (if any) and the new residue.</p>
 spacing of <em>dSol</em> (only if no overlap exists):</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id10">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id10" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id10" title="Link to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># add water randomly</span>
 <span class="n">atpositions</span><span class="p">,</span> <span class="n">attypes</span><span class="p">,</span> <span class="n">resname</span><span class="p">,</span> <span class="n">atnames</span> <span class="o">=</span> <span class="n">H20_molecule</span><span class="p">()</span>
 <span class="k">for</span> <span class="n">x_com</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">dSol</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">Lx</span><span class="p">,</span> <span class="n">dSol</span><span class="p">):</span>
@@ -541,7 +541,7 @@ spacing of <em>dSol</em> (only if no overlap exists):</p>
 actual concentration:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id11">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id11" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id11" title="Link to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Lx = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">Lx</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; nm, Ly = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">Ly</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; nm, Lz = &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">Lz</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; nm&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cpt_Na</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; Na ions&#39;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cpt_SO4</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39; SO4 ions&#39;</span><span class="p">)</span>
@@ -557,7 +557,7 @@ actual concentration:</p>
 <p>Finally, let us write the configuration (.gro) file:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id12">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id12" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id12" title="Link to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># write conf.gro</span>
 <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;conf.gro&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
 <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;Na2SO4 solution</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -588,7 +588,7 @@ actual concentration:</p>
 </div>
 </section>
 <section id="final-system">
-<h2>Final system<a class="headerlink" href="#final-system" title="Permalink to this heading">#</a></h2>
+<h2>Final system<a class="headerlink" href="#final-system" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Run the <em>generategro.py</em> file using Python.
 This is what I in the terminal:</p>
@@ -615,7 +615,7 @@ by typing in a terminal:</p>
 <img alt="Gromacs tutorial - generated topology" class="only-dark" src="../_images/system-dark.png" />
 <figcaption>
 <p><span class="caption-text">The primary system is located within the blue box. The replicated periodic
-images are also represented.</span><a class="headerlink" href="#id13" title="Permalink to this image">#</a></p>
+images are also represented.</span><a class="headerlink" href="#id13" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -626,7 +626,7 @@ configuration for the <a class="reference internal" href="bulksolution.html#bulk
 </div>
 </section>
 <section id="writing-a-top-file">
-<h2>Writing a .top file<a class="headerlink" href="#writing-a-top-file" title="Permalink to this heading">#</a></h2>
+<h2>Writing a .top file<a class="headerlink" href="#writing-a-top-file" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>A topology (.top) file defines the parameters required
 for the simulation, such as masses, Lennard-Jones parameters,
@@ -636,7 +636,7 @@ or bonds.</p>
 <p>Within the same Python script, write:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id14">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id14" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in generategro.py</em></span><a class="headerlink" href="#id14" title="Link to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># write topol.top</span>
 <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;topol.top&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span>
 <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;#include &quot;ff/forcefield.itp&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -732,14 +732,15 @@ will be written in the <a class="reference internal" href="createtopoltop.html#c
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>

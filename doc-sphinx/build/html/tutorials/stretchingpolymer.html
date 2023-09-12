@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,9 +14,9 @@
     </script>
         <link href="../_static/favicon-32x32.png" sizes="32x32" rel="icon" type="image/png"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Molecule solvation energy" href="solvationenergy.html" /><link rel="prev" title="Bulk salt solution" href="bulksolution.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2023.07.26 -->
+    <!-- Generated with Sphinx 7.2.5 and Furo 2023.09.10 -->
         <title>Polymer in water - </title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=362ab14a" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -232,7 +232,7 @@
         </div>
         <article role="main">
           <section id="polymer-in-water">
-<span id="stretching-polymer-label"></span><h1>Polymer in water<a class="headerlink" href="#polymer-in-water" title="Permalink to this heading">#</a></h1>
+<span id="stretching-polymer-label"></span><h1>Polymer in water<a class="headerlink" href="#polymer-in-water" title="Link to this heading">#</a></h1>
 <div class="hatnote docutils container">
 <p>Solvating a small molecule in water before stretching it</p>
 </div>
@@ -247,7 +247,7 @@
 create a small hydrophilic polymer (PEG -
 PolyEthylene Glycol) in a reservoir of water.
 An all-atom description is used, therefore all species considered here
-are made of charged atoms connected by bonds constraints.</p>
+are made of charged atoms connected by bond constraints.</p>
 <p>Once the system is created, a constant stretching force will be applied to both
 ends of the polymer, and its length will be measured with time.</p>
 <p>This tutorial was inspired by a very nice <a href="https://doi.org/10.1021/acsnano.6b07071" target="_blank">publication</a> by Liese and coworkers, in which
@@ -258,7 +258,7 @@ they compare MD simulations of a PEG molecule in water with force spectroscopy e
 <p>See the <a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> page.</p>
 </div>
 <section id="peg-molecule-in-vacuum">
-<h2>PEG molecule in vacuum<a class="headerlink" href="#peg-molecule-in-vacuum" title="Permalink to this heading">#</a></h2>
+<h2>PEG molecule in vacuum<a class="headerlink" href="#peg-molecule-in-vacuum" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Download the <em>peg.gro</em> file for the PEG molecule by clicking <a href="../../../../inputs/polymerstretching/free-peg-in-vacuum/peg.gro" target="_blank">here</a>.</p>
 </div>
@@ -274,7 +274,7 @@ oxygen atoms (in red), and hydrogen atoms (in white):</p>
 <a class="only-dark reference internal image-reference" href="../_images/dark-PEG.png"><img alt="PEG polymer for molecular dynamics simulation in GROMACS" class="only-dark" src="../_images/dark-PEG.png" style="width: 500px;" /></a>
 <figcaption>
 <p><span class="caption-text">This PEG molecule contains 24 carbon atoms, 12 oxygen atoms,
-and 50 hydrogen atoms.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+and 50 hydrogen atoms.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -283,7 +283,7 @@ and 50 hydrogen atoms.</span><a class="headerlink" href="#id2" title="Permalink 
 file named <em>topol.top</em>, and copy the following lines in it:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in free-peg-in-vacuum/topol.top</em></span><a class="headerlink" href="#id3" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in free-peg-in-vacuum/topol.top</em></span><a class="headerlink" href="#id3" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ defaults ]
 ; nbfunc    comb-rule       gen-pairs       fudgeLJ fudgeQQ
   1         1           no          1.0     1.0
@@ -313,7 +313,7 @@ that will be added later.</p>
 Copy the following lines into it:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in free-peg-in-vacuum/inputs/nvt.mdp</em></span><a class="headerlink" href="#id4" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in free-peg-in-vacuum/inputs/nvt.mdp</em></span><a class="headerlink" href="#id4" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = md
 dt = 0.002
 nsteps = 500000
@@ -365,7 +365,7 @@ gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </spa
 <p>Become a <a href="https://www.patreon.com/molecularsimulations" target="_blank">Patreon</a> and support the creation of content for GROMACS</p>
 </div>
 <section id="angle-distribution">
-<h3>Angle distribution<a class="headerlink" href="#angle-distribution" title="Permalink to this heading">#</a></h3>
+<h3>Angle distribution<a class="headerlink" href="#angle-distribution" title="Link to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>Let us use the power of GROMACS to extract the angular
 distribution between triplets of atoms during the run.
@@ -419,12 +419,12 @@ was created, it looks like it:</p>
 <img alt="Angle distribution from molecular dynamics simulation in GROMACS" class="only-dark" src="../_images/angle-distribution-dark.png" />
 <figcaption>
 <p><span class="caption-text">Angle distribution for the Carbon and oxygen atoms of the PEG molecule in
-vacuum.</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+vacuum.</span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="pull-on-the-peg">
-<h3>Pull on the PEG<a class="headerlink" href="#pull-on-the-peg" title="Permalink to this heading">#</a></h3>
+<h3>Pull on the PEG<a class="headerlink" href="#pull-on-the-peg" title="Link to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>Let us apply a force and pull on the PEG polymer.
 Duplicate the <em>free-peg-in-vacuum/</em> folder, and call the
@@ -491,7 +491,7 @@ Remove the <code class="docutils literal notranslate"><span class="pre">comm-mod
 to <code class="docutils literal notranslate"><span class="pre">pull.mdp</span></code>:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in pulled-peg-in-vacuum/inputs/pull.mdp</em></span><a class="headerlink" href="#id6" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in pulled-peg-in-vacuum/inputs/pull.mdp</em></span><a class="headerlink" href="#id6" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>pull = yes
 pull-coord1-type = constant-force
 pull-ncoords = 1
@@ -514,7 +514,7 @@ to both groups <em>End1</em> and <em>End2</em>. Turn off the velocity generator
 as well:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text"><em>to be modified in pulled-peg-in-vacuum/inputs/pull.mdp</em></span><a class="headerlink" href="#id7" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be modified in pulled-peg-in-vacuum/inputs/pull.mdp</em></span><a class="headerlink" href="#id7" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gen_vel = no
 </pre></div>
 </div>
@@ -546,7 +546,7 @@ that the polymer stretches very quickly:</p>
 <figure class="align-default" id="id8">
 <img alt="End to end position from molecular dynamics simulation in GROMACS" class="only-dark" src="../_images/position-dark1.png" />
 <figcaption>
-<p><span class="caption-text">Evolution of the end-to-end distance with time.</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Evolution of the end-to-end distance with time.</span><a class="headerlink" href="#id8" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -559,13 +559,13 @@ what I see:</p>
 <figure class="align-default" id="id9">
 <img alt="PEG polymer for molecular dynamics simulation in GROMACS" class="only-dark" src="../_images/dark-PEG-stretched.png" />
 <figcaption>
-<p><span class="caption-text">The PEG molecule under stretching in vacuum.</span><a class="headerlink" href="#id9" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">The PEG molecule under stretching in vacuum.</span><a class="headerlink" href="#id9" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 </section>
 <section id="peg-molecule-in-water">
-<h2>PEG molecule in water<a class="headerlink" href="#peg-molecule-in-water" title="Permalink to this heading">#</a></h2>
+<h2>PEG molecule in water<a class="headerlink" href="#peg-molecule-in-water" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>The PEG molecule is now going to be solvated in water.
 Duplicate the <em>free-peg-in-vacuum/</em> folder, and call the
@@ -608,7 +608,7 @@ within the <em>ff/</em> folder.</p>
 <p>Become a <a href="https://www.patreon.com/molecularsimulations" target="_blank">Patreon</a> and support the creation of content for GROMACS</p>
 </div>
 <section id="equilibrating-the-system">
-<h3>Equilibrating the system<a class="headerlink" href="#equilibrating-the-system" title="Permalink to this heading">#</a></h3>
+<h3>Equilibrating the system<a class="headerlink" href="#equilibrating-the-system" title="Link to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>Here we perform a 3 steps equilibration of the solvated PEG system, starting with
 an energy minimization, followed by a NVT run, and finally with a NPT run.</p>
@@ -676,7 +676,7 @@ computer allows it):</p>
 <img alt="Angle distribution from molecular dynamics simulation in GROMACS" class="only-dark" src="../_images/angle-distribution-comparison-dark.png" />
 <figcaption>
 <p><span class="caption-text">Angle distribution comparing the PEG molecule in vacuum (gray) and
-the PEG molecule in water (blue).</span><a class="headerlink" href="#id10" title="Permalink to this image">#</a></p>
+the PEG molecule in water (blue).</span><a class="headerlink" href="#id10" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -686,7 +686,7 @@ different conformation when in contact with a solvent.</p>
 </div>
 </section>
 <section id="id1">
-<h3>Pull on the PEG<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<h3>Pull on the PEG<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>Using the same procedure as previously, apply a force to
 the polymer ends and pull it inside water. Do not forget to
@@ -773,14 +773,15 @@ extend the box to make space for the pulling.</p>
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     </body>
 </html>

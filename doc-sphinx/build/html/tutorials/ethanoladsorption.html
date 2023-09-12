@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,9 +14,9 @@
     </script>
         <link href="../_static/favicon-32x32.png" sizes="32x32" rel="icon" type="image/png"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Contact" href="../contact/contact.html" /><link rel="prev" title="Molecule solvation energy" href="solvationenergy.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2023.07.26 -->
+    <!-- Generated with Sphinx 7.2.5 and Furo 2023.09.10 -->
         <title>Free energy profile - </title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=362ab14a" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -232,7 +232,7 @@
         </div>
         <article role="main">
           <section id="free-energy-profile">
-<span id="ethanol-adsorption-label"></span><h1>Free energy profile<a class="headerlink" href="#free-energy-profile" title="Permalink to this heading">#</a></h1>
+<span id="ethanol-adsorption-label"></span><h1>Free energy profile<a class="headerlink" href="#free-energy-profile" title="Link to this heading">#</a></h1>
 <div class="hatnote docutils container">
 <p>Free energy profile calculation using umbrella sampling and WHAM</p>
 </div>
@@ -254,7 +254,7 @@ this simpler tutorial first : <a class="reference internal" href="bulksolution.h
 <p>See the <a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> page.</p>
 </div>
 <section id="input-files">
-<h2>Input files<a class="headerlink" href="#input-files" title="Permalink to this heading">#</a></h2>
+<h2>Input files<a class="headerlink" href="#input-files" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Create 3 folders named ‘preparation/’, ‘adsorption’,
 and ‘singleposition’ in the same directory. Go to ‘preparation/’.</p>
@@ -264,7 +264,7 @@ click on ‘All-Atom PDB (optimised geometry)’
 and place the file <a href="../../../../inputs/ethanoladsorption/preparation/BIPQ_allatom_optimised_geometry.pdb" target="_blank">BIPQ_allatom_optimised_geometry.pdb</a> in the ‘preparation/’ folder.</p>
 </div>
 <section id="create-the-configuration-file">
-<h3>Create the configuration file<a class="headerlink" href="#create-the-configuration-file" title="Permalink to this heading">#</a></h3>
+<h3>Create the configuration file<a class="headerlink" href="#create-the-configuration-file" title="Link to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>First, let us convert the pdb file into a gro file
 consisting of a single ethanol molecule at the center
@@ -278,7 +278,7 @@ of a small box using trjconv:</p>
 </div>
 </section>
 <section id="replicate-the-ethanol-molecule">
-<h3>Replicate the ethanol molecule<a class="headerlink" href="#replicate-the-ethanol-molecule" title="Permalink to this heading">#</a></h3>
+<h3>Replicate the ethanol molecule<a class="headerlink" href="#replicate-the-ethanol-molecule" title="Link to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>In order to create a system with several ethanol
 molecules, let us replicate the single molecule (4x4x4
@@ -298,12 +298,12 @@ you will see:</p>
 <a class="only-dark reference internal image-reference" href="../_images/replicated-ethanol-dark.png"><img alt="Gromacs HBC (graphene) molecule after minimisation in water" class="only-dark" src="../_images/replicated-ethanol-dark.png" style="height: 450px;" /></a>
 <figcaption>
 <p><span class="caption-text">Replicated ethanol molecules with carbon atoms in
-gray, oxygen atom in red, and hydrogen atoms in white.</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+gray, oxygen atom in red, and hydrogen atoms in white.</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="create-the-topology-file">
-<h3>Create the topology file<a class="headerlink" href="#create-the-topology-file" title="Permalink to this heading">#</a></h3>
+<h3>Create the topology file<a class="headerlink" href="#create-the-topology-file" title="Link to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>From the <a class="reference external" href="https://atb.uq.edu.au/molecule.py?molid=902261#panel-md">same atb
 page</a>,
@@ -333,7 +333,7 @@ BIPQ<span class="w"> </span><span class="m">64</span>
 </div>
 </section>
 <section id="add-the-water">
-<h3>Add the water<a class="headerlink" href="#add-the-water" title="Permalink to this heading">#</a></h3>
+<h3>Add the water<a class="headerlink" href="#add-the-water" title="Link to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>Let us add water molecules. First download the tip4p
 water configuration file <a href="../../../../inputs/ethanoladsorption/preparation/tip4p.gro" target="_blank">here</a>
@@ -365,7 +365,7 @@ of both ethanol and water molecules, it looks like that:</p>
 <figure class="align-default" id="id2">
 <a class="only-dark reference internal image-reference" href="../_images/solvated-dark.png"><img alt="GROMACS tutorial : Ethanol molecules in water with VMD" class="only-dark" src="../_images/solvated-dark.png" style="height: 450px;" /></a>
 <figcaption>
-<p><span class="caption-text">Replicated ethanol molecules within water. Water molecules appear in light blue.</span><a class="headerlink" href="#id2" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Replicated ethanol molecules within water. Water molecules appear in light blue.</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -385,7 +385,7 @@ have generated by clicking <a href="../../../../inputs/ethanoladsorption/prepara
 </section>
 </section>
 <section id="energy-minimization">
-<h2>Energy minimization<a class="headerlink" href="#energy-minimization" title="Permalink to this heading">#</a></h2>
+<h2>Energy minimization<a class="headerlink" href="#energy-minimization" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Create a new folder in the preparation/’ folder, call
 it ‘inputs’, and save the <a href="../../../../inputs/ethanoladsorption/preparation/inputs/min.mdp" target="_blank">min.mdp</a>
@@ -421,7 +421,7 @@ minimization step using VMD by typing:</p>
 <figcaption>
 <p><span class="caption-text">Movie showing the motion of the atoms during the
 energy minimization. The two fluid/vacuum interfaces
-are on the left and or the right sides, respectively.</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+are on the left and or the right sides, respectively.</span><a class="headerlink" href="#id3" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -439,7 +439,7 @@ reasonable.</p>
 </div>
 </section>
 <section id="equilibration">
-<h2>Equilibration<a class="headerlink" href="#equilibration" title="Permalink to this heading">#</a></h2>
+<h2>Equilibration<a class="headerlink" href="#equilibration" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Starting from the minimized configuration, let us
 perform a NVT equilibration for 100 ps in order to let
@@ -481,7 +481,7 @@ during the last 500 ps of the 1 ns run is :</p>
 <figure class="align-default" id="id4">
 <img alt="GROMACS tutorial : Density profile water and ethanol" class="only-dark" src="../_images/position-dark.png" />
 <figcaption>
-<p><span class="caption-text">Water (blue) and ethanol (gray) density profile along the x direction.</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">Water (blue) and ethanol (gray) density profile along the x direction.</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
 <div class="legend">
 <p>The density profiles show an excess of
 ethanol at the 2 interfaces, which is expected as
@@ -494,7 +494,7 @@ of the fluid layer and the two interfaces.</p>
 </figure>
 </section>
 <section id="imposed-forcing">
-<h2>Imposed forcing<a class="headerlink" href="#imposed-forcing" title="Permalink to this heading">#</a></h2>
+<h2>Imposed forcing<a class="headerlink" href="#imposed-forcing" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>To calculate the free energy profile across the
 liquid/vapor interface, one needs to impose an
@@ -612,7 +612,7 @@ the center-of-mass of the 2 groups is 2 nm:</p>
 <a class="only-dark reference internal image-reference" href="../_images/video-pulled-dark-2.webp"><img alt="GROMACS tutorial : ethanol molecule being pulled" class="only-dark" src="../_images/video-pulled-dark-2.webp" style="height: 400px;" /></a>
 <figcaption>
 <p><span class="caption-text">Ethanol molecule being pulled from the rest of the
-fluid during minimisation and nvt equilibration.</span><a class="headerlink" href="#id5" title="Permalink to this image">#</a></p>
+fluid during minimisation and nvt equilibration.</span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -628,7 +628,7 @@ plot the histogram of this distance:</p>
 <figcaption>
 <p><span class="caption-text">Probability distribution of the distance between the
 two center-of-mass. Short (50 ps) and long (1.5 ns)
-runs are compared.</span><a class="headerlink" href="#id6" title="Permalink to this image">#</a></p>
+runs are compared.</span><a class="headerlink" href="#id6" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -642,7 +642,7 @@ ethanol molecule from the center of harmonic potential.</p>
 </div>
 </section>
 <section id="free-energy-profile-calculation">
-<h2>Free energy profile calculation<a class="headerlink" href="#free-energy-profile-calculation" title="Permalink to this heading">#</a></h2>
+<h2>Free energy profile calculation<a class="headerlink" href="#free-energy-profile-calculation" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Let us replicate the previous calculation for 30
 differents distances, from x = 0 (the ethanol
@@ -717,7 +717,7 @@ red curve below:</p>
 <img alt="GROMACS tutorial : PMF for the ethanol molecule" class="only-dark" src="../_images/PMF-dark.png" />
 <figcaption>
 <p><span class="caption-text">PMF for the ethanol molecule across the interface
-between a water/ethanol mixture and vapor.</span><a class="headerlink" href="#id7" title="Permalink to this image">#</a></p>
+between a water/ethanol mixture and vapor.</span><a class="headerlink" href="#id7" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -824,14 +824,15 @@ molecule exploring the vapor phase.</p>
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     </body>
 </html>

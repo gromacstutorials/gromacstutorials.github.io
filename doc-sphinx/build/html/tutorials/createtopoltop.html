@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,9 +14,9 @@
     </script>
         <link href="../_static/favicon-32x32.png" sizes="32x32" rel="icon" type="image/png"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Bulk salt solution" href="bulksolution.html" /><link rel="prev" title="Create conf.gro" href="createconfgro.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2023.07.26 -->
+    <!-- Generated with Sphinx 7.2.5 and Furo 2023.09.10 -->
         <title>Write parameters - </title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=362ab14a" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -232,7 +232,7 @@
         </div>
         <article role="main">
           <section id="write-parameters">
-<span id="create-topol-label"></span><h1>Write parameters<a class="headerlink" href="#write-parameters" title="Permalink to this heading">#</a></h1>
+<span id="create-topol-label"></span><h1>Write parameters<a class="headerlink" href="#write-parameters" title="Link to this heading">#</a></h1>
 <div class="hatnote docutils container">
 <p>Writing the topology file for GROMACS.</p>
 </div>
@@ -249,13 +249,13 @@ to <a class="reference internal" href="bulksolution.html#bulk-solution-label"><s
 <p>See the <a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> page.</p>
 </div>
 <section id="default-parameters">
-<h2>Default parameters<a class="headerlink" href="#default-parameters" title="Permalink to this heading">#</a></h2>
+<h2>Default parameters<a class="headerlink" href="#default-parameters" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Create a folder called <em>ff/</em>. Within <em>ff/</em>, create a new empty file named
 <em>forcefield.itp</em>, and copy the following in it:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in ff/forcefield.itp</em></span><a class="headerlink" href="#id1" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in ff/forcefield.itp</em></span><a class="headerlink" href="#id1" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ defaults ]
 ; nbfunc  comb-rule  gen-pairs  fudgeLJ  fudgeQQ
   1       2          no         1.0      0.833
@@ -298,12 +298,12 @@ rigid water model, see this <a href="http://www.sklogwiki.org/SklogWiki/index.ph
 </div>
 </section>
 <section id="sodium-ion">
-<h2>Sodium ion<a class="headerlink" href="#sodium-ion" title="Permalink to this heading">#</a></h2>
+<h2>Sodium ion<a class="headerlink" href="#sodium-ion" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Let us create a file named <em>na.itp</em> for the Sodium ion:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in ff/na.itp</em></span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in ff/na.itp</em></span><a class="headerlink" href="#id2" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ moleculetype ]
 ; molname nrexcl
   Na      1
@@ -320,7 +320,7 @@ of type <em>Na</em> and name <em>Na1</em>, charge +1.0 and mass 22.990 g/mol.</p
 </div>
 </section>
 <section id="sulfate-ion">
-<h2>Sulfate ion<a class="headerlink" href="#sulfate-ion" title="Permalink to this heading">#</a></h2>
+<h2>Sulfate ion<a class="headerlink" href="#sulfate-ion" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>The file <em>so4.itp</em> for the sulfate ion is more complicated,
 as the residue is made of 5 atoms that are bonded together
@@ -329,7 +329,7 @@ and maintained by angular constrained.</p>
 interact through LJ and Coulomb interactions.</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in ff/so4.itp</em></span><a class="headerlink" href="#id3" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in ff/so4.itp</em></span><a class="headerlink" href="#id3" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[moleculetype]
 ; name  nrexcl
   SO4   1
@@ -373,14 +373,14 @@ interact through LJ and Coulomb interactions.</p>
 </div>
 </section>
 <section id="water-molecule">
-<h2>Water molecule<a class="headerlink" href="#water-molecule" title="Permalink to this heading">#</a></h2>
+<h2>Water molecule<a class="headerlink" href="#water-molecule" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Finally, create a file named <em>h2o.itp</em> for the water molecule.
 Settle parameters are added to ensure that the residue remains
 rigid:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id4">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in ff/h2o.itp</em></span><a class="headerlink" href="#id4" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in ff/h2o.itp</em></span><a class="headerlink" href="#id4" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ moleculetype ]
 ; molname  nrexcl
 SOL      2
@@ -486,14 +486,15 @@ with GROMACS, go to <a class="reference internal" href="bulksolution.html#bulk-s
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     </body>

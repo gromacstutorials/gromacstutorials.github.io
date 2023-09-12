@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="en" data-content_root="../">
   <head><meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -14,9 +14,9 @@
     </script>
         <link href="../_static/favicon-32x32.png" sizes="32x32" rel="icon" type="image/png"><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Polymer in water" href="stretchingpolymer.html" /><link rel="prev" title="Write parameters" href="createtopoltop.html" />
 
-    <!-- Generated with Sphinx 7.1.2 and Furo 2023.07.26 -->
+    <!-- Generated with Sphinx 7.2.5 and Furo 2023.09.10 -->
         <title>Bulk salt solution - </title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=362ab14a" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -232,7 +232,7 @@
         </div>
         <article role="main">
           <section id="bulk-salt-solution">
-<span id="bulk-solution-label"></span><h1>Bulk salt solution<a class="headerlink" href="#bulk-salt-solution" title="Permalink to this heading">#</a></h1>
+<span id="bulk-solution-label"></span><h1>Bulk salt solution<a class="headerlink" href="#bulk-salt-solution" title="Link to this heading">#</a></h1>
 <div class="hatnote docutils container">
 <p>The very basics of GROMACS through a
 simple example</p>
@@ -260,7 +260,7 @@ trajectory visualisation.</p>
 <p>See the <a class="reference internal" href="../contact/contact.html#contact-label"><span class="std std-ref">Contact</span></a> page.</p>
 </div>
 <section id="required-softwares">
-<h2>Required softwares<a class="headerlink" href="#required-softwares" title="Permalink to this heading">#</a></h2>
+<h2>Required softwares<a class="headerlink" href="#required-softwares" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>GROMACS must be installed on your machine. You can
 install it following the instructions of the <a href="https://manual.gromacs.org/current/index.html" target="_blank">GROMACS manual</a>.</p>
@@ -307,7 +307,7 @@ GROMACS reminds you: &quot;Computers are like humans - they do everything except
 </div>
 </section>
 <section id="the-input-files">
-<h2>The input files<a class="headerlink" href="#the-input-files" title="Permalink to this heading">#</a></h2>
+<h2>The input files<a class="headerlink" href="#the-input-files" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>In order to run the present simulation using GROMACS,
 we need the 3 following files (or sets of files):</p>
@@ -331,7 +331,7 @@ parameters of the simulation (e.g. temperature, timestep).</p></li>
 </ul>
 </div>
 <section id="the-configuration-file-gro">
-<h3>1) The configuration file (.gro)<a class="headerlink" href="#the-configuration-file-gro" title="Permalink to this heading">#</a></h3>
+<h3>1) The configuration file (.gro)<a class="headerlink" href="#the-configuration-file-gro" title="Link to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>If you already followed the previous tutorial, <a class="reference internal" href="createconfgro.html#create-conf-label"><span class="std std-ref">Create conf.gro</span></a>,
 simply skip this part.</p>
@@ -387,7 +387,7 @@ typing in the terminal:</p>
 <figcaption>
 <p><span class="caption-text">Figure: SO<sub>4</sub><sup>2-</sup> ions (in yellow and
 red) and Na<sub>+</sub> ions (blue) in water (red and
-white).</span><a class="headerlink" href="#id1" title="Permalink to this image">#</a></p>
+white).</span><a class="headerlink" href="#id1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -404,7 +404,7 @@ wrong distances between some of the molecules and ions.</p>
 </div>
 </section>
 <section id="the-topology-file-top">
-<h3>2) The topology file (.top)<a class="headerlink" href="#the-topology-file-top" title="Permalink to this heading">#</a></h3>
+<h3>2) The topology file (.top)<a class="headerlink" href="#the-topology-file-top" title="Link to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>If you already followed the previous tutorial, <a class="reference internal" href="createtopoltop.html#create-topol-label"><span class="std std-ref">Write parameters</span></a>,
 you can also skip this part.</p>
@@ -446,7 +446,7 @@ constraints) for all the species that will be involved here.</p>
 </div>
 </section>
 <section id="the-input-file-mdp">
-<h3>3) The input file (.mdp)<a class="headerlink" href="#the-input-file-mdp" title="Permalink to this heading">#</a></h3>
+<h3>3) The input file (.mdp)<a class="headerlink" href="#the-input-file-mdp" title="Link to this heading">#</a></h3>
 <div class="justify docutils container">
 <p>The input file contains instructions about the
 simulation, such as</p>
@@ -481,7 +481,7 @@ molecular dynamics simulation.</p>
 </section>
 </section>
 <section id="energy-minimization">
-<h2>Energy minimization<a class="headerlink" href="#energy-minimization" title="Permalink to this heading">#</a></h2>
+<h2>Energy minimization<a class="headerlink" href="#energy-minimization" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>It is clear from the configuration (.gro) file that the molecules and ions are currently in a
 quite unphysical configuration (i.e. too regularly aligned). It would be risky to
@@ -496,7 +496,7 @@ them are reasonable.</p>
 ‘inputs/’ folder. Copy the following lines into min.mdp:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/min.mdp</em></span><a class="headerlink" href="#id2" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/min.mdp</em></span><a class="headerlink" href="#id2" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = steep
 nsteps = 5000
 </pre></div>
@@ -516,7 +516,7 @@ let us add the following command to the input
 file in order to print the atom positions every 10 steps in a .trr trajectory file:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id3">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/min.mdp</em></span><a class="headerlink" href="#id3" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/min.mdp</em></span><a class="headerlink" href="#id3" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>nstxout = 10
 </pre></div>
 </div>
@@ -612,7 +612,7 @@ using XmGrace, here I use pyplot and jupyter-notebook):</p>
 <img alt="Gromacs tutorial : energy versus time." class="only-dark" src="../_images/energy-dark.png" />
 <figcaption>
 <p><span class="caption-text">Evolution of the potential energy as a function of the
-number of steps during energy minimization.</span><a class="headerlink" href="#id4" title="Permalink to this image">#</a></p>
+number of steps during energy minimization.</span><a class="headerlink" href="#id4" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -628,7 +628,7 @@ that the atoms are now at appropriate distances from each others.</p>
 </div>
 </section>
 <section id="minimalist-nvt-input-file">
-<h2>Minimalist NVT input file<a class="headerlink" href="#minimalist-nvt-input-file" title="Permalink to this heading">#</a></h2>
+<h2>Minimalist NVT input file<a class="headerlink" href="#minimalist-nvt-input-file" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Let us first perform a small (20 picoseconds)
 equilibration in the NVT ensemble. In the NVT ensemble, the number of
@@ -639,7 +639,7 @@ called nvt.mdp, and save it in the ‘inputs/’ folder.
 Copy the following lines into it:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id5">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id5" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id5" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = md
 nsteps = 20000
 dt = 0.001
@@ -654,7 +654,7 @@ requested duration is 20 ps. Let us print the
 trajectory in a xtc file every 1 ps by adding:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id6">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id6" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id6" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>nstxout-compressed = 1000
 </pre></div>
 </div>
@@ -666,7 +666,7 @@ the Berendsen thermostat with an additional stochastic
 term (it is known to give proper canonical ensemble):</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id7">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id7" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id7" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>tcoupl = v-rescale
 ref-t = 360
 tc-grps = system
@@ -719,7 +719,7 @@ picoseconds:</p>
 <figcaption>
 <p><span class="caption-text">Evolution of the temperature as a function of the time
 during the NVT equilibration. Dashed line is the
-requested temperature of 360 K.</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
+requested temperature of 360 K.</span><a class="headerlink" href="#id8" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -727,7 +727,7 @@ requested temperature of 360 K.</span><a class="headerlink" href="#id8" title="P
 </div>
 </section>
 <section id="improving-the-nvt">
-<h2>Improving the NVT<a class="headerlink" href="#improving-the-nvt" title="Permalink to this heading">#</a></h2>
+<h2>Improving the NVT<a class="headerlink" href="#improving-the-nvt" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>So far, a very few commands have been placed in the
 NVT input file, meaning that most of the instruction
@@ -756,7 +756,7 @@ electrostatics with Fourier spacing of 0.1 nm, order
 of 4, and cut-off of 4:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id9">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id9" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id9" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>coulombtype = pme
 fourierspacing = 0.1
 pme-order = 4
@@ -770,7 +770,7 @@ interactions are treated with Fourier transforms.
 Let us also specify the van der Waals interaction:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id10">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id10" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id10" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>vdw-type = Cut-off
 rvdw = 1.0
 </pre></div>
@@ -781,7 +781,7 @@ rvdw = 1.0
 bonds of the water molecules:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id11">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id11" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id11" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>constraint-algorithm = lincs
 constraints = hbonds
 continuation = no
@@ -794,7 +794,7 @@ water and ions (here corresponding to the gromacs group called non-water) respec
 by replacing:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id12">
-<div class="code-block-caption"><span class="caption-text"><em>to be removed from inputs/nvt.mdp</em></span><a class="headerlink" href="#id12" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be removed from inputs/nvt.mdp</em></span><a class="headerlink" href="#id12" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>tcoupl = v-rescale
 ref-t = 360
 tc-grps = system
@@ -806,7 +806,7 @@ tau-t = 0.5
 <p>by:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id13">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id13" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id13" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>tcoupl = v-rescale
 tc-grps = Water non-Water
 tau-t = 0.5 0.5
@@ -818,7 +818,7 @@ ref-t = 360 360
 <p>Let us specify neighbor searching parameters:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id14">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id14" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id14" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>cutoff-scheme = Verlet
 nstlist = 10
 ns_type = grid
@@ -830,7 +830,7 @@ ns_type = grid
 total velocities give the desired temperature instead of 0):</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id15">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id15" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id15" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gen-vel = yes
 gen-temp = 360
 </pre></div>
@@ -841,7 +841,7 @@ gen-temp = 360
 velocity of the whose system:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id16">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id16" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/nvt.mdp</em></span><a class="headerlink" href="#id16" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>comm_mode = linear
 comm_grps = system
 </pre></div>
@@ -861,12 +861,12 @@ to the desired temperature:</p>
 <img alt="Gromacs tutorial : temperature versus time." class="only-dark" src="../_images/temperature-improved-dark.png" />
 <figcaption>
 <p><span class="caption-text">Evolution of the temperature as a function of the time
-during the NVT equilibration.</span><a class="headerlink" href="#id17" title="Permalink to this image">#</a></p>
+during the NVT equilibration.</span><a class="headerlink" href="#id17" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="adjust-the-density-using-npt">
-<h2>Adjust the density using NPT<a class="headerlink" href="#adjust-the-density-using-npt" title="Permalink to this heading">#</a></h2>
+<h2>Adjust the density using NPT<a class="headerlink" href="#adjust-the-density-using-npt" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Now that the system is properly equilibrated in the
 NVT ensemble, let us perform an equilibration in the
@@ -877,7 +877,7 @@ Create a new input script, call it ‘npt.mdp’, and
 copy the following lines in it:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id18">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/npt.mdp</em></span><a class="headerlink" href="#id18" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/npt.mdp</em></span><a class="headerlink" href="#id18" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = md
 nsteps = 50000
 dt = 0.001
@@ -954,7 +954,7 @@ This is what I see:</p>
 <figcaption>
 <p><span class="caption-text">From top to bottom: evolution of the temperature,
 pressure, and volume of the simulation box as a
-function of the time during the NPT equilibration.</span><a class="headerlink" href="#id19" title="Permalink to this image">#</a></p>
+function of the time during the NPT equilibration.</span><a class="headerlink" href="#id19" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <div class="justify docutils container">
@@ -971,7 +971,7 @@ liquid water that is almost uncompressible.</p>
 </div>
 </section>
 <section id="measurement-diffusion-coefficient">
-<h2>Measurement diffusion coefficient<a class="headerlink" href="#measurement-diffusion-coefficient" title="Permalink to this heading">#</a></h2>
+<h2>Measurement diffusion coefficient<a class="headerlink" href="#measurement-diffusion-coefficient" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Now that the system is fully equilibrated, we can
 perform a longer simulation and extract quantities of
@@ -984,7 +984,7 @@ NVT ensemble. Create a new input file, call it
 following lines into it:</p>
 </div>
 <div class="literal-block-wrapper docutils container" id="id20">
-<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/pro.mdp</em></span><a class="headerlink" href="#id20" title="Permalink to this code">#</a></div>
+<div class="code-block-caption"><span class="caption-text"><em>to be copied in inputs/pro.mdp</em></span><a class="headerlink" href="#id20" title="Link to this code">#</a></div>
 <div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = md
 nsteps = 200000
 dt = 0.001
@@ -1062,12 +1062,12 @@ for more details.</p>
 <figure class="align-default" id="id21">
 <img alt="Gromacs tutorial : diffusion coefficient" class="only-dark" src="../_images/D-dark.png" />
 <figcaption>
-<p><span class="caption-text">MSDs for the three species, respectively.</span><a class="headerlink" href="#id21" title="Permalink to this image">#</a></p>
+<p><span class="caption-text">MSDs for the three species, respectively.</span><a class="headerlink" href="#id21" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="going-further">
-<h2>Going further<a class="headerlink" href="#going-further" title="Permalink to this heading">#</a></h2>
+<h2>Going further<a class="headerlink" href="#going-further" title="Link to this heading">#</a></h2>
 <div class="justify docutils container">
 <p>Take advantage of the generated production run to extract more
 equilibrium quantities. For instance, Gromacs allows you to
@@ -1156,14 +1156,15 @@ extract Radial Distribution Functions (RDF) using the <em>gmx rdf</em> commands.
       
     </aside>
   </div>
-</div><script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3ba4146"></script>
+</div><script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=888ff710"></script>
-    <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     </body>
 </html>
