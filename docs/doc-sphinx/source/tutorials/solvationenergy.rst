@@ -255,6 +255,8 @@ Energy minimization
     field issue. Since this is a tutorial and not actual
     research, we can safely ignore this warning.
 
+..  container:: justify
+
     Let us visualize the atoms' trajectories during the
     minimization step using VMD by typing:
 
