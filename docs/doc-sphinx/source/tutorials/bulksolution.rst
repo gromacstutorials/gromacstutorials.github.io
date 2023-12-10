@@ -213,7 +213,7 @@ The input files
 
 .. |vmd-tutorial| raw:: html
 
-    <a href="https://lammpstutorials.github.io/sphinx/build/html/miscellaneous/vmd.html" target="_blank">VMD tutorial</a>
+    <a href="https://lammpstutorials.github.io/sphinx/build/html/tutorials/vmd/vmd-tutorial.html" target="_blank">VMD tutorial</a>
 
 ..  container:: justify
 
