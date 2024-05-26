@@ -57,18 +57,18 @@ The input files
 
 ..  container:: justify
 
-    If you already followed the previous tutorial, :ref:`create-conf-label`,
-    simply skip this part.
-
     For the present simulation, the initial atom
     positions and box size are given in a conf.gro file
-    (Gromos87 format) that you can download by clicking |conf-SO4.gro|.
-
-    Save the conf.gro file in a folder. The file looks like that:
+    (Gromos87 format) that you can download by clicking |conf-SO4.gro|
+    (See also :ref:`create-conf-label`).
 
 .. |conf-SO4.gro| raw:: html
 
     <a href="../../../../inputs/bulksolution/conf.gro" target="_blank">here</a>
+
+..  container:: justify
+
+    Save the *conf.gro* file in a folder. The file looks like that:
 
 ..  code-block:: bw
 
@@ -88,10 +88,9 @@ The input files
 
 ..  container:: justify
 
-    The first line 'Na2SO4 solution' is just a comment, the
-    second line is the total number of atoms, and the last
-    line is the box dimension in nanometer, here 3.36 nm
-    by 3.36 nm by 3.36 nm. Between the second and the
+    The first line *Na2SO4 solution* is just a comment, the second line is the
+    total number of atoms, and the last line is the box dimension in nanometer,
+    here 3.36 nm by 3.36 nm by 3.36 nm. Between the second and the
     last lines, there is one line per
     atom. Each line indicates, from left to right, the
     residue Id (the atoms of the same
@@ -100,11 +99,15 @@ The input files
     and finally the atom position (x, y, and z
     coordinate in nm).
     
+..  container:: justify
+
     Note that the format of conf.gro file is fixed,
     all columns are in a fixed position. For example,
     the first five columns are for the residue number.
 
-    A conf.gro file can be visualized using VMD by
+..  container:: justify
+
+    The *conf.gro* file can be visualized using VMD by
     typing in the terminal:
 
 ..  code-block:: bash
@@ -123,15 +126,12 @@ The input files
     :alt: Gromacs initial configuration of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
     :class: only-dark
 
+.. container:: figurelegend
+
     Figure: SO\ :sub:`4`\ :sup:`2-` ions (in yellow and
     red) and Na\ :sub:`+` ions (blue) in water (red and
-    white).
-
-..  container:: justify
-
-    You have to play with atoms' representation and color
-    to make it look better than it is by default. I wrote a 
-    small |vmd-tutorial| that explains how to obtain nice looking image.
+    white). Here, the atoms representation and colors was modified. Follow this 
+    |vmd-tutorial| from the LAMMPS tutorials webpage to obtain similar rendering.
 
 .. |vmd-tutorial| raw:: html
 
@@ -139,12 +139,11 @@ The input files
 
 ..  container:: justify
 
-    As can be seen in this figure, the water molecules are
+    As can be seen using VMD, the water molecules are
     arranged in a quite unrealistic and regular manner, with
     all dipoles facing in the same direction, and possibly
     wrong distances between some of the molecules and ions.
-
-    This will be fixed during energy minimization, see below.
+    This will be fixed during energy minimization.
 
 2) The topology file (.top)
 ---------------------------
