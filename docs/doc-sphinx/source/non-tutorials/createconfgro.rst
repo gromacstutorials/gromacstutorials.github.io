@@ -140,15 +140,15 @@ Creating the GRO file
 
 ..  container:: justify
 
-    Here we first define the basic parameters, such as 
-    the number of residues we want, or the box size, and
-    initialize some lists and counters. 
+    Here, we define some of the basic parameters of the simulation, such as 
+    the number of residues and the box size.
+
+..  container:: justify
 
     Next to *molecule.py*, create a new Python file called
     *generategro.py*, and copy the following lines into it:
 
 ..  code-block:: python
-    :caption: *to be copied in generategro.py*
 
     import numpy as np
     from molecules import SO4_ion, Na_ion, H20_molecule
@@ -159,15 +159,18 @@ Creating the GRO file
 
 ..  container:: justify
 
-    Here box is an array containing the box size along all 3 coordinates of space,
-    respectively Lx, Ly, and Lz. Here a cubic box of lateral dimension 3.6 nm is used.
+    Here, *box* is an array containing the box size along all 3 coordinates of space,
+    respectively *Lx*, *Ly*, and *Lz*. A cubic box of lateral dimension 
+    :math:`3.6 ~ \text{nm}` is used.
 
-    Now, let us choose a salt concentration, and calculate the number of
+..  container:: justify
+
+    Let us choose a salt concentration, and calculate the number of
     ions and water molecules accordingly, while also choosing the total
-    number of residues (here I call residue either a molecule or an ion):
+    number of residues (here I call residue either a molecule or an ion).
+    Add the following to *generategro.py*:
 
 ..  code-block:: python
-    :caption: *to be copied in generategro.py*
 
     Mh2o = 0.018053 # kg/mol - water
     ntotal = 720 # total number of molecule
@@ -177,12 +180,11 @@ Creating the GRO file
     
 ..  container:: justify
 
-    Let us also choose typical cutoff distances (in nanometer) for each species. These
-    cutoffs will be used to ensure that no species are inserted too close 
-    from one another:
+    Let us also choose typical cutoff distances (in nanometer) for each
+    species. These cutoffs will be used to ensure that no species are inserted
+    too close from one another, as it would make the simulation crashed later:
 
 ..  code-block:: python
-    :caption: *to be copied in generategro.py*
 
     dSO4 = 0.45
     dNa = 0.28
@@ -190,11 +192,10 @@ Creating the GRO file
 
 ..  container:: justify
 
-    Let us initialized counters and lists for storing
-    all the necessary data:
+    Let us initialized several counters and several lists. The lists will be
+    used for storing all the data about the atoms:
 
 ..  code-block:: python
-    :caption: *to be copied in generategro.py*
 
     cpt_residue = 0
     cpt_atoms = 0
@@ -209,12 +210,11 @@ Creating the GRO file
 
 ..  container:: justify
 
-    Let us add a number *nion* of :math:`\text{SO}_4^{2-}` ions at random locations.
+    Let us first add a number *nion* of :math:`\text{SO}_4^{2-}` ions at random locations.
     To avoid overlap, let us only insert ion if no other ions is already located at 
     a distance closer than *dSO4*:
 
 ..  code-block:: python
-    :caption: *to be copied in generategro.py*
 
     # add SO4 randomly
     atpositions, attypes, resname, atnames = SO4_ion()
@@ -244,7 +244,6 @@ Creating the GRO file
     and copy the following lines in it:
 
 ..  code-block:: python
-    :caption: *to be copied in utils.py*
 
     import numpy as np
     from numpy.linalg import norm
@@ -274,10 +273,12 @@ Creating the GRO file
     within the box. The *search_closest_neighbor* looks for the minimum distance 
     between existing atoms (if any) and the new residue. 
 
-    Let us do the same for the :math:`\text{Na}^{+}` ion :
+..  container:: justify
+
+    Let us do the same for the :math:`\text{Na}^{+}`
+    ion :
 
 ..  code-block:: python
-    :caption: *to be copied in generategro.py*
 
     # Import the functions from the utils file
     from utils import generate_random_location, search_closest_neighbor
@@ -309,7 +310,6 @@ Creating the GRO file
     spacing of *dSol* (only if no overlap exists):
 
 ..  code-block:: python
-    :caption: *to be copied in generategro.py*
 
     # add water randomly
     atpositions, attypes, resname, atnames = H20_molecule()
@@ -342,7 +342,6 @@ Creating the GRO file
     actual concentration:
 
 ..  code-block:: python
-    :caption: *to be copied in generategro.py*
 
     print('Lx = '+str(Lx)+' nm, Ly = '+str(Ly)+' nm, Lz = '+str(Lz)+' nm')
     print(str(cpt_Na)+' Na ions') 
@@ -382,15 +381,13 @@ Creating the GRO file
     f.write("\n")
     f.close()
 
-.. include:: ../contact/supportme.rst
-
 Final system
 ------------
 
 ..  container:: justify
 
     Run the *generategro.py* file using Python.
-    This is what I in the terminal:
+    This is what appear in the terminal:
 
 ..  code-block:: bw
 
@@ -403,8 +400,7 @@ Final system
 
 ..  container:: justify
 
-    You can look at the final system using vmd (or any other MD visualization software)
-    by typing in a terminal:
+    You can check the final system using VMD by typing in a terminal:
 
 ..  code-block:: bash
 
@@ -418,16 +414,15 @@ Final system
     :alt: Gromacs tutorial - generated topology
     :class: only-dark
 
+..  container:: figurelegend
+
     The primary system is located within the blue box. The replicated periodic 
     images are also represented. 
 
 ..  container:: justify
 
-    There is some vacuum left in the box. It is not a big problem and
-    the initial configuration we created is good enough. 
-    The topology file *conf.gro* will be used as the initial 
-    configuration for the :ref:`bulk-solution-label` tutorial.
-
+    There is some vacuum left in the box. It is not an issue as energy
+    minimization and molecular dynamics will help equilibrate the system.
 
 Creating the TOP file
 =====================
@@ -443,7 +438,6 @@ Creating the TOP file
     Within the same Python script, write:
 
 ..  code-block:: python
-    :caption: *to be copied in generategro.py*
 
     # write topol.top
     f = open('topol.top', 'w')
@@ -459,31 +453,12 @@ Creating the TOP file
     f.write('SOL '+ str(cpt_Sol)+'\n')
     f.close()
 
-..  container:: justify
-
-    All the parameter files located in the *ff* folder
-    will be written in the :ref:`create-topol-label` tutorial.
-
-.. include:: ../contact/contactme.rst
-
 Write parameters
 ----------------
 
-.. container:: hatnote
-
-    Writing the topology file for GROMACS.
-
 ..  container:: justify
 
-    The objective of this tutorial is to write
-    the force field parameters (.itp files) for a simple system.
-    If follows directly the writing of the gro file in :ref:`create-conf-label` tutorial.
-
-    The parameter files created here will be used in :ref:`bulk-solution-label`. 
-    If you are only interested in running GROMACS, jump directly
-    to :ref:`bulk-solution-label`.
-
-.. include:: ../contact/needhelp.rst
+    Here, the force field parameters (i.e. the *.itp* files) are written.
 
 Default parameters
 ------------------
@@ -494,7 +469,6 @@ Default parameters
     *forcefield.itp*, and copy the following in it:
 
 ..  code-block:: bw
-    :caption: *to be copied in ff/forcefield.itp*
 
     [ defaults ]
     ; nbfunc  comb-rule  gen-pairs  fudgeLJ  fudgeQQ
@@ -522,6 +496,12 @@ Default parameters
     The |forcefield.itp| file is used to define basic combination rules, as well as 
     atom types, bond types, and angle types. 
 
+.. |forcefield.itp| raw:: html
+
+    <a href="../../../../inputs/bulksolution/ff/forcefield.itp" target="_blank">forcefield.itp</a>
+
+..  container:: justify
+
     With comb-rule = 2, the mixing rule is calculated as 
     :math:`\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilon_{jj}}`,
     :math:`\sigma_{ij} = (\sigma_{ii}+\sigma_{jj})/2`.
@@ -529,10 +509,18 @@ Default parameters
     and Coulomb 1-4 interactions, respectively. 
     You can refer to the |gromacs-manual| for more information.
 
+.. |gromacs-manual| raw:: html
+
+    <a href="https://manual.gromacs.org/current/reference-manual/topologies/parameter-files.html" target="_blank">GROMACS manual</a>
+
+..  container:: justify
+
     The |forcefield.itp| file also contains information about the atoms, 
     such their masses and Lennard-Jones parameters sigma and epsilon,
     as well as some parameters for the bond and angle constraints that will be 
     necessary for the SO4 ions.
+
+..  container:: justify
 
     Notice that the particle with name MW is of type 'D' when all the other particles 
     are of type 'A' for atoms. This is because MW is the virtual massless site of our 4 points
@@ -542,19 +530,18 @@ Default parameters
 
     <a href="http://www.sklogwiki.org/SklogWiki/index.php/TIP4P_model_of_water" target="_blank">wiki</a>
 
-.. |gromacs-manual| raw:: html
-
-    <a href="https://manual.gromacs.org/current/reference-manual/topologies/parameter-files.html" target="_blank">GROMACS manual</a>
-
 Sodium ion
 ----------
 
 ..  container:: justify
 
-    Let us create a file named *na.itp* for the Sodium ion:
+    Let us create a file named *na.itp* for the Sodium ion (|na.itp|):
+
+.. |na.itp| raw:: html
+
+    <a href="../../../../inputs/bulksolution/ff/na.itp" target="_blank">na.itp</a>
 
 ..  code-block:: bw
-    :caption: *to be copied in ff/na.itp*
 
     [ moleculetype ]
     ; molname nrexcl
@@ -574,15 +561,20 @@ Sulfate ion
 
 ..  container:: justify
 
-    The file *so4.itp* for the sulfate ion is more complicated,
+    The file *so4.itp* for the sulfate ion is more complex than the one for the sodium ion,
     as the residue is made of 5 atoms that are bonded together
-    and maintained by angular constrained.
+    and maintained by angular constrained (|so4.itp|).
+
+.. |so4.itp| raw:: html
+
+    <a href="../../../../inputs/bulksolution/ff/so4.itp" target="_blank">so4.itp</a>
+
+..  container:: justify
 
     The *exclusions* ensures that atoms from the same residue do not 
     interact through LJ and Coulomb interactions. 
 
 ..  code-block:: bw
-    :caption: *to be copied in ff/so4.itp*
 
     [moleculetype]
     ; name  nrexcl
@@ -619,19 +611,20 @@ Sulfate ion
     4       1       2       3       5
     5       1       2       3       4
 
-.. include:: ../contact/supportme.rst
-
 Water molecule
 --------------
 
 ..  container:: justify
 
-    Finally, create a file named *h2o.itp* for the water molecule.
-    Settle parameters are added to ensure that the residue remains 
+    Finally, create a file named *h2o.itp* for the water molecule (|h2o.itp|).
+    Settle parameters are added to ensure that the water molecule remains 
     rigid:
 
+.. |h2o.itp| raw:: html
+
+    <a href="../../../../inputs/bulksolution/ff/h2o.itp" target="_blank">h2o.itp</a>
+
 ..  code-block:: bw
-    :caption: *to be copied in ff/h2o.itp*
 
     [ moleculetype ]
     ; molname  nrexcl
@@ -658,25 +651,7 @@ Water molecule
     3 1 2 4
     4 1 2 3
 
-.. |forcefield.itp| raw:: html
-
-    <a href="../../../../inputs/bulksolution/ff/forcefield.itp" target="_blank">forcefield.itp</a>
-
-.. |h2o.itp| raw:: html
-
-    <a href="../../../../inputs/bulksolution/ff/h2o.itp" target="_blank">h2o.itp</a>
-
-.. |na.itp| raw:: html
-
-    <a href="../../../../inputs/bulksolution/ff/na.itp" target="_blank">na.itp</a>
-
-.. |so4.itp| raw:: html
-
-    <a href="../../../../inputs/bulksolution/ff/so4.itp" target="_blank">so4.itp</a>
-
 ..  container:: justify
 
     To continue and use those files for running a molecular dynamics simulation 
     with GROMACS, go to :ref:`bulk-solution-label`.
-
-.. include:: ../contact/contactme.rst
