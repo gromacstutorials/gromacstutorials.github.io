@@ -11,6 +11,7 @@ Welcome to gromacstutorials's documentation!
     :caption: Main  
 
     howto.rst
+    contact/contact.rst
 
 .. toctree::
     :maxdepth: 2
@@ -37,12 +38,6 @@ Welcome to gromacstutorials's documentation!
 
     tutorials/solvationenergy.rst
     tutorials/ethanoladsorption.rst
-
-.. toctree::
-    :maxdepth: 2
-    :caption: Extra content
-
-    contact/contact.rst
 
 .. toctree::
     :maxdepth: 2

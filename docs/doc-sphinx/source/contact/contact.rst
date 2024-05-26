@@ -1,41 +1,49 @@
 .. _contact-label:
 
-Contact
-*******
+Contact me
+**********
 
-Email
-=====
+..  container:: justify
 
-Feel free to contact me by `email`_. I am always happy to read what you
-think about this website, or answer your GROMACS-related questions.
+    Feel free to contact me by `email`_ and
+    ask me any GROMACS-related questions.
 
 .. _email: simon.gravelle@live.fr
 
-Get help with your project:
-===========================
+Support the project
+===================
 
 .. figure:: images/patreon.png
     :height: 100
-    :alt: Simon gravelle patreon for lammps/gromacs material
+    :alt: Simon gravelle patreon for LAMMPS and GROMACS material
     :align: right
     :target: https://www.patreon.com/molecularsimulations
 
-Become a |patreon_simulation|, and:
+..  container:: justify
 
-- Receive personalised advice for your project
-- Have your input scripts reviewed
-- Access a dedicated Discord forum
-- Support the creation of content for GROMACS
+    You can support this webpage on |patreon| and get access to a dedicated
+    Discord channel for 1 euro per month or by donating on |tipeee|.
 
-.. |patreon_simulation| raw:: html
+.. |patreon| raw:: html
 
    <a href="https://www.patreon.com/molecularsimulations" target="_blank">Patreon</a>
 
-Follow me
-=========
+.. |tipeee| raw:: html
 
-- on |twitter_simon_gravelle|, where I post news about these tutorials and about my research
-- on |github_simon_gravelle|, where I share many molecular simulation content
+   <a href="https://en.tipeee.com/lammps-tutorials" target="_blank">tipeee</a>
+
+About me
+========
+
+..  container:: justify
+
+    I have been using GROMACS for research and education since 2020, see my |personal_page_simon_gravelle|.
+    Follow me on |twitter_simon_gravelle|, where I post news about these tutorials
+    and my research or follow me on |github_simon_gravelle|, where I share more molecular simulation content.
+
+.. |personal_page_simon_gravelle| raw:: html
+
+   <a href="https://simongravelle.github.io/" target="_blank">personal page</a>
 
 .. |twitter_simon_gravelle| raw:: html
 
@@ -44,12 +52,3 @@ Follow me
 .. |github_simon_gravelle| raw:: html
 
    <a href="https://github.com/simongravelle" target="_blank">github</a>
-
-About me
-========
-
-I am a physicist in soft matter and fluids at interfaces, see my |personal_page_simon_gravelle|.
-
-.. |personal_page_simon_gravelle| raw:: html
-
-   <a href="https://simongravelle.github.io/" target="_blank">personal page</a>
