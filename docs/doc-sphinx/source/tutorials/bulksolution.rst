@@ -458,17 +458,18 @@ Minimalist NVT input file
 
 ..  container:: justify
 
-    Let us first perform a small (20 picoseconds)
+    Let us first perform a short (20 picoseconds)
     equilibration in the NVT ensemble. In the NVT ensemble, the number of
     atom (N) and volume (V) are maintained fixed, and the
     temperature (T) is adjusted using a thermostat.
     
+..  container:: justify
+
     Let use write a new input script
-    called nvt.mdp, and save it in the 'inputs/' folder.
+    called *nvt.mdp*, and save it in the *inputs/* folder.
     Copy the following lines into it:
 
 ..  code-block:: bw
-    :caption: *to be copied in inputs/nvt.mdp*
 
     integrator = md
     nsteps = 20000
@@ -476,26 +477,23 @@ Minimalist NVT input file
 
 ..  container:: justify
 
-    Here the molecular dynamics (md) integrator is used
+    Here, the molecular dynamics (md) integrator is used
     (leapfrog algorithm), and a number of 20000 steps with
-    timestep (dt) 0.001 ps is requested, so the total
-    requested duration is 20 ps. Let us print the
-    trajectory in a xtc file every 1 ps by adding:
+    a timestep *dt* equal of :math:`0.001 ~ \text{ps}` will be performed.
+    Let us print the trajectory in a compressed *xtc* file every 1 ps by adding:
 
 ..  code-block:: bw
-    :caption: *to be copied in inputs/nvt.mdp*
 
     nstxout-compressed = 1000
 
 ..  container:: justify
 
-    Let us control the temperature over the course of the
+    Let us also control the temperature over the course of the
     simulation using the v-rescale thermostat, which is
     the Berendsen thermostat with an additional stochastic
-    term (it is known to give proper canonical ensemble):
+    term :cite:`bussi2007canonical`. This thermostat is known to give proper canonical ensemble.
 
 ..  code-block:: bw
-    :caption: *to be copied in inputs/nvt.mdp*
 
     tcoupl = v-rescale
     ref-t = 360
@@ -504,18 +502,17 @@ Minimalist NVT input file
 
 ..  container:: justify
 
-    Here we also specified that the thermostat is
-    applied to the entire system (we could choose to
-    apply it only to a certain group of atom, which we
-    will do later), and that the damping constant for
-    the thermostat is 0.5 ps.
+    Here, we also specified that the thermostat is
+    applied to the entire system, and that the damping constant for
+    the thermostat is equal to 0.5 ps.
+
+..  container:: justify
 
     Note that the relatively high temperature of 360 K
     has been chosen here in order to reduce the
     viscosity of the solution and converge toward
-    the desired result (i.e. the diffusion coefficient) faster.
-    We now have a minimalist input file for performing
-    the NVT step. Run it by typing in the terminal:
+    the desired result faster. We now have a minimalist input file for performing
+    the first NVT simulation. Run it by typing in the terminal:
 
 ..  code-block:: bw
 
@@ -524,9 +521,11 @@ Minimalist NVT input file
 
 ..  container:: justify
 
-    Here '-c min.gro' ensures that the previously
+    Here *-c min.gro* ensures that the previously
     minimized configuration is used as a starting point.
     
+..  container:: justify
+
     After the completion of the simulation, we can
     ensure that the system temperature indeed reached
     the value of 360 K by using the energy command of
@@ -538,14 +537,16 @@ Minimalist NVT input file
 
 ..  container:: justify
 
-    and choose 'temperature'.
+    and choose *temperature*.
     
-    From the generated file, we can see that temperature
+..  container:: justify
+
+    From the generated *Tnvt.xvg* file, we can see that temperature
     started from 0, which was expected since the atoms
     have no velocity during a minimization step, and
     reaches a temperature slightly larger than the
     requested 360 K after a duration of a few
-    picoseconds:
+    picoseconds.
 
 .. figure:: figures/bulksolution/temperature-light.png
     :alt: Gromacs tutorial : temperature versus time.
@@ -555,27 +556,24 @@ Minimalist NVT input file
     :alt: Gromacs tutorial : temperature versus time.
     :class: only-dark
 
+.. container:: figurelegend
+
     Evolution of the temperature as a function of the time
     during the NVT equilibration. Dashed line is the
     requested temperature of 360 K.
-
-..  container:: justify
-
-    A better control of the temperature is achieved in the next section.
 
 Improving the NVT
 =================
 
 ..  container:: justify
 
-    So far, a very few commands have been placed in the
-    NVT input file, meaning that most of the instruction
+    So far, very few commands have been placed in the
+    *.mdp* input file, meaning that most of the instruction
     have been taken by GROMACS from the default
     parameters. You can find what parameters were used
-    during the last nvt run by opening the new nvt.mdp
-    file that has been created (i.e. not the one in the
-    'inputs/' folder, but the one in the main folder).
-    Exploring this new nvt.mdp file shows us that, for
+    during the last nvt run by opening the new *nvt.mdp*
+    file that has been created in the main folder.
+    Exploring this new *nvt.mdp* file shows us that, for
     instance, plain cut-off Coulomb interactions have
     been used:
 
@@ -586,9 +584,12 @@ Improving the NVT
 
 ..  container:: justify
 
-    For this system, long range Coulomb interaction is a
+    For this system, long range Coulomb interaction would be a
     better choice. We could also improve the thermostating of the
     system by applying a separate thermostat to water molecules and ions.
+
+..  container:: justify
+
     Therefore, let us improve the NVT step by specifying
     more options in the input file.
     First, in the nvt.mdp file, let us impose the use of the
@@ -597,7 +598,6 @@ Improving the NVT
     of 4, and cut-off of 4:
 
 ..  code-block:: bw
-    :caption: *to be copied in inputs/nvt.mdp*
 
     coulombtype = pme
     fourierspacing = 0.1
@@ -611,7 +611,6 @@ Improving the NVT
     Let us also specify the van der Waals interaction:
 
 ..  code-block:: bw
-    :caption: *to be copied in inputs/nvt.mdp*
 
     vdw-type = Cut-off
     rvdw = 1.0
@@ -622,7 +621,6 @@ Improving the NVT
     bonds of the water molecules:
 
 ..  code-block:: bw
-    :caption: *to be copied in inputs/nvt.mdp*
 
     constraint-algorithm = lincs
     constraints = hbonds
@@ -631,11 +629,10 @@ Improving the NVT
 ..  container:: justify
 
     Let us also use separate temperature baths for
-    water and ions (here corresponding to the gromacs group called non-water) respectively
-    by replacing:
+    water and ions (here corresponding to the GROMACS group called *non-water*)
+    respectively by replacing:
 
 ..  code-block:: bw
-    :caption: *to be removed from inputs/nvt.mdp*
 
     tcoupl = v-rescale
     ref-t = 360
@@ -647,7 +644,6 @@ Improving the NVT
     by:
 
 ..  code-block:: bw
-    :caption: *to be copied in inputs/nvt.mdp*
 
     tcoupl = v-rescale
     tc-grps = Water non-Water
@@ -659,7 +655,6 @@ Improving the NVT
     Let us specify neighbor searching parameters:
 
 ..  code-block:: bw
-    :caption: *to be copied in inputs/nvt.mdp*
 
     cutoff-scheme = Verlet
     nstlist = 10
@@ -671,7 +666,6 @@ Improving the NVT
     total velocities give the desired temperature instead of 0):
 
 ..  code-block:: bw
-    :caption: *to be copied in inputs/nvt.mdp*
 
     gen-vel = yes
     gen-temp = 360
@@ -682,7 +676,6 @@ Improving the NVT
     velocity of the whose system:
 
 ..  code-block:: bw
-    :caption: *to be copied in inputs/nvt.mdp*
 
     comm_mode = linear
     comm_grps = system
@@ -703,6 +696,8 @@ Improving the NVT
     :alt: Gromacs tutorial : temperature versus time.
     :class: only-dark
 
+.. contained:: figurelegend
+
     Evolution of the temperature as a function of the time
     during the NVT equilibration.
 
@@ -713,14 +708,13 @@ Adjust the density using NPT
 
     Now that the system is properly equilibrated in the
     NVT ensemble, let us perform an equilibration in the
-    NPT ensemble, where the pressure is imposed and the
+    NPT ensemble where the pressure is imposed and the
     volume of the box is free to relax. NPT relaxation ensures that the
     density of the fluid converges toward its equilibrium value.
-    Create a new input script, call it 'npt.mdp', and
+    Create a new input script, call it *npt.mdp*, and
     copy the following lines in it:
 
 ..  code-block:: bw
-    :caption: *to be copied in inputs/npt.mdp*
 
     integrator = md
     nsteps = 50000
@@ -762,14 +756,14 @@ Adjust the density using NPT
 
 ..  container:: justify
 
-    The main difference with the previous NVT script, is
+    The main difference with the previous NVT script is
     the addition of the isotropic C-rescale pressure
     coupling with a target pressure of 1 bar. Some other
-    differences are the addition of the 'nstlog' and
-    'nstenergy' commands to control the frequency at
+    differences are the addition of the *nstlog* and
+    *nstenergy* commands to control the frequency at
     which information are printed in the log file and in
-    the energy file (edr), and the removing the
-    'gen-vel' commands. Run it using:
+    the energy file (*edr*), and the removing the
+    *gen-vel* commands. Run it using:
 
 ..  code-block:: bash 
 
@@ -779,7 +773,7 @@ Adjust the density using NPT
 ..  container:: justify
 
     Let us have a look a both temperature, pressure and
-    volume during the NPT step using the 'gmx energy'
+    volume during the NPT step using the *gmx energy*
     command 3 times:
 
 ..  code-block:: bash 
@@ -790,7 +784,7 @@ Adjust the density using NPT
 
 ..  container:: justify
 
-    Choose respectively 'temperature', 'pressure' and 'volume'.
+    Choose respectively *temperature*, *pressure* and *volume*.
     This is what I see:
 
 .. figure:: figures/bulksolution/NPT-light.png
@@ -800,6 +794,8 @@ Adjust the density using NPT
 .. figure:: figures/bulksolution/NPT-dark.png
     :alt: Gromacs tutorial : NPT equilibration
     :class: only-dark
+
+..  container:: figurelegend
 
     From top to bottom: evolution of the temperature,
     pressure, and volume of the simulation box as a
@@ -817,6 +813,8 @@ Adjust the density using NPT
     typical in molecular dynamics, particularly with
     liquid water that is almost uncompressible.
 
+..  container:: justify
+
     Exact results may differ depending on the actual *.gro* file generated.
 
 Measurement diffusion coefficient
@@ -828,15 +826,16 @@ Measurement diffusion coefficient
     perform a longer simulation and extract quantities of
     interest.
     
+..  container:: justify
+
     Here, as an illustration, the diffusion
     coefficients of all 3 species (water and the two ions) will be
     measured. First, let us perform a longer run in the
     NVT ensemble. Create a new input file, call it
-    'pro.mdp' ('pro' is short for 'production'), and copy the
+    *pro.mdp* (*pro* is short for *production*), and copy the
     following lines into it:
 
 ..  code-block:: bw 
-    :caption: *to be copied in inputs/pro.mdp*
 
     integrator = md
     nsteps = 200000
@@ -890,18 +889,24 @@ Measurement diffusion coefficient
 
 ..  container:: justify
 
-    and select the SO4 ions by typing 'SO4', and then press 'ctrl D'.
+    and select the SO4 ions by typing *SO4*, and then press *ctrl D*.
     
+..  container:: justify
+
     Fitting the slope of the
-    MSD gives a value of 1.3e-5 cm\ :sup:`2`/s for the
+    MSD gives a value of :math:`1.3 \mathrm{e}-5 ~ \text{cm}^2/\text{s}` for the
     diffusion coefficient. 
+
+..  container:: justify
     
     Repeat the same for Na and water. 
     
-    For Na, the value is 1.5e-5
-    cm\ :sup:`2`/s, and for water 5.2e-5 cm\ :sup:`2`/s
-    (not too far from the experimental value of ~ 7e-5
-    cm\ :sup:`2`/s at temperature T=360 K).
+..  container:: justify
+
+    For Na, the value is :math:`1.5 \mathrm{e}-5 ~ \text{cm}^2/\text{s}`,
+    and for water :math:`5.2 \mathrm{e}-5 ~ \text{cm}^2/\text{s}`
+    (not too far from the experimental value of :math:`7.5 \mathrm{e}-5 ~ \text{cm}^2/\text{s}`
+    at temperature T=360 K).
     
 .. admonition:: About MSD in molecular simulations
     :class: info
@@ -935,5 +940,3 @@ Going further
     Take advantage of the generated production run to extract more 
     equilibrium quantities. For instance, Gromacs allows you to
     extract Radial Distribution Functions (RDF) using the *gmx rdf* commands.
-
-.. include:: ../contact/contactme.rst
