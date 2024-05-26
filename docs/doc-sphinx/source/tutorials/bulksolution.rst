@@ -150,14 +150,11 @@ The input files
 
 ..  container:: justify
 
-    If you already followed the previous tutorial, :ref:`create-topol-label`,
-    you can also skip this part.
-
     The topology file contains information about the
     interactions of the different atoms and molecules. You
     can download it by clicking |topol-SO4.top|.
-    Place it in the same folder as the conf.gro file. The
-    topol.top file looks like that:
+    Place it in the same folder as the *conf.gro* file. The
+    *topol.top* file looks like that:
 
 .. |topol-SO4.top| raw:: html
 
@@ -181,14 +178,18 @@ The input files
 ..  container:: justify
 
     The 4 first lines are used to include the values of the
-    parameters that are given in 4 separate files (see below). 
+    parameters that are given in 4 separate files located in the *ff/*
+    folder (see below). 
     
-    The rest of the topol.top file contains the system
-    name (Na2SO4 solution), and a list of the molecules. It is important
+..  container:: justify
+
+    The rest of the *topol.top* file contains the system
+    name (*Na2SO4 solution*), and a list of the residues. It is important
     that the order of the molecules in the topology file
-    (here SO4 first, Na second, and SOL (H2O) last)
-    matches the order of the conf.gro file, otherwise the simulation
-    will fail.
+    (here *SO4* first, *Na* second, and *SOL* (for H2O molecules) last)
+    matches the order of the *conf.gro* file.
+
+..  container:: justify
     
     Create a folder named 'ff/' next to the conf.gro and the topol.top files, and copy
     |forcefield.itp|, |h2o.itp|, |na.itp|, and |so4.itp|
