@@ -5,8 +5,7 @@ Bulk salt solution
 
 .. container:: hatnote
 
-    The very basics of GROMACS through a
-    simple example
+    The very basics of GROMACS through a simple example
 
 .. figure:: figures/bulksolution/video-solution-light.webp
     :alt: Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
@@ -28,90 +27,14 @@ Bulk salt solution
     with sodium (Na\ :sup:`+`) and sulfate
     (SO\ :sub:`4`\ :sup:`2-`) ions. 
     
+..  container:: justify
+
     This tutorial illustrates several major ingredients of molecular
     dynamics simulations, such as energy minimization,
     thermostating, NVT and NPT equilibration, and
     trajectory visualisation.
 
-    There are no prerequisite to follow this tutorial.
-
 .. include:: ../contact/needhelp.rst
-
-Required softwares
-==================
-
-..  container:: justify
-
-    GROMACS must be installed on your machine. You can
-    install it following the instructions of the |gromacs-manual|.
-
-    Alternatively, if you are using Ubuntu OS, you can
-    simply execute the following command in a terminal:
-
-.. |gromacs-manual| raw:: html
-
-   <a href="https://manual.gromacs.org/current/index.html" target="_blank">GROMACS manual</a>
-
-..  code-block:: bw
-
-    sudo apt-get install gromacs
-   
-..  container:: justify
-
-    You can verify that GROMACS is indeed installed on your
-    computer by typing in a terminal :
-
-..  code-block:: bw
-
-    gmx
-
-..  container:: justify
-
-    You should see the version of GROMACS that has been
-    installed. On my computer I see
-
-..  code-block:: bw
-
-    :-) GROMACS - gmx, 2023 (-:
-
-    Executable:   /usr/bin/gmx
-    Data prefix:  /usr
-
-    (...)
-
-..  container:: justify
-
-    as well as a quote (at the bottom), such as
-
-..  code-block:: bw
-
-    (...)
-
-    GROMACS reminds you: "Computers are like humans - they do everything except think." (John von Neumann)
-
-..  container:: justify
-
-    In addition to GROMACS, you will also need 
-    
-    - |(1) a basic text editing software| such as Vim, Gedit, or Notepad++,
-    - |(2) a visualization software|, here I will use VMD (note: VMD is free but you have to register to the uiuc website in order to download it. If you don't want to, you can also use Ovito.),
-    - |(3) a plotting tool| like XmGrace or pyplot.
-
-.. |LAMMPS website| raw:: html
-
-   <a href="https://lammps.sandia.gov" target="_blank">LAMMPS website</a>
-
-.. |(1) a basic text editing software| raw:: html
-
-   <a href="https://help.gnome.org/users/gedit/stable/" target="_blank">(1) a basic text editing software</a>
-
-.. |(2) a visualization software| raw:: html
-
-   <a href="https://www.ks.uiuc.edu/Research/vmd/" target="_blank">(2) a visualization software</a>
-
-.. |(3) a plotting tool| raw:: html
-
-   <a href="https://plasma-gate.weizmann.ac.il/Grace/" target="_blank">(3) a plotting tool</a>
 
 The input files
 ===============
@@ -121,14 +44,13 @@ The input files
     In order to run the present simulation using GROMACS,
     we need the 3 following files (or sets of files):
 
-    - 1) a **configuration file** (.gro) containing the
+    - 1) A **configuration file** (.gro) containing the
          initial positions of the atoms and the box
-         dimensions,
-    - 2) a **topology file** (.top) specifying the
-         location of the force field files (.itp),
-    - 3) an **input file** (.mdp) containing the
+         dimensions.
+    - 2) A **topology file** (.top) specifying the
+         location of the force field files (.itp).
+    - 3) An **input file** (.mdp) containing the
          parameters of the simulation (e.g. temperature, timestep).
-
 
 1) The configuration file (.gro)
 --------------------------------

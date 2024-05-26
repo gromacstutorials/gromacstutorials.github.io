@@ -10,7 +10,7 @@ Welcome to gromacstutorials's documentation!
     :maxdepth: 2
     :caption: Main  
 
-    howto.rst
+    non-tutorials/before-you-start.rst
     contact/contact.rst
 
 .. toctree::
