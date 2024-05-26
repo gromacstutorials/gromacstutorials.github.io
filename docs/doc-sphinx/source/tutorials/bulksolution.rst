@@ -196,7 +196,7 @@ The input files
     in it. These four files contain information about
     the atoms (names, masses, changes, Lennard-Jones
     coefficients) and residues (bond and angular
-    constraints) for all the species that will be involved here.
+    constraints) for all the species that are involved here.
 
 .. |forcefield.itp| raw:: html
 
@@ -224,8 +224,10 @@ The input files
 
     - the number of steps to perform,
     - the thermostat to be used (e.g. Langevin, Berendsen),
-    - the cut-off for the interactions (e.g. Lennard-Jones),
-    - the molecular dynamics integrator (e.g. steep-decent, molecular dynamics).
+    - the cut-off for the interactions,
+    - the molecular dynamics integrator (e.g. steep-descent, molecular dynamics).
+
+..  container:: justify
 
     In this tutorial, 4 different input files will be
     written in order to perform respectively an energy
@@ -234,7 +236,9 @@ The input files
     ensemble (with changing box size), and finally a production run.
     Input files will be placed in a 'inputs/' folder. 
 
-    At this point, your folder should look like that:
+..  container:: justify
+
+    At this point, the folder should look like that:
 
 .. figure:: figures/bulksolution/gromacs_inputs-light.png
     :alt: Gromacs files and structure folder
@@ -251,39 +255,40 @@ The input files
     The rest of the tutorial focusses on writing the input files and performing the
     molecular dynamics simulation. 
 
-.. include:: ../contact/supportme.rst
-
 Energy minimization
 ===================
 
 ..  container:: justify
 
-    It is clear from the configuration (.gro) file that the molecules and ions are currently in a
-    quite unphysical configuration (i.e. too regularly aligned). It would be risky to
-    directly perform a molecular dynamics simulation;
+    It is clear from the configuration (.gro) file that the molecules and ions
+    are currently in a quite unphysical configuration. It would be risky to
+    directly start the molecular dynamics simulation as
     atoms would undergo huge forces, accelerate, and the system could
     eventually explode.
+
+..  container:: justify
 
     In order to bring the system into a favorable state,
     let us perform an energy minimization which
     consists in moving the atoms until the forces between
     them are reasonable.
 
-    Open a blank file, call it min.mdp, and save it in the
-    'inputs/' folder. Copy the following lines into min.mdp:
+..  container:: justify
+
+    Open a blank file, call it *min.mdp*, and save it in the
+    *inputs/* folder. Copy the following lines into *min.mdp*:
 
 ..  code-block:: bw
-    :caption: *to be copied in inputs/min.mdp*
 
     integrator = steep
     nsteps = 5000
 
 ..  container:: justify
 
-    These commands specify to GROMACS that the algorithm
-    to be used is the |speepest-descent|, which moves the
-    atoms following the direction of the largest forces
-    until one of the stopping criterial is reached. The 'nsteps' command 
+    These two commands specify to GROMACS that the algorithm
+    to be used is the |speepest-descent| :cite:`debye1909naherungsformeln`,
+    which moves the atoms following the direction of the largest forces
+    until one of the stopping criterial is reached. The *nsteps* command 
     specifies the maximum number of steps to perform.
 
 .. |speepest-descent| raw:: html
@@ -314,20 +319,24 @@ Energy minimization
 
 ..  container:: justify
 
-    The grompp command is used to preprocess the
-    files in order to prepare the simulation. The grompp
+    The *grompp* command is used to preprocess the
+    files in order to prepare the simulation. The *grompp*
     command also checks the validity of the files. By using
-    the '-f', '-c', and '-p' keywords, we specify which
+    the *-f*, *-c*, and *-p* keywords, we specify which
     input, configuration, and topology files must be
-    used, respectively. The other keywords '-o', '-pp', and '-po' are
+    used, respectively. The other keywords *-o*, *-pp*, and *-po* are
     used to specify the names of the output that will be
     produced during the run. 
     
-    The mdrun command calls the engine
+..  container:: justify
+
+    The *mdrun* command calls the engine
     performing the computation from the preprocessed
-    files (which is recognized thanks to the -deffnm keyword). The
-    '-v' option is here to enable verbose and have more
+    files (which is recognized thanks to the *-deffnm* keyword). The
+    *-v* option is here to enable verbose and have more
     information printed in the terminal.
+
+..  container:: justify
 
     If everything works, you should see something like :
 
@@ -350,6 +359,8 @@ Energy minimization
     message, as long as the final energy is large and negative,
     the simulation will work just fine. 
     
+..  container:: justify
+
     The final potential energy is large and
     negative, and the maximum force is small: 240
     kJ/mol/nm (about 0.4 pN). Everything seems alright.
@@ -359,10 +370,6 @@ Energy minimization
 ..  code-block:: bash
 
     vmd conf.gro min.trr
-
-..  container:: justify
-
-    This is what I see:
 
 .. figure:: figures/bulksolution/solution-light.webp
     :alt: Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization.
@@ -374,18 +381,29 @@ Energy minimization
     :class: only-dark
     :height: 330
 
+.. container:: figurelegend
+
+    Movie showing the motion of the atoms during the energy minimization.
+
 ..  container:: justify
 
-    Note for VMD user: You can avoid having
+    Note for VMD users: You can avoid having
     molecules 'cut in half' by the periodic boundary
-    conditions by rewriting the trajectory using 'gmx
-    trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole'
+    conditions by rewriting the trajectory using:
+
+..  code-block:: bash
+    
+    gmx trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole'
+
+..  container:: justify
 
     One can see that the molecules reorient themselves
     into more energetically favorable positions, and that
     the distances between the atoms are being
-    progressively homogeneized.
+    progressively homogenized.
     
+..  container:: justify
+
     Let us have a look at the
     evolution of the potential energy of the system. To do
     so, we can use the internal 'energy' command of
@@ -397,14 +415,15 @@ Energy minimization
 
 ..  container:: justify
 
-    choose 'potential' by typing '5' (or any number that is in front of 'potential'), 
-    then press enter twice. 
+    Choose *potential* by typing *5* (or any number that is in front of
+    *potential*), then press *Enter* twice. 
     
-    Here the edr file produced
+..  container:: justify
+
+    Here, the *.edr* file produced
     by Gromacs during the last run is used, and the
-    result is saved in the epotmin.xvg file.
-    Let us plot it (xvg files can be easily opened
-    using XmGrace, here I use pyplot and jupyter-notebook):
+    result is saved in the *epotmin.xvg* file.
+    Let us plot it:
 
 .. figure:: figures/bulksolution/energy-light.png
     :alt: Gromacs tutorial : energy versus time.
@@ -413,6 +432,8 @@ Energy minimization
 .. figure:: figures/bulksolution/energy-dark.png
     :alt: Gromacs tutorial : energy versus time.
     :class: only-dark
+
+.. container:: figurelegend
 
     Evolution of the potential energy as a function of the
     number of steps during energy minimization.
@@ -427,6 +448,8 @@ Energy minimization
     rapidly decreases and reaches a large and negative
     value, which is usually a good sign as it indicates
     that the atoms are now at appropriate distances from each others. 
+
+..  container:: justify
 
     The system is ready for the molecular dynamics simulation.
 
