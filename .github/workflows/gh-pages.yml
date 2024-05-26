@@ -28,9 +28,9 @@ jobs:
         run: |
           pip install sphinx
           pip install furo
-          pip install sphinxcontrib-googleanalytics
           pip install sphinx-togglebutton
           pip install sphinx-favicon
+          pip install sphinxcontrib.bibtex
       - name: Build
         run: |
           cd docs/doc-sphinx/

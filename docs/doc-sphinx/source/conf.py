@@ -4,11 +4,9 @@
 copyright = 'All source code is available under the GNU General Public License v3.0'
 author = 'Simon Gravelle'
 
-extensions = ['sphinxcontrib.googleanalytics',
-              'sphinx_togglebutton',
-              'sphinx_favicon']
-
-googleanalytics_id = 'G-BFND91CYC2'
+extensions = ['sphinx_togglebutton',
+              'sphinx_favicon',
+              'sphinxcontrib.bibtex']
 
 templates_path = ['_templates']
 
@@ -31,3 +29,5 @@ favicons = [{"href": "favicon-32x32.png"}]
 html_show_copyright = False
 html_show_sphinx = False
 html_short_title = "True"
+
+bibtex_bibfiles = ['journal-article.bib']

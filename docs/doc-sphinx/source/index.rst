@@ -15,13 +15,6 @@ Welcome to gromacstutorials's documentation!
 
 .. toctree::
     :maxdepth: 2
-    :caption: Level 0
-
-    tutorials/createconfgro.rst
-    tutorials/createtopoltop.rst
-
-.. toctree::
-    :maxdepth: 2
     :caption: Level 1
 
     tutorials/bulksolution.rst
@@ -38,6 +31,13 @@ Welcome to gromacstutorials's documentation!
 
     tutorials/solvationenergy.rst
     tutorials/ethanoladsorption.rst
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Extra content
+
+    non-tutorials/createconfgro.rst
+    non-tutorials/bibliography.rst
 
 .. toctree::
     :maxdepth: 2
