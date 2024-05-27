@@ -13,7 +13,7 @@ Contact me
 Support the project
 ===================
 
-.. figure:: images/patreon.png
+.. figure:: figures/patreon.png
     :height: 100
     :alt: Simon gravelle patreon for LAMMPS and GROMACS material
     :align: right

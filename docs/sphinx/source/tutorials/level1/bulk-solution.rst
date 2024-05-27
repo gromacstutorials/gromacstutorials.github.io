@@ -425,11 +425,11 @@ Energy minimization
     result is saved in the *epotmin.xvg* file.
     Let us plot it:
 
-.. figure:: ../figures/level1/bulk-solution/bulksolution/energy-light.png
+.. figure:: ../figures/level1/bulk-solution/bulk-solution/energy-light.png
     :alt: Gromacs tutorial : energy versus time.
     :class: only-light
 
-.. figure:: ../figures/level1/bulk-solution/bulksolution/energy-dark.png
+.. figure:: ../figures/level1/bulk-solution/bulk-solution/energy-dark.png
     :alt: Gromacs tutorial : energy versus time.
     :class: only-dark
 
