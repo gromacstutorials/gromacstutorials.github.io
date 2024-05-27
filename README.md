@@ -12,9 +12,11 @@ in the [docs/input/](docs/inputs) folder.
         <img src="https://raw.githubusercontent.com/lammpstutorials/lammpstutorials.github.io/version2.0/docs/avatars/level1/breaking-a-carbon-nanotube/CNT.png" width="32%" />
     </a>
     <a href="https://lammpstutorials.github.io/sphinx/build/html/tutorials/level3/water-adsorption-in-silica.html">
-        <img src="https://raw.githubusercontent.com/lammpstutorials/lammpstutorials.github.io/version2.0/docs/avatars/level3/water-adsorption-in-silica/water-adsorption.png" width="32%" />
+        <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/version2.0/docs/doc-sphinx/source/tutorials/figures/solvationenergy/no-field-dark.png" width="32%" />
     </a>
 </p>
+
+
 
 The Matplotlib Pyplot functions for the figures are shared [here](https://github.com/simongravelle/pyplot-perso).
 
