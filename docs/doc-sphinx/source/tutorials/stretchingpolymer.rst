@@ -28,8 +28,7 @@ Polymer in water
 
     An all-atom description is used for both PEG (GROMOS 54A7 force
     field :cite:`schmid2011definition`) and water
-    (SPC flexible model :cite:`wu2006flexible`) and the long
-    range Coulomb interactions are solved using the PPPM solver :cite:`luty1996calculating`.    
+    (SPC flexible model :cite:`wu2006flexible`).  
     Once the water reservoir is properly
     equilibrated at the desired temperature and pressure, the polymer molecule
     is added and a constant stretching force is applied to both
@@ -424,7 +423,7 @@ PEG molecule in water
 
 ..  container:: justify
 
-    The PEG molecule is now going to be solvated in water.
+    let us solvate the PEG molecule in water.
     Duplicate the *free-peg-in-vacuum/* folder, and call the 
     copy *free-peg-in-water/*.
 
@@ -440,6 +439,8 @@ PEG molecule in water
 
     Here *spc216.gro* is a default GROMACS file containing a pre-equilibrated
     water reservoir.
+
+..  container:: justify
 
     Note the differences between *peg.gro* and *peg_h2o.gro*,
     as well as the new line in *topol.top*:
@@ -477,7 +478,7 @@ Equilibrating the system
 
 ..  container:: justify
 
-    Here we perform a 3-step equilibration of the solvated PEG system, starting with
+    Here, we perform a 3-step equilibration of the solvated PEG system, starting with
     an energy minimization, followed by a NVT run, and finally with a NPT run.
 
 ..  container:: justify
@@ -513,11 +514,13 @@ Equilibrating the system
 
 ..  container:: justify
 
-    The *define = -DFLEXIBLE* commands triggers the *if* condition
+    The *define = -DFLEXIBLE* command triggers the *if* condition
     within the *tip3p.itp* file. Therefore the water molecules 
     behave as flexible during the minimization (rigid molecules and 
     energy minimization usually don't go along well). For the next steps,
     rigid water molecules will be used by not including this command.
+
+..  container:: justify
 
     Then, let us perform a NVT (constant number of particles, constant volume,
     constant temperature) run:
@@ -529,7 +532,7 @@ Equilibrating the system
 
 ..  container:: justify
 
-    Here the *nvt.mdp* file can be downloaded by clicking |download_nvt.mdp|.
+    Here, the *nvt.mdp* file can be downloaded by clicking |download_nvt.mdp|.
 
 .. |download_nvt.mdp| raw:: html
 
@@ -552,10 +555,9 @@ Equilibrating the system
 ..  container:: justify
 
     Extract the angular distribution again, and compare it to the
-    previous vacuum simulation. Here I increased the duration of both 
+    previous vacuum simulation. Here, I increased the duration of both 
     simulations to 1 ns (for the PEG in water) and 2 ns (for PEG in vacuum)
-    to improve the statistic (feel free to do the same if your
-    computer allows it):
+    to improve the statistics:
 
 .. figure:: figures/stretchingpolymer/angle-distribution-comparison-light.png
    :alt: Angle distribution from molecular dynamics simulation in GROMACS
@@ -565,13 +567,15 @@ Equilibrating the system
    :alt: Angle distribution from molecular dynamics simulation in GROMACS
    :class: only-dark
 
+.. container:: figurelegend
+
    Angle distribution comparing the PEG molecule in vacuum (gray) and 
    the PEG molecule in water (blue).
 
 ..  container:: justify
 
     Notice that the angle distribution is slightly shifted in water, compared to
-    when the peg molecule is in vacuum. This indicates that the polymer has a slightly 
+    when the peg molecule is in a vacuum. This indicates that the polymer has a slightly 
     different conformation when in contact with a solvent.
 
 Pull on the PEG
@@ -582,5 +586,3 @@ Pull on the PEG
     Using the same procedure as previously, apply a force to
     the polymer ends and pull it inside water. Do not forget to 
     extend the box to make space for the pulling.
-
-.. include:: ../contact/contactme.rst

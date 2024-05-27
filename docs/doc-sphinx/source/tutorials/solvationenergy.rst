@@ -5,8 +5,7 @@ Molecule solvation energy
 
 .. container:: hatnote
 
-    Free energy solvation calculation of a
-    disk-like molecule
+    Free energy solvation calculation of a graphene-like molecule
 
 .. figure:: figures/solvationenergy/video-HBC-light-2.webp
     :alt: HBC (graphene-like) molecule in water
@@ -27,10 +26,12 @@ Molecule solvation energy
     calculate the free energy of solvation of a
     large molecule in water. 
 
-    The large molecule used here is a graphene-like and
-    disk-like molecule named hexabenzocoronene.
+..  container:: justify
 
-.. include:: ../contact/recommand-bulk.rst
+    The large molecule used here is a graphene-like and
+    discoid molecule named hexabenzocoronene.
+
+.. include:: ../non-tutorials/recommand-salt.rst
 
 .. include:: ../contact/needhelp.rst
 
@@ -40,8 +41,10 @@ Input files
 ..  container:: justify
 
     Create two folders named 'preparation/' and
-    'solvation' in the same directory, and go to
+    'solvation/' in the same directory, and go to
     'preparation/'.
+
+..  container:: justify
 
     Download the configuration files for the HBC molecule
     by clicking |FJEW_allatom_optimised_geometry.pdb| (its from the |atb-HBC|),
@@ -60,8 +63,8 @@ Create the configuration file
 
 ..  container:: justify
 
-    First, let us convert the pdb file into a gro file
-    within a box of finite size (4 nm by 4 nm by 4 nm) using trj conv:
+    First, let us convert the *.pdb* file into a *.gro* file
+    within a box of finite size (4 nm by 4 nm by 4 nm) using *trj conv*:
 
 ..  code-block:: bw
 
@@ -69,9 +72,7 @@ Create the configuration file
 
 ..  container:: justify
 
-    Select 'system' for both centering and output.
-    
-    If you open the hbc.gro file with VMD, you will see:
+    Select *system* for both centering and output.
 
 .. figure:: figures/solvationenergy/hbc-light.png
     :alt: Gromacs initial configuration of HBC graphene molecule
@@ -85,14 +86,16 @@ Create the configuration file
     :height: 250
     :align: center
 
-    HBC molecule with carbon atoms in gray and hydrogen
-    atoms in white. The honey-comb structure of HBC is similar 
+..  container:: figurelegend
+
+    HBC molecule as seen with VMD with carbon atoms in gray and hydrogen
+    atoms in white. The honeycomb structure of the HBC is similar 
     to that of graphene.
 
 ..  container:: justify
 
-    Alternatively, you can download the |solvation-hbc.gro|
-    I have generated and continue with the tutorial.
+    Alternatively, you can download the |solvation-hbc.gro| I have generated,
+    and continue with the tutorial.
 
 .. |solvation-hbc.gro| raw:: html
 
