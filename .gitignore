@@ -14,6 +14,5 @@
 **/temp/
 **/*#*
 **/step*pdb
-try
 docs/sphinx/build
 **/__pycache__
