@@ -22,7 +22,7 @@ Creating the GRO file
     If you are only interested in learning GROMACS, jump directly
     to the actual GROMACS tutorial :ref:`bulk-solution-label`.
 
-.. include:: ../contact/needhelp.rst
+.. include:: ../../non-tutorials/needhelp.rst
 
 What is a GRO file?
 -------------------
