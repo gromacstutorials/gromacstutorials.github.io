@@ -696,7 +696,7 @@ Improving the NVT
     :alt: Gromacs tutorial : temperature versus time.
     :class: only-dark
 
-.. contained:: figurelegend
+.. container:: figurelegend
 
     Evolution of the temperature as a function of the time
     during the NVT equilibration.

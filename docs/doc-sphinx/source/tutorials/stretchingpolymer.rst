@@ -5,37 +5,48 @@ Polymer in water
 
 .. container:: hatnote
 
-    Solvating a small molecule in water before stretching it
+    Solvating and stretching a small polymer molecule
 
 .. figure:: figures/stretchingpolymer/video-PEG-dark.webp
-    :alt: peg molecule in water
+    :alt: Movie of a peg polymer molecule in water as simulated with GROMACS
     :height: 250
     :align: right
     :class: only-dark
 
 .. figure:: figures/stretchingpolymer/video-PEG-light.webp
-    :alt: peg molecule in water
+    :alt: Movie of a peg polymer molecule in water as simulated with GROMACS
     :height: 250
     :align: right
     :class: only-light
 
 ..  container:: justify
 
-    The goal of this tutorial is to use GROMACS and
-    create a small hydrophilic polymer (PEG -
-    PolyEthylene Glycol) in a reservoir of water. 
-    An all-atom description is used, therefore all species considered here
-    are made of charged atoms connected by bond constraints.
+    The goal of this tutorial is to use GROMACS and solvate a small
+    hydrophilic polymer (PEG - PolyEthylene Glycol) in a reservoir of water. 
 
-    Once the system is created, a constant stretching force will be applied to both
-    ends of the polymer, and its length will be measured with time.
+..  container:: justify
 
-    This tutorial was inspired by a very nice |Liese2017| by Liese and coworkers, in which
-    they compare MD simulations of a PEG molecule in water with force spectroscopy experiments.
+    An all-atom description is used for both PEG (GROMOS 54A7 force
+    field :cite:`schmid2011definition`) and water
+    (SPC flexible model :cite:`wu2006flexible`) and the long
+    range Coulomb interactions are solved using the PPPM solver :cite:`luty1996calculating`.    
+    Once the water reservoir is properly
+    equilibrated at the desired temperature and pressure, the polymer molecule
+    is added and a constant stretching force is applied to both
+    ends of the polymer. The evolution of the polymer length
+    is measured as a function of time.
+
+..  container:: justify
+
+    This tutorial was inspired by a |Liese2017| by Liese and coworkers, in which
+    molecular dynamics simulations are
+    compared with force spectroscopy experiments :cite:`liese2017hydration`.
 
 .. |Liese2017| raw:: html
 
-    <a href="https://doi.org/10.1021/acsnano.6b07071" target="_blank">publication</a>
+   <a href="https://doi.org/10.1021/acsnano.6b07071" target="_blank">publication</a>
+
+.. include:: ../non-tutorials/recommand-salt.rst
 
 .. include:: ../contact/needhelp.rst
 
@@ -48,13 +59,7 @@ PEG molecule in vacuum
 
 .. |download_H2O.data| raw:: html
 
-   <a href="../../../../inputs/polymerstretching/free-peg-in-vacuum/peg.gro" target="_blank">here</a>
-
-..  container:: justify
-
-    Opening *peg.gro* using VMD, one can see that it consists of 
-    a rather long polymer chain main of carbon atoms (in gray),
-    oxygen atoms (in red), and hydrogen atoms (in white):
+   <a href="../../../../inputs/polymerstretching/free-peg-in-vacuum/peg.gro" target="_blank">here</a> 
 
 .. figure:: figures/stretchingpolymer/light-PEG.png
    :alt: PEG polymer for molecular dynamics simulation in GROMACS
@@ -66,8 +71,11 @@ PEG molecule in vacuum
    :class: only-dark
    :width: 500
 
-   This PEG molecule contains 24 carbon atoms, 12 oxygen atoms,
-   and 50 hydrogen atoms.
+.. container:: figurelegend
+
+    The PEG molecule as visualized using VMD. It consists of 
+    a rather long polymer chain main of carbon atoms (in gray),
+    oxygen atoms (in red), and hydrogen atoms (in white).
 
 ..  container:: justify
 
@@ -76,7 +84,6 @@ PEG molecule in vacuum
     file named *topol.top*, and copy the following lines in it:
 
 ..  code-block:: bw
-    :caption: *to be copied in free-peg-in-vacuum/topol.top*
 
     [ defaults ]
     ; nbfunc	comb-rule	gen-pairs	fudgeLJ	fudgeQQ
@@ -109,14 +116,15 @@ PEG molecule in vacuum
 
 ..  container:: justify
 
-    These 2 files contain the parameters for the PEG molecules, as well as extra parameters for the water molecules 
-    that will be added later. 
+    These 2 files contain the parameters for the PEG molecules, as well as extra
+    parameters for the water molecules that will be added later. 
 
-    Create an *inputs/* folder next to *ff/*, and create a new empty file called nvt.mdp.
-    Copy the following lines into it:
+..  container:: justify
+
+    Create an *inputs/* folder next to *ff/*, and create a new empty file
+    called nvt.mdp. Copy the following lines into it:
 
 ..  code-block:: bw
-    :caption: *to be copied in free-peg-in-vacuum/inputs/nvt.mdp*
 
     integrator = md 
     dt = 0.002
@@ -157,7 +165,8 @@ PEG molecule in vacuum
 
 ..  container:: justify
 
-    After the simulation is over, open the trajectory file with VMD by typing:
+    After the simulation is over, open the trajectory file with VMD by typing
+    in a terminal:
 
 ..  code-block:: bash
 
@@ -165,18 +174,21 @@ PEG molecule in vacuum
 
 ..  container:: justify
 
-    You should see the PEG molecule moving due to thermal agitation. 
+    The PEG molecule can be seen moving due to thermal agitation. See
+    the corresponding |video_peg_youtube|.
 
-.. include:: ../contact/supportme.rst
+.. |video_peg_youtube| raw:: html
+
+   <a href="https://www.youtube.com/watch?v=8ldIHP175TI&t=9s" target="_blank">video</a>
 
 Angle distribution
 ------------------
 
 ..  container:: justify
 
-    Let us use the power of GROMACS to extract the angular 
-    distribution between triplets of atoms during the run.
-    First, let us create an index file from the *peg.gro* file:
+    Let us use the tools of GROMACS to extract the angular distribution
+    between triplets of atoms during the run. First, let us create an index
+    file from the *peg.gro* file:
 
 ..  code-block:: bash
 
@@ -197,8 +209,8 @@ Angle distribution
 ..  container:: justify
 
     Here each number corresponds to the atom index, as can be seen from the 
-    *peg.gro* file. For instance, atom of id 2 is a carbon atom, and 
-    five in an oxygen:
+    *peg.gro* file. For instance, the atom of *id 2* is a carbon atom, and 
+    the atom id *id 5* is an oxygen:
 
 ..  code-block:: bw
 
@@ -235,8 +247,10 @@ Angle distribution
    :alt: Angle distribution from molecular dynamics simulation in GROMACS
    :class: only-dark
 
+.. container:: figurelegend
+
    Angle distribution for the Carbon and oxygen atoms of the PEG molecule in
-   vacuum.
+   vacuum as extracted using *gmx angle*.
 
 Pull on the PEG
 ---------------
@@ -247,8 +261,10 @@ Pull on the PEG
     Duplicate the *free-peg-in-vacuum/* folder, and call the 
     copy *pulled-peg-in-vacuum/*.
 
+..  container:: justify
+
     First, change the box size to make room for the pulling by replacing
-    the last line of peg.gro from
+    the last line of *peg.gro* from
 
 ..  code-block:: bw
 
@@ -265,7 +281,7 @@ Pull on the PEG
 ..  container:: justify
 
     Then, for convenience, let us center the PEG molecule
-    in the box by typing:
+    in the box by using *gmx trjconv*:
 
 ..  code-block:: bash
 
@@ -273,10 +289,12 @@ Pull on the PEG
 
 ..  container:: justify
 
-    And choose *System* for both centering and output. Then, let us
+    Choose *System* for both centering and output. Then, let us
     specify to GROMACS which atoms are going to be pulled. This can be done
     by adding 2 additional groups named *End1* and *End2*
     to the index file *index.ndx*:
+
+..  container:: justify
 
     Create an index file by typing:
 
@@ -298,7 +316,7 @@ Pull on the PEG
 ..  container:: justify
 
     Then press *q* to save and quit. The index file *index.ndx*
-    contains 2 additional group, with one oxygen atom each:
+    contains 2 additional groups, with one oxygen atom each:
 
 ..  code-block:: bw
 
@@ -317,12 +335,11 @@ Pull on the PEG
 
 ..  container:: justify
 
-    Then, duplicate the ``nvt.mdp`` file, call the duplicate ``pull.mdp``.
-    Remove the ``comm-mode = angular`` line. Then, add the following lines
-    to ``pull.mdp``:
+    Then, duplicate the *nvt.mdp* file, name the duplicate *pull.mdp*.
+    Remove the *comm-mode = angular* line, and add the following lines
+    to *pull.mdp*:
 
 ..  code-block:: bw
-    :caption: *to be copied in pulled-peg-in-vacuum/inputs/pull.mdp*
 
     pull = yes
     pull-coord1-type = constant-force
@@ -340,12 +357,11 @@ Pull on the PEG
 
 ..  container:: justify
 
-    These lines are ensuring that a force is applied along the *z* direction
+    These lines ensure that a force is applied along the *z* direction
     to both groups *End1* and *End2*. Turn off the velocity generator
     as well:
 
 ..  code-block:: bw
-    :caption: *to be modified in pulled-peg-in-vacuum/inputs/pull.mdp*
 
     gen_vel = no
 
@@ -372,7 +388,7 @@ Pull on the PEG
 ..  container:: justify
 
     Looking at the evolution of the position with time, one can see
-    that the polymer stretches very quickly:
+    that the polymer stretches very quickly.
 
 .. figure:: figures/stretchingpolymer/position-light.png
     :alt: End to end position from molecular dynamics simulation in GROMACS
@@ -382,12 +398,14 @@ Pull on the PEG
     :alt: End to end position from molecular dynamics simulation in GROMACS
     :class: only-dark
 
+.. container:: figurelegend
+
     Evolution of the end-to-end distance with time. 
 
 ..  container:: justify
 
     You can also visualize the PEG molecule during the stretching, this is
-    what I see:
+    what I see.
 
 .. figure:: figures/stretchingpolymer/light-PEG-stretched.png
    :alt: PEG polymer for molecular dynamics simulation in GROMACS
@@ -397,7 +415,9 @@ Pull on the PEG
    :alt: PEG polymer for molecular dynamics simulation in GROMACS
    :class: only-dark
 
-   The PEG molecule under stretching in vacuum.
+.. container:: figurelegend
+
+   The PEG molecule under stretching in a vacuum.
 
 PEG molecule in water
 =====================
@@ -433,7 +453,7 @@ PEG molecule in water
 
 ..  container:: justify
 
-    Add the line *#include "ff/tip3p.itp"* to the topol.top file:
+    Add the line *#include "ff/tip3p.itp"* to the *topol.top* file:
 
 ..  code-block:: bw
 
@@ -452,15 +472,15 @@ PEG molecule in water
 
     <a href="../../../../inputs/polymerstretching/free-peg-in-water/ff/tip3p.itp" target="_blank">here</a>
 
-.. include:: ../contact/supportme.rst
-
 Equilibrating the system
 ------------------------
 
 ..  container:: justify
 
-    Here we perform a 3 steps equilibration of the solvated PEG system, starting with
+    Here we perform a 3-step equilibration of the solvated PEG system, starting with
     an energy minimization, followed by a NVT run, and finally with a NPT run.
+
+..  container:: justify
 
     First, let us perform an energy minimization of the system:
 
