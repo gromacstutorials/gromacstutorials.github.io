@@ -9,7 +9,7 @@ in the [docs/input/](docs/inputs) folder.
         <img src="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/version2.0/docs/avatars/level1/lennard-jones-fluid/avatar-Lennard-Jones-LAMMPS.png" width="32%" />
     </a>
     <a href="https://lammpstutorials.github.io/sphinx/build/html/tutorials/level1/breaking-a-carbon-nanotube.html">
-        <img src="https://raw.githubusercontent.com/lammpstutorials/lammpstutorials.github.io/version2.0/docs/avatars/level1/breaking-a-carbon-nanotube/CNT.png" width="32%" />
+        <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/version2.0/docs/doc-sphinx/source/tutorials/figures/stretchingpolymer/avatar.png" width="32%" />
     </a>
     <a href="https://lammpstutorials.github.io/sphinx/build/html/tutorials/level3/water-adsorption-in-silica.html">
         <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/version2.0/docs/doc-sphinx/source/tutorials/figures/solvationenergy/no-field-dark.png" width="32%" />
