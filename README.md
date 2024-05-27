@@ -2,17 +2,17 @@
 
 This is the script of the [GROMACS tutorials](https://gromacstutorials.github.io/) webpage. 
 All the GROMACS input files used or generated during the tutorials can be found
-in the [docs/input/](docs/inputs) folder. 
+in the [docs/input/](docs/inputs) folder.
 
 <p float="left">
-    <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
-        <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/version2.0/docs/doc-sphinx/source/tutorials/figures/bulksolution/avatar-gromacs.png?raw=true" width="32%" />
+    <a href="https://gromacstutorials.github.io/sphinx/build/html/tutorials/level1/bulk-solution.html">
+        <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/version2.0/docs/sphinx/source/tutorials/figures/level1/bulk-solution/avatar-gromacs.png?raw=true" width="32%" />
     </a>
-    <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/stretchingpolymer.html">
-        <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/version2.0/docs/doc-sphinx/source/tutorials/figures/stretchingpolymer/avatar.png" width="32%" />
+    <a href="https://gromacstutorials.github.io/sphinx/build/html/tutorials/level2/stretching-a-polymer.html">
+        <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/version2.0/docs/sphinx/source/tutorials/figures/level2/stretching-a-polymer/avatar.png" width="32%" />
     </a>
-    <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/solvationenergy.html">
-        <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/version2.0/docs/doc-sphinx/source/tutorials/figures/solvationenergy/no-field-dark.png" width="32%" />
+    <a href="https://gromacstutorials.github.io/sphinx/build/html/tutorials/level3/solvation-energy.html">
+        <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/version2.0/docs/sphinx/source/tutorials/figures/level3/solvation-energy/no-field-dark.png" width="32%" />
     </a>
 </p>
 
