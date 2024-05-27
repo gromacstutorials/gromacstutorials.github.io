@@ -33,7 +33,7 @@ jobs:
           pip install sphinxcontrib.bibtex
       - name: Build
         run: |
-          cd docs/doc-sphinx/
+          cd docs/sphinx/
           make clean
           make html
           cp source/index_replace.html build/html/index.html
