@@ -1,22 +1,20 @@
-# GROMACS tutorials
+![image](https://github.com/gromacstutorials/gromacstutorials.github.io/assets/43388542/2e0dd6cb-3a0a-4e00-b871-a871853f2d51)# GROMACS tutorials
 
 This is the script of the [GROMACS tutorials](https://gromacstutorials.github.io/) webpage. 
 All the GROMACS input files used or generated during the tutorials can be found
 in the [docs/input/](docs/inputs) folder. 
 
 <p float="left">
-    <a href="https://lammpstutorials.github.io/sphinx/build/html/tutorials/level1/lennard-jones-fluid.html">
-        <img src="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/version2.0/docs/avatars/level1/lennard-jones-fluid/avatar-Lennard-Jones-LAMMPS.png" width="32%" />
+    <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/bulksolution.html">
+        <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/version2.0/docs/doc-sphinx/source/tutorials/figures/bulksolution/avatar-gromacs.png?raw=true" width="32%" />
     </a>
-    <a href="https://lammpstutorials.github.io/sphinx/build/html/tutorials/level1/breaking-a-carbon-nanotube.html">
+    <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/stretchingpolymer.html">
         <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/version2.0/docs/doc-sphinx/source/tutorials/figures/stretchingpolymer/avatar.png" width="32%" />
     </a>
-    <a href="https://lammpstutorials.github.io/sphinx/build/html/tutorials/level3/water-adsorption-in-silica.html">
+    <a href="https://gromacstutorials.github.io/doc-sphinx/build/html/tutorials/solvationenergy.html">
         <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/version2.0/docs/doc-sphinx/source/tutorials/figures/solvationenergy/no-field-dark.png" width="32%" />
     </a>
 </p>
-
-
 
 The Matplotlib Pyplot functions for the figures are shared [here](https://github.com/simongravelle/pyplot-perso).
 
