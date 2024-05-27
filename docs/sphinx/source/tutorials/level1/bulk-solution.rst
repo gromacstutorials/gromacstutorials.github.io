@@ -34,7 +34,7 @@ Bulk salt solution
     thermostating, NVT and NPT equilibration, and
     trajectory visualisation.
 
-.. include:: ../contact/needhelp.rst
+.. include:: ../../non-tutorials/needhelp.rst
 
 The input files
 ===============
@@ -425,11 +425,11 @@ Energy minimization
     result is saved in the *epotmin.xvg* file.
     Let us plot it:
 
-.. figure:: ../figures/level1/bulk-solution/bulk-solution/energy-light.png
+.. figure:: ../figures/level1/bulk-solution/energy-light.png
     :alt: Gromacs tutorial : energy versus time.
     :class: only-light
 
-.. figure:: ../figures/level1/bulk-solution/bulk-solution/energy-dark.png
+.. figure:: ../figures/level1/bulk-solution/energy-dark.png
     :alt: Gromacs tutorial : energy versus time.
     :class: only-dark
 

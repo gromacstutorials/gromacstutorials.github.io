@@ -31,9 +31,8 @@ Molecule solvation energy
     The large molecule used here is a graphene-like and
     discoid molecule named hexabenzocoronene.
 
-.. include:: ../non-tutorials/recommand-salt.rst
-
-.. include:: ../contact/needhelp.rst
+.. include:: ../../non-tutorials/recommand-salt.rst
+.. include:: ../../non-tutorials/needhelp.rst
 
 Input files
 ===========

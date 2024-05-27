@@ -25,9 +25,8 @@ Free energy profile
     a molecular dynamics simulation, and to calculate the free energy of adsorption
     of ethanol at the water-vapor interface. 
 
-.. include:: ../non-tutorials/recommand-salt.rst
-
-.. include:: ../contact/needhelp.rst
+.. include:: ../../non-tutorials/recommand-salt.rst
+.. include:: ../../non-tutorials/needhelp.rst
 
 Input files
 ===========
