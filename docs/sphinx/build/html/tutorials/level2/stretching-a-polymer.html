@@ -1,0 +1,828 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../_static/favicon-32x32.png" sizes="32x32" rel="icon" type="image/png"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Molecule solvation energy" href="../level3/solvation-energy.html" /><link rel="prev" title="Protein in electrolyte" href="../level1/protein-in-electrolyte.html" />
+
+    <!-- Generated with Sphinx 7.2.6 and Furo 2024.05.06 -->
+        <title>Polymer in water - </title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=e69558d9" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">    </div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">    </span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Main</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/before-you-start.html">Before you start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/contact.html">Contact me</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Level 1</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../level1/bulk-solution.html">Bulk salt solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../level1/protein-in-electrolyte.html">Protein in electrolyte</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Level 2</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Polymer in water</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Level 3</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../level3/solvation-energy.html">Molecule solvation energy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../level3/adsorption-ethanol.html">Free energy profile</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra content</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/extra/create-GRO-python.html">Write topology using Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Alternative</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/lammps.html">Use LAMMPS instead</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/tutorials/level2/stretching-a-polymer.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="polymer-in-water">
+<span id="stretching-polymer-label"></span><h1>Polymer in water<a class="headerlink" href="#polymer-in-water" title="Link to this heading">¶</a></h1>
+<div class="hatnote docutils container">
+<p>Solvating and stretching a small polymer molecule</p>
+</div>
+<figure class="align-right">
+<a class="only-dark reference internal image-reference" href="../../_images/video-PEG-dark.webp"><img alt="Movie of a peg polymer molecule in water as simulated with GROMACS" class="only-dark" src="../../_images/video-PEG-dark.webp" style="height: 250px;" /></a>
+</figure>
+<figure class="align-right">
+<a class="only-light reference internal image-reference" href="../../_images/video-PEG-light.webp"><img alt="Movie of a peg polymer molecule in water as simulated with GROMACS" class="only-light" src="../../_images/video-PEG-light.webp" style="height: 250px;" /></a>
+</figure>
+<div class="justify docutils container">
+<p>The goal of this tutorial is to use GROMACS and solvate a small
+hydrophilic polymer (PEG - PolyEthylene Glycol) in a reservoir of water.</p>
+</div>
+<div class="justify docutils container">
+<p>An all-atom description is used for both PEG (GROMOS 54A7 force
+field <span id="id1">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id20" title="Nathan Schmid, Andreas P Eichenberger, Alexandra Choutko, Sereina Riniker, Moritz Winger, Alan E Mark, and Wilfred F Van Gunsteren. Definition and testing of the gromos force-field versions 54a7 and 54b7. European biophysics journal, 40:843–856, 2011.">11</a>]</span>) and water
+(SPC flexible model <span id="id2">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id24" title="Yujie Wu, Harald L Tepper, and Gregory A Voth. Flexible simple point-charge water model with improved liquid-state properties. The Journal of chemical physics, 2006.">12</a>]</span>).
+Once the water reservoir is properly
+equilibrated at the desired temperature and pressure, the polymer molecule
+is added and a constant stretching force is applied to both
+ends of the polymer. The evolution of the polymer length
+is measured as a function of time.</p>
+</div>
+<div class="justify docutils container">
+<p>This tutorial was inspired by a <a href="https://doi.org/10.1021/acsnano.6b07071" target="_blank">publication</a> by Liese and coworkers, in which
+molecular dynamics simulations are
+compared with force spectroscopy experiments <span id="id3">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id34" title="Susanne Liese, Manuel Gensler, Stefanie Krysiak, Richard Schwarzl, Andreas Achazi, Beate Paulus, Thorsten Hugel, Jürgen P Rabe, and Roland R Netz. Hydration effects turn a highly stretched polymer from an entropic into an energetic spring. ACS nano, 11(1):702–712, 2017.">13</a>]</span>.</p>
+</div>
+<section id="peg-molecule-in-vacuum">
+<h2>PEG molecule in vacuum<a class="headerlink" href="#peg-molecule-in-vacuum" title="Link to this heading">¶</a></h2>
+<div class="justify docutils container">
+<p>Download the <em>peg.gro</em> file for the PEG molecule by clicking <a href="../../../../../gromacstutorials-inputs/level2/stretching-a-polymer/free-peg-in-vacuum/peg.gro" target="_blank">here</a>.</p>
+</div>
+<figure class="align-default">
+<a class="only-light reference internal image-reference" href="../../_images/light-PEG.png"><img alt="PEG polymer for molecular dynamics simulation in GROMACS" class="only-light" src="../../_images/light-PEG.png" style="width: 500px;" /></a>
+</figure>
+<figure class="align-default">
+<a class="only-dark reference internal image-reference" href="../../_images/dark-PEG.png"><img alt="PEG polymer for molecular dynamics simulation in GROMACS" class="only-dark" src="../../_images/dark-PEG.png" style="width: 500px;" /></a>
+</figure>
+<div class="figurelegend docutils container">
+<p>The PEG molecule as visualized using VMD. It consists of
+a rather long polymer chain main of carbon atoms (in gray),
+oxygen atoms (in red), and hydrogen atoms (in white).</p>
+</div>
+<div class="justify docutils container">
+<p>Create a folder named <em>free-peg-in-vacuum/</em>, and copy
+<em>peg.gro</em> in it. Next to <em>peg.gro</em> create an empty
+file named <em>topol.top</em>, and copy the following lines in it:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ defaults ]
+; nbfunc    comb-rule       gen-pairs       fudgeLJ fudgeQQ
+  1         1           no          1.0     1.0
+
+; Include forcefield parameters
+#include &quot;ff/charmm35r.itp&quot;
+#include &quot;ff/peg.itp&quot;
+
+[ system ]
+; Name
+  PEG
+
+[ molecules ]
+; Compound        #mols
+  PEG             1
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Next to <em>conf.gro</em> and <em>topol.top</em>, create a folder named <em>ff/</em>, and copy the
+following files into it: <a href="../../../../../gromacstutorials-inputs/level2/stretching-a-polymer/free-peg-in-vacuum/ff/charmm35r.itp" target="_blank">charmm35r.itp</a> and <a href="../../../../../gromacstutorials-inputs/level2/stretching-a-polymer/free-peg-in-vacuum/ff/peg.itp" target="_blank">peg.itp</a></p>
+</div>
+<div class="justify docutils container">
+<p>These 2 files contain the parameters for the PEG molecules, as well as extra
+parameters for the water molecules that will be added later.</p>
+</div>
+<div class="justify docutils container">
+<p>Create an <em>inputs/</em> folder next to <em>ff/</em>, and create a new empty file
+called nvt.mdp. Copy the following lines into it:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = md
+dt = 0.002
+nsteps = 500000
+
+nstenergy = 1000
+nstlog = 1000
+nstxout = 1000
+
+constraints = hbonds
+
+coulombtype = pme
+rcoulomb = 1.0
+rlist = 1.0
+
+vdwtype = Cut-off
+rvdw = 1.0
+
+tcoupl = v-rescale
+tau_t = 0.1
+ref_t = 300
+tc_grps = PEG
+
+gen_vel = yes
+gen-temp = 300
+gen-seed = 65823
+
+comm-mode = angular
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Run the simulation using GROMACS by typing in a terminal:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/nvt.mdp<span class="w"> </span>-c<span class="w"> </span>peg.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>nvt<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">1</span>
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>nvt
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>After the simulation is over, open the trajectory file with VMD by typing
+in a terminal:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>peg.gro<span class="w"> </span>nvt.trr
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>The PEG molecule can be seen moving due to thermal agitation. See
+the corresponding <a href="https://www.youtube.com/watch?v=8ldIHP175TI&t=9s" target="_blank">video</a>.</p>
+</div>
+<section id="angle-distribution">
+<h3>Angle distribution<a class="headerlink" href="#angle-distribution" title="Link to this heading">¶</a></h3>
+<div class="justify docutils container">
+<p>Let us use the tools of GROMACS to extract the angular distribution
+between triplets of atoms during the run. First, let us create an index
+file from the <em>peg.gro</em> file:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mk_angndx<span class="w"> </span>-s<span class="w"> </span>nvt.tpr<span class="w"> </span>-n<span class="w"> </span>index.ndx<span class="w"> </span>-hyd<span class="w"> </span>no
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>The first group created contains all the carbon and oxygen atoms
+(a total of 36 atoms), as can be seen from the <em>index.ndx</em> file:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ Theta=109.7_795.49 ]
+    2     5     7    10    12    14    17    19    21    24    26    28
+    31    33    35    38    40    42    45    47    49    52    54    56
+    59    61    63    66    68    70    73    75    77    80    82    84
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Here each number corresponds to the atom index, as can be seen from the
+<em>peg.gro</em> file. For instance, the atom of <em>id 2</em> is a carbon atom, and
+the atom id <em>id 5</em> is an oxygen:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>PEG in water
+86
+    1PEG      H    1   2.032   1.593   1.545  0.6568  2.5734  1.2192
+    1PEG      C    2   1.929   1.614   1.508  0.1558 -0.2184  0.8547
+    1PEG     H1    3   1.902   1.721   1.523 -3.6848 -0.3932 -3.0658
+    1PEG     H2    4   1.921   1.588   1.400 -1.5891  1.4960  0.5057
+    1PEG      O    5   1.831   1.544   1.576  0.0564 -0.5300 -0.6094
+    1PEG     H3    6   1.676   1.665   1.494 -2.6585 -0.5997  0.3128
+    1PEG     C1    7   1.699   1.559   1.519  0.6996  0.0066  0.2900
+    1PEG     H4    8   1.699   1.500   1.425  4.2893  1.6837 -0.9462
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Using the index file, one can extract the angle distribution between
+all the species in the group <em>Theta=109.7_795.49</em>, by typing:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>angle<span class="w"> </span>-n<span class="w"> </span>index.ndx<span class="w">  </span>-f<span class="w"> </span>nvt.trr<span class="w"> </span>-od<span class="w"> </span>angdist.xvg<span class="w"> </span>-binwidth<span class="w"> </span><span class="m">0</span>.25
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Select the first group by typing <em>0</em>. A file named <em>angdist.xvg</em>
+was created, it looks like it:</p>
+</div>
+<figure class="align-default">
+<img alt="Angle distribution from molecular dynamics simulation in GROMACS" class="only-light" src="../../_images/angle-distribution-light.png" />
+</figure>
+<figure class="align-default">
+<img alt="Angle distribution from molecular dynamics simulation in GROMACS" class="only-dark" src="../../_images/angle-distribution-dark.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Angle distribution for the Carbon and oxygen atoms of the PEG molecule in
+vacuum as extracted using <em>gmx angle</em>.</p>
+</div>
+</section>
+<section id="pull-on-the-peg">
+<h3>Pull on the PEG<a class="headerlink" href="#pull-on-the-peg" title="Link to this heading">¶</a></h3>
+<div class="justify docutils container">
+<p>Let us apply a force and pull on the PEG polymer.
+Duplicate the <em>free-peg-in-vacuum/</em> folder, and call the
+copy <em>pulled-peg-in-vacuum/</em>.</p>
+</div>
+<div class="justify docutils container">
+<p>First, change the box size to make room for the pulling by replacing
+the last line of <em>peg.gro</em> from</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>3.00000   3.00000   3.00000
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>to</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>3.00000   3.00000   8.00000
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Then, for convenience, let us center the PEG molecule
+in the box by using <em>gmx trjconv</em>:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>trjconv<span class="w"> </span>-f<span class="w"> </span>peg.gro<span class="w"> </span>-o<span class="w"> </span>peg-centered.gro<span class="w"> </span>-s<span class="w"> </span>nvt.tpr<span class="w"> </span>-center<span class="w"> </span>-pbc<span class="w"> </span>mol
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Choose <em>System</em> for both centering and output. Then, let us
+specify to GROMACS which atoms are going to be pulled. This can be done
+by adding 2 additional groups named <em>End1</em> and <em>End2</em>
+to the index file <em>index.ndx</em>:</p>
+</div>
+<div class="justify docutils container">
+<p>Create an index file by typing:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>make_ndx<span class="w"> </span>-f<span class="w"> </span>peg-centered.gro<span class="w"> </span>-o<span class="w"> </span>index.ndx
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>And create the 2 additional groups by typing:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>a 82
+a 5
+name 3 End1
+name 4 End2
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Then press <em>q</em> to save and quit. The index file <em>index.ndx</em>
+contains 2 additional groups, with one oxygen atom each:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>(...)
+[ PEG ]
+1    2    3    4    5    6    7    8    9   10   11   12   13   14   15
+16   17   18   19   20   21   22   23   24   25   26   27   28   29   30
+31   32   33   34   35   36   37   38   39   40   41   42   43   44   45
+46   47   48   49   50   51   52   53   54   55   56   57   58   59   60
+61   62   63   64   65   66   67   68   69   70   71   72   73   74   75
+76   77   78   79   80   81   82   83   84   85   86
+[ End1 ]
+82
+[ End2 ]
+5
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Then, duplicate the <em>nvt.mdp</em> file, name the duplicate <em>pull.mdp</em>.
+Remove the <em>comm-mode = angular</em> line, and add the following lines
+to <em>pull.mdp</em>:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>pull = yes
+pull-coord1-type = constant-force
+pull-ncoords = 1
+pull-ngroups = 2
+pull-group1-name = End1
+pull-group2-name = End2
+pull-coord1-groups = 1 2
+pull-coord1-geometry = direction-periodic
+pull-coord1-dim = N N Y
+pull-coord1-vec = 0 0 1
+pull-coord1-k = 50
+pull-coord1-start = yes
+pull-print-com = yes
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>These lines ensure that a force is applied along the <em>z</em> direction
+to both groups <em>End1</em> and <em>End2</em>. Turn off the velocity generator
+as well:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gen_vel = no
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Re-equilibrate the system using the previous <em>npt.mdp</em> script, and then
+run the <em>pull.mdp</em> file:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/nvt.mdp<span class="w"> </span>-c<span class="w"> </span>peg-centered.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>nvt<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">1</span>
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>nvt
+
+gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/pull.mdp<span class="w"> </span>-c<span class="w"> </span>nvt.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>pull<span class="w"> </span>-n<span class="w"> </span>index.ndx
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>pull<span class="w"> </span>-px<span class="w"> </span>position.xvg<span class="w"> </span>-pf<span class="w"> </span>force.xvg
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Here, the <em>-n index.ndx</em> command is used to refer to the previously created
+index file, so that GROMACS finds the <em>End1</em> and <em>End2</em> groups.
+The <em>-px position.xvg</em> and <em>-pf force.xvg</em> are used
+to print positions and forces of the 2 end groups in files.</p>
+</div>
+<div class="justify docutils container">
+<p>Looking at the evolution of the position with time, one can see
+that the polymer stretches very quickly.</p>
+</div>
+<figure class="align-default">
+<img alt="End to end position from molecular dynamics simulation in GROMACS" class="only-light" src="../../_images/position-light.png" />
+</figure>
+<figure class="align-default">
+<img alt="End to end position from molecular dynamics simulation in GROMACS" class="only-dark" src="../../_images/position-dark.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Evolution of the end-to-end distance with time.</p>
+</div>
+<div class="justify docutils container">
+<p>You can also visualize the PEG molecule during the stretching, this is
+what I see.</p>
+</div>
+<figure class="align-default">
+<img alt="PEG polymer for molecular dynamics simulation in GROMACS" class="only-light" src="../../_images/light-PEG-stretched.png" />
+</figure>
+<figure class="align-default">
+<img alt="PEG polymer for molecular dynamics simulation in GROMACS" class="only-dark" src="../../_images/dark-PEG-stretched.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>The PEG molecule under stretching in a vacuum.</p>
+</div>
+</section>
+</section>
+<section id="peg-molecule-in-water">
+<h2>PEG molecule in water<a class="headerlink" href="#peg-molecule-in-water" title="Link to this heading">¶</a></h2>
+<div class="justify docutils container">
+<p>let us solvate the PEG molecule in water.
+Duplicate the <em>free-peg-in-vacuum/</em> folder, and call the
+copy <em>free-peg-in-water/</em>.</p>
+</div>
+<div class="justify docutils container">
+<p>Add water molecules to the system by using <em>gmx solvate</em>:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>solvate<span class="w"> </span>-cp<span class="w"> </span>peg.gro<span class="w"> </span>-cs<span class="w"> </span>spc216.gro<span class="w"> </span>-o<span class="w"> </span>peg_h2o.gro<span class="w"> </span>-p<span class="w"> </span>topol.top
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Here <em>spc216.gro</em> is a default GROMACS file containing a pre-equilibrated
+water reservoir.</p>
+</div>
+<div class="justify docutils container">
+<p>Note the differences between <em>peg.gro</em> and <em>peg_h2o.gro</em>,
+as well as the new line in <em>topol.top</em>:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ molecules ]
+; Compound      #mols
+PEG             1
+SOL             853
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Add the line <em>#include “ff/tip3p.itp”</em> to the <em>topol.top</em> file:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>; Include forcefield parameters
+#include &quot;ff/charmm35r.itp&quot;
+#include &quot;ff/peg.itp&quot;
+#include &quot;ff/tip3p.itp
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>The <em>tip3p.itp</em> contains the information about the water molecule,
+and can be downloaded by clicking <a href="../../../../../gromacstutorials-inputs/level2/stretching-a-polymer/free-peg-in-water/ff/tip3p.itp" target="_blank">here</a>, and then placed
+within the <em>ff/</em> folder.</p>
+</div>
+<section id="equilibrating-the-system">
+<h3>Equilibrating the system<a class="headerlink" href="#equilibrating-the-system" title="Link to this heading">¶</a></h3>
+<div class="justify docutils container">
+<p>Here, we perform a 3-step equilibration of the solvated PEG system, starting with
+an energy minimization, followed by a NVT run, and finally with a NPT run.</p>
+</div>
+<div class="justify docutils container">
+<p>First, let us perform an energy minimization of the system:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/em.mdp<span class="w"> </span>-c<span class="w"> </span>peg_h2o.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>em
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>em<span class="w"> </span>-v
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>The <em>em.mdp</em> file contains the following commands:</p>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = steep
+emtol = 10
+emstep = 0.0001
+nsteps = 5000
+
+nstenergy = 1000
+nstxout = 100
+
+cutoff-scheme = Verlet
+coulombtype = PME
+rcoulomb = 1
+rvdw = 1
+pbc = xyz
+
+define = -DFLEXIBLE
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>The <em>define = -DFLEXIBLE</em> command triggers the <em>if</em> condition
+within the <em>tip3p.itp</em> file. Therefore the water molecules
+behave as flexible during the minimization (rigid molecules and
+energy minimization usually don’t go along well). For the next steps,
+rigid water molecules will be used by not including this command.</p>
+</div>
+<div class="justify docutils container">
+<p>Then, let us perform a NVT (constant number of particles, constant volume,
+constant temperature) run:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/nvt.mdp<span class="w"> </span>-c<span class="w"> </span>em.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>nvt
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>nvt<span class="w"> </span>-v
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Here, the <em>nvt.mdp</em> file can be downloaded by clicking <a href="../../../../../gromacstutorials-inputs/level2/stretching-a-polymer/free-peg-in-water/inputs/nvt.mdp" target="_blank">here</a>.</p>
+</div>
+<div class="justify docutils container">
+<p>Finally, perform a NPT (constant number of particles, constant pressure,
+constant temperature) equilibration run, using this <a href="../../../../../gromacstutorials-inputs/level2/stretching-a-polymer/free-peg-in-water/inputs/npt.mdp" target="_blank">npt file</a>:</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/npt.mdp<span class="w"> </span>-c<span class="w"> </span>nvt.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>npt
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-deffnm<span class="w"> </span>npt<span class="w"> </span>-v
+</pre></div>
+</div>
+<div class="justify docutils container">
+<p>Extract the angular distribution again, and compare it to the
+previous vacuum simulation. Here, I increased the duration of both
+simulations to 1 ns (for the PEG in water) and 2 ns (for PEG in vacuum)
+to improve the statistics:</p>
+</div>
+<figure class="align-default">
+<img alt="Angle distribution from molecular dynamics simulation in GROMACS" class="only-light" src="../../_images/angle-distribution-comparison-light.png" />
+</figure>
+<figure class="align-default">
+<img alt="Angle distribution from molecular dynamics simulation in GROMACS" class="only-dark" src="../../_images/angle-distribution-comparison-dark.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Angle distribution comparing the PEG molecule in vacuum (gray) and
+the PEG molecule in water (blue).</p>
+</div>
+<div class="justify docutils container">
+<p>Notice that the angle distribution is slightly shifted in water, compared to
+when the peg molecule is in a vacuum. This indicates that the polymer has a slightly
+different conformation when in contact with a solvent.</p>
+</div>
+</section>
+<section id="id4">
+<h3>Pull on the PEG<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
+<div class="justify docutils container">
+<p>Using the same procedure as previously, apply a force to
+the polymer ends and pull it inside water. Do not forget to
+extend the box to make space for the pulling.</p>
+</div>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../level3/solvation-energy.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Molecule solvation energy</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../level1/protein-in-electrolyte.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Protein in electrolyte</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Polymer in water</a><ul>
+<li><a class="reference internal" href="#peg-molecule-in-vacuum">PEG molecule in vacuum</a><ul>
+<li><a class="reference internal" href="#angle-distribution">Angle distribution</a></li>
+<li><a class="reference internal" href="#pull-on-the-peg">Pull on the PEG</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#peg-molecule-in-water">PEG molecule in water</a><ul>
+<li><a class="reference internal" href="#equilibrating-the-system">Equilibrating the system</a></li>
+<li><a class="reference internal" href="#id4">Pull on the PEG</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=4e2eecee"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    </body>
+</html>
