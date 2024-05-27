@@ -503,7 +503,7 @@ Solvation energy measurement
 ..  container:: justify
 
     The present simulations are too short to give a
-    proper result. To actually measure the solvation
+    reliable result. To accurately measure the solvation
     energy of a molecule, use much longer equilibration
     (typically one nanosecond) and production runs
     (typically several nanoseconds).
