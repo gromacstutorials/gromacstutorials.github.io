@@ -21,7 +21,7 @@ Free energy profile
 
 ..  container:: justify
 
-    **The objective of this tutorial** is to use GROMACS to perform
+    The objective of this tutorial is to use GROMACS to perform
     a molecular dynamics simulation, and to calculate the free energy of adsorption
     of ethanol at the water-vapor interface. 
 
@@ -34,11 +34,13 @@ Input files
 
 ..  container:: justify
 
-    Create 3 folders named 'preparation/', 'adsorption',
-    and 'singleposition' in the same directory. Go to 'preparation/'.
+    Create 3 folders named respectively *preparation/*, *adsorption/*,
+    and *singleposition/*. Go to *preparation/*.
+
+..  container:: justify
 
     Download the configuration files for the ethanol molecule from
-    the atb repository: click `here <https://atb.uq.edu.au/molecule.py?molid=902261#panel-md>`__,
+    the ATB repository: click `here <https://atb.uq.edu.au/molecule.py?molid=902261#panel-md>`__,
     click on 'All-Atom PDB (optimised geometry)'
     and place the file |BIPQ_allatom_optimised_geometry.pdb| in the 'preparation/' folder. 
 
@@ -53,7 +55,7 @@ Create the configuration file
 
     First, let us convert the pdb file into a gro file
     consisting of a single ethanol molecule at the center
-    of a small box using trjconv:
+    of a small box using *trjconv*:
 
 ..  code-block:: bash
 
@@ -61,7 +63,7 @@ Create the configuration file
 
 ..  container:: justify
 
-    Select 'system' for both centering and output.
+    Select *system* for both centering and output.
 
 Replicate the ethanol molecule
 ------------------------------
@@ -70,7 +72,7 @@ Replicate the ethanol molecule
 
     In order to create a system with several ethanol
     molecules, let us replicate the single molecule (4x4x4
-    times) using genconf:
+    times) using *genconf*:
 
 ..  code-block:: bash
 
@@ -78,8 +80,8 @@ Replicate the ethanol molecule
 
 ..  container:: justify
 
-    If you open the replicated_ethanol.gro file with VMD,
-    you will see:
+    If you open the *replicated_ethanol.gro* file with VMD,
+    you will see the replicated ethanol molecules.
 
 .. figure:: figures/ethanoladsorption/replicated-ethanol-light.png
     :alt: Gromacs HBC (graphene) molecule after minimisation in water
@@ -90,6 +92,8 @@ Replicate the ethanol molecule
     :alt: Gromacs HBC (graphene) molecule after minimisation in water
     :class: only-dark
     :height: 450
+
+.. container:: figurelegend
 
     Replicated ethanol molecules with carbon atoms in
     gray, oxygen atom in red, and hydrogen atoms in white.
@@ -267,11 +271,11 @@ Energy minimization
     rewriting the trajectory using 'gmx trjconv -f min.trr
     -s min.tpr -o min_whole.trr -pbc whole'
 
+..  container:: justify
+
     **Observation:** During energy minimisation, the
     molecules move until the forces between the atoms are
     reasonable.
-
-.. include:: ../contact/supportme.rst
 
 Equilibration
 =============
@@ -305,6 +309,8 @@ Equilibration
     keyword to divide the box into 100 frames. Repeat
     the procedure to extract the water profile as well.
 
+..  container:: justify
+
     **Warning:** The current equilibration time for the
     NVT run (100 ps) is too small. It has been chosen to
     make the tutorial easier to follow for people with a
@@ -330,7 +336,11 @@ Equilibration
     :alt: GROMACS tutorial : Density profile water and ethanol
     :class: only-dark
 
+.. container:: figurelegend
+
     Water (blue) and ethanol (gray) density profile along the x direction.
+
+..  container:: justify
 
     The density profiles show an excess of
     ethanol at the 2 interfaces, which is expected as
@@ -399,6 +409,8 @@ Imposed forcing
     distance between the center-of-mass of the two
     groups is 2 nm along the x dimension.
     
+.. container:: justify
+
     Copy as well the previously created topol.top file.
     Modify the first lines to adapt the path to the
     force field folder:
@@ -465,6 +477,8 @@ Imposed forcing
     Other atoms of the molecule could have been
     chosen, or even the full ethanol molecule.
 
+..  container:: justify
+
     Run all 3 inputs successively:
 
 ..  code-block:: bash
@@ -492,6 +506,8 @@ Imposed forcing
     :class: only-dark
     :height: 400
 
+..  container:: figurelegend
+
     Ethanol molecule being pulled from the rest of the
     fluid during minimisation and nvt equilibration.
 
@@ -509,6 +525,8 @@ Imposed forcing
     :alt: GROMACS tutorial : Probability distribution of the distance
     :class: only-dark
 
+..  container:: figurelegend
+
     Probability distribution of the distance between the
     two center-of-mass. Short (50 ps) and long (1.5 ns)
     runs are compared.
@@ -518,6 +536,8 @@ Imposed forcing
     A longer run has been added for comparison.
     If you have a good computer, feel free to run longer
     production run than 50 ps.
+
+..  container:: justify
 
     Note that the distribution is not centered around x = 2 nm.
     This is due to the interaction between the pulled ethanol molecule and the
@@ -588,6 +608,8 @@ Free energy profile calculation
     file within the 'adsorption/' folder, and execute
     the bash script.
 
+..  container:: justify
+
     When the simulation is done, create 2 files (credit
     to `the excellent gaseri site <https://gaseri.org/en/tutorials/gromacs/5-umbrella/#simulation>`__)
 
@@ -626,6 +648,8 @@ Free energy profile calculation
     :alt: GROMACS tutorial : PMF for the ethanol molecule
     :class: only-dark
 
+..  container:: figurelegend
+
     PMF for the ethanol molecule across the interface
     between a water/ethanol mixture and vapor.
 
@@ -636,6 +660,8 @@ Free energy profile calculation
     the duration of the production runs to a few
     nanoseconds to obtain a proper PMF (like the blue
     curve in the figure above).
+
+..  container:: justify
 
     The PMF shows a plateau inside the
     bulk liquid (x<1 nm), a minimum at the interface
@@ -653,5 +679,3 @@ Free energy profile calculation
     least 25 kJ/mol. Consistently, when performing MD
     simulation, it is rare to observe an ethanol
     molecule exploring the vapor phase.
-
-.. include:: ../contact/contactme.rst
