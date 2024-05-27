@@ -1,4 +1,4 @@
-![image](https://github.com/gromacstutorials/gromacstutorials.github.io/assets/43388542/2e0dd6cb-3a0a-4e00-b871-a871853f2d51)# GROMACS tutorials
+# GROMACS tutorials
 
 This is the script of the [GROMACS tutorials](https://gromacstutorials.github.io/) webpage. 
 All the GROMACS input files used or generated during the tutorials can be found
