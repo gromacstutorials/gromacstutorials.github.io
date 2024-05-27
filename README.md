@@ -29,7 +29,8 @@ I am a computer physicist in soft matter and fluids at interfaces. You can
 find more information on my [personal webpage](https://simongravelle.github.io/).
 
 See the [contact page](https://gromacstutorials.github.io/doc-sphinx/build/html/contact/contact.html). 
-You can report issues here on Github, or send me an [email](https://simongravelle.github.io/). Your feedback is always appreciated.
+You can report issues here on Github, or send me an [email](https://simongravelle.github.io/).
+Your feedback is always appreciated.
 
 ### License and Acknowledgments ###
 
