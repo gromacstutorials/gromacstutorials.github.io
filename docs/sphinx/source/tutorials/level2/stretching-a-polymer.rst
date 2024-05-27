@@ -586,3 +586,5 @@ Pull on the PEG
     Using the same procedure as previously, apply a force to
     the polymer ends and pull it inside water. Do not forget to 
     extend the box to make space for the pulling.
+
+.. include:: ../../non-tutorials/accessfile.rst

@@ -679,3 +679,5 @@ Free energy profile calculation
     least 25 kJ/mol. Consistently, when performing MD
     simulation, it is rare to observe an ethanol
     molecule exploring the vapor phase.
+
+.. include:: ../../non-tutorials/accessfile.rst

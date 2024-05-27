@@ -7,3 +7,4 @@ Protein in electrolyte
 
     A simple use of GROMACS molecular dynamics code
 
+.. include:: ../../non-tutorials/accessfile.rst

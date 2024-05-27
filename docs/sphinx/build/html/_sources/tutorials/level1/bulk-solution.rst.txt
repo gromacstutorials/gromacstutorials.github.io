@@ -922,15 +922,19 @@ Measurement diffusion coefficient
 
     The final MSDs plots look like this:
 
-.. figure:: figures/bulksolution/D-light.png
+.. figure:: ../figures/level1/bulk-solution/D-light.png
     :alt: Gromacs tutorial : diffusion coefficient
     :class: only-light
 
-.. figure:: figures/bulksolution/D-dark.png
+.. figure:: ../figures/level1/bulk-solution/D-dark.png
     :alt: Gromacs tutorial : diffusion coefficient
     :class: only-dark
 
+.. container:: figurelegend
+
     MSDs for the three species, respectively.
+
+.. include:: ../../non-tutorials/accessfile.rst
 
 Going further
 =============
@@ -940,3 +944,4 @@ Going further
     Take advantage of the generated production run to extract more 
     equilibrium quantities. For instance, Gromacs allows you to
     extract Radial Distribution Functions (RDF) using the *gmx rdf* commands.
+
