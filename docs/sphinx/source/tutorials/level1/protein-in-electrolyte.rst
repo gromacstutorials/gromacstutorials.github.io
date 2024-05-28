@@ -387,10 +387,11 @@ Run the molecular dynamics
 
     As the simulation progresses, the volume of the box decreases and better
     adjust to the fluid content of the box, as can be seen using *gmx energy*
-    and choosing *volume*:
+    and extracting the *volume*, and/or by extracting the *density*:
 
 .. code-block:: bash
 
-    gmx energy -f npt.edr -o potential-energy-npt.xvg
+    gmx energy -f npt.edr -o volume-npt.xvg
+    gmx energy -f npt.edr -o density-npt.xvg
 
 .. include:: ../../non-tutorials/accessfile.rst
