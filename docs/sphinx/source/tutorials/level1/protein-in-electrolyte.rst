@@ -40,7 +40,7 @@ Convert the pdb file
     We first need to create the *.gro* file, i.e. a GROMACS structure file,
     from the *.pdb* file. This can be done using *gmx trjconv*:
 
-.. container:: bash
+.. code-block:: bash
 
     gmx trjconv -f 1cta.pdb -s 1cta.pdb -o 1cta.gro -center -box 5 5 5
 
@@ -50,7 +50,7 @@ Convert the pdb file
     for the output. A file named *1cta.gro* is created. The generated *.gro*
     file contains 666 atoms, each atom corresponding to one line:
 
-.. container:: bash
+.. code-block:: bw
 
     TROPONIN C SITE III - SITE III HOMODIMER
     666
@@ -58,10 +58,10 @@ Convert the pdb file
         0ACE      O    2   2.714   4.036   2.646
         0ACE    CH3    3   2.651   4.147   2.853
     (...)
-   35NH2    HN2  664   2.417   3.671   3.192
-   69CA      CA  665   3.016   2.279   1.785
-   70CA      CA  666   1.859   2.046   1.838
-   5.00000   5.00000   5.00000
+    35NH2    HN2  664   2.417   3.671   3.192
+    69CA      CA  665   3.016   2.279   1.785
+    70CA      CA  666   1.859   2.046   1.838
+    5.00000   5.00000   5.00000
 
 .. container:: justify
 
@@ -73,5 +73,31 @@ Convert the pdb file
 .. |trjconv-documentation| raw:: html
 
     <a href="https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html" target="_blank">documentation</a>
+
+Choose the force field
+======================
+
+.. container:: justify
+
+    Let us select the force field that will control the interactions between
+    the different atoms. This can be done using the *gmx pdb2gmx* command:
+
+.. code-block:: bash
+
+    gmx pdb2gmx -f 1cta.gro -water spce -v -ignh -o unsolvated.gro
+
+.. container:: justify
+
+    Here, the *-ignh* command is used to ignore the hydrogen atoms that are in
+    the coordinate file and avoid an error, and *-water spce* is used to
+    specify that the water model to use is the extended simple point charge
+    model (spce) :cite:`berendsen1987missing`. 
+
+.. container:: justify
+
+    When running *gmx pdb2gmx*, choose the *AMBER03 protein, nucleic
+    AMBER94* force field :cite:`duan2003point`. A new *gro* file named
+    *unsolvated.gro* was created, as well as a topology *.top* file named
+    *topol.top*.
 
 .. include:: ../../non-tutorials/accessfile.rst
