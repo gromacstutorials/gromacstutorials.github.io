@@ -3,7 +3,7 @@ name: Deploy GitHub Pages
 on:
   push:
     branches:
-      - version2.0  # Set a branch name to trigger deployment
+      - main  # Set a branch name to trigger deployment
 jobs:
   deploy:
     runs-on: ubuntu-20.04
@@ -39,7 +39,7 @@ jobs:
           cp source/index_replace.html build/html/index.html
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.ref == 'refs/heads/version2.0' }}
+        if: ${{ github.ref == 'refs/heads/main' }}
         with:
           context: .
           github_token: ${{ secrets.GITHUB_TOKEN }}
