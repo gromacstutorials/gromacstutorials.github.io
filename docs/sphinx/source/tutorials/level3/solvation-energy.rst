@@ -51,7 +51,7 @@ Input files
 
 .. |FJEW_allatom_optimised_geometry.pdb| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/solvation-energy/preparation/FJEW_allatom_optimised_geometry.pdb" target="_blank">here</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/FJEW_allatom_optimised_geometry.pdb" target="_blank">here</a>
 
 .. |atb-HBC| raw:: html
 
@@ -98,7 +98,7 @@ Create the configuration file
 
 .. |solvation-hbc.gro| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/solvation-energy/preparation/hbc.gro" target="_blank">file</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/hbc.gro" target="_blank">file</a>
 
 Create the topology file
 ------------------------
@@ -111,7 +111,7 @@ Create the topology file
 
 .. |ff-itp.zip| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/solvation-energy/preparation/ff-itp.zip" target="_blank">here</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/ff-itp.zip" target="_blank">here</a>
 
 ..  container:: justify
 
@@ -141,7 +141,7 @@ Add the water
     water configuration file |tip4p.gro|,
     and copy it in the 'preparation/' folder. Then, in
     order to add (tip4p) water molecules to both gro and
-    top file, use the gmx solvate command as follow:
+    top file, use the *gmx solvate* command as follows:
 
 ..  code-block:: bw
 
@@ -149,7 +149,7 @@ Add the water
 
 .. |tip4p.gro| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/solvation-energy/preparation/tip4p.gro" target="_blank">here</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/tip4p.gro" target="_blank">here</a>
 
 ..  container:: justify
 
@@ -178,7 +178,7 @@ Add the water
 
 .. |solvated.gro| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/solvation-energy/preparation/solvated.gro" target="_blank">here</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/solvated.gro" target="_blank">here</a>
 
 ..  container:: justify
 
@@ -190,7 +190,7 @@ Add the water
 
 .. |h2o.itp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/solvation-energy/preparation/ff/h2o.itp" target="_blank">h2o.itp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/ff/h2o.itp" target="_blank">h2o.itp</a>
 
 ..  code-block:: bw
 
@@ -296,11 +296,11 @@ Equilibration
 
 .. |solvation-nvt.mdp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/solvation-energy/preparation/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
 
 .. |solvation-npt.mdp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/solvation-energy/preparation/inputs/npt.mdp" target="_blank">npt.mdp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/inputs/npt.mdp" target="_blank">npt.mdp</a>
 
 ..  code-block:: bash
 
@@ -353,11 +353,11 @@ Solvation energy measurement
 
 .. |solvation-npt-bis.mdp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/solvation-energy/solvation/inputs/npt_bis.mdp" target="_blank">npt_bis.mdp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/solvation/inputs/npt_bis.mdp" target="_blank">npt_bis.mdp</a>
 
 .. |solvation-pro.mdp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/solvation-energy/solvation/inputs/pro.mdp" target="_blank">pro.mdp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/solvation/inputs/pro.mdp" target="_blank">pro.mdp</a>
 
 ..  container:: justify
 
@@ -403,7 +403,7 @@ Solvation energy measurement
 
 .. |solvation-topol.top| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/solvation-energy/solvation/topol.top" target="_blank">topol.top</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/solvation/topol.top" target="_blank">topol.top</a>
 
 ..  container:: justify
 

@@ -64,7 +64,7 @@ The input files
 
 .. |conf-SO4.gro| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level1/bulk-solution/conf.gro" target="_blank">here</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/conf.gro" target="_blank">here</a>
 
 ..  container:: justify
 
@@ -158,7 +158,7 @@ The input files
 
 .. |topol-SO4.top| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level1/topol.top" target="_blank">here</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/topol.top" target="_blank">here</a>
 
 ..  code-block:: bw
 
@@ -200,19 +200,19 @@ The input files
 
 .. |forcefield.itp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level1/ff/forcefield.itp" target="_blank">forcefield.itp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/ff/forcefield.itp" target="_blank">forcefield.itp</a>
 
 .. |h2o.itp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level1/ff/h2o.itp" target="_blank">h2o.itp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/ff/h2o.itp" target="_blank">h2o.itp</a>
 
 .. |na.itp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level1/ff/na.itp" target="_blank">na.itp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/ff/na.itp" target="_blank">na.itp</a>
 
 .. |so4.itp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level1/ff/so4.itp" target="_blank">so4.itp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/ff/so4.itp" target="_blank">so4.itp</a>
 
 3) The input file (.mdp)
 ------------------------
@@ -252,7 +252,7 @@ The input files
 
 ..  container:: justify
 
-    The rest of the tutorial focusses on writing the input files and performing the
+    The rest of the tutorial focuses on writing the input files and performing the
     molecular dynamics simulation. 
 
 Energy minimization
@@ -263,15 +263,14 @@ Energy minimization
     It is clear from the configuration (.gro) file that the molecules and ions
     are currently in a quite unphysical configuration. It would be risky to
     directly start the molecular dynamics simulation as
-    atoms would undergo huge forces, accelerate, and the system could
+    atoms would undergo huge forces and accelerate, and the system could
     eventually explode.
 
 ..  container:: justify
 
     In order to bring the system into a favorable state,
     let us perform an energy minimization which
-    consists in moving the atoms until the forces between
-    them are reasonable.
+    consists in moving the atoms until the forces between them are reasonable.
 
 ..  container:: justify
 
@@ -288,7 +287,7 @@ Energy minimization
     These two commands specify to GROMACS that the algorithm
     to be used is the |speepest-descent| :cite:`debye1909naherungsformeln`,
     which moves the atoms following the direction of the largest forces
-    until one of the stopping criterial is reached. The *nsteps* command 
+    until one of the stopping criteria is reached. The *nsteps* command 
     specifies the maximum number of steps to perform.
 
 .. |speepest-descent| raw:: html

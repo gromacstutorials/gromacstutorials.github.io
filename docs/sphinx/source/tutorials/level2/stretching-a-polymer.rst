@@ -57,7 +57,7 @@ PEG molecule in vacuum
 
 .. |download_H2O.data| raw:: html
 
-   <a href="../../../../../gromacstutorials-inputs/level2/stretching-a-polymer/free-peg-in-vacuum/peg.gro" target="_blank">here</a> 
+   <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/free-peg-in-vacuum/peg.gro" target="_blank">here</a> 
 
 .. figure:: ../figures/level2/stretching-a-polymer/light-PEG.png
    :alt: PEG polymer for molecular dynamics simulation in GROMACS
@@ -106,11 +106,11 @@ PEG molecule in vacuum
 
 .. |download_charmm35r.itp| raw:: html
 
-   <a href="../../../../../gromacstutorials-inputs/level2/stretching-a-polymer/free-peg-in-vacuum/ff/charmm35r.itp" target="_blank">charmm35r.itp</a>
+   <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/free-peg-in-vacuum/ff/charmm35r.itp" target="_blank">charmm35r.itp</a>
    
 .. |download_peg.itp| raw:: html
 
-   <a href="../../../../../gromacstutorials-inputs/level2/stretching-a-polymer/free-peg-in-vacuum/ff/peg.itp" target="_blank">peg.itp</a>
+   <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/free-peg-in-vacuum/ff/peg.itp" target="_blank">peg.itp</a>
 
 ..  container:: justify
 
@@ -470,7 +470,7 @@ PEG molecule in water
 
 .. |download_tip3p.itp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level2/stretching-a-polymer/free-peg-in-water/ff/tip3p.itp" target="_blank">here</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/free-peg-in-water/ff/tip3p.itp" target="_blank">here</a>
 
 Equilibrating the system
 ------------------------
@@ -535,7 +535,7 @@ Equilibrating the system
 
 .. |download_nvt.mdp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level2/stretching-a-polymer/free-peg-in-water/inputs/nvt.mdp" target="_blank">here</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/free-peg-in-water/inputs/nvt.mdp" target="_blank">here</a>
 
 ..  container:: justify
 
@@ -549,7 +549,7 @@ Equilibrating the system
 
 .. |download_npt.mdp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level2/stretching-a-polymer/free-peg-in-water/inputs/npt.mdp" target="_blank">npt file</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/free-peg-in-water/inputs/npt.mdp" target="_blank">npt file</a>
 
 ..  container:: justify
 

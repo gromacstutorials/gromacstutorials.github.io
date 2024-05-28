@@ -45,7 +45,8 @@ Input files
 
 .. |BIPQ_allatom_optimised_geometry.pdb| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/adsorption-ethanol/preparation/BIPQ_allatom_optimised_geometry.pdb" target="_blank">BIPQ_allatom_optimised_geometry.pdb</a>
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/preparation/BIPQ_allatom_optimised_geometry.pdb" target="_blank">BIPQ_allatom_optimised_geometry.pdb</a>
 
 Create the configuration file
 -----------------------------
@@ -119,7 +120,7 @@ Create the topology file
 
 .. |ethanol-h2o.itp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/adsorption-ethanol/preparation/ff/h2o.itp" target="_blank">h2o.itp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/preparation/ff/h2o.itp" target="_blank">h2o.itp</a>
 
 ..  code-block:: bash
 
@@ -147,7 +148,7 @@ Add the water
 
 .. |ethanol-tip4p.gro| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/adsorption-ethanol/preparation/tip4p.gro" target="_blank">here</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/preparation/tip4p.gro" target="_blank">here</a>
 
 ..  code-block:: bash
 
@@ -203,7 +204,7 @@ Add the water
 
 .. |ethanol-solvated_vacuum| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/adsorption-ethanol/preparation/solvated_vacuum.gro" target="_blank">here</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/preparation/solvated_vacuum.gro" target="_blank">here</a>
 
 Energy minimization
 ===================
@@ -216,11 +217,11 @@ Energy minimization
 
 .. |ethanol-min.mdp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/adsorption-ethanol/preparation/inputs/min.mdp" target="_blank">min.mdp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/preparation/inputs/min.mdp" target="_blank">min.mdp</a>
 
 .. |ethanol-nvt.mdp| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/adsorption-ethanol/preparation/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/preparation/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
 
 ..  container:: justify
 
@@ -314,13 +315,13 @@ Equilibration
     NVT run (100 ps) is too small. It has been chosen to
     make the tutorial easier to follow for people with a
     bad laptop (myself included). Increase the duration
-    to 1 nanosecond for a better equilibrated system.
+    to 1 nanosecond for a better-equilibrated system.
     Alternatively, download the final configuration I
     have generated after a 1 ns run by clicking |ethanol-nvt_1ns.gro|.
 
 .. |ethanol-nvt_1ns.gro| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/adsorption-ethanol/preparation/nvt_1ns.gro" target="_blank">here</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/preparation/nvt_1ns.gro" target="_blank">here</a>
 
 ..  container:: justify
 
@@ -345,7 +346,7 @@ Equilibration
     ethanol at the 2 interfaces, which is expected as
     ethanol is known to be amphiphilic. There is also a
     local maxima in the center of the fluid layer (near x
-    = 3 nm), and two depletion area in between the center
+    = 3 nm), and two depletion areas in between the center
     of the fluid layer and the two interfaces.
 
 Imposed forcing
@@ -357,25 +358,25 @@ Imposed forcing
     liquid/vapor interface, one needs to impose an
     additional harmonic potential to one ethanol
     molecule and force it to explore the box, including
-    the most energeticaly unfavorable part.
-    In order to test our protocole, let us first
+    the most energetically unfavorable part.
+    To test our protocol, let us first
     calculate one single position. More positions will
     be calculated in the next part of this tutorial.
-    Within 'singleposition/', create a folder named
+    Within *singleposition/*, create a folder named
     'inputs', and copy |ethanol-min.mdp-2|, |ethanol-nvt.mdp-2|
     and |ethanol-pro.mdp-2| in it.
 
 .. |ethanol-min.mdp-2| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/adsorption-ethanol/singleposition/inputs/min.mdp" target="_blank">min.mdp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/singleposition/inputs/min.mdp" target="_blank">min.mdp</a>
 
 .. |ethanol-nvt.mdp-2| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/adsorption-ethanol/singleposition/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/singleposition/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
 
 .. |ethanol-pro.mdp-2| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/adsorption-ethanol/singleposition/inputs/pro.mdp" target="_blank">pro.mdp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/singleposition/inputs/pro.mdp" target="_blank">pro.mdp</a>
 
 ..  container:: justify
 
@@ -559,15 +560,15 @@ Free energy profile calculation
 
 .. |ethanol-min.mdp-3| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/adsorption-ethanol/adsorption/inputs/min.mdp" target="_blank">min.mdp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/adsorption/inputs/min.mdp" target="_blank">min.mdp</a>
 
 .. |ethanol-nvt.mdp-3| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/adsorption-ethanol/adsorption/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/adsorption/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
 
 .. |ethanol-pro.mdp-3| raw:: html
 
-    <a href="../../../../../gromacstutorials-inputs/level3/adsorption-ethanol/adsorption/inputs/pro.mdp" target="_blank">pro.mdp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/adsorption/inputs/pro.mdp" target="_blank">pro.mdp</a>
 
 ..  code-block:: bash
 
