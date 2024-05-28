@@ -207,4 +207,70 @@ Run an energy minimization
     energy decreases from :math:`-3 \mathrm{e}-4~\text{kJ}/\text{mol}` to
     :math:`-1.8 \mathrm{e}-5~\text{kJ}/\text{mol}`.
 
+.. container:: justify
+
+    The system can be visualized using VMD:
+
+.. code-block:: bash
+
+    vmd min.gro min.trr
+
+Add the salt
+============
+
+.. container:: justify
+
+    Let us add some ions to the system so that the (1) total charge is 0, and (2)
+    that the salt concentration is :math:`c_\text{s} \approx 1~\text{mol/L}`.
+    This is done using the *gmx genion* command, 
+
+.. code-block:: bash
+
+    gmx genion -s min.tpr -p topol.top -conc 1 -neutral -o salted.gro
+
+.. container:: justify
+
+    Select the group *SOL* as the continuous group of solvent molecules. GROMACS
+    will replace some of the *SOL* residue by ions.
+
+.. container:: justify
+
+    As can be seen from the *topol.top* file, some sodium (Na+) and chloride
+    (Cl-) ions were added, and the number :math:`N` of water molecules is 
+    reduced compared to the previous step:
+
+.. code-block:: bash
+
+    [ molecules ]
+    ; Compound        #mols
+    Protein             1
+    SOL         3563
+    NA               81
+    CL               75
+
+.. container:: justify
+
+    Out of safety, let us run a new energy minimization staring from the 
+    *salted.gro* configuration. The *-maxwarn* option is not necessary
+    as the system is charge-neutral.
+
+.. code-block:: bash
+
+    gmx grompp -f inputs/mininimize.mdp -c salted.gro -p topol.top -o min-s -pp min-s -po min-s
+    gmx mdrun -v -deffnm min-s
+
+.. container:: justify
+
+    As previously, one can have a look at the potential energy using *gmx energy*:
+
+.. code-block:: bash
+
+    gmx energy -f min-s.edr -o potential-energy-minimization-s.xvg
+
+Run the molecular dynamics
+==========================
+
+
+
+
 .. include:: ../../non-tutorials/accessfile.rst
