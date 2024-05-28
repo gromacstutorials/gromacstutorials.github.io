@@ -6,7 +6,7 @@ on:
       - main  # Set a branch name to trigger deployment
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     permissions:
       contents: write
     concurrency:
