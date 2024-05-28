@@ -5,7 +5,7 @@ Protein in electrolyte
 
 .. container:: hatnote
 
-    A simple use of GROMACS molecular dynamics code
+    Simulating a protein in an electrolyte
 
 .. container:: justify
 
