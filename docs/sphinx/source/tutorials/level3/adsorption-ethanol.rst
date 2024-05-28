@@ -106,7 +106,7 @@ Create the topology file
     From the `same atb
     page <https://atb.uq.edu.au/molecule.py?molid=902261#panel-md>`__,
     copy the 
-    `'GROMACS G54A7FF All-Atom (ITP file)' <https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/version2.0/docs/inputs/ethanoladsorption/preparation/ff/BIPQ_GROMACS_G54A7FF_allatom.itp>`__
+    `'GROMACS G54A7FF All-Atom (ITP file)' <https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/preparation/ff/BIPQ_GROMACS_G54A7FF_allatom.itp>`__
     and place it in a folder named 'ff/' and located
     within the 'preparation/' folder. Within 'ff/',
     download as well the GROMACS top file named `Gromacs

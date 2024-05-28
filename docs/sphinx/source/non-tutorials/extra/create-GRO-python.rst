@@ -111,7 +111,7 @@ Residue definition
 
     Each function corresponds to a residue, and contains the positions, types,
     and names of all the atoms, as well as the names of the residues. These
-    functions will be called every time we will need to place a residue in
+    functions will be called every time we need to place a residue in
     our system.
 
 ..  container:: justify
@@ -132,7 +132,7 @@ Residue definition
     From left to right, the sulfide ion (:math:`\text{SO}_4^{2-}`),
     the sodium ion (:math:`\text{Na}^{+}`), and the water
     molecules (:math:`\text{H}_2\text{O}`). Oxygen atoms are in red, hydrogen
-    atoms in white, sodium atom in blue, and sulfur atom in yellow. The fourth
+    atoms in white, sodium atoms in blue, and sulfur atoms in yellow. The fourth
     massless point (MW) of the water molecule is not visible.
 
 Creating the GRO file
@@ -145,7 +145,7 @@ Creating the GRO file
 
 ..  container:: justify
 
-    Next to *molecule.py*, create a new Python file called
+    Next to the *molecule.py* file, create a new Python file called
     *generategro.py*, and copy the following lines into it:
 
 ..  code-block:: python
@@ -182,7 +182,7 @@ Creating the GRO file
 
     Let us also choose typical cutoff distances (in nanometer) for each
     species. These cutoffs will be used to ensure that no species are inserted
-    too close from one another, as it would make the simulation crashed later:
+    too close to one another, as it would make the simulation crash later:
 
 ..  code-block:: python
 
@@ -192,7 +192,7 @@ Creating the GRO file
 
 ..  container:: justify
 
-    Let us initialized several counters and several lists. The lists will be
+    Let us initialize several counters and several lists. The lists will be
     used for storing all the data about the atoms:
 
 ..  code-block:: python
@@ -498,7 +498,7 @@ Default parameters
 
 .. |forcefield.itp| raw:: html
 
-    <a href="../../../../inputs/bulksolution/ff/forcefield.itp" target="_blank">forcefield.itp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/ff/forcefield.itp" target="_blank">forcefield.itp</a>
 
 ..  container:: justify
 
@@ -539,7 +539,7 @@ Sodium ion
 
 .. |na.itp| raw:: html
 
-    <a href="../../../../inputs/bulksolution/ff/na.itp" target="_blank">na.itp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/ff/na.itp" target="_blank">na.itp</a>
 
 ..  code-block:: bw
 
@@ -567,7 +567,7 @@ Sulfate ion
 
 .. |so4.itp| raw:: html
 
-    <a href="../../../../inputs/bulksolution/ff/so4.itp" target="_blank">so4.itp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/ff/so4.itp" target="_blank">so4.itp</a>
 
 ..  container:: justify
 
@@ -622,7 +622,7 @@ Water molecule
 
 .. |h2o.itp| raw:: html
 
-    <a href="../../../../inputs/bulksolution/ff/h2o.itp" target="_blank">h2o.itp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/ff/h2o.itp" target="_blank">h2o.itp</a>
 
 ..  code-block:: bw
 
