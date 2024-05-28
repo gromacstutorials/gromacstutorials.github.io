@@ -270,6 +270,65 @@ Add the salt
 Run the molecular dynamics
 ==========================
 
+.. container:: justify
+
+    Create a new input file called *nvt.mdp* and placed into the *inputs/*
+    folder, and copy the following lines into it:
+
+.. code-block:: bash
+
+    integrator = md
+    nsteps = 20000
+    dt = 0.001
+
+    comm_mode = linear
+    comm_grps = system
+
+    gen-vel = yes
+    gen-temp = 300
+
+    cutoff-scheme = Verlet
+    nstlist = 10
+    ns_type = grid
+
+    nstxout-compressed = 1000
+
+    vdw-type = Cut-off
+    rvdw = 1.0
+
+    couple-intramol = yes
+
+    coulombtype = pme
+    fourierspacing = 0.1
+    pme-order = 4
+    rcoulomb = 1.0
+
+    constraint-algorithm = lincs
+    constraints = hbonds
+
+    tcoupl = v-rescale
+    ld-seed = 48456
+    tc-grps = system
+    tau-t = 0.5
+    ref-t = 300
+
+.. container:: justify
+
+    Here, the *v-rescale* thermostat is used to impose a temperature
+    of :math:`T = 300~\text{K}`
+    with a characteristic time of :math:`0.5~\text{ps}`.
+    The *v-rescale* thermostat
+    corresponds to the Berendsen thermostat with an additional stochastic
+    term :cite:`bussi2007canonical`, and is known to give proper canonical ensemble.
+
+.. container:: justify
+
+    The *LINCS* algorithm is used to constrain the hydrogen bonds, allowing us 
+    to use a timestep of :math:`1~\text{fs}`. Without such constraint, the fast
+    vibration of the hydrogen bonds would impose the use of a smaller timestep,
+    which make the computation more computationally expensive.
+
+.. container:: justify
 
 
 
