@@ -100,4 +100,91 @@ Choose the force field
     *unsolvated.gro* was created, as well as a topology *.top* file named
     *topol.top*.
 
+Solvate the protein
+===================
+
+.. container:: justify
+
+    The protein is now ready to be solvated. Let us first immerse it in pure
+    water using *gmx solvate*:
+
+.. code-block:: bash
+
+    gmx solvate -cs spc216.gro -cp unsolvated.gro -o solvated.gro -p topol.top
+
+.. container:: justify
+
+    Here, *spc216.gro* is a pre-equilibrated water configuration that is provided
+    by GROMACS. After running *gmx solvate*, a number :math:`N = 3719` of
+    water molecules, or SOL (for solvent), is created in the new GRO file
+    named *solvated.gro* next to the protein. The number :math:`N` may slightly
+    differ in your case. A new line must also appear at the end of the
+    *topol.top* file:
+
+.. code-block:: bash
+
+    (...)
+    [ molecules ]
+    ; Compound        #mols
+    Protein             1
+    SOL              3719
+
+Run an energy minimization
+==========================
+
+.. container:: justify
+
+    Although *gmx solvate* creates molecules such as no overlap occur with the
+    protein, it is safer to perform a short energy minimization to ensure that
+    the distances between the atoms are reasonable.
+
+.. container:: justify
+
+    To do so, create a new folder named *inputs/*, and create a file named 
+    *mininimize.mdp* into it. Copy the following lines into *mininimize.mdp*:
+
+.. code-block:: bw
+
+    integrator = steep
+    nsteps = 50
+
+    nstxout = 10
+
+    cutoff-scheme = Verlet
+    nstlist = 10
+    ns_type = grid
+
+    couple-intramol = yes
+
+    vdw-type = Cut-off
+    rvdw = 1.0
+
+    coulombtype = pme
+    fourierspacing = 0.1
+    pme-order = 4
+    rcoulomb = 1.0
+
+.. container:: justify
+
+    Here, the speepest-descent method is used, with a maximum number of steps
+    of 50 :cite:`debye1909naherungsformeln`. The trajectory is printed every 10
+    step, as specified by the *nstxout* option. The other commands control the
+    interactions and cut-offs. 
+
+.. container:: justify
+
+    Run the energy minimization using *gmx grompp* and *gmx mdrun*:
+
+.. code-block:: bash
+
+    gmx grompp -f inputs/mininimize.mdp -c solvated.gro -p topol.top -o min -pp min -po min -maxwarn 1
+    gmx mdrun -v -deffnm min
+
+.. container:: justify
+
+    The *-maxwarn 1* is required here, because the system is not charge neutral
+    and GROMACS will throw a WARNING. The charge neutrality will be enforced
+    later on.
+    
+
 .. include:: ../../non-tutorials/accessfile.rst
