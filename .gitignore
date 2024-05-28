@@ -1,3 +1,4 @@
+
 **/*.xtc
 **/*.tpr
 **/*.log
@@ -16,3 +17,4 @@
 **/step*pdb
 docs/sphinx/build
 **/__pycache__
+**/build/
