@@ -173,7 +173,7 @@ Run an energy minimization
 
 .. container:: justify
 
-    Run the energy minimization using *gmx grompp* and *gmx mdrun*:
+    Prepare the energy minimization using *gmx grompp*:
 
 .. code-block:: bash
 
@@ -183,8 +183,28 @@ Run an energy minimization
 .. container:: justify
 
     The *-maxwarn 1* is required here, because the system is not charge neutral
-    and GROMACS will throw a WARNING. The charge neutrality will be enforced
-    later on.
-    
+    and GROMACS will return a WARNING. The charge neutrality will be enforced
+    later on. Finally, run the simulation using *gmx mdrun*:
+
+.. code-block:: bash
+
+    gmx mdrun -v -deffnm min
+
+.. container:: justify
+
+    Thanks to the speepest-descent algoritm, the potential energy of the
+    system decreases rapidly and becomes large and negative, which is usually
+    a good sign. The potential energy can be extracted using *gmx energy*:
+
+.. code-block:: bash
+
+    gmx energy -f min.edr -o potential-energy-minimization.xvg
+
+.. container:: justify
+
+    and choose *Potential*. The generated *.xvg* files contains the value of the
+    potential energy (in kJ/mol) as a function of the simulation steps. The potential 
+    energy decreases from :math:`-3 \mathrm{e}-4~\text{kJ}/\text{mol}` to
+    :math:`-1.8 \mathrm{e}-5~\text{kJ}/\text{mol}`.
 
 .. include:: ../../non-tutorials/accessfile.rst
