@@ -275,7 +275,7 @@ Run the molecular dynamics
     Create a new input file called *nvt.mdp* and placed into the *inputs/*
     folder, and copy the following lines into it:
 
-.. code-block:: bash
+.. code-block:: bw
 
     integrator = md
     nsteps = 20000
@@ -330,6 +330,67 @@ Run the molecular dynamics
 
 .. container:: justify
 
+    Run the NVT simulation:
 
+.. container:: justify
+
+    gmx grompp -f inputs/nvt.mdp -c min-s.gro -p topol.top -o nvt -pp nvt -po nvt
+    gmx mdrun -v -deffnm nvt
+
+.. container:: justify
+
+    Let us observe the potential energy. Let us also observe the temperature,
+    and the pressure of the system. Run the *gmx energy* command 3 times,
+    and select successively *potential*, *temperature*, and *pressure*:
+
+.. code-block:: bash
+
+    gmx energy -f nvt.edr -o potential-energy-nvt.xvg
+    gmx energy -f nvt.edr -o temperature-nvt.xvg
+    gmx energy -f nvt.edr -o pressure-nvt.xvg
+
+.. container:: justify
+
+    After an initial spike in properties, energy, temperature and pressure
+    stabilize near a value. For the temperature, the desired value of :math:`T = 300~\text{K}`
+    is reach, and for the pressure, a negative value of about :math:`- 700~\text{bar}`
+    is measured.
+
+.. container:: justify
+
+    The negative pressure indicates that the volume is slightly too large. This
+    can be rectified by performing a short NPT simulation, during which the
+    volume of the box will adjust until a desired pressure is reach. Create
+    a new file called *npt.mdp* in the *inputs/* folder. Copy the same lines as 
+    in *nvt.mdp*, and add the following lines to it:
+
+.. code-block:: bw
+
+    pcoupl = c-rescale
+    Pcoupltype = isotropic
+    tau_p = 1.0
+    ref_p = 1.0
+    compressibility = 4.5e-5
+
+.. container:: justify
+
+    Here, the isotropic c-rescale pressure
+    coupling with a target pressure of 1 bar is used.
+    Run it starting from the end of the previous *nvt* run: 
+
+.. container:: justify
+
+    gmx grompp -f inputs/npt.mdp -c nvt.gro -p topol.top -o npt -pp npt -po npt
+    gmx mdrun -v -deffnm npt
+
+.. container:: justify
+
+    As the simulation progresses, the volume of the box decreases and better
+    adjust to the fluid content of the box, as can be seen using *gmx energy*
+    and choosing *volume*:
+
+.. code-block:: bash
+
+    gmx energy -f npt.edr -o potential-energy-npt.xvg
 
 .. include:: ../../non-tutorials/accessfile.rst
