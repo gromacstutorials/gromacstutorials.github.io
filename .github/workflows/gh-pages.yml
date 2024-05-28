@@ -6,7 +6,7 @@ on:
       - main  # Set a branch name to trigger deployment
 jobs:
   deploy:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     permissions:
       contents: write
     concurrency:
@@ -14,7 +14,7 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           context: .
           submodules: true 
@@ -38,9 +38,14 @@ jobs:
           make html
           # cp source/index_replace.html build/html/index.html
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           context: .
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs
+          publish_branch: gh-pages
+          enable_jekyll: false
+          allow_empty_commit: true
+          keep_files: false
+          force_orphan: true
