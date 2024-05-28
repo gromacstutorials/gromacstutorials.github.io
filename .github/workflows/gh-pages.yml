@@ -6,7 +6,7 @@ on:
       - main  # Set a branch name to trigger deployment
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-20.04
     permissions:
       contents: write
     concurrency:
@@ -38,7 +38,7 @@ jobs:
           make html
           cp source/index_replace.html build/html/index.html
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/main' }}
         with:
           context: .
