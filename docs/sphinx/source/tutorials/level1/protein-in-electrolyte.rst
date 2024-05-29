@@ -23,8 +23,14 @@ Protein in electrolyte
 
     The goal of this tutorial is to use GROMACS and perform a simple
     molecular dynamics simulation of a protein solvated in an electrolyte. The
-    protein will be downloaded from the Protein Data Bank (PDB) :cite:`bank1971protein`
-    and solvated in an electrolyte.
+    protein is downloaded from the Protein Data Bank (PDB) :cite:`bank1971protein`
+    and solvated in an electrolyte made of water molecules and Na+ Cl- ions.
+
+.. container:: justify
+
+    This tutorial covers some of the basic uses of GROMACS, including system
+    preparation, force field selection, input file preparation, and data
+    analysis. 
 
 .. include:: ../../non-tutorials/needhelp.rst
 
