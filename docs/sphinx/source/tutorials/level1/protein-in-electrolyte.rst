@@ -209,7 +209,7 @@ Run an energy minimization
 
 .. container:: justify
 
-    Thanks to the speepest-descent algorithm, the potential energy of the
+    Thanks to the steepest-descent algorithm, the potential energy of the
     system decreases rapidly and becomes large and negative, which is usually
     a good sign. The potential energy can be extracted using *gmx energy*:
 
@@ -223,6 +223,19 @@ Run an energy minimization
     potential energy (in kJ/mol) as a function of the simulation steps. The potential 
     energy decreases from :math:`-3 \mathrm{e}-4~\text{kJ}/\text{mol}` to
     :math:`-1.8 \mathrm{e}-5~\text{kJ}/\text{mol}`.
+
+.. figure:: ../figures/level1/protein-in-electrolyte/potential-energy-minimization-light.png
+    :alt: potential energy extracted using Gromacs
+    :class: only-light
+
+.. figure:: ../figures/level1/protein-in-electrolyte/potential-energy-minimization-dark.png
+    :alt: potential energy extracted using Gromacs
+    :class: only-dark
+
+.. container:: figurelegend
+
+    Potential energy :math:`E_\text{p}` of the system as a function of the
+    number of steps :math:`N_\text{step}` during energy minimization.
 
 Add the salt
 ============
@@ -275,6 +288,19 @@ Add the salt
 .. code-block:: bash
 
     gmx energy -f min-s.edr -o potential-energy-minimization-s.xvg
+
+.. figure:: ../figures/level1/protein-in-electrolyte/potential-energy-minimization-s-light.png
+    :alt: potential energy extracted using Gromacs
+    :class: only-light
+
+.. figure:: ../figures/level1/protein-in-electrolyte/potential-energy-minimization-s-dark.png
+    :alt: potential energy extracted using Gromacs
+    :class: only-dark
+
+.. container:: figurelegend
+
+    Potential energy :math:`E_\text{p}` of the system as a function of the
+    number of steps :math:`N_\text{step}` during energy minimization.
 
 .. container:: justify
 
@@ -382,6 +408,21 @@ Run the molecular dynamics
     all stabilize. For the temperature, the desired value of :math:`T = 300~\text{K}`
     is reached, and for the pressure, a negative value of about :math:`- 700~\text{bar}`
     can be observed.
+
+.. figure:: ../figures/level1/protein-in-electrolyte/potential-energy-nvt-light.png
+    :alt: potential energy extracted using Gromacs
+    :class: only-light
+
+.. figure:: ../figures/level1/protein-in-electrolyte/potential-energy-nvt-dark.png
+    :alt: potential energy extracted using Gromacs
+    :class: only-dark
+
+.. container:: figurelegend
+
+    Potential energy :math:`E_\text{p}` (a),
+    temperature :math:`T` (b),
+    and pressure :math:`p` (c) as a function of the
+    time :math:`t` during the NVT molecular dynamics.
 
 .. container:: justify
 
