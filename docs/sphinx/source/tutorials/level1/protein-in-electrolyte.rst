@@ -7,6 +7,18 @@ Protein in electrolyte
 
     Simulating a solvated protein
 
+.. figure:: ../figures/level1/protein-in-electrolyte/protein-light.png
+    :alt: Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
+    :class: only-light
+    :height: 250
+    :align: right
+
+.. figure:: ../figures/level1/protein-in-electrolyte/protein-dark.png
+    :alt: Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
+    :class: only-dark
+    :height: 250
+    :align: right
+
 .. container:: justify
 
     The goal of this tutorial is to use GROMACS and perform a simple
@@ -15,7 +27,6 @@ Protein in electrolyte
     and solvated in an electrolyte.
 
 .. include:: ../../non-tutorials/needhelp.rst
-.. include:: ../../non-tutorials/recommand-salt.rst
 
 Convert the pdb file
 ====================
