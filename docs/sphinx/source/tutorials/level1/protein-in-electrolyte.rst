@@ -7,16 +7,16 @@ Protein in electrolyte
 
     Simulating a solvated protein
 
-.. figure:: ../figures/level1/protein-in-electrolyte/protein-light.png
-    :alt: Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
+.. figure:: ../figures/level1/protein-in-electrolyte/protein-light.webp
+    :alt: Protein and Na Cl ions visualized with VMD
     :class: only-light
-    :height: 250
+    :height: 300
     :align: right
 
-.. figure:: ../figures/level1/protein-in-electrolyte/protein-dark.png
-    :alt: Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
+.. figure:: ../figures/level1/protein-in-electrolyte/protein-dark.webp
+    :alt: Protein and Na Cl ions visualized with VMD
     :class: only-dark
-    :height: 250
+    :height: 300
     :align: right
 
 .. container:: justify
@@ -224,14 +224,6 @@ Run an energy minimization
     energy decreases from :math:`-3 \mathrm{e}-4~\text{kJ}/\text{mol}` to
     :math:`-1.8 \mathrm{e}-5~\text{kJ}/\text{mol}`.
 
-.. container:: justify
-
-    The system can be visualized using VMD:
-
-.. code-block:: bash
-
-    vmd min.gro min.trr
-
 Add the salt
 ============
 
@@ -283,6 +275,24 @@ Add the salt
 .. code-block:: bash
 
     gmx energy -f min-s.edr -o potential-energy-minimization-s.xvg
+
+.. container:: justify
+
+    The system can also be visualized using VMD using:
+
+.. code-block:: bash
+
+    vmd min.gro min.trr
+
+.. figure:: ../figures/level1/protein-in-electrolyte/protein-solvated.png
+    :alt: Gromacs tutorial protein in water and salt
+
+.. container:: figurelegend
+
+    Protein solvated in water. On the left, only the water molecules that are
+    near the protein are represented. On the right, the entire system is shown.
+    Water molecules are represented as red and white sticks, and ions are
+    represented as spheres.
 
 Run the molecular dynamics
 ==========================
