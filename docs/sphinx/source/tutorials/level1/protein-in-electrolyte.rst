@@ -462,4 +462,18 @@ Run the molecular dynamics
     gmx energy -f npt.edr -o volume-npt.xvg
     gmx energy -f npt.edr -o density-npt.xvg
 
+.. figure:: ../figures/level1/protein-in-electrolyte/potential-energy-npt-light.png
+    :alt: potential energy extracted using Gromacs
+    :class: only-light
+
+.. figure:: ../figures/level1/protein-in-electrolyte/potential-energy-npt-dark.png
+    :alt: potential energy extracted using Gromacs
+    :class: only-dark
+
+.. container:: figurelegend
+
+    Box volume :math:`V` (a) and
+    density :math:`\rho` (b) as a function of the
+    time :math:`t` during the NPT molecular dynamics.
+
 .. include:: ../../non-tutorials/accessfile.rst
