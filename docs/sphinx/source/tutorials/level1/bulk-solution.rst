@@ -771,8 +771,8 @@ Adjust the density using NPT
 
 ..  container:: justify
 
-    Let us have a look a both temperature, pressure and
-    volume during the NPT step using the *gmx energy*
+    Let us have a look a the temperature, the pressure, and the
+    volume of the box during the NPT step using the *gmx energy*
     command 3 times:
 
 ..  code-block:: bash 

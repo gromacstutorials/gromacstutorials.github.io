@@ -5,7 +5,7 @@ Protein in electrolyte
 
 .. container:: hatnote
 
-    Simulating a solvated protein
+    Simulating a protein solvated in water and ions
 
 .. figure:: ../figures/level1/protein-in-electrolyte/protein-light.webp
     :alt: Protein and Na Cl ions visualized with VMD
@@ -105,9 +105,9 @@ Choose the force field
 
 .. container:: justify
 
-    Here, the *-ignh* command is used to ignore the hydrogen atoms that are in
-    the coordinate file and avoid an error, and *-water spce* is used to
-    specify that the water model to use is the extended simple point charge
+    Here, the *-ignh* option is used to ignore the hydrogen atoms that are in
+    the coordinate file. The *-water spce* open is used to
+    specify the water model; the extended simple point charge
     model (spce) :cite:`berendsen1987missing`. 
 
 .. container:: justify
