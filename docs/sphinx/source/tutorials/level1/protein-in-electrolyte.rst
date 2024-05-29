@@ -34,15 +34,15 @@ Protein in electrolyte
 
 .. include:: ../../non-tutorials/needhelp.rst
 
-Convert the pdb file
+Convert the PDB file
 ====================
 
 .. container:: justify
 
     Download the *.pdb* file from the |ProteinDataBank|,
     or simply click |1cta.pdb|. The protein is a calcium-binding peptide from site III
-    of chicken troponin-C that has been determined using 1H-NMR
-    spectroscopy :cite:`shaw1992determination`.
+    of chicken troponin-C that has been determined using 1H-NMR spectroscopy
+    :cite:`shaw1992determination`.
 
 .. |ProteinDataBank| raw:: html
 
@@ -84,7 +84,7 @@ Convert the pdb file
 
     The last line is the box dimensions in nanometer, which was requested 
     in the *gmx trjconv* command by the *-box 5 5 5* option. All the options
-    of *trjconv* can be found in the corresponding page of the GROMACS
+    of *trjconv* can be found on the corresponding page of the GROMACS
     |trjconv-documentation|.
 
 .. |trjconv-documentation| raw:: html
@@ -151,7 +151,7 @@ Run an energy minimization
 
 .. container:: justify
 
-    Although *gmx solvate* creates molecules such as no overlap occur with the
+    Although *gmx solvate* creates molecules without overlap with the
     protein, it is safer to perform a short energy minimization to ensure that
     the distances between the atoms are reasonable.
 
@@ -209,7 +209,7 @@ Run an energy minimization
 
 .. container:: justify
 
-    Thanks to the speepest-descent algoritm, the potential energy of the
+    Thanks to the speepest-descent algorithm, the potential energy of the
     system decreases rapidly and becomes large and negative, which is usually
     a good sign. The potential energy can be extracted using *gmx energy*:
 
@@ -219,7 +219,7 @@ Run an energy minimization
 
 .. container:: justify
 
-    and choose *Potential*. The generated *.xvg* files contains the value of the
+    and choose *Potential*. The generated *.xvg* files contain the value of the
     potential energy (in kJ/mol) as a function of the simulation steps. The potential 
     energy decreases from :math:`-3 \mathrm{e}-4~\text{kJ}/\text{mol}` to
     :math:`-1.8 \mathrm{e}-5~\text{kJ}/\text{mol}`.
@@ -248,7 +248,7 @@ Add the salt
 .. container:: justify
 
     Select the group *SOL* as the continuous group of solvent molecules. GROMACS
-    will replace some of the *SOL* residue by ions.
+    will replace some of the *SOL* residues with ions.
 
 .. container:: justify
 
@@ -267,7 +267,7 @@ Add the salt
 
 .. container:: justify
 
-    Out of safety, let us run a new energy minimization staring from the 
+    Out of safety, let us run a new energy minimization starting from the 
     *salted.gro* configuration. The *-maxwarn* option is not necessary
     as the system is charge-neutral.
 
@@ -343,7 +343,7 @@ Run the molecular dynamics
     The *LINCS* algorithm is used to constrain the hydrogen bonds, allowing us 
     to use a timestep of :math:`1~\text{fs}`. Without such constraint, the fast
     vibration of the hydrogen bonds would impose the use of a smaller timestep,
-    which make the computation more computationally expensive.
+    which makes the computation more computationally expensive.
 
 .. container:: justify
 
@@ -356,7 +356,7 @@ Run the molecular dynamics
 
 .. container:: justify
 
-    Let us observe the potential energy. Let us also observe the temperature,
+    Let us observe the potential energy. Let us also observe the temperature
     and the pressure of the system. Run the *gmx energy* command 3 times,
     and select successively *potential*, *temperature*, and *pressure*:
 
@@ -368,16 +368,16 @@ Run the molecular dynamics
 
 .. container:: justify
 
-    After an initial spike in properties, energy, temperature and pressure
-    stabilize near a value. For the temperature, the desired value of :math:`T = 300~\text{K}`
-    is reach, and for the pressure, a negative value of about :math:`- 700~\text{bar}`
-    is measured.
+    After an initial spike, the energy, the temperature, and the pressure
+    all stabilize. For the temperature, the desired value of :math:`T = 300~\text{K}`
+    is reached, and for the pressure, a negative value of about :math:`- 700~\text{bar}`
+    can be observed.
 
 .. container:: justify
 
     The negative pressure indicates that the volume is slightly too large. This
     can be rectified by performing a short NPT simulation, during which the
-    volume of the box will adjust until a desired pressure is reach. Create
+    volume of the box will adjust until a desired pressure is reached. Create
     a new file called *npt.mdp* in the *inputs/* folder. Copy the same lines as 
     in *nvt.mdp*, and add the following lines to it:
 
