@@ -36,7 +36,8 @@ jobs:
           cd docs/sphinx/
           make clean
           make html
-          # cp source/index_replace.html build/html/index.html
+          cp source/index_replace.html build/html/index.html
+          cp source/lammps_replace.html build/html/non-tutorials/lammps.html
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         if: ${{ github.ref == 'refs/heads/main' }}
