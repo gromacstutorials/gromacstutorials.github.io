@@ -477,3 +477,14 @@ Run the molecular dynamics
     time :math:`t` during the NPT molecular dynamics.
 
 .. include:: ../../non-tutorials/accessfile.rst
+
+Going further with exercises
+============================
+
+Extract radial distribution functions
+-------------------------------------
+
+.. container:: justify
+
+    Use *gmx rdf* and extract the radial distribution functions (rdfs) between
+    the ions and the water molecules.
