@@ -486,5 +486,5 @@ Extract radial distribution functions
 
 .. container:: justify
 
-    Use *gmx rdf* and extract the radial distribution functions (rdfs) between
+    Use *gmx rdf* and extract the radial distribution functions (RDFs) between
     the ions and the water molecules.

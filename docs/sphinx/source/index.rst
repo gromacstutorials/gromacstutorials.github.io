@@ -32,7 +32,7 @@ GROMACS tutorials
     :maxdepth: 2
     :caption: Extra content
 
-    non-tutorials/extra/create-GRO-python
+    non-tutorials/extra/create-GRO-python.rst
     non-tutorials/bibliography.rst
 
 .. toctree::
