@@ -23,7 +23,7 @@ Bulk salt solution
 
     The objective of this tutorial is to use the
     open-source code GROMACS to perform a simple molecular
-    dynamics simulation: a liquid solution of water mixed
+    dynamics simulation. The system is a bulk solution of water mixed
     with sodium (Na\ :sup:`+`) and sulfate
     (SO\ :sub:`4`\ :sup:`2-`) ions. 
     
@@ -32,7 +32,7 @@ Bulk salt solution
     This tutorial illustrates several major ingredients of molecular
     dynamics simulations, such as energy minimization,
     thermostating, NVT and NPT equilibration, and
-    trajectory visualisation.
+    trajectory visualization.
 
 .. include:: ../../non-tutorials/needhelp.rst
 
@@ -52,15 +52,24 @@ The input files
     - 3) An **input file** (.mdp) containing the
          parameters of the simulation (e.g. temperature, timestep).
 
+..  container:: justify
+
+    The specificity of the present tutorial is that both configuration
+    and topology files were prepared with homemade Python scripts, see
+    :ref:`create-conf-label`. In principle, it is also possible to
+    prepare the system using GROMACS functionalities, such as 
+    *gmx pdb2gmx*, *gmx trjconv*, or *gmx solvate*. This will be done
+    in the next tutorial, :ref:`protein_electrolyte-label`.
+
 1) The configuration file (.gro)
 --------------------------------
 
 ..  container:: justify
 
     For the present simulation, the initial atom
-    positions and box size are given in a conf.gro file
-    (Gromos87 format) that you can download by clicking |conf-SO4.gro|
-    (See also :ref:`create-conf-label`).
+    positions and box size are given in a *conf.gro* file
+    (Gromos87 format) that you can download by clicking |conf-SO4.gro|.
+    Save the *conf.gro* file in a folder. 
 
 .. |conf-SO4.gro| raw:: html
 
@@ -68,7 +77,7 @@ The input files
 
 ..  container:: justify
 
-    Save the *conf.gro* file in a folder. The file looks like that:
+    The *conf.gro* file looks like this:
 
 ..  code-block:: bw
 
@@ -92,18 +101,18 @@ The input files
     total number of atoms, and the last line is the box dimension in nanometer,
     here 3.36 nm by 3.36 nm by 3.36 nm. Between the second and the
     last lines, there is one line per
-    atom. Each line indicates, from left to right, the
-    residue Id (the atoms of the same
-    SO\ :sub:`4`\ :sup:`2-` ion have the same residue
-    Id), the residue name, the atom name, the atom Id,
-    and finally the atom position (x, y, and z
-    coordinate in nm).
+    atom. Each line indicates, from left to right:
+
+    - the residue Id, with all the atoms from the same SO\ :sub:`4`\ :sup:`2-` ion sharing the same residue Id,
+    - the residue name,
+    - the atom name,
+    - the atom Id, and finally
+    - the atom position, *x*, *y*, and *z* coordinate in nanometer.
     
 ..  container:: justify
 
-    Note that the format of conf.gro file is fixed,
-    all columns are in a fixed position. For example,
-    the first five columns are for the residue number.
+    Note that the format of a *.gro* file is fixed,
+    and all columns are in a fixed position.
 
 ..  container:: justify
 
@@ -113,10 +122,6 @@ The input files
 ..  code-block:: bash
 
      vmd conf.gro
-
-..  container:: justify
-
-    This is what I see:
 
 .. figure:: ../figures/level1/bulk-solution/step0-light.png
     :alt: Gromacs initial configuration of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
@@ -128,10 +133,11 @@ The input files
 
 .. container:: figurelegend
 
-    Figure: SO\ :sub:`4`\ :sup:`2-` ions (in yellow and
-    red) and Na\ :sub:`+` ions (blue) in water (red and
-    white). Here, the atoms representation and colors was modified. Follow this 
-    |vmd-tutorial| from the LAMMPS tutorials webpage to obtain similar rendering.
+    Figure: SO\ :sub:`4`\ :sup:`2-` ions, Na\ :sup:`+` ions, and water molecules.
+    Oxygen atoms are in red, hydrogen in white, sodium in blue, and sulfur in yellow. For better rendering, the atoms representation and colors
+    were modified with respect to the default VMD representation. If 
+    you want to obtain the same rendering, you can follow this 
+    |vmd-tutorial| from the LAMMPS tutorials webpage to obtain a similar rendering.
 
 .. |vmd-tutorial| raw:: html
 
@@ -382,7 +388,7 @@ Energy minimization
 
 .. container:: figurelegend
 
-    Movie showing the motion of the atoms during the energy minimization.
+    Figure: Movie showing the motion of the atoms during the energy minimization.
 
 ..  container:: justify
 
@@ -434,7 +440,7 @@ Energy minimization
 
 .. container:: figurelegend
 
-    Evolution of the potential energy as a function of the
+    Figure: Evolution of the potential energy as a function of the
     number of steps during energy minimization.
 
 ..  container:: justify
@@ -557,8 +563,8 @@ Minimalist NVT input file
 
 .. container:: figurelegend
 
-    Evolution of the temperature as a function of the time
-    during the NVT equilibration. Dashed line is the
+    Figure: Evolution of the temperature as a function of the time
+    during the NVT equilibration. The dashed line is the
     requested temperature of 360 K.
 
 Improving the NVT
@@ -697,7 +703,7 @@ Improving the NVT
 
 .. container:: figurelegend
 
-    Evolution of the temperature as a function of the time
+    Figure: Evolution of the temperature as a function of the time
     during the NVT equilibration.
 
 Adjust the density using NPT
@@ -796,7 +802,7 @@ Adjust the density using NPT
 
 ..  container:: figurelegend
 
-    From top to bottom: evolution of the temperature,
+    Figure: From top to bottom, evolution of the temperature,
     pressure, and volume of the simulation box as a
     function of the time during the NPT equilibration.
 
@@ -931,7 +937,7 @@ Measurement diffusion coefficient
 
 .. container:: figurelegend
 
-    MSDs for the three species, respectively.
+    Figure: MSDs for the three species, respectively.
 
 .. include:: ../../non-tutorials/accessfile.rst
 

@@ -1,4 +1,4 @@
-.. protein-electrolyte-label:
+.. _protein_electrolyte-label:
 
 Protein in electrolyte
 **********************
@@ -32,6 +32,7 @@ Protein in electrolyte
     preparation, force field selection, input file preparation, and data
     analysis. 
 
+.. include:: ../../non-tutorials/recommand-salt.rst
 .. include:: ../../non-tutorials/needhelp.rst
 
 Convert the PDB file
@@ -234,7 +235,7 @@ Run an energy minimization
 
 .. container:: figurelegend
 
-    Potential energy :math:`E_\text{p}` of the system as a function of the
+    Figure: Potential energy :math:`E_\text{p}` of the system as a function of the
     number of steps :math:`N_\text{step}` during energy minimization.
 
 Add the salt
@@ -299,7 +300,7 @@ Add the salt
 
 .. container:: figurelegend
 
-    Potential energy :math:`E_\text{p}` of the system as a function of the
+    Figure: Potential energy :math:`E_\text{p}` of the system as a function of the
     number of steps :math:`N_\text{step}` during energy minimization.
 
 .. container:: justify
@@ -315,7 +316,7 @@ Add the salt
 
 .. container:: figurelegend
 
-    Protein solvated in water. On the left, only the water molecules that are
+    Figure: Protein solvated in water. On the left, only the water molecules that are
     near the protein are represented. On the right, the entire system is shown.
     Water molecules are represented as red and white sticks, and ions are
     represented as spheres.
@@ -419,7 +420,7 @@ Run the molecular dynamics
 
 .. container:: figurelegend
 
-    Potential energy :math:`E_\text{p}` (a),
+    Figure: Potential energy :math:`E_\text{p}` (a),
     temperature :math:`T` (b),
     and pressure :math:`p` (c) as a function of the
     time :math:`t` during the NVT molecular dynamics.
@@ -472,7 +473,7 @@ Run the molecular dynamics
 
 .. container:: figurelegend
 
-    Box volume :math:`V` (a) and
+    Figure: Box volume :math:`V` (a) and
     density :math:`\rho` (b) as a function of the
     time :math:`t` during the NPT molecular dynamics.
 
