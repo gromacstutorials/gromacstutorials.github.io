@@ -151,8 +151,8 @@ The input files
     wrong distances between some of the molecules and ions.
     This will be fixed during energy minimization.
 
-2) The topology file (.top)
----------------------------
+2) The topology files (.top .itp)
+-------------------------------------
 
 ..  container:: justify
 
@@ -190,14 +190,21 @@ The input files
 ..  container:: justify
 
     The rest of the *topol.top* file contains the system
-    name (*Na2SO4 solution*), and a list of the residues. It is important
-    that the order of the molecules in the topology file
-    (here *SO4* first, *Na* second, and *SOL* (for H2O molecules) last)
-    matches the order of the *conf.gro* file.
+    name (*Na2SO4 solution*), and the list of the residues. Here there
+    is 6 SO\ :sub:`4`\ :sup:`2-` ions,
+    12 Na\ :sup:`+` ions,
+    and 701 water molecules. It is crucial
+    that the order and number of residues in the topology file 
+    match the order of the *conf.gro* file. If you open the *conf.gro*
+    file, you can see that indeed the first 30 lines beyond to the
+    6 SO\ :sub:`4`\ :sup:`2-` residues, the next 12 lines to the
+    12 Na\ :sup:`+` residues, and that the remaining lines concern the
+    water molecules.
 
 ..  container:: justify
     
-    Create a folder named 'ff/' next to the conf.gro and the topol.top files, and copy
+    Create a folder named *ff/* next to the *conf.gro* and the
+    *topol.top* files, and copy
     |forcefield.itp|, |h2o.itp|, |na.itp|, and |so4.itp|
     in it. These four files contain information about
     the atoms (names, masses, changes, Lennard-Jones
@@ -219,6 +226,71 @@ The input files
 .. |so4.itp| raw:: html
 
     <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/ff/so4.itp" target="_blank">so4.itp</a>
+
+..  container:: justify
+
+    For instance, the *forcefield.itp* file contains a line that specifies
+    the combination rules as *comb-rule 2*, which corresponds to
+    the well-known Lorentz-Berthelot rule,
+    where :math:`\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilon_{jj}}` and
+    :math:`\sigma_{ij} = (\sigma_{ii}+\sigma_{jj})/2`
+    :cite:`lorentz1881ueber,berthelot1898melange`:
+
+..  code-block:: bw
+
+    [ defaults ]
+    ; nbfunc  comb-rule  gen-pairs  fudgeLJ  fudgeQQ
+    1       2          no         1.0      0.833
+    
+..  container:: justify
+
+    The fudge parameters specify how the pair interaction between
+    fourth neighbors in a residue are handled, which is not relevant for
+    the small residues considered here. The *forcefield.itp* file also
+    contains the list of atoms, their respective charge in the units of
+    the elementary charge :math:`e`, as well as their respective Lennard-Jones
+    parameters :math:`\sigma`
+    (in nanometer)
+    and :math:`\epsilon`
+    (in J/mol):
+
+..  code-block:: bw
+
+    [ atomtypes ]
+    ; name  at.num  mass      charge  ptype  sigma    epsilon
+    Na    11      22.9900   1.0000  A      0.23100  0.45000
+    OS     8      15.9994  -1.0000  A      0.38600  0.12
+    SO    16      32.0600   2.0000  A      0.35500  1.0465
+    HW     1       1.0079   0.5270  A      0.00000  0.00000
+    OW     8      15.9994   0.0000  A      0.31650  0.77323
+    MW     0       0.0000  -1.0540  D      0.00000  0.00000
+
+..  container:: justify
+
+    Here the *ptype* is used to differential the real atoms (A) from the virtual
+    and massless site (D) from the four-point water model.
+
+..  container:: justify
+
+    Finally, the *forcefield.itp* file also specifies the bond and angle
+    parameters for the flexible SO\ :sub:`4`\ :sup:`2-` ions
+    (the water model used here is rigid and does not require those parameters):
+
+..  code-block:: bw
+
+    [ bondtypes ]
+    ; i   j   func  b0    kb
+    SO  OS  1     0.15  3.7656e4
+
+    [ angletypes ]
+    ; i   j   k   func  theta  k0          
+    OS  SO  OS  1     109.5  520
+
+..  container:: justify
+
+    Finally, the *h2o.itp*, *na.itp*, and *so4.itp* files contain information 
+    about the residues, such as their exact compositions, or which pairs of
+    atoms are connected by bonds.
 
 3) The input file (.mdp)
 ------------------------
