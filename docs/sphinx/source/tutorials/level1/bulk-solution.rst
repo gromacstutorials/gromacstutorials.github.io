@@ -134,7 +134,7 @@ The input files
 .. container:: figurelegend
 
     Figure: SO\ :sub:`4`\ :sup:`2-` ions, Na\ :sup:`+` ions, and water molecules.
-    Oxygen atoms are in red, hydrogen in white, sodium in blue, and sulfur in yellow. For better rendering, the atoms representation and colors
+    Oxygen atoms are in red, hydrogen in white, sodium in blue, and sulfur in yellow. For better rendering, the atom representation and colors
     were modified with respect to the default VMD representation. If 
     you want to obtain the same rendering, you can follow this 
     |vmd-tutorial| from the LAMMPS tutorials webpage to obtain a similar rendering.
@@ -272,25 +272,23 @@ The input files
 
 ..  container:: justify
 
-    Finally, the *forcefield.itp* file also specifies the bond and angle
-    parameters for the flexible SO\ :sub:`4`\ :sup:`2-` ions
-    (the water model used here is rigid and does not require those parameters):
+    Finally, the *h2o.itp*, *na.itp*, and *so4.itp* files contain information 
+    about the residues, such as their exact compositions, which pairs of
+    atoms are connected by bonds as well as the parameters for these bonds.
+    In the case of the SO\ :sub:`4`\ :sup:`2-`,
+    for instance, the sulfur atom forms a bond of equilibrium distance
+    :math:`0.152~\text{nm}`
+    and rigidity constant :math:`3.7656 \mathrm{e}4 ~ \text{kJ/mol/nm}^2`
+    with each of the four oxygen atoms:
 
 ..  code-block:: bw
 
-    [ bondtypes ]
-    ; i   j   func  b0    kb
-    SO  OS  1     0.15  3.7656e4
-
-    [ angletypes ]
-    ; i   j   k   func  theta  k0          
-    OS  SO  OS  1     109.5  520
-
-..  container:: justify
-
-    Finally, the *h2o.itp*, *na.itp*, and *so4.itp* files contain information 
-    about the residues, such as their exact compositions, or which pairs of
-    atoms are connected by bonds.
+    [ bonds ]
+    ;  ai   aj  funct   c0         c1
+        1    5    1   0.1520   3.7656e4
+        2    5    1   0.1520   3.7656e4
+        3    5    1   0.1520   3.7656e4
+        4    5    1   0.1520   3.7656e4
 
 3) The input file (.mdp)
 ------------------------
