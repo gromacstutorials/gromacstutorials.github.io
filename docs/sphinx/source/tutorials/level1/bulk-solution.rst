@@ -301,22 +301,23 @@ The input files
     simulation, such as
 
     - the number of steps to perform,
-    - the thermostat to be used (e.g. Langevin, Berendsen),
+    - the thermostat to be used (e.g. Langevin :cite:`schneider1978molecular`, Berendsen :cite:`berendsen1984molecular`),
     - the cut-off for the interactions,
-    - the molecular dynamics integrator (e.g. steep-descent, molecular dynamics).
+    - the integrator or algorithms (e.g. steepest-descent :cite:`debye1909naherungsformeln`, leap-frog :cite:`allen2017computer`).
 
 ..  container:: justify
 
     In this tutorial, 4 different input files will be
     written in order to perform respectively an energy
     minimization of the salt solution, an equilibration
-    in the NVT ensemble (with fixed box sized), an equilibration in the NPT
-    ensemble (with changing box size), and finally a production run.
-    Input files will be placed in a 'inputs/' folder. 
+    in the NVT ensemble (i.e. with fixed box size), an equilibration
+    in the NPT ensemble (i.e. with changing box size), and finally
+    a production run.
 
 ..  container:: justify
 
-    At this point, the folder should look like that:
+    Input files will be placed in an *inputs/* folder
+    that must be created next to *ff/*. 
 
 .. figure:: ../figures/level1/bulk-solution/gromacs_inputs-light.png
     :alt: Gromacs files and structure folder
@@ -327,6 +328,10 @@ The input files
     :alt: Gromacs files and structure folder
     :height: 200
     :class: only-dark
+
+.. container:: figurelegend
+
+    Figure: Structure of the folder.
 
 ..  container:: justify
 
@@ -346,7 +351,7 @@ Energy minimization
 
 ..  container:: justify
 
-    In order to bring the system into a favorable state,
+    To bring the system into a more favorable state,
     let us perform an energy minimization which
     consists in moving the atoms until the forces between them are reasonable.
 
@@ -363,10 +368,10 @@ Energy minimization
 ..  container:: justify
 
     These two commands specify to GROMACS that the algorithm
-    to be used is the |speepest-descent| :cite:`debye1909naherungsformeln`,
+    to be used is the |speepest-descent|
     which moves the atoms following the direction of the largest forces
-    until one of the stopping criteria is reached. The *nsteps* command 
-    specifies the maximum number of steps to perform.
+    until one of the stopping criteria is reached :cite:`debye1909naherungsformeln`. 
+    The *nsteps* command specifies the maximum number of steps to perform.
 
 .. |speepest-descent| raw:: html
 
@@ -374,19 +379,19 @@ Energy minimization
 
 ..  container:: justify
 
-    In order to visualize
-    the trajectory of the atoms during the minimization,
-    let us add the following command to the input
-    file in order to print the atom positions every 10 steps in a .trr trajectory file:
+    To visualize the trajectory of the atoms during the minimization,
+    let us also add the following command to the input
+    file:
 
 ..  code-block:: bw
-    :caption: *to be copied in inputs/min.mdp*
 
     nstxout = 10
 
 ..  container:: justify
 
-    We now have a very minimalist input script, let us try
+    The *nstxout* parameter requests GROMACS to print the atom
+    positions every 10 steps in a *.trr* trajectory file that can
+    be read by VMD. We now have a very minimalist input script, let us try
     it. From the terminal, type:
 
 ..  code-block:: bash
@@ -397,8 +402,8 @@ Energy minimization
 ..  container:: justify
 
     The *grompp* command is used to preprocess the
-    files in order to prepare the simulation. The *grompp*
-    command also checks the validity of the files. By using
+    files in order to prepare the simulation. The *grompp* command also
+    checks the validity of the files. By using
     the *-f*, *-c*, and *-p* keywords, we specify which
     input, configuration, and topology files must be
     used, respectively. The other keywords *-o*, *-pp*, and *-po* are
@@ -409,39 +414,42 @@ Energy minimization
 
     The *mdrun* command calls the engine
     performing the computation from the preprocessed
-    files (which is recognized thanks to the *-deffnm* keyword). The
-    *-v* option is here to enable verbose and have more
+    files (which is recognized thanks to the *-deffnm* keyword). The *-v*
+    option enables *verbose* for more
     information printed in the terminal.
 
 ..  container:: justify
 
-    If everything works, you should see something like :
+    If everything works, you should see something like:
 
 ..  code-block:: bw
 
+    :-) GROMACS - gmx mdrun, 2023.2 (-:
+    Executable:   /usr/bin/gmx
+    Data prefix:  /usr
     (...)
-
-    Steepest Descents converged to machine precision in 824 steps,
+    Steepest Descents converged to machine precision in 961 steps,
     but did not reach the requested Fmax < 10.
-    Potential Energy  = -6.8990930e+04
-    Maximum force     =  2.4094606e+02 on atom 1654
-    Norm of force     =  4.6640654e+01
+    Potential Energy  = -4.4659062e+04
+    Maximum force     =  2.2164763e+02 on atom 15
+    Norm of force     =  4.5976703e+01
+
 
 ..  container:: justify
 
     The information printed in the terminal indicates us
     that energy minimization has been performed, even
     though the precision that was asked from the default
-    parameters was not reached. We can ignore this
+    parameters were not reached. We can ignore this
     message, as long as the final energy is large and negative,
     the simulation will work just fine. 
     
 ..  container:: justify
 
     The final potential energy is large and
-    negative, and the maximum force is small: 240
-    kJ/mol/nm (about 0.4 pN). Everything seems alright.
-    Let us visualize the atoms' trajectories during the
+    negative, and the maximum force is as small as :math:`220 ~ \text{kJ/mol/nm}`
+    (about 0.4 pN). Everything seems alright.
+    Let us visualize the trajectories of the atoms during the
     minimization step using VMD by typing in the terminal:
 
 ..  code-block:: bash
@@ -462,15 +470,19 @@ Energy minimization
 
     Figure: Movie showing the motion of the atoms during the energy minimization.
 
-..  container:: justify
+.. admonition:: Note for VMD users
+    :class: info
 
-    Note for VMD users: You can avoid having
-    molecules 'cut in half' by the periodic boundary
+    You can avoid having
+    molecules *cut in half* by the periodic boundary
     conditions by rewriting the trajectory using:
 
-..  code-block:: bash
-    
-    gmx trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole
+    ..  code-block:: bash
+        
+        gmx trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole
+
+
+    And select the group of your choice for the output.
 
 ..  container:: justify
 
@@ -483,7 +495,7 @@ Energy minimization
 
     Let us have a look at the
     evolution of the potential energy of the system. To do
-    so, we can use the internal 'energy' command of
+    so, we can use the *gmx energy* command of
     GROMACS. In the terminal, type:
 
 ..  code-block:: bash
@@ -492,15 +504,14 @@ Energy minimization
 
 ..  container:: justify
 
-    Choose *potential* by typing *5* (or any number that is in front of
-    *potential*), then press *Enter* twice. 
+    Choose *potential* (in my case I have to type *5*),
+    then press *Enter* twice. 
     
 ..  container:: justify
 
-    Here, the *.edr* file produced
-    by Gromacs during the last run is used, and the
+    Here, the *min.edr* file produced
+    by Gromacs during the minmization run is used, and the
     result is saved in the *epotmin.xvg* file.
-    Let us plot it:
 
 .. figure:: ../figures/level1/bulk-solution/energy-light.png
     :alt: Gromacs tutorial : energy versus time.
@@ -523,8 +534,8 @@ Energy minimization
     one another, as well as molecules being wrongly oriented.
     As the minimization progresses, the potential energy
     rapidly decreases and reaches a large and negative
-    value, which is usually a good sign as it indicates
-    that the atoms are now at appropriate distances from each others. 
+    value, which is usually the sign
+    that the atoms are located at appropriate distances from each other. 
 
 ..  container:: justify
 
@@ -639,13 +650,13 @@ Minimalist NVT input file
     during the NVT equilibration. The dashed line is the
     requested temperature of 360 K.
 
-Improving the NVT
-=================
+Improving the NVT input
+=======================
 
 ..  container:: justify
 
     So far, very few commands have been placed in the
-    *.mdp* input file, meaning that most of the instruction
+    *.mdp* input file, meaning that most of the instructions
     have been taken by GROMACS from the default
     parameters. You can find what parameters were used
     during the last nvt run by opening the new *nvt.mdp*
