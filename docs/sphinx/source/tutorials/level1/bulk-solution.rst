@@ -113,7 +113,7 @@ The input files
 ..  container:: justify
 
     Note that the format of a *.gro* file is fixed,
-    and all columns are in a fixed position.
+    and each column is in a fixed position.
 
 ..  container:: justify
 
@@ -330,7 +330,8 @@ The input files
 
 .. container:: figurelegend
 
-    Figure: Structure of the folder.
+    Figure: Structure of the folder with the *.itp*, *.gro*, and *.top*
+    files.
 
 ..  container:: justify
 
