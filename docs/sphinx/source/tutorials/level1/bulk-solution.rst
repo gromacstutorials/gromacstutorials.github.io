@@ -35,6 +35,7 @@ Bulk salt solution
     trajectory visualization.
 
 .. include:: ../../non-tutorials/needhelp.rst
+.. include:: ../../non-tutorials/GROMACS2023.3.rst
 
 The input files
 ===============

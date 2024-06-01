@@ -47,6 +47,7 @@ Polymer in water
 
 .. include:: ../../non-tutorials/recommand-salt.rst
 .. include:: ../../non-tutorials/needhelp.rst
+.. include:: ../../non-tutorials/GROMACS2023.3.rst
 
 PEG molecule in vacuum
 ======================
