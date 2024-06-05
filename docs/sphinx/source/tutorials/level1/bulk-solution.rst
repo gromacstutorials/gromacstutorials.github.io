@@ -576,10 +576,11 @@ Minimalist NVT input file
 
 ..  container:: justify
 
-    Let us also control the temperature over the course of the
+    Let us also control the temperature throughout the
     simulation using the v-rescale thermostat, which is
     the Berendsen thermostat with an additional stochastic
-    term :cite:`bussi2007canonical`. This thermostat is known to give proper canonical ensemble.
+    term :cite:`bussi2007canonical`. The v-rescale thermostat is known to give
+    a proper canonical ensemble.
 
 ..  code-block:: bw
 
@@ -591,15 +592,18 @@ Minimalist NVT input file
 ..  container:: justify
 
     Here, we also specified that the thermostat is
-    applied to the entire system, and that the damping constant for
-    the thermostat is equal to 0.5 ps.
+    applied to the entire system using the *tc-grps* option, and that the
+    damping constant for the thermostat, *tau-t*, is equal to 0.5 ps.
 
 ..  container:: justify
 
     Note that the relatively high temperature of 360 K
-    has been chosen here in order to reduce the
-    viscosity of the solution and converge toward
-    the desired result faster. We now have a minimalist input file for performing
+    has been chosen here to reduce the viscosity of the solution and
+    reduce the equilibration duration. 
+    
+..  container:: justify
+    
+    We now have a minimalist input file for performing
     the first NVT simulation. Run it by typing in the terminal:
 
 ..  code-block:: bw
@@ -672,7 +676,7 @@ Improving the NVT input
 
 ..  container:: justify
 
-    For this system, long range Coulomb interaction would be a
+    For this system, long-range Coulomb interaction would be a
     better choice. We could also improve the thermostating of the
     system by applying a separate thermostat to water molecules and ions.
 
@@ -680,7 +684,7 @@ Improving the NVT input
 
     Therefore, let us improve the NVT step by specifying
     more options in the input file.
-    First, in the nvt.mdp file, let us impose the use of the
+    First, in the *nvt.mdp* file, let us impose the use of the
     long-range Fast smooth Particle-Mesh Ewald (SPME)
     electrostatics with Fourier spacing of 0.1 nm, order
     of 4, and cut-off of 4:
