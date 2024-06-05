@@ -440,8 +440,8 @@ Energy minimization
     The information printed in the terminal indicates us
     that energy minimization has been performed, even
     though the precision that was asked from the default
-    parameters were not reached. We can ignore this
-    message, as long as the final energy is large and negative,
+    parameters were not reached. We can ignore this message,
+    as long as the final energy is large and negative,
     the simulation will work just fine. 
     
 ..  container:: justify
@@ -482,7 +482,7 @@ Energy minimization
         gmx trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole
 
 
-    And select the group of your choice for the output.
+    Then, select the group of your choice for the output.
 
 ..  container:: justify
 
@@ -514,11 +514,11 @@ Energy minimization
     result is saved in the *epotmin.xvg* file.
 
 .. figure:: ../figures/level1/bulk-solution/energy-light.png
-    :alt: Gromacs tutorial : energy versus time.
+    :alt: Gromacs tutorial : plot of the energy versus time.
     :class: only-light
 
 .. figure:: ../figures/level1/bulk-solution/energy-dark.png
-    :alt: Gromacs tutorial : energy versus time.
+    :alt: Gromacs tutorial : plot of the energy versus time.
     :class: only-dark
 
 .. container:: figurelegend
@@ -539,7 +539,8 @@ Energy minimization
 
 ..  container:: justify
 
-    The system is ready for the molecular dynamics simulation.
+    The system is now in a favorable state and the molecular dynamics simulation
+    can be started.
 
 Minimalist NVT input file
 =========================
@@ -548,14 +549,13 @@ Minimalist NVT input file
 
     Let us first perform a short (20 picoseconds)
     equilibration in the NVT ensemble. In the NVT ensemble, the number of
-    atom (N) and volume (V) are maintained fixed, and the
+    atoms (N) and the volume (V) are maintained fixed, and the
     temperature (T) is adjusted using a thermostat.
     
 ..  container:: justify
 
-    Let use write a new input script
-    called *nvt.mdp*, and save it in the *inputs/* folder.
-    Copy the following lines into it:
+    Let us write a new input script called *nvt.mdp*, and save it in
+    the *inputs/* folder. Copy the following lines into it:
 
 ..  code-block:: bw
 
