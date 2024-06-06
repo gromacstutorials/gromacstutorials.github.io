@@ -550,7 +550,7 @@ Minimalist NVT input file
     Let us first perform a short (20 picoseconds)
     equilibration in the NVT ensemble. In the NVT ensemble, the number of
     atoms (N) and the volume (V) are maintained fixed, and the
-    temperature (T) is adjusted using a thermostat.
+    temperature of the system (T) is adjusted using a thermostat.
     
 ..  container:: justify
 
@@ -565,10 +565,15 @@ Minimalist NVT input file
 
 ..  container:: justify
 
-    Here, the molecular dynamics (md) integrator is used
-    (leapfrog algorithm), and a number of 20000 steps with
+    Here, the molecular dynamics (md) integrator is used, this is a leap-frog
+    algorithm integrating Newton equations of motion. A number of 20000 steps with
     a timestep *dt* equal of :math:`0.001 ~ \text{ps}` will be performed.
-    Let us print the trajectory in a compressed *xtc* file every 1 ps by adding:
+
+..  container:: justify
+
+    Let us also ask GROMACS to print the trajectory in a compressed *xtc* file
+    every 1000 steps, or every 1 ps, by adding the following line to
+    *nvt.mdp*:
 
 ..  code-block:: bw
 
@@ -579,8 +584,7 @@ Minimalist NVT input file
     Let us also control the temperature throughout the
     simulation using the v-rescale thermostat, which is
     the Berendsen thermostat with an additional stochastic
-    term :cite:`bussi2007canonical`. The v-rescale thermostat is known to give
-    a proper canonical ensemble.
+    term :cite:`bussi2007canonical`.
 
 ..  code-block:: bw
 
@@ -591,15 +595,16 @@ Minimalist NVT input file
 
 ..  container:: justify
 
-    Here, we also specified that the thermostat is
-    applied to the entire system using the *tc-grps* option, and that the
+    The v-rescale thermostat is known to give
+    a proper canonical ensemble. Here, we also specified that the thermostat is
+    applied to the entire system using the *tc-grps* option and that the
     damping constant for the thermostat, *tau-t*, is equal to 0.5 ps.
 
 ..  container:: justify
 
     Note that the relatively high temperature of 360 K
     has been chosen here to reduce the viscosity of the solution and
-    reduce the equilibration duration. 
+    decrease the equilibration duration. 
     
 ..  container:: justify
     
@@ -633,12 +638,17 @@ Minimalist NVT input file
     
 ..  container:: justify
 
-    From the generated *Tnvt.xvg* file, we can see that temperature
+    From the generated *Tnvt.xvg* file, one can see that temperature
     started from 0, which was expected since the atoms
     have no velocity during a minimization step, and
     reaches a temperature slightly larger than the
     requested 360 K after a duration of a few
     picoseconds.
+
+..  container:: justify
+
+    In general, it is better to perform a longer equilibration, but simulation
+    durations are kept as short as possible for this tutorials. 
 
 .. figure:: ../figures/level1/bulk-solution/temperature-light.png
     :alt: Gromacs tutorial : temperature versus time.
