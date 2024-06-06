@@ -35,7 +35,7 @@ Bulk salt solution
     trajectory visualization.
 
 .. include:: ../../non-tutorials/needhelp.rst
-.. include:: ../../non-tutorials/GROMACS2023.3.rst
+.. include:: ../../non-tutorials/GROMACS2024.2.rst
 
 The input files
 ===============
@@ -104,11 +104,11 @@ The input files
     last lines, there is one line per
     atom. Each line indicates, from left to right:
 
-    - the residue Id, with all the atoms from the same SO\ :sub:`4`\ :sup:`2-` ion sharing the same residue Id,
+    - the residue ID, with all the atoms from the same SO\ :sub:`4`\ :sup:`2-` ion sharing the same residue ID,
     - the residue name,
     - the atom name,
-    - the atom Id, and finally
-    - the atom position, *x*, *y*, and *z* coordinate in nanometer.
+    - the atom ID,
+    - the atom position: *x*, *y*, and *z* coordinates in nanometer.
     
 ..  container:: justify
 
@@ -248,7 +248,7 @@ The input files
     The fudge parameters specify how the pair interaction between
     fourth neighbors in a residue are handled, which is not relevant for
     the small residues considered here. The *forcefield.itp* file also
-    contains the list of atoms, their respective charge in the units of
+    contains the list of atoms, and their respective charge in the units of
     the elementary charge :math:`e`, as well as their respective Lennard-Jones
     parameters :math:`\sigma`
     (in nanometer)
@@ -500,7 +500,7 @@ Energy minimization
 
 ..  code-block:: bash
 
-    gmx energy -f min.edr -o epotmin.xvg
+    gmx energy -f min.edr -o potential-energy-minimization.xvg
 
 ..  container:: justify
 
@@ -509,21 +509,21 @@ Energy minimization
     
 ..  container:: justify
 
-    Here, the *min.edr* file produced
-    by Gromacs during the minmization run is used, and the
-    result is saved in the *epotmin.xvg* file.
+    Here, the portable energy file *min.edr* produced
+    by GROMACS during the *minimization run* is used, and the
+    result is saved in the *potential-energy-minimization.xvg* file.
 
-.. figure:: ../figures/level1/bulk-solution/energy-light.png
+.. figure:: ../figures/level1/bulk-solution/potential-energy-min-light.png
     :alt: Gromacs tutorial : plot of the energy versus time.
     :class: only-light
 
-.. figure:: ../figures/level1/bulk-solution/energy-dark.png
+.. figure:: ../figures/level1/bulk-solution/potential-energy-min-dark.png
     :alt: Gromacs tutorial : plot of the energy versus time.
     :class: only-dark
 
 .. container:: figurelegend
 
-    Figure: Evolution of the potential energy as a function of the
+    Figure: Evolution of the potential energy :math:`E_\text{p}` as a function of the
     number of steps during energy minimization.
 
 ..  container:: justify
@@ -626,11 +626,11 @@ Minimalist NVT input file
     After the completion of the simulation, we can
     ensure that the system temperature indeed reached
     the value of 360 K by using the energy command of
-    GROMACS. Type:
+    GROMACS. In the terminal, type:
 
 ..  code-block:: bw
 
-    gmx energy -f nvt.edr -o Tnvt.xvg
+    gmx energy -f nvt.edr -o temperature-nvt-minimal.xvg
 
 ..  container:: justify
 
@@ -638,23 +638,21 @@ Minimalist NVT input file
     
 ..  container:: justify
 
-    From the generated *Tnvt.xvg* file, one can see that temperature
-    started from 0, which was expected since the atoms
-    have no velocity during a minimization step, and
-    reaches a temperature slightly larger than the
-    requested 360 K after a duration of a few
-    picoseconds.
+    From the generated *temperature-nvt-minimal.xvg* file, one can see that temperature
+    started from 0 K, which was expected since the atoms have no velocity
+    during a minimization step, and reaches a temperature slightly larger
+    than the requested 360 K after a duration of a few picoseconds.
 
 ..  container:: justify
 
     In general, it is better to perform a longer equilibration, but simulation
     durations are kept as short as possible for these tutorials. 
 
-.. figure:: ../figures/level1/bulk-solution/temperature-light.png
+.. figure:: ../figures/level1/bulk-solution/temperature-nvt-minimal-light.png
     :alt: Gromacs tutorial : temperature versus time.
     :class: only-light
 
-.. figure:: ../figures/level1/bulk-solution/temperature-dark.png
+.. figure:: ../figures/level1/bulk-solution/temperature-nvt-minimal-dark.png
     :alt: Gromacs tutorial : temperature versus time.
     :class: only-dark
 
@@ -697,12 +695,12 @@ Improving the NVT input
     In addition, the thermostating of the system should be improved, given that
     the temperature of the system is slightly larger than the desired temperature.
     For instance, separate thermostats can be applied to the water molecules
-    and to the ions.
+    and the ions.
 
 ..  container:: justify
 
     Let us improve the input used for the NVT step.
-    First, in the *nvt.mdp* file, let us impose the calculation of long range
+    First, in the *nvt.mdp* file, let us impose the calculation of long-range
     electrostatic, by the use of the
     long-range fast smooth particle-mesh ewald (SPME)
     electrostatics with Fourier spacing of :math:`0.1~\text{nm}`, order
@@ -720,13 +718,13 @@ Improving the NVT input
 
     Here, the cut-off *rcoulomb* separates the short-range interactions from the
     long-range interactions. Long-range interactions are treated in the
-    reciprocal space, while the short-range interactions are computed directly.
+    reciprocal space, while short-range interactions are computed directly.
 
 ..  container:: justify
 
     Let us also impose how the short-range van der Waals interactions
     should be treated by GROMACS, as well as the cut-off *rvdw*
-    of :math:`1~\text{nm}`*as well:
+    of :math:`1~\text{nm}`:
 
 ..  code-block:: bw
 
@@ -814,11 +812,11 @@ Improving the NVT input
     the temperature at the beginning of the run. The final
     temperature is also much closer to the desired temperature of 360 K.
 
-.. figure:: ../figures/level1/bulk-solution/temperature-improved-light.png
+.. figure:: ../figures/level1/bulk-solution/temperature-nvt-light.png
     :alt: Gromacs tutorial : temperature versus time.
     :class: only-light
 
-.. figure:: ../figures/level1/bulk-solution/temperature-improved-dark.png
+.. figure:: ../figures/level1/bulk-solution/temperature-nvt-dark.png
     :alt: Gromacs tutorial : temperature versus time.
     :class: only-dark
 
@@ -832,18 +830,18 @@ Adjust the density using NPT
 
 ..  container:: justify
 
-    Now that the system is properly equilibrated in the
-    NVT ensemble, let us perform an equilibration in the
-    NPT ensemble where the pressure is imposed and the
-    volume of the box is free to relax. NPT relaxation ensures that the
-    density of the fluid converges toward its equilibrium value.
+    Now that the temperature of the system is properly equilibrated,
+    let us continue the simulation using the
+    NPT ensemble, where the pressure of the system is imposed by a barostat
+    and the volume of the box is allowed to relax. During NPT relaxation, the
+    density of the fluid should converge toward its equilibrium value.
     Create a new input script, call it *npt.mdp*, and
     copy the following lines in it:
 
 ..  code-block:: bw
 
     integrator = md
-    nsteps = 50000
+    nsteps = 80000
     dt = 0.001
 
     comm_mode = linear
@@ -884,12 +882,16 @@ Adjust the density using NPT
 
     The main difference with the previous NVT script is
     the addition of the isotropic C-rescale pressure
-    coupling with a target pressure of 1 bar. Some other
-    differences are the addition of the *nstlog* and
+    coupling with a target pressure of 1 bar :cite:`bernetti2020pressure`.
+    Another difference is the addition of the *nstlog* and
     *nstenergy* commands to control the frequency at
     which information is printed in the log file and in
-    the energy file (*edr*), and the removing the
-    *gen-vel* commands. Run it using:
+    the energy file (*edr*). Note also the removing the
+    *gen-vel* commands, because the atoms already have a velocity. 
+    
+..  container:: justify
+
+    Run the NPT equilibration using:
 
 ..  code-block:: bash 
 
@@ -900,71 +902,71 @@ Adjust the density using NPT
 
     Let us have a look a the temperature, the pressure, and the
     volume of the box during the NPT step using the *gmx energy*
-    command 3 times:
+    command 3 consecutive times:
 
-..  code-block:: bash 
+..  code-block:: bash
 
-    gmx energy -f npt.edr -o Tnpt.xvg
-    gmx energy -f npt.edr -o Pnpt.xvg
-    gmx energy -f npt.edr -o Vnpt.xvg
+    gmx energy -f npt.edr -o temperature-npt.xvg
+    gmx energy -f npt.edr -o pressure-npt.xvg
+    gmx energy -f npt.edr -o density-npt.xvg
 
 ..  container:: justify
 
-    Choose respectively *temperature*, *pressure* and *volume*.
+    Choose respectively *temperature*, *pressure* and *density*.
     This is what I see:
 
-.. figure:: ../figures/level1/bulk-solution/NPT-light.png
+.. figure:: ../figures/level1/bulk-solution/temperature-npt-light.png
     :alt: Gromacs tutorial : NPT equilibration
     :class: only-light
 
-.. figure:: ../figures/level1/bulk-solution/NPT-dark.png
+.. figure:: ../figures/level1/bulk-solution/temperature-npt-dark.png
     :alt: Gromacs tutorial : NPT equilibration
     :class: only-dark
 
 ..  container:: figurelegend
 
-    Figure: From top to bottom, evolution of the temperature,
-    pressure, and volume of the simulation box as a
+    Figure: Evolution of the temperature :math:`T` (a),
+    pressure :math:`p` (b),
+    and fluid density :math:`\rho` (c) as a
     function of the time during the NPT equilibration.
 
 ..  container:: justify
 
     The results show that the temperature remains well
-    controlled during the NPT run. The results also show
-    that the volume was initially too small for the
-    desired pressure, and equilibrated itself at a
-    slightly larger value after a few pico-seconds.
-    Finally, the pressure curve reveal that large oscillations of the
-    pressure with time. These large oscillations are
-    typical in molecular dynamics, particularly with
-    liquid water that is almost uncompressible.
-
+    controlled during the NPT run, and
+    that the fluid density was initially too small,
+    i.e. :math:`\rho \approx 600\,\mathrm{kg}/\mathrm{m}^3`.
+    Due to the change in volume induced by the barostat, the fluid density 
+    gently reaches its equilibrium value of about :math:`1000\,\mathrm{kg}/\mathrm{m}^3`
+    after approximately 40 pico-seconds. Once the system has reached its equilibrium
+    density, the pressure stabilizes itself near the desired value of 1 bar.
+    
 ..  container:: justify
 
-    Exact results may differ depending on the actual *.gro* file generated.
+    The pressure curve reveals large oscillations in the
+    pressure, with the pressure alternating between large negative
+    values and large positive values. These large oscillations are
+    typical in molecular dynamics, and not a source of concern here.
 
-Measurement diffusion coefficient
-=================================
+Radial distribution function
+============================
 
 ..  container:: justify
 
     Now that the system is fully equilibrated, we can
-    perform a longer simulation and extract quantities of
-    interest.
-    
+    perform a longer simulation and measure some outputs.
+
 ..  container:: justify
 
-    Here, as an illustration, the diffusion
-    coefficients of all 3 species (water and the two ions) will be
-    measured. First, let us perform a longer run in the
-    NVT ensemble. Create a new input file, call it
-    *pro.mdp* (*pro* is short for *production*), and copy the
+    Let us perform a slightly longer run in the
+    NVT ensemble, during which the atom positions will be printed every pico-second.
+    Create a new input file and call it *production.mdp*. Copy the
     following lines into it:
 
 ..  code-block:: bw 
 
     integrator = md
-    nsteps = 200000
+    nsteps = 400000
     dt = 0.001
 
     comm_mode = linear
@@ -1001,73 +1003,112 @@ Measurement diffusion coefficient
 
 ..  code-block:: bash 
 
-    gmx grompp -f inputs/pro.mdp -c npt.gro -p topol.top -o pro -pp pro -po pro
-    gmx mdrun -v -deffnm pro
+    gmx grompp -f inputs/production.mdp -c npt.gro -p topol.top -o production -pp production -po production
+    gmx mdrun -v -deffnm production
 
 ..  container:: justify
 
-    When its completed, compute the mean square
-    displacement using:
+    When the simulation is completed, let us compute the radial
+    distribution functions (RDF) between :math:`\text{Na}^+` and
+    :math:`\text{H}_2\text{O}`, 
+    :math:`\text{SO}_4^{2-}` and 
+    :math:`\text{H}_2\text{O}`,
+    as well as in between :math:`\text{H}_2\text{O}` molecules.
+    This can be done using the *gmx rdf* command as follow:
+    
+..  code-block:: bash 
+
+    gmx rdf -f production.xtc -s production.tpr -o na-sol-rdf.xvg
+
+..  container:: justify
+
+    and then selecting sodium ions and water. Repeat the same operation for 
+    the sulfate and water, and for the water and water RDF. For the water-water
+    RDF, one can exclude the intra-molecular contribution by using the *-excl*
+    option:
 
 ..  code-block:: bash 
 
-    gmx msd -f pro.xtc -s pro.tpr -o SO4.xvg
+    gmx rdf -f production.xtc -s production.tpr -o sol-sol-rdf.xvg -excl
+    
+.. figure:: ../figures/level1/bulk-solution/rdf-production-light.png
+    :alt: Gromacs tutorial RDF radial distribution function
+    :class: only-light
 
-..  container:: justify
+.. figure:: ../figures/level1/bulk-solution/rdf-production-dark.png
+    :alt: Gromacs tutorial RDF radial distribution function
+    :class: only-dark
 
-    and select the SO4 ions by typing *SO4*, and then press *ctrl D*.
+.. container:: figurelegend
+
+    Figure: Radial distribution functions (RDF) as calculated between sodium
+    and water, between sulfate and water, and finally between water and water.
     
 ..  container:: justify
 
-    Fitting the slope of the
-    MSD gives a value of :math:`1.3 \mathrm{e}-5 ~ \text{cm}^2/\text{s}` for the
-    diffusion coefficient. 
+    The radial distribution functions highlight the typical distance between
+    the different species of the fluid. For instance, it can be seen that
+    there is a hydration layer of water around sodium ions at a typical
+    distance of :math:`2.4 ~ \text{Å}` from the center of the sodium ion.
 
-..  container:: justify
-    
-    Repeat the same for Na and water. 
-    
-..  container:: justify
-
-    For Na, the value is :math:`1.5 \mathrm{e}-5 ~ \text{cm}^2/\text{s}`,
-    and for water :math:`5.2 \mathrm{e}-5 ~ \text{cm}^2/\text{s}`
-    (not too far from the experimental value of :math:`7.5 \mathrm{e}-5 ~ \text{cm}^2/\text{s}`
-    at temperature T=360 K).
-    
-.. admonition:: About MSD in molecular simulations
-    :class: info
-
-    In principle, diffusion coefficients obtained from
-    molecular dynamics simulations in a finite-sized box
-    must be corrected, but this is beyond the scope of
-    the present tutorial, see this
-    `paper <https://pubs.acs.org/doi/pdf/10.1021/acs.jpcb.1c05303>`__
-    for more details.
+Mean square displacement
+============================
 
 ..  container:: justify
 
-    The final MSDs plots look like this:
+    To probe the system dynamics, let us compute the mean square
+    displacement for each species using:
 
-.. figure:: ../figures/level1/bulk-solution/D-light.png
+..  code-block:: bash 
+
+    gmx msd -f production.xtc -s production.tpr -o so4-msd.xvg
+
+..  container:: justify
+
+    and select the :math:`\text{SO}_4^{2-}` ions by typing *2*, and then press *ctrl D*.
+    
+..  container:: justify
+
+    The slope of the MSD in the limit of long times gives an estimate of the diffusion
+    coefficient, following :math:`D = \text{MSD} / 2 d t`,
+    where :math:`d = 3` is the dimension of the system. Here,
+    I find a value of :math:`1.4 \mathrm{e}-5 ~ \text{cm}^2/\text{s}` for the
+    diffusion coefficient of the sulfur ions. 
+
+..  container:: justify
+    
+    Repeat the same for :math:`\text{Na}^+` and water. 
+    
+..  container:: justify
+
+    For sodium, I find a value of :math:`1.6 \mathrm{e}-5 ~ \text{cm}^2/\text{s}`
+    for the diffusion coefficient,
+    and for water :math:`5.3 \mathrm{e}-5 ~ \text{cm}^2/\text{s}`.
+    For comparison, the experimental diffusion coefficient of *pure* water at 
+    temperature :math:`T = 360~\text{K}`
+    is :math:`7.3 \mathrm{e}-5 ~ \text{cm}^2/\text{s}` :cite:`simpson1958diffusion`.
+    In the presence of ions, the diffusion coefficient of water is expected to
+    be reduced.
+
+.. figure:: ../figures/level1/bulk-solution/msd-production-light.png
     :alt: Gromacs tutorial : diffusion coefficient
     :class: only-light
 
-.. figure:: ../figures/level1/bulk-solution/D-dark.png
+.. figure:: ../figures/level1/bulk-solution/msd-production-dark.png
     :alt: Gromacs tutorial : diffusion coefficient
     :class: only-dark
 
 .. container:: figurelegend
 
-    Figure: MSDs for the three species, respectively.
+    Figure: Mean square displacement (msd) for the three species. The dashed line
+    highlight the proportionality between msd and time :math:`t` which is expected
+    at long times, when the system reaches the diffusive regime.
+
+.. admonition:: About diffusion coefficient measurement in molecular simulations
+    :class: info
+
+    In principle, diffusion coefficients obtained from the MSD in a
+    finite-sized box must be corrected, but this is beyond the scope of
+    the present tutorial :cite:`loche2021transferable`.
 
 .. include:: ../../non-tutorials/accessfile.rst
-
-Going further
-=============
-
-..  container:: justify
-
-    Take advantage of the generated production run to extract more 
-    equilibrium quantities. For instance, Gromacs allows you to
-    extract Radial Distribution Functions (RDF) using the *gmx rdf* commands.
-
