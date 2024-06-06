@@ -648,7 +648,7 @@ Minimalist NVT input file
 ..  container:: justify
 
     In general, it is better to perform a longer equilibration, but simulation
-    durations are kept as short as possible for this tutorials. 
+    durations are kept as short as possible for these tutorials. 
 
 .. figure:: ../figures/level1/bulk-solution/temperature-light.png
     :alt: Gromacs tutorial : temperature versus time.
@@ -660,8 +660,8 @@ Minimalist NVT input file
 
 .. container:: figurelegend
 
-    Figure: Evolution of the temperature as a function of the time
-    during the NVT equilibration. The dashed line is the
+    Figure: Evolution of the temperature :math:`T` as a function of
+    the time :math:`t` during the NVT equilibration. The dashed line is the
     requested temperature of 360 K.
 
 Improving the NVT input
@@ -681,23 +681,33 @@ Improving the NVT input
 
 ..  code-block:: bw
 
+    (...)
     ; Method for doing electrostatics
     coulombtype = Cut-off
+    (...)
 
 ..  container:: justify
 
-    For this system, long-range Coulomb interaction would be a
-    better choice. We could also improve the thermostating of the
-    system by applying a separate thermostat to water molecules and ions.
+    For this system, computing the long-range Coulomb interactions is necessary,
+    because electrostatic forces between charged particles decay slowly,
+    as the inverse of the square of the distance between them, :math:`1/r^2`.
+    
+..  container:: justify
+
+    In addition, the thermostating of the system should be improved, given that
+    the temperature of the system is slightly larger than the desired temperature.
+    For instance, separate thermostats can be applied to the water molecules
+    and to the ions.
 
 ..  container:: justify
 
-    Therefore, let us improve the NVT step by specifying
-    more options in the input file.
-    First, in the *nvt.mdp* file, let us impose the use of the
-    long-range Fast smooth Particle-Mesh Ewald (SPME)
-    electrostatics with Fourier spacing of 0.1 nm, order
-    of 4, and cut-off of 4:
+    Let us improve the input used for the NVT step.
+    First, in the *nvt.mdp* file, let us impose the calculation of long range
+    electrostatic, by the use of the
+    long-range fast smooth particle-mesh ewald (SPME)
+    electrostatics with Fourier spacing of :math:`0.1~\text{nm}`, order
+    of 4, and cut-off of :math:`1~\text{nm}`
+    :cite:`darden1993particle, essmann1995smooth`:
 
 ..  code-block:: bw
 
@@ -708,9 +718,15 @@ Improving the NVT input
 
 ..  container:: justify
 
-    Note that with PME, the cut-off specifies which
-    interactions are treated with Fourier transforms.
-    Let us also specify the van der Waals interaction:
+    Here, the cut-off *rcoulomb* separates the short-range interactions from the
+    long-range interactions. Long-range interactions are treated in the
+    reciprocal space, while the short-range interactions are computed directly.
+
+..  container:: justify
+
+    Let us also impose how the short-range van der Waals interactions
+    should be treated by GROMACS, as well as the cut-off *rvdw*
+    of :math:`1~\text{nm}`*as well:
 
 ..  code-block:: bw
 
@@ -719,8 +735,10 @@ Improving the NVT input
 
 ..  container:: justify
 
-    as well as the constraint algorithm for the hydrogen
-    bonds of the water molecules:
+    Let us use the LINCS algorithm to constrain the hydrogen
+    bonds :cite:`hess1997lincs`. The water
+    molecules will thus be treated as rigid, which is generally better given
+    the fast vibration of the hydrogen bonds.
 
 ..  code-block:: bw
 
@@ -731,8 +749,9 @@ Improving the NVT input
 ..  container:: justify
 
     Let us also use separate temperature baths for
-    water and ions (here corresponding to the GROMACS group called *non-water*)
-    respectively by replacing:
+    the water molecules and the ions. Here, the ions are included
+    in the default GROMACS group called *non-water*.
+    Within *nvt.mdp*, replace the following lines:
 
 ..  code-block:: bw
 
@@ -754,7 +773,12 @@ Improving the NVT input
 
 ..  container:: justify
 
-    Let us specify neighbor searching parameters:
+    Now, the same temperature :math:`T = 360 ~ \text{K}` is imposed to the
+    two groups with the same characteristic time :math:`\tau = 0.5 ~ \text{ps}`.
+    
+..  container:: justify
+  
+    Let us also specify the neighbor searching parameters:
 
 ..  code-block:: bw
 
@@ -764,8 +788,9 @@ Improving the NVT input
 
 ..  container:: justify
 
-    Let us give an initial kick to the atom (so that the initial
-    total velocities give the desired temperature instead of 0):
+    Let us give an initial kick to the atom so that the initial
+    total velocities give the desired temperature of 360 K instead of 0 K
+    as previously:
 
 ..  code-block:: bw
 
@@ -774,8 +799,8 @@ Improving the NVT input
 
 ..  container:: justify
 
-    and let us remove center of mass translational
-    velocity of the whose system:
+    Finally, let us cancel the translational of the center of mass
+    of the system:
 
 ..  code-block:: bw
 
@@ -784,11 +809,10 @@ Improving the NVT input
 
 ..  container:: justify
 
-    Run the new version of the input script. One obvious
-    difference with the previous (minimalist) NVT run is
-    the temperature at the beginning of the run (orange
-    curve). The final temperature is also closer
-    to the desired temperature:
+    Run again GROMACS using this new input script. One difference with the
+    previous (minimalist) NVT run is
+    the temperature at the beginning of the run. The final
+    temperature is also much closer to the desired temperature of 360 K.
 
 .. figure:: ../figures/level1/bulk-solution/temperature-improved-light.png
     :alt: Gromacs tutorial : temperature versus time.
@@ -863,7 +887,7 @@ Adjust the density using NPT
     coupling with a target pressure of 1 bar. Some other
     differences are the addition of the *nstlog* and
     *nstenergy* commands to control the frequency at
-    which information are printed in the log file and in
+    which information is printed in the log file and in
     the energy file (*edr*), and the removing the
     *gen-vel* commands. Run it using:
 
