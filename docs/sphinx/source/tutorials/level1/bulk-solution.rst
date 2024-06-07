@@ -953,15 +953,15 @@ Radial distribution function
 
 ..  container:: justify
 
-    Now that the system is fully equilibrated, we can
-    perform a longer simulation and measure some outputs.
-
+    Let us perform a 400 pico seconds run in the
+    NVT ensemble, during which the atom positions will be printed every
+    pico-second. The trajectory will then be used to measure radial distribution
+    functions and probe the solvation environnement of the ions. 
+    
 ..  container:: justify
-
-    Let us perform a slightly longer run in the
-    NVT ensemble, during which the atom positions will be printed every pico-second.
-    Create a new input file and call it *production.mdp*. Copy the
-    following lines into it:
+    
+    Create a new input file within the *inputs/* folder, call it *production.mdp*,
+    and copy the following lines into it:
 
 ..  code-block:: bw 
 
@@ -1009,7 +1009,7 @@ Radial distribution function
 ..  container:: justify
 
     When the simulation is completed, let us compute the radial
-    distribution functions (RDF) between :math:`\text{Na}^+` and
+    distribution functions between :math:`\text{Na}^+` and
     :math:`\text{H}_2\text{O}`, 
     :math:`\text{SO}_4^{2-}` and 
     :math:`\text{H}_2\text{O}`,
@@ -1022,11 +1022,11 @@ Radial distribution function
 
 ..  container:: justify
 
-    and then selecting sodium ions and water. Repeat the same operation for 
-    the sulfate and water, and for the water and water RDF. For the water-water
-    RDF, one can exclude the intra-molecular contribution by using the *-excl*
-    option:
-
+    Selecting the sodium ions, and then the water. Repeat the same operation for 
+    the sulfate and water, and for the water and water. For the water-water
+    RDF, it is better to exclude the intra-molecular contribution using
+    the *-excl* option, as follow:
+    
 ..  code-block:: bash 
 
     gmx rdf -f production.xtc -s production.tpr -o sol-sol-rdf.xvg -excl
