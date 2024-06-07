@@ -375,7 +375,7 @@ Energy minimization
 
 .. |speepest-descent| raw:: html
 
-    <a href="https://manual.gromacs.org/current/reference-manual/algorithms/energy-minimization.html" target="_blank">speepest-descent</a>
+    <a href="https://manual.gromacs.org/current/reference-manual/algorithms/energy-minimization.html" target="_blank">steepest-descent</a>
 
 ..  container:: justify
 
