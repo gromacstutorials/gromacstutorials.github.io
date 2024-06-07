@@ -61,7 +61,7 @@ Prepare the PEG molecule
 
 .. |download_H2O.data| raw:: html
 
-   <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/free-peg-in-vacuum/peg.gro" target="_blank">here</a> 
+   <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/tretching-a-polymer/cubic-box/peg.gro" target="_blank">here</a> 
 
 .. code-block:: bash
 
