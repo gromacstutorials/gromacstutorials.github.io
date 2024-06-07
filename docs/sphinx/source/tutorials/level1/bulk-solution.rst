@@ -1026,7 +1026,7 @@ Radial distribution function
     the sulfate and water, and for the water and water. For the water-water
     RDF, it is better to exclude the intra-molecular contribution using
     the *-excl* option, as follow:
-    
+
 ..  code-block:: bash 
 
     gmx rdf -f production.xtc -s production.tpr -o sol-sol-rdf.xvg -excl
@@ -1052,12 +1052,12 @@ Radial distribution function
     distance of :math:`2.4 ~ \text{Å}` from the center of the sodium ion.
 
 Mean square displacement
-============================
+========================
 
 ..  container:: justify
 
     To probe the system dynamics, let us compute the mean square
-    displacement for each species using:
+    displacement for all 3 species.  For the sulfate ion, type:
 
 ..  code-block:: bash 
 
@@ -1065,7 +1065,9 @@ Mean square displacement
 
 ..  container:: justify
 
-    and select the :math:`\text{SO}_4^{2-}` ions by typing *2*, and then press *ctrl D*.
+    Select the :math:`\text{SO}_4^{2-}` ions (in my case, it is done by typing
+    *2*), and then press *ctrl D*. Repeat the same operation for the sodium
+    ions and for the water molecules.
     
 ..  container:: justify
 
@@ -1112,3 +1114,18 @@ Mean square displacement
     the present tutorial :cite:`loche2021transferable`.
 
 .. include:: ../../non-tutorials/accessfile.rst
+
+..
+    Going further with exercises
+    ============================
+
+    Cage effect
+    -----------
+
+    ..  container:: justify
+
+        The *cage effect* describes the dynamical confinement of a molecule
+        or an atom by its neighors. Modify *production.mdp* and probe the *cage effect*
+        for the sodium ions. Probe also the short-time ballistic regime.
+
+        Cannot be done right now, because gmx msd does not like dt < 1 ps
