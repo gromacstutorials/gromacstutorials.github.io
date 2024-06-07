@@ -26,8 +26,8 @@ Stretching a polymer
 
 ..  container:: justify
 
-    An all-atom description is used for both polymer and water. The polymer is PolyEthylene
-    Glycol (PEG). Once the system is properly
+    An all-atom description is used for both polymer and water. The polymer is
+    PolyEthylene Glycol (PEG). Once the system is properly
     equilibrated at the desired temperature and pressure, a force is applied
     to both ends of the polymer. The evolution of the polymer length
     is measured, and the energetics of the system is measured.
@@ -528,17 +528,17 @@ Equilibrate the PEG-water system
     Select 0 for the C-O-C angles of equilibrium
     value :math:`\theta_0 = 109.7^\circ`.
 
-.. figure:: ../figures/level2/stretching-a-polymer/angular-distribution-light.png
+.. figure:: ../figures/level2/stretching-a-polymer/dihedral-distribution-light.png
     :alt: Angular distribution from molecular dynamics simulation in GROMACS
     :class: only-light
 
-.. figure:: ../figures/level2/stretching-a-polymer/angular-distribution-dark.png
+.. figure:: ../figures/level2/stretching-a-polymer/dihedral-distribution-dark.png
     :alt: Angular distribution from molecular dynamics simulation in GROMACS
     :class: only-dark
 
 .. container:: figurelegend
 
-    Figure: Angular distribution for the C-O-C angles within the PEG molecules.
+    Figure: Angular distribution for the dihedral of the PEG molecules.
 
 Stretch on the polymer
 ======================
@@ -688,5 +688,17 @@ Stretch on the polymer
     index file, so that GROMACS finds the *End1* and *End2* groups.
     The *-px position.xvg* and *-pf force.xvg* are used 
     to print positions and forces of the 2 end groups in files. 
+
+.. figure:: ../figures/level2/stretching-a-polymer/comparison-dihedral-distribution-light.png
+    :alt: Angular distribution from molecular dynamics simulation in GROMACS
+    :class: only-light
+
+.. figure:: ../figures/level2/stretching-a-polymer/comparison-dihedral-distribution-dark.png
+    :alt: Angular distribution from molecular dynamics simulation in GROMACS
+    :class: only-dark
+
+.. container:: figurelegend
+
+    Figure: Angular distribution for the dihedral of the PEG molecules.
 
 .. include:: ../../non-tutorials/accessfile.rst
