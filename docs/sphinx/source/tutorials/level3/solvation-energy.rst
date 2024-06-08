@@ -379,9 +379,9 @@ Solvation energy measurement
 ..  container:: justify
 
     These lines specify that the decoupling between the
-    molecule of interest (here FJEW) and the rest of
-    the system (here water) must be done by
-    progressively turning off van der Waals and Coulomb
+    molecule of interest (FJEW) and the rest of
+    the system (water) must be done by
+    progressively turning off the van der Waals and the Coulomb
     interactions. The parameter *nstdhdl* controls the frequency at
     which information are being printed in a xvg file during
     the production run.
