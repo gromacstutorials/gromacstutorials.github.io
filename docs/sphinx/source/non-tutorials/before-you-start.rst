@@ -13,15 +13,15 @@ Required software
 
 ..  container:: justify
 
-    The 2023.3 version of GROMACS is required
+    The 2024.2 version of GROMACS is required
     to follow the tutorials.
 
-GROMACS (2023.3)
+GROMACS (2024.2)
 ----------------
 
 ..  container:: justify
 
-    Download and install the 2023.3 version of GROMACS by following the
+    Download and install the 2024.2 version of GROMACS by following the
     instructions of the |gromacs-manual|.
     Depending on your operative system (i.e. Linux, macOS, or Windows),
     the procedure may differ.

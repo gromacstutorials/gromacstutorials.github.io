@@ -5,7 +5,7 @@ Molecule solvation energy
 
 .. container:: hatnote
 
-    Free energy solvation calculation of a graphene-like molecule
+    Calculating the free energy of solvation of a graphene-like molecule
 
 .. figure:: ../figures/level3/solvation-energy/video-HBC-light-2.webp
     :alt: HBC (graphene-like) molecule in water
@@ -22,37 +22,40 @@ Molecule solvation energy
 ..  container:: justify
 
     The objective of this tutorial is to use GROMACS
-    to perform a molecular dynamics simulation, and to
-    calculate the free energy of solvation of a
-    large molecule in water. 
+    to perform a molecular simulation of a large molecule in water. 
+    By progressively switching off the interactions between the molecule and
+    water, the free energy of solvation will be calculated. 
 
 ..  container:: justify
 
-    The large molecule used here is a graphene-like and
-    discoid molecule named hexabenzocoronene.
+    The large and flat molecule used here is a graphene-like and
+    discoid molecule named hexabenzocoronene (HBC) of
+    formula :math:`\text{C}_{42}\text{H}_{18}`. The TIP4P/epsilon
+    model is used for the water :cite:`fuentes2014non`.
 
 .. include:: ../../non-tutorials/recommand-salt.rst
 .. include:: ../../non-tutorials/needhelp.rst
-.. include:: ../../non-tutorials/GROMACS2023.3.rst
+.. include:: ../../non-tutorials/GROMACS2024.2.rst
 
 Input files
 ===========
 
 ..  container:: justify
 
-    Create two folders named 'preparation/' and
-    'solvation/' in the same directory, and go to
-    'preparation/'.
+    Create two folders side-by side. Name the two folders *preparation/* and
+    *solvation/*, and go to *preparation/*.
 
 ..  container:: justify
 
     Download the configuration files for the HBC molecule
-    by clicking |FJEW_allatom_optimised_geometry.pdb| (its from the |atb-HBC|),
-    and place it in the 'preparation/' folder.
+    by clicking |FJEW_allatom_optimised_geometry.pdb|, and save it in
+    the *preparation/* folder. The molecule 
+    was downloaded from the |atb-HBC| on the automated topology builder
+    (ATB) :cite:`malde2011automated`.
 
 .. |FJEW_allatom_optimised_geometry.pdb| raw:: html
 
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/FJEW_allatom_optimised_geometry.pdb" target="_blank">here</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/FJEW_allatom_optimised_geometry.pdb" target="_blank">this page</a>
 
 .. |atb-HBC| raw:: html
 
@@ -64,11 +67,12 @@ Create the configuration file
 ..  container:: justify
 
     First, let us convert the *.pdb* file into a *.gro* file
-    within a box of finite size (4 nm by 4 nm by 4 nm) using *trj conv*:
+    within a cubic box of lateral size 3.5 nanometers using the *gmx trjconv*
+    command. Type the following command in a terminal:
 
 ..  code-block:: bw
 
-    gmx trjconv -f FJEW_allatom_optimised_geometry.pdb -s FJEW_allatom_optimised_geometry.pdb -o hbc.gro -box 4 4 4 -center  
+    gmx trjconv -f FJEW_allatom_optimised_geometry.pdb -s FJEW_allatom_optimised_geometry.pdb -o hbc.gro -box 3.5 3.5 3.5 -center  
 
 ..  container:: justify
 
@@ -88,9 +92,9 @@ Create the configuration file
 
 ..  container:: figurelegend
 
-    HBC molecule as seen with VMD with carbon atoms in gray and hydrogen
-    atoms in white. The honeycomb structure of the HBC is similar 
-    to that of graphene.
+    Figure: HBC molecule as seen with VMD with carbon atoms in gray and hydrogen
+    atoms in white. The honeycomb structure of the HBC is similar  to that
+    of graphene.
 
 ..  container:: justify
 
@@ -99,16 +103,17 @@ Create the configuration file
 
 .. |solvation-hbc.gro| raw:: html
 
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/hbc.gro" target="_blank">file</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/hbc.gro" target="_blank">hbc.gro</a>
 
 Create the topology file
 ------------------------
 
 ..  container:: justify
 
-    Copy the force field files (ITP file)in a folder named 'ff/' and located within
-    the 'preparation/' folder. Force field parameters can be downloaded as a zip file by 
-    clicking |ff-itp.zip|.
+    Create a folder named *ff/* within the *preparation/* folder.
+    Copy the force field parameters from the following *zip* file by 
+    clicking |ff-itp.zip|. Both *FJEW_GROMACS_G54A7FF_allatom.itp* file
+    and *gromos54a7_atb.ff/* folder were downloaded from the |atb-HBC|.
 
 .. |ff-itp.zip| raw:: html
 
@@ -116,11 +121,9 @@ Create the topology file
 
 ..  container:: justify
 
-    All the files contained in the ff folder were downloaded from the |atb-HBC|.
-
-    Then, let us write the topology file by simply
-    creating a blank file named 'topol.top' within the
-    'preparation/' folder, and copying in it:
+    Then, let us write the topology (*top*) file by simply
+    creating a blank file named *topol.top* within the
+    *preparation/* folder. Copy the following lines into *topol.top*:
 
 ..  code-block:: bw
 
@@ -133,37 +136,32 @@ Create the topology file
     [ molecules ]
     FJEW 1
 
-Add the water
--------------
+Solvate the HBC in water
+------------------------
 
 ..  container:: justify
 
     Let us add water molecules to the system. First, download the tip4p
-    water configuration file |tip4p.gro|,
-    and copy it in the 'preparation/' folder. Then, in
-    order to add (tip4p) water molecules to both gro and
-    top file, use the *gmx solvate* command as follows:
-
-..  code-block:: bw
-
-    gmx solvate -cs tip4p.gro -cp hbc.gro -o solvated.gro -p topol.top
+    water configuration (*.gro*) file |tip4p.gro|,
+    and copy it in the *preparation/* folder. This is a fourth point water
+    model with additional massless site where the charge of the
+    oxygen atom is placed. Then, in
+    order to add tip4p water molecules to both *.gro* and
+    *.top* file, use the *gmx solvate* command as follows:
 
 .. |tip4p.gro| raw:: html
 
     <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/tip4p.gro" target="_blank">here</a>
 
-..  container:: justify
-
-    You should see the following message:
-
 ..  code-block:: bw
 
-    Processing topology
-    Adding line for 2186 solvent molecules with resname (SOL) to topology file (topol.top)
+    gmx solvate -cs tip4p.gro -cp hbc.gro -o solvated.gro -p topol.top
 
 ..  container:: justify
 
-    and a new line 'SOL 2186' in the topology file:
+    The new *solvated.gro* file contains all *8804* atoms from the HBC
+    molecule (called FJEW) and the water molecules. A new line
+    *SOL 2186* also appeared in the topology *.top* file:
 
 ..  code-block:: bw
 
@@ -173,9 +171,8 @@ Add the water
 
 ..  container:: justify
 
-    The created *solvated.gro* file contains the positions
-    of both HBC (called FJEW) and water molecules . Alternatively, you
-    can download the file I have generated by clicking |solvated.gro|.
+    Alternatively, you can download the *solvated.gro* file I have generated by
+    clicking |solvated.gro|, and continue with the tutorial.
 
 .. |solvated.gro| raw:: html
 
@@ -183,11 +180,9 @@ Add the water
 
 ..  container:: justify
 
-    The only missing information is the force field for
-    the water molecule. In order to use the TIP4P/epsilon
-    water model, which is one of the best classical water model, copy the
-    |h2o.itp| file in the 'ff/' folder and modify the beginning of
-    the topology file as follow:
+    Finally, save the topology file for the water, the |h2o.itp| file, in
+    the *ff/* folder and add the *#include "ff/h2o.itp"* line to the *topol.top*
+    file:
 
 .. |h2o.itp| raw:: html
 
@@ -199,13 +194,16 @@ Add the water
     #include "ff/FJEW_GROMACS_G54A7FF_allatom.itp"
     #include "ff/h2o.itp"
 
+System equilibration
+====================
+
 ..  container:: justify
 
-    The system is ready, let us equilibrate it before measuring the solvation
-    energy of the HBC molecule. 
+    The system is now ready for the simulations. Let us first equilibrate it
+    before measuring the solvation energy of the HBC molecule. 
 
 Energy minimization
-===================
+-------------------
 
 ..  container:: justify
 
@@ -239,16 +237,15 @@ Energy minimization
 
 ..  container:: justify
 
-    All these lines have been seen in the first
-    tutorial, :ref:`bulk-solution-label`. In short, this script will perform a
+    All these lines have been seen in the previous
+    tutorials. In short, with this input script, GROMACS will perform a
     steepest descent by updating the atom positions
     according to the largest forces directions, until
-    the energy and maximum force reach a reasonable
-    value. 
+    the energy and maximum force reach a reasonable value. 
     
 ..  container:: justify
 
-    Apply the minimization to the solvated box using *gmx grompp*:
+    Apply the minimization to the solvated box using *gmx grompp* and *gmx mdrun*:
 
 ..  code-block:: bash
 
@@ -257,9 +254,9 @@ Energy minimization
 
 ..  container:: justify
 
-    Here, the *-maxwarn 1* allows us to perform the
-    simulation despite GROMACS warning about some force
-    field issue. For this tutorial, we can safely ignore this warning.
+    Here, the *-maxwarn 1* option is used to ignore a WARNING from GROMACS
+    about some issue with the force field. For this tutorial, we can safely
+    ignore this WARNING.
 
 ..  container:: justify
 
@@ -284,15 +281,15 @@ Energy minimization
 
 .. container:: figurelegend
 
-    System after energy minimization showing the HBC molecule in water.
+    Figure: The system after energy minimization showing the HBC molecule in water.
     The water is represented as a transparent field. 
 
-Equilibration
-=============
+NVT and NPT equilibration 
+-------------------------
 
 ..  container:: justify
 
-    Let us perform successively a NVT and a NPT relaxation. Copy the |solvation-nvt.mdp|
+    Let us perform successively a NVT and a NPT relaxation steps. Copy the |solvation-nvt.mdp|
     and the |solvation-npt.mdp| files into the inputs folder, and run them both using:
 
 .. |solvation-nvt.mdp| raw:: html
@@ -324,7 +321,7 @@ Equilibration
 
 .. container:: figurelegend
 
-    Movie showing the motion of the atoms during the
+    Figure: Movie showing the motion of the atoms during the
     NVT and NPT equilibration steps. For clarity, the
     water molecules are represented as a continuum field.
 
@@ -333,22 +330,22 @@ Solvation energy measurement
 
 ..  container:: justify
 
-    We are done with the first equilibration of the
-    system. We are now going to perform the solvation
+    The equilibration of the system is complete. Let us perform the solvation
     free energy calculation, for which 21 independent
     simulations will be performed.
      
-..  container:: justify
+..  admonition:: About free energy calculation
+    :class: info
      
-    **Quick explanation of the procedure:** The
-    interactions between the HBC molecule and water
+    The interactions between the HBC molecule and the water
     are progressively turned-off, thus effectively
     mimicking the HBC molecule moving from bulk water
-    to vacuum.
+    to vacuum. Then, the free energy difference between the fully solvated
+    and the fully decoupled configurations is measured.
 
 ..  container:: justify
 
-    Within the 'solvation/' folder, create an 'inputs/'
+    Within the *solvation/* folder, create an *inputs/*
     folders. Copy the two following
     |solvation-npt-bis.mdp| and |solvation-pro.mdp| files in it.
 

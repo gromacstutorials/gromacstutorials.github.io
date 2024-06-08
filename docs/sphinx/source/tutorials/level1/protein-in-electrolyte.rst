@@ -34,7 +34,7 @@ Protein in electrolyte
 
 .. include:: ../../non-tutorials/recommand-salt.rst
 .. include:: ../../non-tutorials/needhelp.rst
-.. include:: ../../non-tutorials/GROMACS2023.3.rst
+.. include:: ../../non-tutorials/GROMACS2024.2.rst
 
 Convert the PDB file
 ====================
