@@ -525,8 +525,7 @@ Equilibrate the PEG-water system
 
 ..  container:: justify
 
-    Select 0 for the C-O-C angles of equilibrium
-    value :math:`\theta_0 = 109.7^\circ`.
+    Select 1 for the O-C-C-O dihedral.
 
 .. figure:: ../figures/level2/stretching-a-polymer/dihedral-distribution-light.png
     :alt: Angular distribution from molecular dynamics simulation in GROMACS
@@ -538,7 +537,7 @@ Equilibrate the PEG-water system
 
 .. container:: figurelegend
 
-    Figure: Angular distribution for the dihedral of the PEG molecules.
+    Figure: Angular distribution for the O-C-C-O dihedral of the PEG molecules.
 
 Stretch on the polymer
 ======================
@@ -552,7 +551,8 @@ Stretch on the polymer
 ..  container:: justify
 
     To leave space for the stretched PEG molecule, let us create an
-    elongated box:
+    elongated box of length :math:`6~\text{nm}`
+    along the *x* direction:
 
 ..  code-block:: bash
 
@@ -560,11 +560,12 @@ Stretch on the polymer
 
 ..  container:: justify
 
-    Select again *system* for both centering and output.
+    Select *system* for both centering and output.
 
 ..  container:: justify
 
-    Then, follow all the same steps as previously:
+    Then, follow the exact same steps as previously to solvate and equilibrate
+    the system:
 
 ..  code-block:: bash
 
@@ -579,10 +580,15 @@ Stretch on the polymer
     gmx grompp -f inputs/npt-peg-h2o.mdp -c nvt.gro -p topol.top -o npt -maxwarn 1
     gmx mdrun -deffnm npt -v -nt 8
 
+The index file
+--------------
+
 ..  container:: justify
 
     To apply a forcing to the ends of the PEG, one needs to create atom groups.
-    In GROMACS, this can be done using and index file. Create a new index file
+    Specificaly, we want to create two groups, each containing a single oxygen
+    atom from the edges of the PEG molecules (with ID 82 and 5). In GROMACS,
+    this can be done using and index file *.ndx*. Create a new index file
     named *index.ndx* using the *gmx make_ndx* command:
 
 ..  code-block:: bash
@@ -591,7 +597,7 @@ Stretch on the polymer
     
 ..  container:: justify
 
-    Then, create 2 new groups by typing the following lines
+    When prompted, type the following 4 lines to create 2 additional groups: 
     
 ..  code-block:: bash
 
@@ -603,7 +609,7 @@ Stretch on the polymer
 ..  container:: justify
 
     Then, type *q* for quitting. The index file *index.ndx*
-    contains 2 additional groups, with one oxygen atom each:
+    contains 2 additional groups named *End1* and *End2*:
 
 ..  code-block:: bw
 
@@ -620,10 +626,17 @@ Stretch on the polymer
     [ End2 ]
     5
 
+The input file
+--------------
+
 ..  container:: justify
 
-    Create a new input file named *stretching-peg-h2o.mdp*, and copy the following
-    lines in it:
+    Let us create an input file for the stretching of the PEG molecule.
+
+..  container:: justify
+
+    Create a new input file named *stretching-peg-h2o.mdp* within *inputs/*,
+    and copy the following lines in it:
 
 ..  code-block:: bw
 
@@ -675,7 +688,14 @@ Stretch on the polymer
     
 ..  container:: justify
 
-    Launch the simulation:
+    The force constant is requested along the *x* direction only (Y N N),
+    with a force constant :math:`k = 200~\text{kJ}~\text{mol}^{-1}~\text{nm}^{-1}`. 
+
+..  container:: justify
+
+    Launch the simulation using the *-n index.ndx* option for the *gmx grompp*
+    command to refer to the previously created index file, so that GROMACS
+    finds the *End1* and *End2* groups.
 
 ..  code-block:: bash
 
@@ -684,10 +704,46 @@ Stretch on the polymer
 
 ..  container:: justify
 
-    Here, the *-n index.ndx* command is used to refer to the previously created 
-    index file, so that GROMACS finds the *End1* and *End2* groups.
-    The *-px position.xvg* and *-pf force.xvg* are used 
-    to print positions and forces of the 2 end groups in files. 
+    Two data files named *stretching_pullf.xvg* and *stretching_pullx.xvg*
+    are created during the simulation, and contain respectively the
+    force and distance between the 2 groups *End1* and *End2* as a function
+    of time.
+
+.. figure:: ../figures/level2/stretching-a-polymer/pull-position-light.png
+    :alt: Pull position from molecular dynamics simulation in GROMACS
+    :class: only-light
+
+.. figure:: ../figures/level2/stretching-a-polymer/pull-position-dark.png
+    :alt: Pull position from molecular dynamics simulation in GROMACS
+    :class: only-dark
+
+.. container:: figurelegend
+
+    Figure: Distance between the two pulled groups *End1* and *End2* along the
+    *x* direction, :math:`\Delta x`,
+    as a function of time :math:`t`.
+
+..  container:: justify
+
+    It can be seen from the evolution of the distance between the groups,
+    :math:`\Delta x`, that the system reaches its equilibrium state after
+    approximately 20 pico-seconds.
+
+..  container:: justify
+
+    Let us probe the effect of the stretching on the structure of the PEG
+    by remeasuring the dihedral angle values:
+
+..  code-block:: bash
+
+    gmx mk_angndx -s stretching.tpr -hyd no -type dihedral
+    gmx angle -n angle.ndx  -f stretching-centered.xtc -od dihedral-distribution.xvg -binwidth 0.25 -type dihedral -b 20 
+
+..  container:: justify
+
+    Select 1 for the O-C-C-O dihedral. Here the option *-b 20* is used to disregard
+    the first 20 pico-seconds of the simulation during which the PEG has not 
+    reach is final length. 
 
 .. figure:: ../figures/level2/stretching-a-polymer/comparison-dihedral-distribution-light.png
     :alt: Angular distribution from molecular dynamics simulation in GROMACS
@@ -699,6 +755,14 @@ Stretch on the polymer
 
 .. container:: figurelegend
 
-    Figure: Angular distribution for the dihedral of the PEG molecules.
+    Figure: Angular distribution for the O-C-C-O dihedral of the PEG molecules,
+    comparing the unstretched (cyan) and stretched case (orange).
+
+..  container:: justify
+
+    The change in dihedral angles disribution reveals a configurational change of 
+    the polymer induced by the forcing. This transition is called gauche-trans,
+    where *gauche* and *trans* refer to possible state
+    for the PEG monomer :cite:`binder1995monte, liese2017hydration`.
 
 .. include:: ../../non-tutorials/accessfile.rst
