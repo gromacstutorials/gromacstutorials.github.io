@@ -762,7 +762,15 @@ The input file
 
     The change in dihedral angles disribution reveals a configurational change of 
     the polymer induced by the forcing. This transition is called gauche-trans,
-    where *gauche* and *trans* refer to possible state
+    where *gauche* and *trans* refer to possible states
     for the PEG monomer :cite:`binder1995monte, liese2017hydration`.
+
+.. figure:: ../figures/level2/stretching-a-polymer/gauche-trans.png
+    :alt: Illustration of the gauche (left) and trans (right) states of the PEG polymer.
+
+.. container:: figurelegend
+
+    Figure: Illustration of the gauche (left) and trans (right) states of the
+    PEG polymer.
 
 .. include:: ../../non-tutorials/accessfile.rst
