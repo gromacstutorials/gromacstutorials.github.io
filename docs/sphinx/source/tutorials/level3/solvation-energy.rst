@@ -67,12 +67,12 @@ Create the configuration file
 ..  container:: justify
 
     First, let us convert the *.pdb* file into a *.gro* file
-    within a cubic box of lateral size 3.5 nanometers using the *gmx trjconv*
+    within a cubic box of lateral size 3 nanometers using the *gmx trjconv*
     command. Type the following command in a terminal:
 
 ..  code-block:: bw
 
-    gmx trjconv -f FJEW_allatom_optimised_geometry.pdb -s FJEW_allatom_optimised_geometry.pdb -o hbc.gro -box 3.5 3.5 3.5 -center  
+    gmx trjconv -f FJEW_allatom_optimised_geometry.pdb -s FJEW_allatom_optimised_geometry.pdb -o hbc.gro -box 3 3 3 -center  
 
 ..  container:: justify
 
@@ -161,13 +161,13 @@ Solvate the HBC in water
 
     The new *solvated.gro* file contains all *8804* atoms from the HBC
     molecule (called FJEW) and the water molecules. A new line
-    *SOL 2186* also appeared in the topology *.top* file:
+    *SOL 887* also appeared in the topology *.top* file:
 
 ..  code-block:: bw
 
     [ molecules ]
     FJEW 1
-    SOL 2186
+    SOL 887
 
 ..  container:: justify
 
@@ -328,6 +328,9 @@ NVT and NPT equilibration
 Solvation energy measurement
 ============================
 
+Files preparation
+-----------------
+
 ..  container:: justify
 
     The equilibration of the system is complete. Let us perform the solvation
@@ -346,62 +349,163 @@ Solvation energy measurement
 ..  container:: justify
 
     Within the *solvation/* folder, create an *inputs/*
-    folders. Copy the two following
-    |solvation-npt-bis.mdp| and |solvation-pro.mdp| files in it.
+    folders, and copy the following input file into it:
+    |equilibration.mdp|.
 
-.. |solvation-npt-bis.mdp| raw:: html
+.. |equilibration.mdp| raw:: html
 
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/solvation/inputs/npt_bis.mdp" target="_blank">npt_bis.mdp</a>
-
-.. |solvation-pro.mdp| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/solvation/inputs/pro.mdp" target="_blank">pro.mdp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/solvation/inputs/equilibration.mdp" target="_blank">equilibration.mdp</a>
 
 ..  container:: justify
 
-    Both files contain the following commands that are
-    related to the free energy calculation:
+    This input file starts similarly as the inputs previously used in this
+    tutorial, with the exception of the integrator. Instead of the *md*
+    integrator, a *sd* for stochastic dynamics integrator:
+
+..  code-block:: bw
+
+    integrator = sd
+    nsteps = 20000
+    dt = 0.001
+
+..  container:: justify
+
+    This stochastic integrator creates a Langevin dynamics by adding a friction
+    and a noise term to Newton equations of motion. The *sd* integrator also
+    serves as a thermostat, therefore *tcoupl* is set to *No*:
+
+..  code-block:: bw
+
+    tcoupl = No
+    ld-seed = 48456
+    tc-grps = Water non-Water
+    tau-t = 0.5 0.5
+    ref-t = 300 300
+
+..  container:: justify
+
+    A stochastic integrator can be a better option for free energy measurements,
+    as it generates a better sampling, while also imposing a strong control
+    of the temperature. This is particularly useful when the molecules are
+    completely decoupled.
+
+..  container:: justify
+
+    The rest of the input deals with the progressive decoupling of the HBC molecule
+    from the water:
 
 ..  code-block:: bw
 
     free_energy = yes
     vdw-lambdas = 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0
     coul-lambdas = 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
-    sc-alpha = 0.5
-    sc-power = 1
+
+..  container:: justify
+
+    The *vdw-lambdas* is used to turn-off (when *vdw-lambdas = 0*) or 
+    turn-on (when *vdw-lambdas = 1*) the van der Waals interactions, 
+    and the *coul-lambdas* is used to turn-off/turn-on the Coulomb interactions.
+
+..  container:: justify
+
+    Here, there are 21 possible states, from *vdw-lambdas = coul-lambdas = 0.0*,
+    where the HBC molecule is fully decoupled from the water, to 
+    *vdw-lambdas = coul-lambdas = 1.0*, where the HBC molecule is fully coupled
+    to the water. All the other state correspond to situation where the HBC
+    molecule is partially coupled with the water. 
+
+..  container:: justify
+
+    The *sc-alpha* and *sc-power* options are used to turn-on a soft core
+    repulsion between the HBC and the water molecules. This is necessary
+    to avoid overlap between the decoupled atoms.
+
+..  container:: justify
+
+    The *init-lambda-state* is an integer that specifies which values of
+    *vdw-lambdas* and *coul-lambdas* is used. When *init-lambda-state*, 
+    then *vdw-lambdas = coul-lambdas = 0.0*. 21 one independent simulations
+    will be performed, each with a different value of init-lambda-state:
+
+..  code-block:: bw
+
     init-lambda-state =  0
+
+..  container:: justify
+
+    The *couple-lambda0* and *couple-lambda1* are used to specify that indeed
+    interaction are turn-off when the *lambdas* are 0, and turn-on when the
+    *lambdas* as 1:
+
+..  code-block:: bw
+
     couple-lambda0 = none
     couple-lambda1 = vdw-q
-    nstdhdl = 100
+
+..  container:: justify
+
+    The parameter *nstdhdl* controls the frequency at
+    which information are being printed in a *.xvg* file during
+    the production run.
+
+..  code-block:: bw
+
+    nstdhdl = 0
+
+..  container:: justify
+
+    For the equilibration, there is no need of printing information. For
+    the production runs, a value :math:`>0` will be used for nstdhdl.
+
+..  container:: justify
+
+    The 2 last lines impose that lambda points will be written out,
+    and which molecule will be used for calculating solvation free energies:
+
+..  code-block:: bw
+
     calc_lambda_neighbors = -1
     couple-moltype = FJEW
 
 ..  container:: justify
 
-    These lines specify that the decoupling between the
-    molecule of interest (FJEW) and the rest of
-    the system (water) must be done by
-    progressively turning off the van der Waals and the Coulomb
-    interactions. The parameter *nstdhdl* controls the frequency at
-    which information are being printed in a xvg file during
-    the production run.
+    Let us create a second input file almost identical to *equilibration.mdp*.
+    Duplicate *equilibration.mdp*, name the duplicated file *production.mdp*.
+    Within *production.mdp*, simply change *nstdhdl* from 0 to 100, so that 
+    information about the state of the system will be printed by GROMACS
+    every 100 step during the production runs.
 
 ..  container:: justify
 
-    In addition, the stochastic integrator 'sd' is used
-    instead of 'md', as it provides a better sampling,
-    which is crucial here, particularly when the HBC
-    and the water molecules are not coupled.
+    Finally, copy the previous *topol.top* file from the *preparation/* folder into
+    *solvation/* folder. In oder to avoid duplicating the force field
+    folder *ff/*, modify the path to the *.itp* files as follow: 
+
+..  code-block:: bw
+
+    #include "../preparation/ff/gromos54a7_atb.ff/forcefield.itp"
+    #include "../preparation/ff/FJEW_GROMACS_G54A7FF_allatom.itp"
+    #include "../preparation/ff/h2o.itp"
+
+    [ system ]
+    Single HBC molecule in water
+
+    [ molecules ]
+    FJEW 1
+    SOL 887
+
+Perform a 21-step loop
+----------------------
 
 ..  container:: justify
 
-    Copy as well the following |solvation-topol.top| file within the
-    *solvation/* folder (the only difference with the previous one if the path
-    to the *ff/* folder).
 
-.. |solvation-topol.top| raw:: html
 
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/solvation/topol.top" target="_blank">topol.top</a>
+
+
+
+
+
 
 ..  container:: justify
 
