@@ -499,68 +499,67 @@ Perform a 21-step loop
 
 ..  container:: justify
 
-
-
-
-
-
-
-
+    We need to a total of 2 x 21 simulations, 2 simulations per value of
+    *init-lambda-state*. This can be done using a small bash script 
+    with the *sed* (for *stream editor*) command.
 
 ..  container:: justify
 
-    We need to create 21 folders, each containing the
-    input files with different value of
-    init-lambda-state (from 0 to 21). To do so, create
-    a new bash file fine within the 'solvation/'
-    folder, call it 'createfolders.sh' can copy the
+    Create a new bash file fine within the 'solvation/'
+    folder, call it *local-run.sh* can copy the
     following lines in it:
 
 ..  code-block:: bw
 
     #/bin/bash
-    # delete runall.sh if it exist, then re-create it
-    if test -f "runall.sh"; then
-        rm runall.sh
-    fi
-    touch runall.sh
-    echo '#/bin/bash' >> runall.sh
-    echo '' >> runall.sh
-    # folder for analysis
+    set -e 
+
+    # create folder for analysis
     mkdir -p dhdl
+
     # loop on the 21 lambda state
-    for state in $(seq 0 20); 
+    for state in $(seq 0 20)
     do
-        # create folder
+        # create folder for the lambda state
         DIRNAME=lambdastate${state}
         mkdir -p $DIRNAME
-        # copy the topology, inputs, and configuration file in the folder
-        cp -r topol.top $DIRNAME
-        cp -r ../preparation/npt.gro $DIRNAME/preparedstate.gro
-        cp -r inputs $DIRNAME
-        # replace the lambda state in both npt_bis and production mdp file
+
+        # update the value of init-lambda-state
         newline='init-lambda-state = '$state
-        linetoreplace=$(cat $DIRNAME/inputs/npt_bis.mdp | grep init-lambda-state)
-        sed -i '/'"$linetoreplace"'/c\'"$newline" $DIRNAME/inputs/npt_bis.mdp
-        sed -i '/'"$linetoreplace"'/c\'"$newline" $DIRNAME/inputs/pro.mdp
-        # create a bash file to launch all the simulations
-        echo 'cd '$DIRNAME >> runall.sh
-        echo 'gmx grompp -f inputs/npt_bis.mdp -c preparedstate.gro -p topol.top -o npt_bis -pp npt_bis -po npt_bis -maxwarn 1' >> runall.sh
-        echo 'gmx mdrun -v -deffnm npt_bis -nt 4' >> runall.sh
-        echo 'gmx grompp -f inputs/pro.mdp -c npt_bis.gro -p topol.top -o pro -pp pro -po pro -maxwarn 1' >> runall.sh
-        echo 'gmx mdrun -v -deffnm pro -nt 4' >> runall.sh
-        echo 'cd ..' >> runall.sh
-        echo '' >> runall.sh
+        linetoreplace=$(cat inputs/equilibration.mdp | grep init-lambda-state)
+        sed -i '/'"$linetoreplace"'/c\'"$newline" inputs/equilibration.mdp
+        linetoreplace=$(cat inputs/production.mdp | grep init-lambda-state)
+        sed -i '/'"$linetoreplace"'/c\'"$newline" inputs/production.mdp
+
+        gmx grompp -f inputs/equilibration.mdp -c ../preparation/npt.gro -p topol.top -o equilibration -pp equilibration -po equilibration -maxwarn 1
+        gmx mdrun -v -deffnm equilibration -nt 4
+
+        gmx grompp -f inputs/production.mdp -c equilibration.gro -p topol.top -o production -pp production -po production -maxwarn 1
+        gmx mdrun -v -deffnm production -nt 4
+
+        mv production.* $DIRNAME
+        mv equilibration.* $DIRNAME  
+
         # create links for the analysis
-        cd dhdl
-        ln -sf ../$DIRNAME/pro.xvg md$state.xvg
-        cd ..    
+        cd dhdl/
+            ln -sf ../$DIRNAME/production.xvg md$state.xvg
+        cd ..
     done
 
 ..  container:: justify
 
-    Change the *-nt 4* to use a different number of thread if necessary
-    or/and possible.
+    Within this bash script, the variable *state* increases from 0 to 20 in a 
+    for loop. At eash step of the loop, a folder *lambdastateX* is created,
+    where *X* goes from 0 to 20. Then, the *sed* command is used twice to
+    update the value of *init-lambda-state* in both *equilibration.mdp*
+    and *production.mdp*.
+
+..  container:: justify
+
+    Then, GROMACS is used to run the *equilibration.mdp* script, and then
+    the *production.mdp* script. When the simulations are done, the generated
+    files are moved into the *lambdastateX* folder. Finally the *ln* command
+    creates a link toward the *production.xvg* file within the *dhdl/* folder.
 
 ..  container:: justify
 
@@ -572,22 +571,9 @@ Perform a 21-step loop
 
 ..  container:: justify
 
-    The bash file creates 21 folders, each containing
-    the input files with init-lambda-state from 0 to
-    21, as well as a 'topol.top' file and a
-    'preparedstate.gro' corresponding to the last
-    state of the system simulated in the
-    'preparation/' folder. Run all 21 simulations by executing the 'runall.sh' script:
-
-..  code-block:: bash
-
-    bash runall.sh
-
-..  container:: justify
-
-    This may take a while, depending on your computer.
-
-    When the simulation is complete, go the dhdl folder, and type:
+    Completing the 2 x 21 simulations may take a while, depending on your
+    computer. When the simulation is complete, go the dhdl folder, and
+    call the *gmx bar* command:
 
 ..  code-block:: bash
 
@@ -595,18 +581,20 @@ Perform a 21-step loop
 
 ..  container:: justify
 
-    The value of the solvation energy is printed in the terminal:
+    The value of the solvation energy is printed in the terminal.
+    In my case, I see:
 
 ..  code-block:: bash
 
-    total 0 - 20, DG -37.0 +/- 8.40
+    DG -64.62 +/- 6.35
 
 ..  container:: justify
 
-    The present simulations are too short to give a
+    This indicate that the solvation energy is of :math:`-64.6 \pm 6.3`~kJ/mol.
+    Note however that the present simulations are too short to give a
     reliable result. To accurately measure the solvation
-    energy of a molecule, use much longer equilibration
-    (typically one nanosecond) and production runs
-    (typically several nanoseconds).
+    energy of a molecule, you should use much longer equilibration,
+    typically one nanosecond, as well as much longer production runs,
+    typically several nanoseconds.
 
 .. include:: ../../non-tutorials/accessfile.rst
