@@ -67,12 +67,12 @@ Create the configuration file
 ..  container:: justify
 
     First, let us convert the *.pdb* file into a *.gro* file
-    within a cubic box of lateral size 3.5 nanometers using the *gmx trjconv*
+    within a cubic box of lateral size 3 nanometers using the *gmx trjconv*
     command. Type the following command in a terminal:
 
 ..  code-block:: bw
 
-    gmx trjconv -f FJEW_allatom_optimised_geometry.pdb -s FJEW_allatom_optimised_geometry.pdb -o hbc.gro -box 3.5 3.5 3.5 -center  
+    gmx trjconv -f FJEW_allatom_optimised_geometry.pdb -s FJEW_allatom_optimised_geometry.pdb -o hbc.gro -box 3 3 3 -center  
 
 ..  container:: justify
 
@@ -161,13 +161,13 @@ Solvate the HBC in water
 
     The new *solvated.gro* file contains all *8804* atoms from the HBC
     molecule (called FJEW) and the water molecules. A new line
-    *SOL 2186* also appeared in the topology *.top* file:
+    *SOL 887* also appeared in the topology *.top* file:
 
 ..  code-block:: bw
 
     [ molecules ]
     FJEW 1
-    SOL 2186
+    SOL 887
 
 ..  container:: justify
 
@@ -328,6 +328,9 @@ NVT and NPT equilibration
 Solvation energy measurement
 ============================
 
+Files preparation
+-----------------
+
 ..  container:: justify
 
     The equilibration of the system is complete. Let us perform the solvation
@@ -346,117 +349,217 @@ Solvation energy measurement
 ..  container:: justify
 
     Within the *solvation/* folder, create an *inputs/*
-    folders. Copy the two following
-    |solvation-npt-bis.mdp| and |solvation-pro.mdp| files in it.
+    folders, and copy the following input file into it:
+    |equilibration.mdp|.
 
-.. |solvation-npt-bis.mdp| raw:: html
+.. |equilibration.mdp| raw:: html
 
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/solvation/inputs/npt_bis.mdp" target="_blank">npt_bis.mdp</a>
-
-.. |solvation-pro.mdp| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/solvation/inputs/pro.mdp" target="_blank">pro.mdp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/solvation/inputs/equilibration.mdp" target="_blank">equilibration.mdp</a>
 
 ..  container:: justify
 
-    Both files contain the following commands that are
-    related to the free energy calculation:
+    This input file starts similarly as the inputs previously used in this
+    tutorial, with the exception of the integrator. Instead of the *md*
+    integrator, a *sd* for stochastic dynamics integrator:
+
+..  code-block:: bw
+
+    integrator = sd
+    nsteps = 20000
+    dt = 0.001
+
+..  container:: justify
+
+    This stochastic integrator creates a Langevin dynamics by adding a friction
+    and a noise term to Newton equations of motion. The *sd* integrator also
+    serves as a thermostat, therefore *tcoupl* is set to *No*:
+
+..  code-block:: bw
+
+    tcoupl = No
+    ld-seed = 48456
+    tc-grps = Water non-Water
+    tau-t = 0.5 0.5
+    ref-t = 300 300
+
+..  container:: justify
+
+    A stochastic integrator can be a better option for free energy measurements,
+    as it generates a better sampling, while also imposing a strong control
+    of the temperature. This is particularly useful when the molecules are
+    completely decoupled.
+
+..  container:: justify
+
+    The rest of the input deals with the progressive decoupling of the HBC molecule
+    from the water:
 
 ..  code-block:: bw
 
     free_energy = yes
     vdw-lambdas = 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0
     coul-lambdas = 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
-    sc-alpha = 0.5
-    sc-power = 1
+
+..  container:: justify
+
+    The *vdw-lambdas* is used to turn-off (when *vdw-lambdas = 0*) or 
+    turn-on (when *vdw-lambdas = 1*) the van der Waals interactions, 
+    and the *coul-lambdas* is used to turn-off/turn-on the Coulomb interactions.
+
+..  container:: justify
+
+    Here, there are 21 possible states, from *vdw-lambdas = coul-lambdas = 0.0*,
+    where the HBC molecule is fully decoupled from the water, to 
+    *vdw-lambdas = coul-lambdas = 1.0*, where the HBC molecule is fully coupled
+    to the water. All the other state correspond to situation where the HBC
+    molecule is partially coupled with the water. 
+
+..  container:: justify
+
+    The *sc-alpha* and *sc-power* options are used to turn-on a soft core
+    repulsion between the HBC and the water molecules. This is necessary
+    to avoid overlap between the decoupled atoms.
+
+..  container:: justify
+
+    The *init-lambda-state* is an integer that specifies which values of
+    *vdw-lambdas* and *coul-lambdas* is used. When *init-lambda-state*, 
+    then *vdw-lambdas = coul-lambdas = 0.0*. 21 one independent simulations
+    will be performed, each with a different value of init-lambda-state:
+
+..  code-block:: bw
+
     init-lambda-state =  0
+
+..  container:: justify
+
+    The *couple-lambda0* and *couple-lambda1* are used to specify that indeed
+    interaction are turn-off when the *lambdas* are 0, and turn-on when the
+    *lambdas* as 1:
+
+..  code-block:: bw
+
     couple-lambda0 = none
     couple-lambda1 = vdw-q
-    nstdhdl = 100
+
+..  container:: justify
+
+    The parameter *nstdhdl* controls the frequency at
+    which information are being printed in a *.xvg* file during
+    the production run.
+
+..  code-block:: bw
+
+    nstdhdl = 0
+
+..  container:: justify
+
+    For the equilibration, there is no need of printing information. For
+    the production runs, a value :math:`>0` will be used for nstdhdl.
+
+..  container:: justify
+
+    The 2 last lines impose that lambda points will be written out,
+    and which molecule will be used for calculating solvation free energies:
+
+..  code-block:: bw
+
     calc_lambda_neighbors = -1
     couple-moltype = FJEW
 
 ..  container:: justify
 
-    These lines specify that the decoupling between the
-    molecule of interest (FJEW) and the rest of
-    the system (water) must be done by
-    progressively turning off the van der Waals and the Coulomb
-    interactions. The parameter *nstdhdl* controls the frequency at
-    which information are being printed in a xvg file during
-    the production run.
+    Let us create a second input file almost identical to *equilibration.mdp*.
+    Duplicate *equilibration.mdp*, name the duplicated file *production.mdp*.
+    Within *production.mdp*, simply change *nstdhdl* from 0 to 100, so that 
+    information about the state of the system will be printed by GROMACS
+    every 100 step during the production runs.
 
 ..  container:: justify
 
-    In addition, the stochastic integrator 'sd' is used
-    instead of 'md', as it provides a better sampling,
-    which is crucial here, particularly when the HBC
-    and the water molecules are not coupled.
+    Finally, copy the previous *topol.top* file from the *preparation/* folder into
+    *solvation/* folder. In oder to avoid duplicating the force field
+    folder *ff/*, modify the path to the *.itp* files as follow: 
+
+..  code-block:: bw
+
+    #include "../preparation/ff/gromos54a7_atb.ff/forcefield.itp"
+    #include "../preparation/ff/FJEW_GROMACS_G54A7FF_allatom.itp"
+    #include "../preparation/ff/h2o.itp"
+
+    [ system ]
+    Single HBC molecule in water
+
+    [ molecules ]
+    FJEW 1
+    SOL 887
+
+Perform a 21-step loop
+----------------------
 
 ..  container:: justify
 
-    Copy as well the following |solvation-topol.top| file within the
-    *solvation/* folder (the only difference with the previous one if the path
-    to the *ff/* folder).
-
-.. |solvation-topol.top| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/solvation/topol.top" target="_blank">topol.top</a>
+    We need to a total of 2 x 21 simulations, 2 simulations per value of
+    *init-lambda-state*. This can be done using a small bash script 
+    with the *sed* (for *stream editor*) command.
 
 ..  container:: justify
 
-    We need to create 21 folders, each containing the
-    input files with different value of
-    init-lambda-state (from 0 to 21). To do so, create
-    a new bash file fine within the 'solvation/'
-    folder, call it 'createfolders.sh' can copy the
+    Create a new bash file fine within the 'solvation/'
+    folder, call it *local-run.sh* can copy the
     following lines in it:
 
 ..  code-block:: bw
 
     #/bin/bash
-    # delete runall.sh if it exist, then re-create it
-    if test -f "runall.sh"; then
-        rm runall.sh
-    fi
-    touch runall.sh
-    echo '#/bin/bash' >> runall.sh
-    echo '' >> runall.sh
-    # folder for analysis
+    set -e 
+
+    # create folder for analysis
     mkdir -p dhdl
+
     # loop on the 21 lambda state
-    for state in $(seq 0 20); 
+    for state in $(seq 0 20)
     do
-        # create folder
+        # create folder for the lambda state
         DIRNAME=lambdastate${state}
         mkdir -p $DIRNAME
-        # copy the topology, inputs, and configuration file in the folder
-        cp -r topol.top $DIRNAME
-        cp -r ../preparation/npt.gro $DIRNAME/preparedstate.gro
-        cp -r inputs $DIRNAME
-        # replace the lambda state in both npt_bis and production mdp file
+
+        # update the value of init-lambda-state
         newline='init-lambda-state = '$state
-        linetoreplace=$(cat $DIRNAME/inputs/npt_bis.mdp | grep init-lambda-state)
-        sed -i '/'"$linetoreplace"'/c\'"$newline" $DIRNAME/inputs/npt_bis.mdp
-        sed -i '/'"$linetoreplace"'/c\'"$newline" $DIRNAME/inputs/pro.mdp
-        # create a bash file to launch all the simulations
-        echo 'cd '$DIRNAME >> runall.sh
-        echo 'gmx grompp -f inputs/npt_bis.mdp -c preparedstate.gro -p topol.top -o npt_bis -pp npt_bis -po npt_bis -maxwarn 1' >> runall.sh
-        echo 'gmx mdrun -v -deffnm npt_bis -nt 4' >> runall.sh
-        echo 'gmx grompp -f inputs/pro.mdp -c npt_bis.gro -p topol.top -o pro -pp pro -po pro -maxwarn 1' >> runall.sh
-        echo 'gmx mdrun -v -deffnm pro -nt 4' >> runall.sh
-        echo 'cd ..' >> runall.sh
-        echo '' >> runall.sh
+        linetoreplace=$(cat inputs/equilibration.mdp | grep init-lambda-state)
+        sed -i '/'"$linetoreplace"'/c\'"$newline" inputs/equilibration.mdp
+        linetoreplace=$(cat inputs/production.mdp | grep init-lambda-state)
+        sed -i '/'"$linetoreplace"'/c\'"$newline" inputs/production.mdp
+
+        gmx grompp -f inputs/equilibration.mdp -c ../preparation/npt.gro -p topol.top -o equilibration -pp equilibration -po equilibration -maxwarn 1
+        gmx mdrun -v -deffnm equilibration -nt 4
+
+        gmx grompp -f inputs/production.mdp -c equilibration.gro -p topol.top -o production -pp production -po production -maxwarn 1
+        gmx mdrun -v -deffnm production -nt 4
+
+        mv production.* $DIRNAME
+        mv equilibration.* $DIRNAME  
+
         # create links for the analysis
-        cd dhdl
-        ln -sf ../$DIRNAME/pro.xvg md$state.xvg
-        cd ..    
+        cd dhdl/
+            ln -sf ../$DIRNAME/production.xvg md$state.xvg
+        cd ..
     done
 
 ..  container:: justify
 
-    Change the *-nt 4* to use a different number of thread if necessary
-    or/and possible.
+    Within this bash script, the variable *state* increases from 0 to 20 in a 
+    for loop. At eash step of the loop, a folder *lambdastateX* is created,
+    where *X* goes from 0 to 20. Then, the *sed* command is used twice to
+    update the value of *init-lambda-state* in both *equilibration.mdp*
+    and *production.mdp*.
+
+..  container:: justify
+
+    Then, GROMACS is used to run the *equilibration.mdp* script, and then
+    the *production.mdp* script. When the simulations are done, the generated
+    files are moved into the *lambdastateX* folder. Finally the *ln* command
+    creates a link toward the *production.xvg* file within the *dhdl/* folder.
 
 ..  container:: justify
 
@@ -468,22 +571,9 @@ Solvation energy measurement
 
 ..  container:: justify
 
-    The bash file creates 21 folders, each containing
-    the input files with init-lambda-state from 0 to
-    21, as well as a 'topol.top' file and a
-    'preparedstate.gro' corresponding to the last
-    state of the system simulated in the
-    'preparation/' folder. Run all 21 simulations by executing the 'runall.sh' script:
-
-..  code-block:: bash
-
-    bash runall.sh
-
-..  container:: justify
-
-    This may take a while, depending on your computer.
-
-    When the simulation is complete, go the dhdl folder, and type:
+    Completing the 2 x 21 simulations may take a while, depending on your
+    computer. When the simulation is complete, go the dhdl folder, and
+    call the *gmx bar* command:
 
 ..  code-block:: bash
 
@@ -491,18 +581,20 @@ Solvation energy measurement
 
 ..  container:: justify
 
-    The value of the solvation energy is printed in the terminal:
+    The value of the solvation energy is printed in the terminal.
+    In my case, I see:
 
 ..  code-block:: bash
 
-    total 0 - 20, DG -37.0 +/- 8.40
+    DG -64.62 +/- 6.35
 
 ..  container:: justify
 
-    The present simulations are too short to give a
+    This indicate that the solvation energy is of :math:`-64.6 \pm 6.3`~kJ/mol.
+    Note however that the present simulations are too short to give a
     reliable result. To accurately measure the solvation
-    energy of a molecule, use much longer equilibration
-    (typically one nanosecond) and production runs
-    (typically several nanoseconds).
+    energy of a molecule, you should use much longer equilibration,
+    typically one nanosecond, as well as much longer production runs,
+    typically several nanoseconds.
 
 .. include:: ../../non-tutorials/accessfile.rst
