@@ -1,7 +1,7 @@
 .. _solvation-energy-label:
 
-Molecule solvation energy
-*************************
+Solvation energy
+****************
 
 .. container:: hatnote
 
