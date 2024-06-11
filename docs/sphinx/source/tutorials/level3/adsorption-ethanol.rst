@@ -284,6 +284,8 @@ Energy minimization
     :class: only-dark
     :height: 450
 
+.. container:: figurelegend
+
     Movie showing the motion of the atoms during the
     energy minimization. The two fluid/vacuum interfaces
     are on the left and or the right sides, respectively.
