@@ -23,31 +23,40 @@ Free energy profile
 
     The objective of this tutorial is to use GROMACS to perform
     a molecular simulation, and to calculate the free energy of adsorption
-    of ethanol at the water-vapor interface. 
+    of ethanol at a liquid-vapor interface. 
+
+..  container:: justify
+
+    A liquid-vapor slab made of water and ethanol molecules is first
+    equilibrated under ambient conditions. Then, umbrella sampling is used
+    to probe the free energy profile of a chosen molecule across the 
+    liquid-vapor interface.
 
 .. include:: ../../non-tutorials/recommand-salt.rst
 .. include:: ../../non-tutorials/needhelp.rst
 .. include:: ../../non-tutorials/GROMACS2024.2.rst
 
-Input files
-===========
+Prepare the input files
+=======================
 
 ..  container:: justify
 
-    Create 3 folders named respectively *preparation/*, *adsorption/*,
+    Create 3 folders side-by-side named respectively *preparation/*, *adsorption/*,
     and *singleposition/*. Go to *preparation/*.
 
 ..  container:: justify
 
     Download the configuration files for the ethanol molecule from
-    the ATB repository: click `here <https://atb.uq.edu.au/molecule.py?molid=902261#panel-md>`__,
-    click on 'All-Atom PDB (optimised geometry)'
-    and place the file |BIPQ_allatom_optimised_geometry.pdb| in the 'preparation/' folder. 
+    the |ethanol_atb| (click on *All-Atom PDB (optimised geometry)*),
+    and place the file |BIPQ_allatom_optimised_geometry.pdb| in the *preparation/* folder. 
 
 .. |BIPQ_allatom_optimised_geometry.pdb| raw:: html
 
-
     <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/preparation/BIPQ_allatom_optimised_geometry.pdb" target="_blank">BIPQ_allatom_optimised_geometry.pdb</a>
+
+.. |ethanol_atb| raw:: html
+
+    <a href="https://atb.uq.edu.au/molecule.py?molid=902261#panel-md" target="_blank">ATB repository</a>
 
 Create the configuration file
 -----------------------------
@@ -56,7 +65,7 @@ Create the configuration file
 
     First, let us convert the pdb file into a gro file
     consisting of a single ethanol molecule at the center
-    of a small box using *trjconv*:
+    of a small box using the *gmx trjconv* command:
 
 ..  code-block:: bash
 
@@ -97,33 +106,41 @@ Replicate the ethanol molecule
 .. container:: figurelegend
 
     Replicated ethanol molecules with carbon atoms in
-    gray, oxygen atom in red, and hydrogen atoms in white.
+    gray, oxygen atoms in red, and hydrogen atoms in white.
 
 Create the topology file
 ------------------------
 
 ..  container:: justify
 
-    From the `same atb
-    page <https://atb.uq.edu.au/molecule.py?molid=902261#panel-md>`__,
-    copy the 
-    `'GROMACS G54A7FF All-Atom (ITP file)' <https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/preparation/ff/BIPQ_GROMACS_G54A7FF_allatom.itp>`__
-    and place it in a folder named 'ff/' and located
-    within the 'preparation/' folder. Within 'ff/',
-    download as well the GROMACS top file named `Gromacs
-    4.5.x-5.x.x
-    54a7 <https://atb.uq.edu.au/forcefield_files/atb_gromacs/5/gromos54a7_atb.ff.tar.gz>`__
-    containing all the force field parameters. Copy as
-    well the |ethanol-h2o.itp| file for the water molecules in the 'ff/' folder.
-    Then, let us write the topology file by simply
-    creating a blank file named 'topol.top' within the
-    'preparation/' folder, and copying in it:
+    Within the *preparation/* folder, create a folder named *ff/*.
 
-.. |ethanol-h2o.itp| raw:: html
+..  container:: justify
+
+    From the same same page from the ATB repository, download the file named
+    |GROMACS_G54A7FF.itp| and place within *ff/*.
+    Download as well the GROMACS top file named |Gromacs4.5.x-5.x.x54a7.itp|
+    containing most of the force field parameters. Finally, copy
+    the |ethanol_h2o.itp| file for the water molecules in the *ff/* folder.
+
+.. |GROMACS_G54A7FF.itp| raw:: html
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/preparation/ff/BIPQ_GROMACS_G54A7FF_allatom.itp" target="_blank">GROMACS G54A7FF All-Atom (ITP file)</a>
+    
+.. |Gromacs4.5.x-5.x.x54a7.itp| raw:: html
+
+    <a href="https://atb.uq.edu.au/forcefield_files/atb_gromacs/5/gromos54a7_atb.ff.tar.gz" target="_blank">Gromacs 4.5.x-5.x.x 54a7</a>
+
+.. |ethanol_h2o.itp| raw:: html
 
     <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/preparation/ff/h2o.itp" target="_blank">h2o.itp</a>
 
-..  code-block:: bash
+..  container:: justify
+
+    Create a blank file named *topol.top* within the
+    *preparation/* folder, and copy the following lines in it:
+
+..  code-block:: bw
 
     #include "ff/gromos54a7_atb.ff/forcefield.itp"
     #include "ff/BIPQ_GROMACS_G54A7FF_allatom.itp"
@@ -135,7 +152,6 @@ Create the topology file
     [ molecules ]
     BIPQ 64
 
-
 Add the water
 -------------
 
@@ -143,7 +159,7 @@ Add the water
 
     Let us add water molecules. First download the tip4p
     water configuration file |ethanol-tip4p.gro|
-    and copy it in the 'preparation/' folder. Then, in
+    and copy it in the *preparation/* folder. Then, in
     order to add (tip4p) water molecules to both gro and
     top files, use the gmx solvate command as follow:
 
@@ -158,10 +174,12 @@ Add the water
 ..  container:: justify
 
     In my case, 858 water molecules with residue name
-    'SOL' were added.
+    *SOL* were added.
 
-    There should be a new line 'SOL 858' in the topology
-    file 'topol.top':
+..  container:: justify
+
+    There should be a new line *SOL 858* in the topology
+    file *topol.top*:
 
 ..  code-block:: bash
 
@@ -171,7 +189,7 @@ Add the water
 
 ..  container:: justify
 
-    The created 'solvated.gro' file contains the positions
+    The created *solvated.gro* file contains the positions
     of both ethanol and water molecules, it looks like that:
 
 .. figure:: ../figures/level3/adsorption-ethanol/solvated-light.png
@@ -184,12 +202,14 @@ Add the water
     :class: only-dark
     :height: 450
 
-    Replicated ethanol molecules within water. Water molecules appear in light blue.
+.. container:: figurelegend
+
+    Replicated ethanol molecules surrounded by water (in light blue color).
 
 ..  container:: justify
 
-    Since we want to simulate a liquid-vapor system, let
-    us increase the box size along the x direction to
+    In order to create a liquid-vapor slab, let
+    us increase the box size along the *x* direction to
     create a large vacuum area:
 
 ..  code-block:: bash
@@ -198,10 +218,13 @@ Add the water
 
 ..  container:: justify
 
-    Select 'system' for both centering and output.
-    If you encountered a problem during file generation,
-    you can also download the solvated_vacuum.gro file I
-    have generated by clicking |ethanol-solvated_vacuum|.
+    Select *system* for both centering and output.
+
+..  container:: justify
+
+    Alternatively, download the *solvated_vacuum.gro* file I
+    have generated by clicking |ethanol-solvated_vacuum| and continue with
+    the tutorial.
 
 .. |ethanol-solvated_vacuum| raw:: html
 
