@@ -590,7 +590,7 @@ Perform a 21-step loop
 
 ..  container:: justify
 
-    This indicate that the solvation energy is of :math:`-64.6 \pm 6.3`~kJ/mol.
+    This indicate that the solvation energy is of :math:`-64.6 \pm 6.3~\text{kJ/mol}`.
     Note however that the present simulations are too short to give a
     reliable result. To accurately measure the solvation
     energy of a molecule, you should use much longer equilibration,
