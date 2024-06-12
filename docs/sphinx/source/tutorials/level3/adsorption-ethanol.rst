@@ -105,7 +105,7 @@ Replicate the ethanol molecule
 
 .. container:: figurelegend
 
-    Replicated ethanol molecules with carbon atoms in
+    Figure: Replicated ethanol molecules with carbon atoms in
     gray, oxygen atoms in red, and hydrogen atoms in white.
 
 Create the topology file
@@ -204,7 +204,7 @@ Add the water
 
 .. container:: figurelegend
 
-    Replicated ethanol molecules surrounded by water (in light blue color).
+    Figure: Replicated ethanol molecules surrounded by water (in light blue color).
 
 ..  container:: justify
 
@@ -272,7 +272,9 @@ Energy minimization
 
 ..  container:: justify
 
-    This is what I see:
+    During energy minimisation, the
+    molecules move until the forces between the atoms are
+    reasonable.
 
 .. figure:: ../figures/level3/adsorption-ethanol/video-min-light.webp
     :alt: GROMACS tutorial : Ethanol molecules during minimisation
@@ -286,22 +288,20 @@ Energy minimization
 
 .. container:: figurelegend
 
-    Movie showing the motion of the atoms during the
+    Figure: Movie showing the motion of the atoms during the
     energy minimization. The two fluid/vacuum interfaces
     are on the left and or the right sides, respectively.
 
-..  container:: justify
+.. admonition:: Note for VMD users
+    :class: info
 
-    **Note for VMD user:** You can avoid having molecules
-    'cut in half' by the periodic boundary conditions by
-    rewriting the trajectory using 'gmx trjconv -f min.trr
-    -s min.tpr -o min_whole.trr -pbc whole'
+    You can avoid having
+    molecules *cut in half* by the periodic boundary
+    conditions by rewriting the trajectory using:
 
-..  container:: justify
-
-    **Observation:** During energy minimisation, the
-    molecules move until the forces between the atoms are
-    reasonable.
+    ..  code-block:: bash
+        
+        gmx trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole
 
 Equilibration
 =============
@@ -310,7 +310,7 @@ Equilibration
 
     Starting from the minimized configuration, let us
     perform a NVT equilibration for 100 ps in order to let
-    the system reach equilibrium:
+    the system reaches equilibrium:
 
 ..  code-block:: bash
 
@@ -364,7 +364,7 @@ Equilibration
 
 .. container:: figurelegend
 
-    Water (blue) and ethanol (gray) density profile along the x direction.
+    Figure: Water (blue) and ethanol (gray) density profile along the *x* direction.
 
 ..  container:: justify
 
@@ -534,7 +534,7 @@ Imposed forcing
 
 ..  container:: figurelegend
 
-    Ethanol molecule being pulled from the rest of the
+    Figure: Ethanol molecule being pulled from the rest of the
     fluid during minimisation and nvt equilibration.
 
 ..  container:: justify
@@ -553,7 +553,7 @@ Imposed forcing
 
 ..  container:: figurelegend
 
-    Probability distribution of the distance between the
+    Figure: Probability distribution of the distance between the
     two center-of-mass. Short (50 ps) and long (1.5 ns)
     runs are compared.
 
@@ -676,7 +676,7 @@ Free energy profile calculation
 
 ..  container:: figurelegend
 
-    PMF for the ethanol molecule across the interface
+    Figure: PMF for the ethanol molecule across the interface
     between a water/ethanol mixture and vapor.
 
 ..  container:: justify

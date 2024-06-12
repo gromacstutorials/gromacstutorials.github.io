@@ -79,7 +79,7 @@ Prepare the PEG molecule
 
 .. container:: figurelegend
 
-    The PEG molecule is a polymer chain made of carbon atoms (in gray),
+    Figure: The PEG molecule is a polymer chain made of carbon atoms (in gray),
     oxygen atoms (in red), and hydrogen atoms (in white). See
     the corresponding |video_peg_youtube|.
 
