@@ -335,15 +335,15 @@ Equilibration
     keyword to divide the box into 100 frames. Repeat
     the procedure to extract the water profile as well.
 
-..  container:: justify
+.. admonition:: Warning: small equilibration time
+    :class: info
 
-    **Warning:** The current equilibration time for the
-    NVT run (100 ps) is too small. It has been chosen to
-    make the tutorial easier to follow for people with a
-    bad laptop (myself included). Increase the duration
-    to 1 nanosecond for a better-equilibrated system.
+    The current equilibration time for the
+    NVT run (100 ps) is too small. Such short time was chosen to
+    make the tutorial possible to follow regardless of your computational resources.
+    Increase the duration to 1 nanosecond for a well equilibrated system.
     Alternatively, download the final configuration I
-    have generated after a 1 ns run by clicking |ethanol-nvt_1ns.gro|.
+    have obtained after a 1 ns run by clicking |ethanol-nvt_1ns.gro|.
 
 .. |ethanol-nvt_1ns.gro| raw:: html
 
@@ -351,8 +351,7 @@ Equilibration
 
 ..  container:: justify
 
-    The density profile I get for both water and ethanol
-    during the last 500 ps of the 1 ns run is :
+    The n is :
 
 .. figure:: ../figures/level3/adsorption-ethanol/position-light.png
     :alt: GROMACS tutorial : Density profile water and ethanol
@@ -364,15 +363,16 @@ Equilibration
 
 .. container:: figurelegend
 
-    Figure: Water (blue) and ethanol (gray) density profile along the *x* direction.
+    Figure: Water (blue) and ethanol (gray) density profiles along the :math:`x` axis.
+    These density profiles were obtained during the last 500 picosecond of a
+    1 nanosecond long run.
 
 ..  container:: justify
 
     The density profiles show an excess of
-    ethanol at the 2 interfaces, which is expected as
-    ethanol is known to be amphiphilic. There is also a
-    local maxima in the center of the fluid layer (near x
-    = 3 nm), and two depletion areas in between the center
+    ethanol at the 2 interfaces, which is commonly observed :cite:`stewart2003molecular`.
+    There is also a local maxima in the water density near center of the fluid
+    layer (near :math:`x = 3~\text{nm}`), and two depletion areas in between the center
     of the fluid layer and the two interfaces.
 
 Imposed forcing
@@ -380,16 +380,20 @@ Imposed forcing
 
 ..  container:: justify
 
-    To calculate the free energy profile across the
-    liquid/vapor interface, one needs to impose an
-    additional harmonic potential to one ethanol
-    molecule and force it to explore the box, including
-    the most energetically unfavorable part.
-    To test our protocol, let us first
-    calculate one single position. More positions will
-    be calculated in the next part of this tutorial.
+    To calculate the free energy profile across the liquid/vapor interface,
+    one needs to impose an additional harmonic potential to one ethanol
+    molecule and force it to explore the box along the :math:`x` axis..
+
+..  container:: justify
+
+    As a test, let us first apply the protocol to force the ethanol molecule
+    to remain in one given single position. All the remaining
+    positions will be calculated in the next part of this tutorial.
+
+..  container:: justify
+
     Within *singleposition/*, create a folder named
-    'inputs', and copy |ethanol-min.mdp-2|, |ethanol-nvt.mdp-2|
+    *inputs/*, and copy |ethanol-min.mdp-2|, |ethanol-nvt.mdp-2|
     and |ethanol-pro.mdp-2| in it.
 
 .. |ethanol-min.mdp-2| raw:: html
@@ -406,7 +410,7 @@ Imposed forcing
 
 ..  container:: justify
 
-    In all 3 mdp files, there are the following lines:
+    In all 3 *.mdp* files, there are the following lines:
 
 ..  code-block:: bw
 
@@ -427,18 +431,18 @@ Imposed forcing
 
 ..  container:: justify
 
-    These lines specify the additional
-    harmonic potential to be applied between a group
-    name 'ethanol_pull' (still to be defined) and
-    'water'. The spring constant of the harmonic
-    potential is 1000 kJ/mol/nm2, and the requested
+    These lines specify the additional harmonic potential to be applied
+    between a group named *ethanol_pull* (still to be defined) and
+    *water*. The spring constant of the harmonic
+    potential is :math:`k = 1000~\text{kJ/mol/nm}^2`, and the requested
     distance between the center-of-mass of the two
-    groups is 2 nm along the x dimension.
+    groups is :math:`2~\text{nm}` along
+    the :math:`x` axis.
     
 .. container:: justify
 
-    Copy as well the previously created topol.top file.
-    Modify the first lines to adapt the path to the
+    Copy as well the previously created *topol.top* file within 
+    *singleposition/*, and modify the first lines to adapt the path to the
     force field folder:
 
 ..  code-block:: bw
@@ -449,7 +453,7 @@ Imposed forcing
 
 ..  container:: justify
 
-    Let us create an index file :
+    Let us create an index file:
 
 ..  code-block:: bash
 
@@ -457,33 +461,28 @@ Imposed forcing
 
 ..  container:: justify
 
-    or (if you choose to used this file)
+    Then, type:
 
-..  code-block:: bash
-
-    gmx make_ndx -f ../preparation/nvt.gro -o index.ndx
-
-..  container:: justify
-
-    and type:
-
-..  code-block:: bash
+..  code-block:: bw
 
     a 2
     name 6 ethanol_pull
 
 ..  container:: justify
 
-    Press 'q' to save and exit. These commands create an
-    index file containing a new group named 'ethanol_pull'
+    Press *q* to save and exit. These commands create an
+    index file containing, alongside default groups, a group named *ethanol_pull*
     made of only 1 atom: the atom with index 2. This atom
     is the oxygen atom of the first ethanol molecule in
-    the list. We don't care here where this molecule is
-    located in the box. You can ensure that the atom of
-    index 2 is indeed an oxygen of an ethanol molecule by
-    looking at the top of the nvt.gro (or nvt_1ns.gro) file:
+    the list.
+    
+..  container:: justify
 
-..  code-block:: bash
+    You can ensure that the atom of
+    index 2 is indeed an oxygen of an ethanol molecule by
+    looking at the top of the *nvt.gro* (or *nvt_1ns.gro*) file:
+
+..  code-block:: bw
 
     Ethanol molecules in water
     4008
@@ -500,12 +499,7 @@ Imposed forcing
 
 ..  container:: justify
 
-    Other atoms of the molecule could have been
-    chosen, or even the full ethanol molecule.
-
-..  container:: justify
-
-    Run all 3 inputs successively:
+    Run all 3 inputs successively using GROMACS:
 
 ..  code-block:: bash
 
@@ -518,9 +512,9 @@ Imposed forcing
 
 ..  container:: justify
 
-    During minisation, the ethanol molecule is separated
+    During minimisation, the ethanol molecule is separated
     from the rest of the fluid until the distance between
-    the center-of-mass of the 2 groups is 2 nm:
+    the center-of-mass of the 2 groups is 2 nm.
 
 .. figure:: ../figures/level3/adsorption-ethanol/video-pulled-light-2.webp
     :alt: GROMACS tutorial : ethanol molecule being pulled
@@ -540,8 +534,7 @@ Imposed forcing
 ..  container:: justify
 
     Then, during the production run, the average distance
-    between the 2 groups is measured over time. Let us
-    plot the histogram of this distance:
+    between the 2 groups is measured over time.
 
 .. figure:: ../figures/level3/adsorption-ethanol/probability-light.png
     :alt: GROMACS tutorial : Probability distribution of the distance
@@ -559,15 +552,15 @@ Imposed forcing
 
 ..  container:: justify
 
-    A longer run has been added for comparison.
-    If you have a good computer, feel free to run longer
-    production run than 50 ps.
+    Here, a longer run has been added for comparison.
+    If you have the computational resources, feel free to run longer
+    production runs than 50 ps.
 
 ..  container:: justify
 
-    Note that the distribution is not centered around x = 2 nm.
-    This is due to the interaction between the pulled ethanol molecule and the
-    rest of the fluid, that are shifting away the average position of the 
+    Note that the distribution is not centered around :math:`x = 2~\text{nm}`.
+    This is expected as the interactions between the pulled ethanol molecule and the
+    rest of the fluid are shifting away the average position of the 
     ethanol molecule from the center of harmonic potential.
 
 Free energy profile calculation
@@ -575,14 +568,11 @@ Free energy profile calculation
 
 ..  container:: justify
 
-    Let us replicate the previous calculation for 30
-    differents distances, from x = 0 (the ethanol
-    molecule is forced to remain at the center of the
-    liquid) to x = 4 (the ethanol molecule is far within
-    the vacuum phase).
-    Create a new folder, call it 'adsorption/', and copy
+    Let us replicate the previous calculation for 30 distances,
+    from :math:`x = 0` (i.e. the center of the
+    liquid slab) to :math:`x = 4~\text{nm}` (far within the vacuum phase).
+    Within the folder called *adsorption/*, create an *inputs/* folder, and copy
     |ethanol-min.mdp-3|, |ethanol-nvt.mdp-3|, and |ethanol-pro.mdp-3|, in it.
-    The only difference with the previous input scripts is the command:
 
 .. |ethanol-min.mdp-3| raw:: html
 
@@ -596,16 +586,23 @@ Free energy profile calculation
 
     <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/adsorption-ethanol/adsorption/inputs/pro.mdp" target="_blank">pro.mdp</a>
 
+..  container:: justify
+
+    The only difference with the previous input scripts is the command:
+
 ..  code-block:: bash
 
     pull-coord1-init = to_be_replaced
 
 ..  container:: justify
 
-    where the keyword 'to_be_replaced' is to be
-    systematically replaced using a bash script. Create a
-    bash script, call it 'run.sh', and copy the following
-    lines in it:
+    Here, the keyword *to_be_replaced* is to be systematically replaced by the
+    right number using the bash script below. 
+    
+..  container:: justify
+
+    Create a new bash script called *run.sh* with *adsorption/*, and copy
+    the following lines in it:
 
 ..  code-block:: bash
 
@@ -631,29 +628,26 @@ Free energy profile calculation
 ..  container:: justify
 
     Copy the previously created index file and topology
-    file within the 'adsorption/' folder, and execute
+    file within the *adsorption/* folder, and execute
     the bash script.
 
 ..  container:: justify
 
-    When the simulation is done, create 2 files (credit
-    to `the excellent gaseri site <https://gaseri.org/en/tutorials/gromacs/5-umbrella/#simulation>`__)
+    When the simulation is done, create 2 files
+    by typing in the terminal (credit to the |gaseri_site|):
+
+.. |gaseri_site| raw:: html
+
+    <a href="https://gaseri.org/en/tutorials/gromacs/5-umbrella/#simulation" target="_blank">gaseri site</a>
 
 ..  code-block:: bash
 
     ls prd.*.tpr > tpr.dat
-
-..  container:: justify
-
-    and:
-
-..  code-block:: bash
-
     ls pullf-prd.*.xvg > pullf.dat
 
 ..  container:: justify
 
-    Finally, perform the analysis using the WHAM command
+    Finally, perform the analysis using the *gmx wham* command
     of GROMACS:
 
 ..  code-block:: bash
@@ -662,9 +656,8 @@ Free energy profile calculation
 
 ..  container:: justify
 
-    A file named "profile.xvg" must have been created,
-    and it should contain a PMF profile resembling the
-    red curve below:
+    A file named *profile.xvg* has been created. It
+    contains a potential of mean force (PMF).
 
 .. figure:: ../figures/level3/adsorption-ethanol/PMF-light.png
     :alt: GROMACS tutorial : PMF for the ethanol molecule
@@ -677,33 +670,36 @@ Free energy profile calculation
 ..  container:: figurelegend
 
     Figure: PMF for the ethanol molecule across the interface
-    between a water/ethanol mixture and vapor.
+    between a water/ethanol liquid slab and vapor.
 
 ..  container:: justify
 
-    Runs of 100 ps as done in this tutorial
-    are too short to obtain a proper result. Increase
+    The durations 100 ps used in this tutorial
+    are too short to obtain a smooth and reliable PMF curve. Increase
     the duration of the production runs to a few
-    nanoseconds to obtain a proper PMF (like the blue
-    curve in the figure above).
+    nanoseconds for reasonable results.
 
 ..  container:: justify
 
-    The PMF shows a plateau inside the
-    bulk liquid (x<1 nm), a minimum at the interface
-    (x=1.5 nm), and increase in the vapor phase (x>1.5
-    nm). The minimum at the interface indicate that
-    ethanol favorably adsorb at the liquid/vapor
-    interface, which is consistent with the density
-    profile. The PMF also indicates that, once adsorbed,
-    the ethanol molecule requires an energy of about 5
-    kJ/mol to re-enter the liquid phase (looking at the
-    blue curve), which is about 2.2 kBT. Finally the PMF
-    shows that it is energetically costly for the
+    The PMF shows a plateau inside the bulk liquid (:math:`x<1~\text{nm}`),
+    a minimum at the interface (:math:`x=1.5~\text{nm}`), and increase in the
+    vapor phase (:math:`x>1.5~\text{nm}`). The minimum at the interface indicate that
+    ethanol favorably adsorb at the liquid/vapor interface, which is
+    consistent with the density profile. 
+    
+..  container:: justify
+
+    The PMF also indicates that, once adsorbed,
+    the ethanol molecule requires an energy of about :math:`5~\text{kJ/mol}`
+    to re-enter the liquid phase (see blue curve), which is about
+    :math:`2.2~k_\text{B} T`.
+    
+..  container:: justify
+
+    Finally, the PMF shows that it is energetically costly for the
     ethanol molecule to fully desorb and go into the
-    vacuum phase as the energy barrer to overcome is at
-    least 25 kJ/mol. Consistently, when performing MD
-    simulation, it is rare to observe an ethanol
-    molecule exploring the vapor phase.
+    vacuum phase as the energy barrier to overcome is at
+    least :math:`25~\text{kJ/mol}`. Consistently, when performing unbiased MD
+    simulation, it is relatively rare to observe an ethanol molecule exploring the vapor phase.
 
 .. include:: ../../non-tutorials/accessfile.rst
