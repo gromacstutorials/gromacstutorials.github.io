@@ -80,9 +80,8 @@ Replicate the ethanol molecule
 
 ..  container:: justify
 
-    In order to create a system with several ethanol
-    molecules, let us replicate the single molecule (4x4x4
-    times) using *genconf*:
+    To create a system with several ethanol molecules, let us replicate
+    the single molecule (4x4x4 times) using *genconf*:
 
 ..  code-block:: bash
 
@@ -117,7 +116,7 @@ Create the topology file
 
 ..  container:: justify
 
-    From the same same page from the ATB repository, download the file named
+    From the same page from the ATB repository, download the file named
     |GROMACS_G54A7FF.itp| and place within *ff/*.
     Download as well the GROMACS top file named |Gromacs4.5.x-5.x.x54a7.itp|
     containing most of the force field parameters. Finally, copy
@@ -161,7 +160,7 @@ Add the water
     water configuration file |ethanol-tip4p.gro|
     and copy it in the *preparation/* folder. Then, in
     order to add (tip4p) water molecules to both gro and
-    top files, use the gmx solvate command as follow:
+    top files, use the gmx solvate command as follows:
 
 .. |ethanol-tip4p.gro| raw:: html
 
@@ -190,7 +189,7 @@ Add the water
 ..  container:: justify
 
     The created *solvated.gro* file contains the positions
-    of both ethanol and water molecules, it looks like that:
+    of both ethanol and water molecules, it looks like this:
 
 .. figure:: ../figures/level3/adsorption-ethanol/solvated-light.png
     :alt: GROMACS tutorial : Ethanol molecules in water with VMD
@@ -208,7 +207,7 @@ Add the water
 
 ..  container:: justify
 
-    In order to create a liquid-vapor slab, let
+    To create a liquid-vapor slab, let
     us increase the box size along the *x* direction to
     create a large vacuum area:
 
@@ -252,7 +251,7 @@ Energy minimization
     These 2 files have been seen in the previous
     tutorials. They contain the GROMACS commands, such
     as the type of solver to use, the temperature, etc.
-    Apply the minimisation to the solvated box using :
+    Apply the minimization to the solvated box using :
 
 ..  code-block:: bash
 
@@ -272,7 +271,7 @@ Energy minimization
 
 ..  container:: justify
 
-    During energy minimisation, the
+    During energy minimization, the
     molecules move until the forces between the atoms are
     reasonable.
 
@@ -309,7 +308,7 @@ Equilibration
 ..  container:: justify
 
     Starting from the minimized configuration, let us
-    perform a NVT equilibration for 100 ps in order to let
+    perform an NVT equilibration for 100 ps in order to let
     the system reaches equilibrium:
 
 ..  code-block:: bash
@@ -339,9 +338,9 @@ Equilibration
     :class: info
 
     The current equilibration time for the
-    NVT run (100 ps) is too small. Such short time was chosen to
+    NVT run (100 ps) is too small. Such a short time was chosen to
     make the tutorial possible to follow regardless of your computational resources.
-    Increase the duration to 1 nanosecond for a well equilibrated system.
+    Increase the duration to 1 nanosecond for a well-equilibrated system.
     Alternatively, download the final configuration I
     have obtained after a 1 ns run by clicking |ethanol-nvt_1ns.gro|.
 
@@ -364,14 +363,14 @@ Equilibration
 .. container:: figurelegend
 
     Figure: Water (blue) and ethanol (gray) density profiles along the :math:`x` axis.
-    These density profiles were obtained during the last 500 picosecond of a
+    These density profiles were obtained during the last 500 picoseconds of a
     1 nanosecond long run.
 
 ..  container:: justify
 
     The density profiles show an excess of
     ethanol at the 2 interfaces, which is commonly observed :cite:`stewart2003molecular`.
-    There is also a local maxima in the water density near center of the fluid
+    There is also a local maxima in the water density near the center of the fluid
     layer (near :math:`x = 3~\text{nm}`), and two depletion areas in between the center
     of the fluid layer and the two interfaces.
 
@@ -381,7 +380,7 @@ Imposed forcing
 ..  container:: justify
 
     To calculate the free energy profile across the liquid/vapor interface,
-    one needs to impose an additional harmonic potential to one ethanol
+    one needs to impose an additional harmonic potential on one ethanol
     molecule and force it to explore the box along the :math:`x` axis..
 
 ..  container:: justify
@@ -479,7 +478,7 @@ Imposed forcing
 ..  container:: justify
 
     You can ensure that the atom of
-    index 2 is indeed an oxygen of an ethanol molecule by
+    index 2 is indeed an oxygen atom that beyond to an ethanol molecule by
     looking at the top of the *nvt.gro* (or *nvt_1ns.gro*) file:
 
 ..  code-block:: bw
@@ -512,7 +511,7 @@ Imposed forcing
 
 ..  container:: justify
 
-    During minimisation, the ethanol molecule is separated
+    During minimization, the ethanol molecule is separated
     from the rest of the fluid until the distance between
     the center-of-mass of the 2 groups is 2 nm.
 
@@ -529,7 +528,7 @@ Imposed forcing
 ..  container:: figurelegend
 
     Figure: Ethanol molecule being pulled from the rest of the
-    fluid during minimisation and nvt equilibration.
+    fluid during minimization and NVT equilibration.
 
 ..  container:: justify
 
@@ -560,7 +559,7 @@ Imposed forcing
 
     Note that the distribution is not centered around :math:`x = 2~\text{nm}`.
     This is expected as the interactions between the pulled ethanol molecule and the
-    rest of the fluid are shifting away the average position of the 
+    rest of the fluid are shifting away from the average position of the 
     ethanol molecule from the center of harmonic potential.
 
 Free energy profile calculation
@@ -674,7 +673,7 @@ Free energy profile calculation
 
 ..  container:: justify
 
-    The durations 100 ps used in this tutorial
+    The durations of 100 ps used in this tutorial
     are too short to obtain a smooth and reliable PMF curve. Increase
     the duration of the production runs to a few
     nanoseconds for reasonable results.
@@ -689,7 +688,7 @@ Free energy profile calculation
     
 ..  container:: justify
 
-    The PMF also indicates that, once adsorbed,
+    The PMF also indicates that once adsorbed,
     the ethanol molecule requires an energy of about :math:`5~\text{kJ/mol}`
     to re-enter the liquid phase (see blue curve), which is about
     :math:`2.2~k_\text{B} T`.

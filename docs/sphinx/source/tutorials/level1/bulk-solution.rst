@@ -250,10 +250,9 @@ The input files
     the small residues considered here. The *forcefield.itp* file also
     contains the list of atoms, and their respective charge in the units of
     the elementary charge :math:`e`, as well as their respective Lennard-Jones
-    parameters :math:`\sigma`
-    (in nanometer)
-    and :math:`\epsilon`
-    (in J/mol):
+    parameters :math:`\sigma` (in nanometer)
+    and :math:`\epsilon` 
+    (in kJ/mol):
 
 ..  code-block:: bw
 
@@ -268,8 +267,9 @@ The input files
 
 ..  container:: justify
 
-    Here the *ptype* is used to differential the real atoms (A) from the virtual
-    and massless site (D) from the four-point water model.
+    Here the *ptype* is used to differential the real atoms (A), such as 
+    hydrogens and oxygens, from the virtual and massless site of the
+    four-point water model (D).
 
 ..  container:: justify
 
@@ -307,7 +307,7 @@ The input files
 ..  container:: justify
 
     In this tutorial, 4 different input files will be
-    written in order to perform respectively an energy
+    written to perform respectively an energy
     minimization of the salt solution, an equilibration
     in the NVT ensemble (i.e. with fixed box size), an equilibration
     in the NPT ensemble (i.e. with changing box size), and finally
