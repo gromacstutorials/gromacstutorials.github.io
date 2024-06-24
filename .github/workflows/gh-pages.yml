@@ -31,7 +31,7 @@ jobs:
           pip install sphinx-togglebutton
           pip install sphinx-favicon
           pip install sphinxcontrib.bibtex
-      - name: Build
+      - name: Build  # build from docs/sphinx
         run: |
           cd docs/sphinx/
           make clean
