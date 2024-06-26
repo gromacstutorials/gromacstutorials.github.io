@@ -3,7 +3,7 @@ name: Deploy GitHub Pages
 on:
   push:
     branches:
-      - main  # Set a branch name to trigger deployment
+      - develop  # Set a branch name to trigger deployment
 jobs:
   deploy:
     runs-on: ubuntu-22.04
@@ -40,7 +40,7 @@ jobs:
           cp source/lammps_replace.html build/html/non-tutorials/lammps.html
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
-        if: ${{ github.ref == 'refs/heads/main' }}
+        if: ${{ github.ref == 'refs/heads/develop' }}
         with:
           context: .
           github_token: ${{ secrets.GITHUB_TOKEN }}
