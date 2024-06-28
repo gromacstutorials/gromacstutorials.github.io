@@ -640,8 +640,8 @@ Minimalist NVT input file
 
     From the generated *temperature-nvt-minimal.xvg* file, one can see that temperature
     started from 0 K, which was expected since the atoms have no velocity
-    during a minimization step, and reaches a temperature slightly larger
-    than the requested 360 K after a duration of a few picoseconds.
+    during a minimization step, and reaches a temperature slightly larger than the
+    requested 360 K after a duration of a few picoseconds.
 
 ..  container:: justify
 
@@ -943,25 +943,22 @@ Adjust the density using NPT
     
 ..  container:: justify
 
-    The pressure curve reveals large oscillations in the
-    pressure, with the pressure alternating between large negative
-    values and large positive values. These large oscillations are
-    typical in molecular dynamics, and not a source of concern here.
+    The pressure curve reveals large oscillations in the pressure, with the pressure alternating between large negative
+    values and large positive values. These large oscillations are typical in molecular dynamics, and not a source of
+    concern here.
 
 Radial distribution function
 ============================
 
 ..  container:: justify
 
-    Let us perform a 400 pico seconds run in the
-    NVT ensemble, during which the atom positions will be printed every
-    pico-second. The trajectory will then be used to measure radial distribution
-    functions and probe the solvation environnement of the ions. 
+    Let us perform a :math:`400~\text{ps}` run in the NVT ensemble, during which the atom positions will be printed every
+    pico-second. The trajectory will then be used to measure radial distribution functions and probe the solvation
+    environment of the ions. 
     
 ..  container:: justify
     
-    Create a new input file within the *inputs/* folder, call it *production.mdp*,
-    and copy the following lines into it:
+    Create a new input file within the *inputs/* folder, call it *production.mdp*, and copy the following lines into it:
 
 ..  code-block:: bw 
 
@@ -1014,7 +1011,7 @@ Radial distribution function
     :math:`\text{SO}_4^{2-}` and 
     :math:`\text{H}_2\text{O}`,
     as well as in between :math:`\text{H}_2\text{O}` molecules.
-    This can be done using the *gmx rdf* command as follow:
+    This can be done using the *gmx rdf* command as follows:
     
 ..  code-block:: bash 
 
@@ -1025,7 +1022,7 @@ Radial distribution function
     Selecting the sodium ions, and then the water. Repeat the same operation for 
     the sulfate and water, and for the water and water. For the water-water
     RDF, it is better to exclude the intra-molecular contribution using
-    the *-excl* option, as follow:
+    the *-excl* option, as follows:
 
 ..  code-block:: bash 
 
