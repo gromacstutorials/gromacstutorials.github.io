@@ -8,13 +8,13 @@ The tutorials are compatible with the 2024.2 release of GROMACS.
 
 <p float="left">
     <a href="https://gromacstutorials.github.io/sphinx/build/html/tutorials/level1/bulk-solution.html">
-        <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/2024.2/docs/sphinx/source/tutorials/figures/level1/bulk-solution/avatar-gromacs.png?raw=true" width="32%" />
+        <img src="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/2024.2/docs/avatars/level1/bulk-solution/bulk-solution-gromacs.png" width="32%" />
+    </a>
+    <a href="https://gromacstutorials.github.io/sphinx/build/html/tutorials/level1/protein-in-electrolyte.html">
+        <img src="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/2024.2/docs/avatars/level1/protein-in-electrolyte/protein-in-electrolyte.png" width="32%" />
     </a>
     <a href="https://gromacstutorials.github.io/sphinx/build/html/tutorials/level2/stretching-a-polymer.html">
-        <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/2024.2/docs/sphinx/source/tutorials/figures/level2/stretching-a-polymer/avatar.png" width="32%" />
-    </a>
-    <a href="https://gromacstutorials.github.io/sphinx/build/html/tutorials/level3/solvation-energy.html">
-        <img src="https://github.com/gromacstutorials/gromacstutorials.github.io/blob/2024.2/docs/sphinx/source/tutorials/figures/level3/solvation-energy/no-field-dark.png" width="32%" />
+        <img src="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/2024.2/docs/avatars/level2/stretching-a-polymer/stretching-polymer-gromacs.png" width="32%" />
     </a>
 </p>
 
