@@ -1112,20 +1112,20 @@ Mean square displacement
 
 .. include:: ../../non-tutorials/accessfile.rst
 
+.. 
+    Going further with exercises
+    ============================
 
-Going further with exercises
-============================
+    ..  container:: justify
 
-..  container:: justify
+        The solutions can be found in the GitHub repository of GROMACS tutorials.
 
-    The solutions can be found in the GitHub repository of GROMACS tutorials.
+    Calculate the structure factor
+    ------------------------------
 
-Calculate the structure factor
-------------------------------
+    ..  container:: justify
 
-..  container:: justify
-
-    Use the *gmx saxs* command and extract its structure factor, or :math:`S(q)`.
-    The structure factor is a fundamental quantity that it commonly measured
-    experimentally through Small Angle X-ray Scattering (SAXS) or Small-Angle
-    Neutron Scattering (SANS) :cite:`hansen2013theory, sedlmeier2011spatial`.
+        Use the *gmx scattering* command and extract its structure factor, or :math:`S(q)`.
+        The structure factor is a fundamental quantity that it commonly measured
+        experimentally through Small Angle X-ray Scattering (SAXS) or Small-Angle
+        Neutron Scattering (SANS) :cite:`hansen2013theory, sedlmeier2011spatial`.
