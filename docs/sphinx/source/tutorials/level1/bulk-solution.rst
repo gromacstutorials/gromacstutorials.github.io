@@ -539,8 +539,8 @@ Energy minimization
 
 ..  container:: justify
 
-    The system is now in a favorable state and the molecular dynamics simulation
-    can be started.
+    Thank to the energy minimization, the system is now in a favorable state
+    and the molecular dynamics simulation can be started safely.
 
 Minimalist NVT input file
 =========================
@@ -1045,7 +1045,7 @@ Radial distribution function
 
     The radial distribution functions highlight the typical distance between
     the different species of the fluid. For instance, it can be seen that
-    there is a hydration layer of water around sodium ions at a typical
+    there is a strong hydration layer of water around sodium ions at a typical
     distance of :math:`2.4 ~ \text{Å}` from the center of the sodium ion.
 
 Mean square displacement
@@ -1112,17 +1112,20 @@ Mean square displacement
 
 .. include:: ../../non-tutorials/accessfile.rst
 
-..
-    Going further with exercises
-    ============================
 
-    Cage effect
-    -----------
+Going further with exercises
+============================
 
-    ..  container:: justify
+..  container:: justify
 
-        The *cage effect* describes the dynamical confinement of a molecule
-        or an atom by its neighors. Modify *production.mdp* and probe the *cage effect*
-        for the sodium ions. Probe also the short-time ballistic regime.
+    The solutions can be found in the GitHub repository of GROMACS tutorials.
 
-        Cannot be done right now, because gmx msd does not like dt < 1 ps
+Calculate the structure factor
+------------------------------
+
+..  container:: justify
+
+    Use the *gmx saxs* command and extract its structure factor, or :math:`S(q)`.
+    The structure factor is a fundamental quantity that it commonly measured
+    experimentally through Small Angle X-ray Scattering (SAXS) or Small-Angle
+    Neutron Scattering (SANS) :cite:`hansen2013theory, sedlmeier2011spatial`.
