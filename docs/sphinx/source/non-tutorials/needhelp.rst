@@ -1,4 +1,9 @@
-.. admonition:: You can support this webpage and access a dedicated discord channel
+.. admonition:: Struggling with your molecular simulations project?
     :class: patreon
 
-    See the :ref:`contact-label` page. 
+    Get guidance for your GROMACS simulations. :ref:`contact-label` for
+    personalized |advice| for your project.
+
+.. |advice| raw:: html
+
+   <a href="https://www.patreon.com/molecularsimulations" target="_blank">advice</a>
