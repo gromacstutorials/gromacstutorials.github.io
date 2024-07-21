@@ -27,16 +27,12 @@ Support the GROMACS tutorials initiative
 
 ..  container:: justify
 
-   You can support this webpage through |patreon| or |tipeee|. As a supporter,
+   You can support this webpage through |patreon|. As a supporter,
    you will receive personalized support and assistance with your projects.
 
 .. |patreon| raw:: html
 
    <a href="https://www.patreon.com/molecularsimulations" target="_blank">Patreon</a>
-
-.. |tipeee| raw:: html
-
-   <a href="https://en.tipeee.com/lammps-tutorials" target="_blank">Tipeee</a>
 
 Follow us
 =========
