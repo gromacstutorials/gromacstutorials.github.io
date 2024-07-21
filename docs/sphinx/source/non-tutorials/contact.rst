@@ -51,7 +51,7 @@ Follow us
 
 .. |twitter_gromacs_tutorials| raw:: html
 
-   <a href="https://x.com/gromacstutorials" target="_blank">Twitter</a>
+   <a href="https://x.com/gmxtutorials" target="_blank">Twitter</a>
 
 .. |personal_page_simon_gravelle| raw:: html
 
