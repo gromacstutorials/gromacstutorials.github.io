@@ -1,0 +1,3 @@
+[submodule ".dependencies/gromacstutorials-inputs"]
+	path = .dependencies/gromacstutorials-inputs
+	url = git@github.com:gromacstutorials/gromacstutorials-inputs.git

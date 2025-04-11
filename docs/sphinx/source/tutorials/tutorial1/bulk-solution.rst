@@ -38,31 +38,98 @@ visualized using VMD :cite:`humphrey1996vmd`.
 The input files
 ===============
 
-In order to run the present simulation using GROMACS,
-we need the 3 following files (or sets of files):
+In order to run the present simulation using GROMACS, we need to
+prepare the following three files (or sets of files):
 
-- 1) A **configuration file** (.gro) containing the
-  initial positions of the atoms and the box
-  dimensions.
-- 2) A **topology file** (.top) specifying the
-  location of the force field files (.itp).
-- 3) An **input file** (.mdp) containing the
-  parameters of the simulation (e.g. temperature, timestep).
+- 1) A **configuration file** (**.gro**) containing the initial positions of
+  the atoms and the box dimensions.
 
-The specificity of the present tutorial is that both configuration
-and topology files were prepared with homemade Python scripts, see
-:ref:`create-conf-label`. In principle, it is also possible to
-prepare the system using GROMACS functionalities, such as 
-*gmx pdb2gmx*, *gmx trjconv*, or *gmx solvate*. This will be done
-in the next tutorial, :ref:`protein_electrolyte-label`.
+- 2) A **topology file** (**.top**) specifying the location of the force
+  field files (**.itp**) and the number of residues in the simulation.
+
+- 3) An **input file** (**.mdp**) containing the simulation parameters
+  (e.g., imposed temperature, timestep, and cut-off values).
+
+..
+    The specificity of the present tutorial is that both configuration
+    and topology files were prepared with homemade Python scripts, see
+    :ref:`create-conf-label`. In principle, it is also possible to
+    prepare the system using GROMACS functionalities, such as 
+    *gmx pdb2gmx*, *gmx trjconv*, or *gmx solvate*. This will be done
+    in the next tutorial, :ref:`protein_electrolyte-label`.
 
 1) The configuration file (.gro)
 --------------------------------
 
-For the present simulation, the initial atom
-positions and box size are given in a *conf.gro* file
-(Gromos87 format) that you can download by clicking |conf-SO4.gro|.
-Save the *conf.gro* file in a folder. 
+Let us create the simulation box by placing the ions
+and molecules into it. To do so, we start from an
+empty box. In a dedicated folder, create an empty
+file called |empty.gro|, and copy the following lines
+into it:
+
+..  code-block:: bw
+
+    Empty box
+    0
+    3.50000   3.50000   3.50000
+
+.. |empty.gro| raw:: html
+
+    <a href="../../../../../../.dependencies/gromacstutorials-inputs/tutorial1/empty.gro" target="_blank">empty.gro</a>
+
+The first line, *Empty box*, is a comment, the second line is the
+total number of atoms (0), and the last line is the box dimension in nanometer,
+here 3.5 nm by 3.5 nm by 3.5 nm. This **.gro** file is written in |Gromos87 format.
+
+.. |Gromos87| raw:: html
+
+    <a href="https://manual.gromacs.org/archive/5.0.4/online/gro.html" target="_blank">Gromos87</a>
+
+Let us populate this empty box with SO\ :sub:`4`\ :sup:`2-` ions first.
+To do so, the GROMACS command named ``insert-molecules`` is used, for which one
+needs to provide a template for the ion. Within the same folder as **empty.gro**,
+create a new file named |so4.gro|, and copy the following lines
+into it:
+
+..  code-block:: bw
+
+    SO4 ion
+    5
+        1  SO4   O1    1   0.608   1.089   0.389
+        1  SO4   O2    2   0.562   1.181   0.150
+        1  SO4   O3    3   0.388   1.217   0.339
+        1  SO4   O4    4   0.425   0.980   0.241
+        1  SO4   S1    5   0.496   1.117   0.280
+    1.00000   1.00000   1.00000
+
+.. |so4.gro| raw:: html
+
+    <a href="../../../../../../.dependencies/gromacstutorials-inputs/tutorial1/so4.gro" target="_blank">so4.gro</a>
+
+This topology file for the SO\ :sub:`4`\ :sup:`2-` ion is written in the same
+format as **empty.gro**. It contains 5 atoms named ``O1``, ``O2``, ``O3``, ``O4``,
+and ``S1``, all grouped in a residue called ``SO4``.
+
+
+
+..  code-block:: bw
+
+    nb_so4=6
+    gmx insert-molecules -ci so4.gro -f empty.gro -o conf.gro -nmol ${nb_so4} -radius 0.5
+
+..  code-block:: bw
+
+    nb_na=$((2 * nb_so4))
+    gmx insert-molecules -ci na.gro -f conf.gro -o conf.gro -nmol ${nb_na} -radius 0.5
+
+..  code-block:: bw
+
+    nb_h2o=800
+    gmx insert-molecules -ci h2o.gro -f conf.gro -o conf.gro -nmol ${nb_h2o} -radius 0.14
+
+
+
+
 
 .. |conf-SO4.gro| raw:: html
 
@@ -86,9 +153,7 @@ The *conf.gro* file looks like this:
      719  Sol  MW1 2846   3.230   2.380   1.540
    3.36000   3.36000   3.36000
 
-The first line *Na2SO4 solution* is just a comment, the second line is the
-total number of atoms, and the last line is the box dimension in nanometer,
-here 3.36 nm by 3.36 nm by 3.36 nm. Between the second and the
+ Between the second and the
 last lines, there is one line per
 atom. Each line indicates, from left to right:
 
