@@ -1,0 +1,752 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../_static/favicon-32x32.png" sizes="32x32" rel="icon" type="image/png"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Free energy profile" href="adsorption-ethanol.html" /><link rel="prev" title="Stretching a polymer" href="../level2/stretching-a-polymer.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Solvation energy - </title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8b1a507d" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">    </div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">    </span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Main</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/before-you-start.html">Before you start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/contact.html">Contact us</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial1/bulk-solution.html">Bulk salt solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../level1/protein-in-electrolyte.html">Protein in electrolyte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../level2/stretching-a-polymer.html">Stretching a polymer</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Solvation energy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adsorption-ethanol.html">Free energy profile</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra content</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/extra/create-GRO-python.html">Write topology using Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Alternative</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/lammps.html">Use LAMMPS instead</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/tutorials/level3/solvation-energy.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="solvation-energy">
+<span id="solvation-energy-label"></span><h1>Solvation energy<a class="headerlink" href="#solvation-energy" title="Link to this heading">¶</a></h1>
+<div class="hatnote docutils container">
+<p>Calculating the free energy of solvation of a graphene-like molecule</p>
+</div>
+<figure class="align-right">
+<a class="only-light reference internal image-reference" href="../../_images/video-HBC-light-2.webp"><img alt="HBC (graphene-like) molecule in water" class="only-light" src="../../_images/video-HBC-light-2.webp" style="height: 250px;" />
+</a>
+</figure>
+<figure class="align-right">
+<a class="only-dark reference internal image-reference" href="../../_images/video-HBC-dark-2.webp"><img alt="HBC (graphene-like) molecule in water" class="only-dark" src="../../_images/video-HBC-dark-2.webp" style="height: 250px;" />
+</a>
+</figure>
+<p>The objective of this tutorial is to use GROMACS
+to perform a molecular simulation of a large molecule in water.
+By progressively switching off the interactions between the molecule and
+water, the free energy of solvation will be calculated.</p>
+<p>The large and flat molecule used here is a graphene-like and
+discoid molecule named hexabenzocoronene (HBC) of
+formula <span class="math notranslate nohighlight">\(\text{C}_{42}\text{H}_{18}\)</span>. The TIP4P/epsilon
+model is used for the water <span id="id1">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id49" title="Raúl Fuentes-Azcatl and José Alejandre. Non-polarizable force field of water based on the dielectric constant: tip4p/$\varepsilon $. The Journal of Physical Chemistry B, 118(5):1263–1272, 2014.">28</a>]</span>.</p>
+<div class="justify docutils container">
+<p>If you are completely new to GROMACS, I recommend that
+you follow this tutorial on a simple <a class="reference internal" href="../tutorial1/bulk-solution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a> first.</p>
+</div>
+<div class="patreon admonition">
+<p class="admonition-title">Struggling with your molecular simulations project?</p>
+<p>Get guidance for your GROMACS simulations. <a class="reference internal" href="../../non-tutorials/contact.html#contact-label"><span class="std std-ref">Contact us</span></a> for
+personalized <a href="https://www.patreon.com/molecularsimulations" target="_blank">advice</a> for your project.</p>
+</div>
+<div class="version docutils container">
+<p>This tutorial is compatible with the 2024.2 GROMACS version.</p>
+</div>
+<section id="input-files">
+<h2>Input files<a class="headerlink" href="#input-files" title="Link to this heading">¶</a></h2>
+<p>Create two folders side-by side. Name the two folders <em>preparation/</em> and
+<em>solvation/</em>, and go to <em>preparation/</em>.</p>
+<p>Download the configuration files for the HBC molecule
+by clicking <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/FJEW_allatom_optimised_geometry.pdb" target="_blank">this page</a>, and save it in
+the <em>preparation/</em> folder. The molecule
+was downloaded from the <a href="https://atb.uq.edu.au/molecule.py?molid=151371#panel-md" target="_blank">atb</a> on the automated topology builder
+(ATB) <span id="id2">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id59" title="Alpeshkumar K Malde, Le Zuo, Matthew Breeze, Martin Stroet, David Poger, Pramod C Nair, Chris Oostenbrink, and Alan E Mark. An automated force field topology builder (ATB) and repository: version 1.0. Journal of chemical theory and computation, 7(12):4026–4037, 2011.">29</a>]</span>.</p>
+<section id="create-the-configuration-file">
+<h3>Create the configuration file<a class="headerlink" href="#create-the-configuration-file" title="Link to this heading">¶</a></h3>
+<p>First, let us convert the <em>.pdb</em> file into a <em>.gro</em> file
+within a cubic box of lateral size 3 nanometers using the <em>gmx trjconv</em>
+command. Type the following command in a terminal:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx trjconv -f FJEW_allatom_optimised_geometry.pdb -s FJEW_allatom_optimised_geometry.pdb -o hbc.gro -box 3 3 3 -center
+</pre></div>
+</div>
+<p>Select <em>system</em> for both centering and output.</p>
+<figure class="align-center">
+<a class="only-light reference internal image-reference" href="../../_images/hbc-light.png"><img alt="Gromacs initial configuration of HBC graphene molecule" class="only-light" src="../../_images/hbc-light.png" style="height: 250px;" />
+</a>
+</figure>
+<figure class="align-center">
+<a class="only-dark reference internal image-reference" href="../../_images/hbc-dark.png"><img alt="Gromacs initial configuration of HBC graphene molecule" class="only-dark" src="../../_images/hbc-dark.png" style="height: 250px;" />
+</a>
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: HBC molecule as seen with VMD with carbon atoms in gray and hydrogen
+atoms in white. The honeycomb structure of the HBC is similar  to that
+of graphene.</p>
+</div>
+<p>Alternatively, you can download the <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/hbc.gro" target="_blank">hbc.gro</a> I have generated,
+and continue with the tutorial.</p>
+</section>
+<section id="create-the-topology-file">
+<h3>Create the topology file<a class="headerlink" href="#create-the-topology-file" title="Link to this heading">¶</a></h3>
+<p>Create a folder named <em>ff/</em> within the <em>preparation/</em> folder.
+Copy the force field parameters from the following <em>zip</em> file by
+clicking <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/ff-itp.zip" target="_blank">here</a>. Both <em>FJEW_GROMACS_G54A7FF_allatom.itp</em> file
+and <em>gromos54a7_atb.ff/</em> folder were downloaded from the <a href="https://atb.uq.edu.au/molecule.py?molid=151371#panel-md" target="_blank">atb</a>.</p>
+<p>Then, let us write the topology (<em>top</em>) file by simply
+creating a blank file named <em>topol.top</em> within the
+<em>preparation/</em> folder. Copy the following lines into <em>topol.top</em>:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>#include &quot;ff/gromos54a7_atb.ff/forcefield.itp&quot;
+#include &quot;ff/FJEW_GROMACS_G54A7FF_allatom.itp&quot;
+
+[ system ]
+Single HBC molecule
+
+[ molecules ]
+FJEW 1
+</pre></div>
+</div>
+</section>
+<section id="solvate-the-hbc-in-water">
+<h3>Solvate the HBC in water<a class="headerlink" href="#solvate-the-hbc-in-water" title="Link to this heading">¶</a></h3>
+<p>Let us add water molecules to the system. First, download the tip4p
+water configuration (<em>.gro</em>) file <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/tip4p.gro" target="_blank">here</a>,
+and copy it in the <em>preparation/</em> folder. This is a fourth point water
+model with additional massless site where the charge of the
+oxygen atom is placed. Then, in
+order to add tip4p water molecules to both <em>.gro</em> and
+<em>.top</em> file, use the <em>gmx solvate</em> command as follows:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx solvate -cs tip4p.gro -cp hbc.gro -o solvated.gro -p topol.top
+</pre></div>
+</div>
+<p>The new <em>solvated.gro</em> file contains all <em>8804</em> atoms from the HBC
+molecule (called FJEW) and the water molecules. A new line
+<em>SOL 887</em> also appeared in the topology <em>.top</em> file:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ molecules ]
+FJEW 1
+SOL 887
+</pre></div>
+</div>
+<p>Alternatively, you can download the <em>solvated.gro</em> file I have generated by
+clicking <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/solvated.gro" target="_blank">here</a>, and continue with the tutorial.</p>
+<p>Finally, save the topology file for the water, the <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/ff/h2o.itp" target="_blank">h2o.itp</a> file, in
+the <em>ff/</em> folder and add the <em>#include “ff/h2o.itp”</em> line to the <em>topol.top</em>
+file:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>#include &quot;ff/gromos54a7_atb.ff/forcefield.itp&quot;
+#include &quot;ff/FJEW_GROMACS_G54A7FF_allatom.itp&quot;
+#include &quot;ff/h2o.itp&quot;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="system-equilibration">
+<h2>System equilibration<a class="headerlink" href="#system-equilibration" title="Link to this heading">¶</a></h2>
+<p>The system is now ready for the simulations. Let us first equilibrate it
+before measuring the solvation energy of the HBC molecule.</p>
+<section id="energy-minimization">
+<h3>Energy minimization<a class="headerlink" href="#energy-minimization" title="Link to this heading">¶</a></h3>
+<p>Create an <em>inputs/</em> folder inside the <em>preparation/</em> folder,
+and create a new blank file called
+<em>min.mdp</em> in it. Copy the following lines into <em>min.mdp</em>:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = steep
+nsteps = 50
+
+nstxout = 10
+
+cutoff-scheme = Verlet
+nstlist = 10
+ns_type = grid
+
+couple-intramol=yes
+
+vdw-type = Cut-off
+rvdw = 1.2
+
+coulombtype = pme
+fourierspacing = 0.1
+pme-order = 4
+rcoulomb = 1.2
+
+constraint-algorithm = lincs
+constraints = hbonds
+</pre></div>
+</div>
+<p>All these lines have been seen in the previous
+tutorials. In short, with this input script, GROMACS will perform a
+steepest descent by updating the atom positions
+according to the largest forces directions, until
+the energy and maximum force reach a reasonable value.</p>
+<p>Apply the minimization to the solvated box using <em>gmx grompp</em> and <em>gmx mdrun</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/min.mdp<span class="w"> </span>-c<span class="w"> </span>solvated.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>min<span class="w"> </span>-pp<span class="w"> </span>min<span class="w"> </span>-po<span class="w"> </span>min<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">1</span>
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>min
+</pre></div>
+</div>
+<p>Here, the <em>-maxwarn 1</em> option is used to ignore a WARNING from GROMACS
+about some issue with the force field. For this tutorial, we can safely
+ignore this WARNING.</p>
+<p>Let us visualize the atom trajectories during the
+minimization step using VMD by typing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>solvate.gro<span class="w"> </span>min.trr
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="only-light reference internal image-reference" href="../../_images/minimize-light.png"><img alt="Gromacs HBC (graphene) molecule after minimization in water" class="only-light" src="../../_images/minimize-light.png" style="height: 400px;" />
+</a>
+</figure>
+<figure class="align-center">
+<a class="only-dark reference internal image-reference" href="../../_images/minimize-dark.png"><img alt="Gromacs HBC (graphene) molecule after minimization in water" class="only-dark" src="../../_images/minimize-dark.png" style="height: 400px;" />
+</a>
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: The system after energy minimization showing the HBC molecule in water.
+The water is represented as a transparent field.</p>
+</div>
+</section>
+<section id="nvt-and-npt-equilibration">
+<h3>NVT and NPT equilibration<a class="headerlink" href="#nvt-and-npt-equilibration" title="Link to this heading">¶</a></h3>
+<p>Let us perform successively a NVT and a NPT relaxation steps. Copy the <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/inputs/nvt.mdp" target="_blank">nvt.mdp</a>
+and the <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/preparation/inputs/npt.mdp" target="_blank">npt.mdp</a> files into the inputs folder, and run them both using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/nvt.mdp<span class="w"> </span>-c<span class="w"> </span>min.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>nvt<span class="w"> </span>-pp<span class="w"> </span>nvt<span class="w"> </span>-po<span class="w"> </span>nvt<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">1</span>
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>nvt
+gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/npt.mdp<span class="w"> </span>-c<span class="w"> </span>nvt.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>npt<span class="w"> </span>-pp<span class="w"> </span>npt<span class="w"> </span>-po<span class="w"> </span>npt<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">1</span>
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>npt
+</pre></div>
+</div>
+<figure class="align-center">
+<a class="only-light reference internal image-reference" href="../../_images/nvtnpt-light.webp"><img alt="Gromacs HBC (graphene) molecule during NVT and NPT equilibration" class="only-light" src="../../_images/nvtnpt-light.webp" style="height: 400px;" />
+</a>
+</figure>
+<figure class="align-center">
+<a class="only-dark reference internal image-reference" href="../../_images/nvtnpt-dark.webp"><img alt="Gromacs HBC (graphene) molecule during NVT and NPT equilibration" class="only-dark" src="../../_images/nvtnpt-dark.webp" style="height: 400px;" />
+</a>
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: Movie showing the motion of the atoms during the
+NVT and NPT equilibration steps. For clarity, the
+water molecules are represented as a continuum field.</p>
+</div>
+</section>
+</section>
+<section id="solvation-energy-measurement">
+<h2>Solvation energy measurement<a class="headerlink" href="#solvation-energy-measurement" title="Link to this heading">¶</a></h2>
+<section id="files-preparation">
+<h3>Files preparation<a class="headerlink" href="#files-preparation" title="Link to this heading">¶</a></h3>
+<p>The equilibration of the system is complete. Let us perform the solvation
+free energy calculation, for which 21 independent
+simulations will be performed.</p>
+<div class="info admonition">
+<p class="admonition-title">About free energy calculation</p>
+<p>The interactions between the HBC molecule and the water
+are progressively turned-off, thus effectively
+mimicking the HBC molecule moving from bulk water
+to vacuum. Then, the free energy difference between the fully solvated
+and the fully decoupled configurations is measured.</p>
+</div>
+<p>Within the <em>solvation/</em> folder, create an <em>inputs/</em>
+folders, and copy the following input file into it:
+<a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level3/solvation-energy/solvation/inputs/equilibration.mdp" target="_blank">equilibration.mdp</a>.</p>
+<p>This input file starts similarly as the inputs previously used in this
+tutorial, with the exception of the integrator. Instead of the <em>md</em>
+integrator, a <em>sd</em> for stochastic dynamics integrator:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = sd
+nsteps = 20000
+dt = 0.001
+</pre></div>
+</div>
+<p>This stochastic integrator creates a Langevin dynamics by adding a friction
+and a noise term to Newton equations of motion. The <em>sd</em> integrator also
+serves as a thermostat, therefore <em>tcoupl</em> is set to <em>No</em>:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>tcoupl = No
+ld-seed = 48456
+tc-grps = Water non-Water
+tau-t = 0.5 0.5
+ref-t = 300 300
+</pre></div>
+</div>
+<p>A stochastic integrator can be a better option for free energy measurements,
+as it generates a better sampling, while also imposing a strong control
+of the temperature. This is particularly useful when the molecules are
+completely decoupled.</p>
+<p>The rest of the input deals with the progressive decoupling of the HBC molecule
+from the water:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>free_energy = yes
+vdw-lambdas = 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0 1.0
+coul-lambdas = 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+</pre></div>
+</div>
+<p>The <em>vdw-lambdas</em> is used to turn-off (when <em>vdw-lambdas = 0</em>) or
+turn-on (when <em>vdw-lambdas = 1</em>) the van der Waals interactions,
+and the <em>coul-lambdas</em> is used to turn-off/turn-on the Coulomb interactions.</p>
+<p>Here, there are 21 possible states, from <em>vdw-lambdas = coul-lambdas = 0.0</em>,
+where the HBC molecule is fully decoupled from the water, to
+<em>vdw-lambdas = coul-lambdas = 1.0</em>, where the HBC molecule is fully coupled
+to the water. All the other state correspond to situation where the HBC
+molecule is partially coupled with the water.</p>
+<p>The <em>sc-alpha</em> and <em>sc-power</em> options are used to turn-on a soft core
+repulsion between the HBC and the water molecules. This is necessary
+to avoid overlap between the decoupled atoms.</p>
+<p>The <em>init-lambda-state</em> is an integer that specifies which values of
+<em>vdw-lambdas</em> and <em>coul-lambdas</em> is used. When <em>init-lambda-state</em>,
+then <em>vdw-lambdas = coul-lambdas = 0.0</em>. 21 one independent simulations
+will be performed, each with a different value of init-lambda-state:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>init-lambda-state =  0
+</pre></div>
+</div>
+<p>The <em>couple-lambda0</em> and <em>couple-lambda1</em> are used to specify that indeed
+interaction are turn-off when the <em>lambdas</em> are 0, and turn-on when the
+<em>lambdas</em> as 1:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>couple-lambda0 = none
+couple-lambda1 = vdw-q
+</pre></div>
+</div>
+<p>The parameter <em>nstdhdl</em> controls the frequency at
+which information are being printed in a <em>.xvg</em> file during
+the production run.</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>nstdhdl = 0
+</pre></div>
+</div>
+<p>For the equilibration, there is no need of printing information. For
+the production runs, a value <span class="math notranslate nohighlight">\(&gt;0\)</span> will be used for nstdhdl.</p>
+<p>The 2 last lines impose that lambda points will be written out,
+and which molecule will be used for calculating solvation free energies:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>calc_lambda_neighbors = -1
+couple-moltype = FJEW
+</pre></div>
+</div>
+<p>Let us create a second input file almost identical to <em>equilibration.mdp</em>.
+Duplicate <em>equilibration.mdp</em>, name the duplicated file <em>production.mdp</em>.
+Within <em>production.mdp</em>, simply change <em>nstdhdl</em> from 0 to 100, so that
+information about the state of the system will be printed by GROMACS
+every 100 step during the production runs.</p>
+<p>Finally, copy the previous <em>topol.top</em> file from the <em>preparation/</em> folder into
+<em>solvation/</em> folder. In oder to avoid duplicating the force field
+folder <em>ff/</em>, modify the path to the <em>.itp</em> files as follow:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>#include &quot;../preparation/ff/gromos54a7_atb.ff/forcefield.itp&quot;
+#include &quot;../preparation/ff/FJEW_GROMACS_G54A7FF_allatom.itp&quot;
+#include &quot;../preparation/ff/h2o.itp&quot;
+
+[ system ]
+Single HBC molecule in water
+
+[ molecules ]
+FJEW 1
+SOL 887
+</pre></div>
+</div>
+</section>
+<section id="perform-a-21-step-loop">
+<h3>Perform a 21-step loop<a class="headerlink" href="#perform-a-21-step-loop" title="Link to this heading">¶</a></h3>
+<p>We need to a total of 2 x 21 simulations, 2 simulations per value of
+<em>init-lambda-state</em>. This can be done using a small bash script
+with the <em>sed</em> (for <em>stream editor</em>) command.</p>
+<p>Create a new bash file fine within the ‘solvation/’
+folder, call it <em>local-run.sh</em> can copy the
+following lines in it:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>#/bin/bash
+set -e
+
+# create folder for analysis
+mkdir -p dhdl
+
+# loop on the 21 lambda state
+for state in $(seq 0 20)
+do
+    # create folder for the lambda state
+    DIRNAME=lambdastate${state}
+    mkdir -p $DIRNAME
+
+    # update the value of init-lambda-state
+    newline=&#39;init-lambda-state = &#39;$state
+    linetoreplace=$(cat inputs/equilibration.mdp | grep init-lambda-state)
+    sed -i &#39;/&#39;&quot;$linetoreplace&quot;&#39;/c\&#39;&quot;$newline&quot; inputs/equilibration.mdp
+    linetoreplace=$(cat inputs/production.mdp | grep init-lambda-state)
+    sed -i &#39;/&#39;&quot;$linetoreplace&quot;&#39;/c\&#39;&quot;$newline&quot; inputs/production.mdp
+
+    gmx grompp -f inputs/equilibration.mdp -c ../preparation/npt.gro -p topol.top -o equilibration -pp equilibration -po equilibration -maxwarn 1
+    gmx mdrun -v -deffnm equilibration -nt 4
+
+    gmx grompp -f inputs/production.mdp -c equilibration.gro -p topol.top -o production -pp production -po production -maxwarn 1
+    gmx mdrun -v -deffnm production -nt 4
+
+    mv production.* $DIRNAME
+    mv equilibration.* $DIRNAME
+
+    # create links for the analysis
+    cd dhdl/
+        ln -sf ../$DIRNAME/production.xvg md$state.xvg
+    cd ..
+done
+</pre></div>
+</div>
+<p>Within this bash script, the variable <em>state</em> increases from 0 to 20 in a
+for loop. At eash step of the loop, a folder <em>lambdastateX</em> is created,
+where <em>X</em> goes from 0 to 20. Then, the <em>sed</em> command is used twice to
+update the value of <em>init-lambda-state</em> in both <em>equilibration.mdp</em>
+and <em>production.mdp</em>.</p>
+<p>Then, GROMACS is used to run the <em>equilibration.mdp</em> script, and then
+the <em>production.mdp</em> script. When the simulations are done, the generated
+files are moved into the <em>lambdastateX</em> folder. Finally the <em>ln</em> command
+creates a link toward the <em>production.xvg</em> file within the <em>dhdl/</em> folder.</p>
+<p>Execute the bash script by typing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>bash<span class="w"> </span>createfolders.sh
+</pre></div>
+</div>
+<p>Completing the 2 x 21 simulations may take a while, depending on your
+computer. When the simulation is complete, go the dhdl folder, and
+call the <em>gmx bar</em> command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>bar<span class="w"> </span>-f<span class="w"> </span>*.xvg
+</pre></div>
+</div>
+<p>The value of the solvation energy is printed in the terminal.
+In my case, I see:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>DG<span class="w"> </span>-64.62<span class="w"> </span>+/-<span class="w"> </span><span class="m">6</span>.35
+</pre></div>
+</div>
+<p>This indicate that the solvation energy is of <span class="math notranslate nohighlight">\(-64.6 \pm 6.3~\text{kJ/mol}\)</span>.
+Note however that the present simulations are too short to give a
+reliable result. To accurately measure the solvation
+energy of a molecule, you should use much longer equilibration,
+typically one nanosecond, as well as much longer production runs,
+typically several nanoseconds.</p>
+<p>You can access all the input scripts and data files that
+are used in these tutorials from <a href="https://github.com/gromacstutorials/gromacstutorials-inputs" target="_blank">GitHub</a>.</p>
+</section>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="adsorption-ethanol.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Free energy profile</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../level2/stretching-a-polymer.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Stretching a polymer</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Solvation energy</a><ul>
+<li><a class="reference internal" href="#input-files">Input files</a><ul>
+<li><a class="reference internal" href="#create-the-configuration-file">Create the configuration file</a></li>
+<li><a class="reference internal" href="#create-the-topology-file">Create the topology file</a></li>
+<li><a class="reference internal" href="#solvate-the-hbc-in-water">Solvate the HBC in water</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#system-equilibration">System equilibration</a><ul>
+<li><a class="reference internal" href="#energy-minimization">Energy minimization</a></li>
+<li><a class="reference internal" href="#nvt-and-npt-equilibration">NVT and NPT equilibration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#solvation-energy-measurement">Solvation energy measurement</a><ul>
+<li><a class="reference internal" href="#files-preparation">Files preparation</a></li>
+<li><a class="reference internal" href="#perform-a-21-step-loop">Perform a 21-step loop</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>

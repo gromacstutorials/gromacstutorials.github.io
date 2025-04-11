@@ -1,0 +1,690 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../_static/favicon-32x32.png" sizes="32x32" rel="icon" type="image/png"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Stretching a polymer" href="../level2/stretching-a-polymer.html" /><link rel="prev" title="Bulk salt solution" href="../tutorial1/bulk-solution.html" />
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
+        <title>Protein in electrolyte - </title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=8b1a507d" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">    </div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">    </span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Main</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/before-you-start.html">Before you start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/contact.html">Contact us</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../tutorial1/bulk-solution.html">Bulk salt solution</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Protein in electrolyte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../level2/stretching-a-polymer.html">Stretching a polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../level3/solvation-energy.html">Solvation energy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../level3/adsorption-ethanol.html">Free energy profile</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra content</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/extra/create-GRO-python.html">Write topology using Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Alternative</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/lammps.html">Use LAMMPS instead</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/tutorials/level1/protein-in-electrolyte.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="protein-in-electrolyte">
+<span id="protein-electrolyte-label"></span><h1>Protein in electrolyte<a class="headerlink" href="#protein-in-electrolyte" title="Link to this heading">¶</a></h1>
+<div class="hatnote docutils container">
+<p>Simulating a protein solvated in water and ions</p>
+</div>
+<figure class="align-right">
+<a class="only-light reference internal image-reference" href="../../_images/protein-light.webp"><img alt="Protein and Na Cl ions visualized with VMD" class="only-light" src="../../_images/protein-light.webp" style="height: 300px;" />
+</a>
+</figure>
+<figure class="align-right">
+<a class="only-dark reference internal image-reference" href="../../_images/protein-dark.webp"><img alt="Protein and Na Cl ions visualized with VMD" class="only-dark" src="../../_images/protein-dark.webp" style="height: 300px;" />
+</a>
+</figure>
+<p>The goal of this tutorial is to use GROMACS and perform a simple
+molecular dynamics simulation of a protein solvated in an electrolyte. The
+protein is downloaded from the Protein Data Bank (PDB) <span id="id1">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id6" title="Protein Data Bank. Protein data bank. Nature New Biol, 233(223):10–1038, 1971.">22</a>]</span>
+and solvated in an electrolyte made of water molecules and Na+ Cl- ions.</p>
+<p>This tutorial covers some of the basic uses of GROMACS, including system
+preparation, force field selection, input file preparation, and data
+analysis.</p>
+<div class="justify docutils container">
+<p>If you are completely new to GROMACS, I recommend that
+you follow this tutorial on a simple <a class="reference internal" href="../tutorial1/bulk-solution.html#bulk-solution-label"><span class="std std-ref">Bulk salt solution</span></a> first.</p>
+</div>
+<div class="patreon admonition">
+<p class="admonition-title">Struggling with your molecular simulations project?</p>
+<p>Get guidance for your GROMACS simulations. <a class="reference internal" href="../../non-tutorials/contact.html#contact-label"><span class="std std-ref">Contact us</span></a> for
+personalized <a href="https://www.patreon.com/molecularsimulations" target="_blank">advice</a> for your project.</p>
+</div>
+<div class="version docutils container">
+<p>This tutorial is compatible with the 2024.2 GROMACS version.</p>
+</div>
+<section id="convert-the-pdb-file">
+<h2>Convert the PDB file<a class="headerlink" href="#convert-the-pdb-file" title="Link to this heading">¶</a></h2>
+<p>Download the <em>.pdb</em> file from the <a href="https://www.rcsb.org/structure/1CTA" target="_blank">Protein Data Bank</a>,
+or simply click <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/protein-in-electrolyte/1cta.pdb" target="_blank">here</a>. The protein is a calcium-binding peptide from site III
+of chicken troponin-C that has been determined using 1H-NMR spectroscopy
+<span id="id2">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id5" title="Gary S Shaw, Robert S Hodges, and Brian D Sykes. Determination of the solution structure of a synthetic two-site calcium-binding homodimeric protein domain by nmr spectroscopy. Biochemistry, 31(40):9572–9580, 1992.">23</a>]</span>.</p>
+<p>We first need to create the <em>.gro</em> file, i.e. a GROMACS structure file,
+from the <em>.pdb</em> file. This can be done using <em>gmx trjconv</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>trjconv<span class="w"> </span>-f<span class="w"> </span>1cta.pdb<span class="w"> </span>-s<span class="w"> </span>1cta.pdb<span class="w"> </span>-o<span class="w"> </span>1cta.gro<span class="w"> </span>-center<span class="w"> </span>-box<span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">5</span>
+</pre></div>
+</div>
+<p>Choose the group <em>System</em> for the centering, and the group <em>System</em> as well
+for the output. A file named <em>1cta.gro</em> is created. The generated <em>.gro</em>
+file contains 666 atoms, each atom corresponding to one line:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>TROPONIN C SITE III - SITE III HOMODIMER
+666
+    0ACE      C    1   2.662   4.131   2.701
+    0ACE      O    2   2.714   4.036   2.646
+    0ACE    CH3    3   2.651   4.147   2.853
+(...)
+35NH2    HN2  664   2.417   3.671   3.192
+69CA      CA  665   3.016   2.279   1.785
+70CA      CA  666   1.859   2.046   1.838
+5.00000   5.00000   5.00000
+</pre></div>
+</div>
+<p>The last line is the box dimensions in nanometer, which was requested
+in the <em>gmx trjconv</em> command by the <em>-box 5 5 5</em> option. All the options
+of <em>trjconv</em> can be found on the corresponding page of the GROMACS
+<a href="https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html" target="_blank">documentation</a>.</p>
+</section>
+<section id="choose-the-force-field">
+<h2>Choose the force field<a class="headerlink" href="#choose-the-force-field" title="Link to this heading">¶</a></h2>
+<p>Let us select the force field that will control the interactions between
+the different atoms. This can be done using the <em>gmx pdb2gmx</em> command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>pdb2gmx<span class="w"> </span>-f<span class="w"> </span>1cta.gro<span class="w"> </span>-water<span class="w"> </span>spce<span class="w"> </span>-v<span class="w"> </span>-ignh<span class="w"> </span>-o<span class="w"> </span>unsolvated.gro
+</pre></div>
+</div>
+<p>Here, the <em>-ignh</em> option is used to ignore the hydrogen atoms that are in
+the coordinate file. The <em>-water spce</em> open is used to
+specify the water model; the extended simple point charge
+model (spce) <span id="id3">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id35" title="Herman-J-C Berendsen, J-Raúl Grigera, and Tjerk P Straatsma. The missing term in effective pair potentials. Journal of Physical Chemistry, 91(24):6269–6271, 1987.">24</a>]</span>.</p>
+<p>When running <em>gmx pdb2gmx</em>, choose the <em>AMBER03 protein, nucleic
+AMBER94</em> force field <span id="id4">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id34" title="Yong Duan, Chun Wu, Shibasish Chowdhury, Mathew C Lee, Guoming Xiong, Wei Zhang, Rong Yang, Piotr Cieplak, Ray Luo, Taisung Lee, and others. A point-charge force field for molecular mechanics simulations of proteins based on condensed-phase quantum mechanical calculations. Journal of computational chemistry, 24(16):1999–2012, 2003.">25</a>]</span>. A new <em>gro</em> file named
+<em>unsolvated.gro</em> was created, as well as a topology <em>.top</em> file named
+<em>topol.top</em>.</p>
+</section>
+<section id="solvate-the-protein">
+<h2>Solvate the protein<a class="headerlink" href="#solvate-the-protein" title="Link to this heading">¶</a></h2>
+<p>The protein is now ready to be solvated. Let us first immerse it in pure
+water using <em>gmx solvate</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>solvate<span class="w"> </span>-cs<span class="w"> </span>spc216.gro<span class="w"> </span>-cp<span class="w"> </span>unsolvated.gro<span class="w"> </span>-o<span class="w"> </span>solvated.gro<span class="w"> </span>-p<span class="w"> </span>topol.top
+</pre></div>
+</div>
+<p>Here, <em>spc216.gro</em> is a pre-equilibrated water configuration that is provided
+by GROMACS. After running <em>gmx solvate</em>, a number <span class="math notranslate nohighlight">\(N = 3719\)</span> of
+water molecules, or SOL (for solvent), is created in the new GRO file
+named <em>solvated.gro</em> next to the protein. The number <span class="math notranslate nohighlight">\(N\)</span> may slightly
+differ in your case. A new line must also appear at the end of the
+<em>topol.top</em> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>...<span class="o">)</span>
+<span class="o">[</span><span class="w"> </span>molecules<span class="w"> </span><span class="o">]</span>
+<span class="p">;</span><span class="w"> </span>Compound<span class="w">        </span><span class="c1">#mols</span>
+Protein<span class="w">             </span><span class="m">1</span>
+SOL<span class="w">              </span><span class="m">3719</span>
+</pre></div>
+</div>
+</section>
+<section id="run-an-energy-minimization">
+<h2>Run an energy minimization<a class="headerlink" href="#run-an-energy-minimization" title="Link to this heading">¶</a></h2>
+<p>Although <em>gmx solvate</em> creates molecules without overlap with the
+protein, it is safer to perform a short energy minimization to ensure that
+the distances between the atoms are reasonable.</p>
+<p>To do so, create a new folder named <em>inputs/</em>, and create a file named
+<em>mininimize.mdp</em> into it. Copy the following lines into <em>mininimize.mdp</em>:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = steep
+nsteps = 50
+
+nstxout = 10
+
+cutoff-scheme = Verlet
+nstlist = 10
+ns_type = grid
+
+couple-intramol = yes
+
+vdw-type = Cut-off
+rvdw = 1.0
+
+coulombtype = pme
+fourierspacing = 0.1
+pme-order = 4
+rcoulomb = 1.0
+</pre></div>
+</div>
+<p>Here, the speepest-descent method is used, with a maximum number of steps
+of 50 <span id="id5">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id47" title="Peter Debye. Näherungsformeln für die zylinderfunktionen für große werte des arguments und unbeschränkt veränderliche werte des index. Mathematische Annalen, 67(4):535–558, 1909.">14</a>]</span>. The trajectory is printed every 10
+step, as specified by the <em>nstxout</em> option. The other commands control the
+interactions and cut-offs.</p>
+<p>Prepare the energy minimization using <em>gmx grompp</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/mininimize.mdp<span class="w"> </span>-c<span class="w"> </span>solvated.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>min<span class="w"> </span>-pp<span class="w"> </span>min<span class="w"> </span>-po<span class="w"> </span>min<span class="w"> </span>-maxwarn<span class="w"> </span><span class="m">1</span>
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>min
+</pre></div>
+</div>
+<p>The <em>-maxwarn 1</em> is required here, because the system is not charge neutral
+and GROMACS will return a WARNING. The charge neutrality will be enforced
+later on. Finally, run the simulation using <em>gmx mdrun</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>min
+</pre></div>
+</div>
+<p>Thanks to the steepest-descent algorithm, the potential energy of the
+system decreases rapidly and becomes large and negative, which is usually
+a good sign. The potential energy can be extracted using <em>gmx energy</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>energy<span class="w"> </span>-f<span class="w"> </span>min.edr<span class="w"> </span>-o<span class="w"> </span>potential-energy-minimization.xvg
+</pre></div>
+</div>
+<p>and choose <em>Potential</em>. The generated <em>.xvg</em> files contain the value of the
+potential energy (in kJ/mol) as a function of the simulation steps. The potential
+energy decreases from <span class="math notranslate nohighlight">\(-3 \mathrm{e}-4~\text{kJ}/\text{mol}\)</span> to
+<span class="math notranslate nohighlight">\(-1.8 \mathrm{e}-5~\text{kJ}/\text{mol}\)</span>.</p>
+<figure class="align-default">
+<img alt="potential energy extracted using Gromacs" class="only-light" src="../../_images/potential-energy-minimization-light.png" />
+</figure>
+<figure class="align-default">
+<img alt="potential energy extracted using Gromacs" class="only-dark" src="../../_images/potential-energy-minimization-dark.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: Potential energy <span class="math notranslate nohighlight">\(E_\text{p}\)</span> of the system as a function of the
+number of steps <span class="math notranslate nohighlight">\(N_\text{step}\)</span> during energy minimization.</p>
+</div>
+</section>
+<section id="add-the-salt">
+<h2>Add the salt<a class="headerlink" href="#add-the-salt" title="Link to this heading">¶</a></h2>
+<p>Let us add some ions to the system so that the (1) total charge is 0, and (2)
+that the salt concentration is <span class="math notranslate nohighlight">\(c_\text{s} \approx 1~\text{mol/L}\)</span>.
+This is done using the <em>gmx genion</em> command,</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>genion<span class="w"> </span>-s<span class="w"> </span>min.tpr<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-conc<span class="w"> </span><span class="m">1</span><span class="w"> </span>-neutral<span class="w"> </span>-o<span class="w"> </span>salted.gro
+</pre></div>
+</div>
+<p>Select the group <em>SOL</em> as the continuous group of solvent molecules. GROMACS
+will replace some of the <em>SOL</em> residues with ions.</p>
+<p>As can be seen from the <em>topol.top</em> file, some sodium (Na+) and chloride
+(Cl-) ions were added, and the number <span class="math notranslate nohighlight">\(N\)</span> of water molecules is
+reduced compared to the previous step:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span><span class="w"> </span>molecules<span class="w"> </span><span class="o">]</span>
+<span class="p">;</span><span class="w"> </span>Compound<span class="w">        </span><span class="c1">#mols</span>
+Protein<span class="w">             </span><span class="m">1</span>
+SOL<span class="w">         </span><span class="m">3563</span>
+NA<span class="w">               </span><span class="m">81</span>
+CL<span class="w">               </span><span class="m">75</span>
+</pre></div>
+</div>
+<p>Out of safety, let us run a new energy minimization starting from the
+<em>salted.gro</em> configuration. The <em>-maxwarn</em> option is not necessary
+as the system is charge-neutral.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/mininimize.mdp<span class="w"> </span>-c<span class="w"> </span>salted.gro<span class="w"> </span>-p<span class="w"> </span>topol.top<span class="w"> </span>-o<span class="w"> </span>min-s<span class="w"> </span>-pp<span class="w"> </span>min-s<span class="w"> </span>-po<span class="w"> </span>min-s
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>min-s
+</pre></div>
+</div>
+<p>As previously, one can have a look at the potential energy using <em>gmx energy</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>energy<span class="w"> </span>-f<span class="w"> </span>min-s.edr<span class="w"> </span>-o<span class="w"> </span>potential-energy-minimization-s.xvg
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="potential energy extracted using Gromacs" class="only-light" src="../../_images/potential-energy-minimization-s-light.png" />
+</figure>
+<figure class="align-default">
+<img alt="potential energy extracted using Gromacs" class="only-dark" src="../../_images/potential-energy-minimization-s-dark.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: Potential energy <span class="math notranslate nohighlight">\(E_\text{p}\)</span> of the system as a function of the
+number of steps <span class="math notranslate nohighlight">\(N_\text{step}\)</span> during energy minimization.</p>
+</div>
+<p>The system can also be visualized using VMD using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>min.gro<span class="w"> </span>min.trr
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="Gromacs tutorial protein in water and salt" src="../../_images/protein-solvated.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: Protein solvated in water. On the left, only the water molecules that are
+near the protein are represented. On the right, the entire system is shown.
+Water molecules are represented as red and white sticks, and ions are
+represented as spheres.</p>
+</div>
+</section>
+<section id="run-the-molecular-dynamics">
+<h2>Run the molecular dynamics<a class="headerlink" href="#run-the-molecular-dynamics" title="Link to this heading">¶</a></h2>
+<p>Create a new input file called <em>nvt.mdp</em> and placed into the <em>inputs/</em>
+folder, and copy the following lines into it:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = md
+nsteps = 20000
+dt = 0.001
+
+comm_mode = linear
+comm_grps = system
+
+gen-vel = yes
+gen-temp = 300
+
+cutoff-scheme = Verlet
+nstlist = 10
+ns_type = grid
+
+nstxout-compressed = 1000
+
+vdw-type = Cut-off
+rvdw = 1.0
+
+couple-intramol = yes
+
+coulombtype = pme
+fourierspacing = 0.1
+pme-order = 4
+rcoulomb = 1.0
+
+constraint-algorithm = lincs
+constraints = hbonds
+
+tcoupl = v-rescale
+ld-seed = 48456
+tc-grps = system
+tau-t = 0.5
+ref-t = 300
+</pre></div>
+</div>
+<p>Here, the <em>v-rescale</em> thermostat is used to impose a temperature
+of <span class="math notranslate nohighlight">\(T = 300~\text{K}\)</span>
+with a characteristic time of <span class="math notranslate nohighlight">\(0.5~\text{ps}\)</span>.
+The <em>v-rescale</em> thermostat
+corresponds to the Berendsen thermostat with an additional stochastic
+term <span id="id6">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id46" title="Giovanni Bussi, Davide Donadio, and Michele Parrinello. Canonical sampling through velocity rescaling. The Journal of chemical physics, 2007.">15</a>]</span>, and is known to give proper canonical ensemble.</p>
+<p>The <em>LINCS</em> algorithm is used to constrain the hydrogen bonds, allowing us
+to use a timestep of <span class="math notranslate nohighlight">\(1~\text{fs}\)</span>. Without such constraint, the fast
+vibration of the hydrogen bonds would impose the use of a smaller timestep,
+which makes the computation more computationally expensive.</p>
+<p>Run the NVT simulation:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx grompp -f inputs/nvt.mdp -c min-s.gro -p topol.top -o nvt -pp nvt -po nvt
+gmx mdrun -v -deffnm nvt
+</pre></div>
+</div>
+<p>Let us observe the potential energy. Let us also observe the temperature
+and the pressure of the system. Run the <em>gmx energy</em> command 3 times,
+and select successively <em>potential</em>, <em>temperature</em>, and <em>pressure</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>energy<span class="w"> </span>-f<span class="w"> </span>nvt.edr<span class="w"> </span>-o<span class="w"> </span>potential-energy-nvt.xvg
+gmx<span class="w"> </span>energy<span class="w"> </span>-f<span class="w"> </span>nvt.edr<span class="w"> </span>-o<span class="w"> </span>temperature-nvt.xvg
+gmx<span class="w"> </span>energy<span class="w"> </span>-f<span class="w"> </span>nvt.edr<span class="w"> </span>-o<span class="w"> </span>pressure-nvt.xvg
+</pre></div>
+</div>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>After an initial spike, the energy, the temperature, and the pressure
+all stabilize. For the temperature, the desired value of :math:`T = 300~\text{K}`
+is reached, and for the pressure, a negative value of about :math:`- 700~\text{bar}`
+can be observed.
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="potential energy extracted using Gromacs" class="only-light" src="../../_images/potential-energy-nvt-light.png" />
+</figure>
+<figure class="align-default">
+<img alt="potential energy extracted using Gromacs" class="only-dark" src="../../_images/potential-energy-nvt-dark.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: Potential energy <span class="math notranslate nohighlight">\(E_\text{p}\)</span> (a),
+temperature <span class="math notranslate nohighlight">\(T\)</span> (b),
+and pressure <span class="math notranslate nohighlight">\(p\)</span> (c) as a function of the
+time <span class="math notranslate nohighlight">\(t\)</span> during the NVT molecular dynamics.</p>
+</div>
+<p>The negative pressure indicates that the volume is slightly too large. This
+can be rectified by performing a short NPT simulation, during which the
+volume of the box will adjust until a desired pressure is reached. Create
+a new file called <em>npt.mdp</em> in the <em>inputs/</em> folder. Copy the same lines as
+in <em>nvt.mdp</em>, and add the following lines to it:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>pcoupl = c-rescale
+Pcoupltype = isotropic
+tau_p = 1.0
+ref_p = 1.0
+compressibility = 4.5e-5
+</pre></div>
+</div>
+<p>Here, the isotropic c-rescale pressure
+coupling with a target pressure of 1 bar is used.
+Run it starting from the end of the previous <em>nvt</em> run:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx grompp -f inputs/npt.mdp -c nvt.gro -p topol.top -o npt -pp npt -po npt
+gmx mdrun -v -deffnm npt
+</pre></div>
+</div>
+<p>As the simulation progresses, the volume of the box decreases and better
+adjust to the fluid content of the box, as can be seen using <em>gmx energy</em>
+and extracting the <em>volume</em>, and/or by extracting the <em>density</em>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>energy<span class="w"> </span>-f<span class="w"> </span>npt.edr<span class="w"> </span>-o<span class="w"> </span>volume-npt.xvg
+gmx<span class="w"> </span>energy<span class="w"> </span>-f<span class="w"> </span>npt.edr<span class="w"> </span>-o<span class="w"> </span>density-npt.xvg
+</pre></div>
+</div>
+<figure class="align-default">
+<img alt="potential energy extracted using Gromacs" class="only-light" src="../../_images/potential-energy-npt-light.png" />
+</figure>
+<figure class="align-default">
+<img alt="potential energy extracted using Gromacs" class="only-dark" src="../../_images/potential-energy-npt-dark.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: Box volume <span class="math notranslate nohighlight">\(V\)</span> (a) and
+density <span class="math notranslate nohighlight">\(\rho\)</span> (b) as a function of the
+time <span class="math notranslate nohighlight">\(t\)</span> during the NPT molecular dynamics.</p>
+</div>
+<p>You can access all the input scripts and data files that
+are used in these tutorials from <a href="https://github.com/gromacstutorials/gromacstutorials-inputs" target="_blank">GitHub</a>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../level2/stretching-a-polymer.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Stretching a polymer</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../tutorial1/bulk-solution.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Bulk salt solution</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Protein in electrolyte</a><ul>
+<li><a class="reference internal" href="#convert-the-pdb-file">Convert the PDB file</a></li>
+<li><a class="reference internal" href="#choose-the-force-field">Choose the force field</a></li>
+<li><a class="reference internal" href="#solvate-the-protein">Solvate the protein</a></li>
+<li><a class="reference internal" href="#run-an-energy-minimization">Run an energy minimization</a></li>
+<li><a class="reference internal" href="#add-the-salt">Add the salt</a></li>
+<li><a class="reference internal" href="#run-the-molecular-dynamics">Run the molecular dynamics</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>
