@@ -19,16 +19,18 @@ Bulk salt solution
     :height: 250
     :align: right
 
-The objective of this tutorial is to use the
-open-source code GROMACS to perform a simple molecular
-dynamics simulation. The system is a bulk solution of water mixed
-with sodium (Na\ :sup:`+`) and sulfate
-(SO\ :sub:`4`\ :sup:`2-`) ions. 
+The objective of this tutorial is to use the open-source code GROMACS
+:cite:`van2005gromacs` to perform a molecular dynamics simulation. The
+system consists of a bulk solution of water mixed with sodium
+(Na\ :sup:`+`) and sulfate (SO\ :sub:`4`\ :sup:`2-`) ions.
 
-This tutorial illustrates several major ingredients of molecular
-dynamics simulations, such as energy minimization,
-thermostating, NVT and NPT equilibration, and
-trajectory visualization.
+This tutorial demonstrates how to set up a simulation box, solvate it
+with water, and add ions. It also introduces key components of molecular
+dynamics simulations, including energy minimization, thermostating, and
+*NVT* and *NpT* equilibrations. The resulting trajectory is analyzed
+using GROMACS utilities to extract properties such as the radial distribution
+function (RDF) and mean squared displacement (MSD). Trajectories are
+visualized using VMD :cite:`humphrey1996vmd`.
 
 .. include:: ../../non-tutorials/needhelp.rst
 .. include:: ../../non-tutorials/GROMACS2024.2.rst
