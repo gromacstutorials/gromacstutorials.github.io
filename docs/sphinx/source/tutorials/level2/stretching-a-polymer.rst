@@ -19,25 +19,21 @@ Stretching a polymer
     :align: right
     :class: only-light
 
-..  container:: justify
+The goal of this tutorial is to use GROMACS and solvate a small
+hydrophilic polymer in a reservoir of water. 
 
-    The goal of this tutorial is to use GROMACS and solvate a small
-    hydrophilic polymer in a reservoir of water. 
-
-..  container:: justify
-
-    An all-atom description is used for both polymer and water. The polymer is
-    PolyEthylene Glycol (PEG). Once the system is properly
-    equilibrated at the desired temperature and pressure, a force is applied
-    to both ends of the polymer. The evolution of the polymer length
-    is measured, and the energetics of the system is measured.
+An all-atom description is used for both polymer and water. The polymer is
+PolyEthylene Glycol (PEG). Once the system is properly
+equilibrated at the desired temperature and pressure, a force is applied
+to both ends of the polymer. The evolution of the polymer length
+is measured, and the energetics of the system is measured.
 
 .. 
     (GROMOS 54A7 force
     field :cite:`schmid2011definition`)
     (SPC flexible model :cite:`wu2006flexible`)
 
-..  container:: justify
+
 
     This tutorial was inspired by a |Liese2017| by Liese and coworkers, in which
     molecular dynamics simulations are
@@ -54,10 +50,8 @@ Stretching a polymer
 Prepare the PEG molecule
 ========================
 
-..  container:: justify
-
-    Download the *peg.gro* file for the PEG molecule by clicking |download_H2O.data|.
-    The *peg.gro* file can be visualized using vmd, by typing in a terminal:
+Download the *peg.gro* file for the PEG molecule by clicking |download_H2O.data|.
+The *peg.gro* file can be visualized using vmd, by typing in a terminal:
 
 .. |download_H2O.data| raw:: html
 
@@ -87,10 +81,8 @@ Prepare the PEG molecule
 
    <a href="https://www.youtube.com/watch?v=8ldIHP175TI&t=9s" target="_blank">video</a>
 
-..  container:: justify
-
-    Save *peg.gro* in a new folder. Next to *peg.gro* create an empty
-    file named *topol.top*, and copy the following lines in it:
+Save *peg.gro* in a new folder. Next to *peg.gro* create an empty
+file named *topol.top*, and copy the following lines in it:
 
 ..  code-block:: bw
 
@@ -111,11 +103,9 @@ Prepare the PEG molecule
     ; Compound        #mols
       PEG             1
 
-..  container:: justify
-
-    Next to *conf.gro* and *topol.top*, create a folder named *ff/*, and copy
-    the following 3 *.itp* files into it: |download_charmm35r.itp|, |download_peg.itp|,
-    and |download_tip3p.itp|. 
+Next to *conf.gro* and *topol.top*, create a folder named *ff/*, and copy
+the following 3 *.itp* files into it: |download_charmm35r.itp|, |download_peg.itp|,
+and |download_tip3p.itp|. 
 
 .. |download_charmm35r.itp| raw:: html
 
@@ -129,15 +119,11 @@ Prepare the PEG molecule
 
     <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/cubic-box/ff/tip3p.itp" target="_blank">tip3p.itp</a>
 
-..  container:: justify
+These 3 files contain the parameters for the PEG and the water molecules
+with oxygen (OW) and hydrogen (HW) atoms.
 
-    These 3 files contain the parameters for the PEG and the water molecules
-    with oxygen (OW) and hydrogen (HW) atoms.
-
-..  container:: justify
-
-    Create an *inputs/* folder next to *ff/*, and create a new empty file
-    called *em.mdp*. Copy the following lines into it:
+Create an *inputs/* folder next to *ff/*, and create a new empty file
+called *em.mdp*. Copy the following lines into it:
 
 ..  code-block:: bw
 
@@ -155,78 +141,58 @@ Prepare the PEG molecule
     rvdw = 1
     pbc = xyz
 
-..  container:: justify
+Most of these commands have been seen in previous tutorials. The most
+important command is *integrator = steep*, which set the algorithm
+used by GROMACS as the steepest-descent,
+which moves the atoms following the direction of the largest forces
+until one of the stopping criteria is reached :cite:`debye1909naherungsformeln`.
 
-    Most of these commands have been seen in previous tutorials. The most
-    important command is *integrator = steep*, which set the algorithm
-    used by GROMACS as the steepest-descent,
-    which moves the atoms following the direction of the largest forces
-    until one of the stopping criteria is reached :cite:`debye1909naherungsformeln`.
-
-..  container:: justify
-
-    Run the energy minimization using GROMACS by typing in a terminal:
+Run the energy minimization using GROMACS by typing in a terminal:
 
 ..  code-block:: bash
 
     gmx grompp -f inputs/em.mdp -c peg.gro -p topol.top -o em-peg
     gmx mdrun -deffnm em-peg -v -nt 8
 
-..  container:: justify
+The *-nt 8* option limits the number of threads that GROMACS uses. Adjust
+the number to your computer. 
 
-    The *-nt 8* option limits the number of threads that GROMACS uses. Adjust
-    the number to your computer. 
-
-..  container:: justify
-
-    After the simulation is over, open the trajectory file with VMD by typing
-    in a terminal:
+After the simulation is over, open the trajectory file with VMD by typing
+in a terminal:
 
 ..  code-block:: bash
 
     vmd peg.gro em-peg.trr
 
-..  container:: justify
+From VMD, the PEG molecule can be seen moving a little by the
+steepest-descent algorithm. 
 
-    From VMD, the PEG molecule can be seen moving a little by the
-    steepest-descent algorithm. 
-
-..  container:: justify
-
-    Before adding the water, let us reshape the box and recenter the PEG molecule
-    in the box. As a first step, let us use a cubic box of
-    lateral size :math:`2.6~\text{nm}`.
+Before adding the water, let us reshape the box and recenter the PEG molecule
+in the box. As a first step, let us use a cubic box of
+lateral size :math:`2.6~\text{nm}`.
 
 ..  code-block:: bash
 
     gmx trjconv -f em-peg.gro -s em-peg.tpr -o peg-recentered.gro -center -pbc mol -box 2.6 2.6 2.6
 
-..  container:: justify
-
-    Select *system* for both centering and output. The newly created *gro*
-    file named *peg-recentered.gro* will be used as a starting point
-    for the next step of the tutorial.
+Select *system* for both centering and output. The newly created *gro*
+file named *peg-recentered.gro* will be used as a starting point
+for the next step of the tutorial.
 
 Solvate the PEG molecule
 ========================
 
-..  container:: justify
-
-    Let us add the water molecules to the system by using *gmx solvate*:
+Let us add the water molecules to the system by using *gmx solvate*:
 
 ..  code-block:: bash
 
     gmx solvate -cp peg-recentered.gro -cs spc216.gro -o peg-solvated.gro -p topol.top
 
-..  container:: justify
+Here *spc216.gro* is a default GROMACS file containing a pre-equilibrated
+water reservoir.
 
-    Here *spc216.gro* is a default GROMACS file containing a pre-equilibrated
-    water reservoir.
-
-..  container:: justify
-
-    The newly created file *peg-solvated.gro* contains the water molecules,
-    and a a new line in was added to the topology file *topol.top*:
+The newly created file *peg-solvated.gro* contains the water molecules,
+and a a new line in was added to the topology file *topol.top*:
 
 ..  code-block:: bw
 
@@ -235,28 +201,22 @@ Solvate the PEG molecule
     PEG               1 
     SOL               546
 
-..  container:: justify
-
-    We can apply the same energy minimization to the newly created solvated
-    system. Simply add the following line to *em.mdp*:
+We can apply the same energy minimization to the newly created solvated
+system. Simply add the following line to *em.mdp*:
 
 ..  code-block:: bw
 
     define = -DFLEXIBLE
 
-..  container:: justify
-
-    And then launch the energy minimization again using:
+And then launch the energy minimization again using:
 
 ..  code-block:: bash
 
     gmx grompp -f inputs/em.mdp -c peg-solvated.gro -p topol.top -o em
     gmx mdrun -deffnm em -v -nt 8
 
-..  container:: justify
-
-    The *define = -DFLEXIBLE* option triggers the following *if* condition
-    within the *tip3p.itp* file:
+The *define = -DFLEXIBLE* option triggers the following *if* condition
+within the *tip3p.itp* file:
 
 ..  code-block:: bw
 
@@ -270,27 +230,21 @@ Solvate the PEG molecule
     ; i      j      k       funct   angle   force.c.
     2        1      3       1       104.52  628.02  104.52  628.02
     
-..  container:: justify
-
-    With this *if* condition the water molecules 
-    behave as flexible. This is better because rigid molecules and 
-    energy minimization usually don't go along well. For the next molecular
-    dynamics steps, rigid water molecules will be used by not including
-    the *define = -DFLEXIBLE* command in the inputs.
+With this *if* condition the water molecules 
+behave as flexible. This is better because rigid molecules and 
+energy minimization usually don't go along well. For the next molecular
+dynamics steps, rigid water molecules will be used by not including
+the *define = -DFLEXIBLE* command in the inputs.
 
 Equilibrate the PEG-water system
 ================================
 
-..  container:: justify
+Let use equilibrate the system in two steps: first a NVT simulation,
+with constant number of particles, constant volume, and imposed temperature,
+and second a NPT simulation with imposed pressure. 
 
-    Let use equilibrate the system in two steps: first a NVT simulation,
-    with constant number of particles, constant volume, and imposed temperature,
-    and second a NPT simulation with imposed pressure. 
-
-..  container:: justify
-
-    Within the *inputs/* folder, create a new input named *nvt-peg-h2o.mdp*,
-    and copy the following lines into it:
+Within the *inputs/* folder, create a new input named *nvt-peg-h2o.mdp*,
+and copy the following lines into it:
 
 ..  code-block:: bw
 
@@ -325,36 +279,28 @@ Equilibrate the PEG-water system
     comm-mode = linear
     comm-grps = PEG
 
-..  container:: justify
+Most of these commands have already been seen. In addition to the conventional
+*md* leap-frog algorithm integrator, long-range Coulomb and short-range
+van der Waals interactions, the LINCS constraint algorithm is used to maintain
+the hydrogen bonds as rigid. An initial temperature of :math:`300~K` is given
+to the system by the *gen-* commands, and the PEG is maintained in the center
+of the box by the *comm-mode* and *comm-grps* commands.
 
-    Most of these commands have already been seen. In addition to the conventional
-    *md* leap-frog algorithm integrator, long-range Coulomb and short-range
-    van der Waals interactions, the LINCS constraint algorithm is used to maintain
-    the hydrogen bonds as rigid. An initial temperature of :math:`300~K` is given
-    to the system by the *gen-* commands, and the PEG is maintained in the center
-    of the box by the *comm-mode* and *comm-grps* commands.
-
-..  container:: justify
-
-    Launch the NVT simulation using:
+Launch the NVT simulation using:
 
 ..  code-block:: bash
 
     gmx grompp -f inputs/nvt-peg-h2o.mdp -c em.gro -p topol.top -o nvt -maxwarn 1
     gmx mdrun -deffnm nvt -v -nt 8
 
-..  container:: justify
+The *maxwarn 1* option is used to avoid a GROMACS WARNING related to the
+centering of the PEG in the box. 
 
-    The *maxwarn 1* option is used to avoid a GROMACS WARNING related to the
-    centering of the PEG in the box. 
-
-..  container:: justify
-
-    Let us follow-up with the NPT equilibration. Duplicate the *nvt-peg-h2o.mdp*
-    file into a new input file named *npt-peg-h2o.mdp*. Within *npt-peg-h2o.mdp*,
-    Within the *npt-peg-h2o.mdp*, delete the lines related to the creation
-    of velocity as its better to keep the velocities generated during the
-    NVT run:
+Let us follow-up with the NPT equilibration. Duplicate the *nvt-peg-h2o.mdp*
+file into a new input file named *npt-peg-h2o.mdp*. Within *npt-peg-h2o.mdp*,
+Within the *npt-peg-h2o.mdp*, delete the lines related to the creation
+of velocity as its better to keep the velocities generated during the
+NVT run:
 
 ..  code-block:: bw
 
@@ -362,11 +308,9 @@ Equilibrate the PEG-water system
     gen-temp = 300
     gen-seed = 65823
 
-..  container:: justify
-
-    In addition to the removal the previous 3 lines, add the following lines 
-    to *npt-peg-h2o.mdp* to specify the isotropic barostat with imposed pressure
-    of :math:`1~\text{bar}`:
+In addition to the removal the previous 3 lines, add the following lines 
+to *npt-peg-h2o.mdp* to specify the isotropic barostat with imposed pressure
+of :math:`1~\text{bar}`:
 
 ..  code-block:: bw
 
@@ -376,21 +320,17 @@ Equilibrate the PEG-water system
     ref-p = 1.0
     compressibility = 4.5e-5
 
-..  container:: justify
-
-    Run the NPT simulation, using the final state of the NVT simulation
-    *nvt.gro* as starting configuration:
+Run the NPT simulation, using the final state of the NVT simulation
+*nvt.gro* as starting configuration:
 
 ..  code-block:: bash
 
     ${gmx} grompp -f inputs/npt-peg-h2o.mdp -c nvt.gro -p topol.top -o npt -maxwarn 1
     ${gmx} mdrun -deffnm npt -v -nt 8
 
-..  container:: justify
-
-    Let us observe the evolution of the potential energy of the system during the
-    3 successive equilibration steps, i.e. the *em*, *nvt*, and *npt* steps,
-    using the *gmx energy* command as follow:
+Let us observe the evolution of the potential energy of the system during the
+3 successive equilibration steps, i.e. the *em*, *nvt*, and *npt* steps,
+using the *gmx energy* command as follow:
 
 ..  code-block:: bash
 
@@ -398,9 +338,7 @@ Equilibrate the PEG-water system
     gmx energy -f nvt.edr -o energy-nvt.xvg
     gmx energy -f npt.edr -o energy-npt.xvg
 
-..  container:: justify
-
-    For each of the 3 *gmx energy* commands, select *potential*.
+For each of the 3 *gmx energy* commands, select *potential*.
 
 .. figure:: ../figures/level2/stretching-a-polymer/potential-energy-light.png
     :alt: Potential energy from molecular dynamics simulation in GROMACS
@@ -416,17 +354,13 @@ Equilibrate the PEG-water system
     respectively the energy minimization (a), the NVT step (b), and the NPT
     step (c). 
 
-..  container:: justify
+Let us launch a longer simulation, and extract the angle distribution
+between the different atoms of the PEG molecules. This angle
+distribution will be used later as a benchmark to probe the effect of
+of the stretching on the PEG structure.
 
-    Let us launch a longer simulation, and extract the angle distribution
-    between the different atoms of the PEG molecules. This angle
-    distribution will be used later as a benchmark to probe the effect of
-    of the stretching on the PEG structure.
-
-..  container:: justify
-
-    Create a new input named *production-peg-h2o.mdp*, and copy the following
-    lines into it:
+Create a new input named *production-peg-h2o.mdp*, and copy the following
+lines into it:
 
 ..  code-block:: bw
 
@@ -457,35 +391,27 @@ Equilibrate the PEG-water system
     comm-mode = linear
     comm-grps = PEG
 
-..  container:: justify
+This script resembles the *nvt-peg-h2o.mdp* input, but the duration and
+output frequency is different, and without the *gen-vel* commands. 
 
-    This script resembles the *nvt-peg-h2o.mdp* input, but the duration and
-    output frequency is different, and without the *gen-vel* commands. 
-
-..  container:: justify
-
-    Run it using:
+Run it using:
 
 ..  code-block:: bash
 
     gmx grompp -f inputs/production-peg-h2o.mdp -c npt.gro -p topol.top -o production -maxwarn 1
     gmx mdrun -deffnm production -v -nt 8
 
-..  container:: justify
-
-    First, create an index file called *angle.ndx* using the *gmx mk_angndx*
-    command:
+First, create an index file called *angle.ndx* using the *gmx mk_angndx*
+command:
 
 ..  code-block:: bash
 
     gmx mk_angndx -s production.tpr -hyd no
 
-..  container:: justify
-
-    The *angle.ndx* file generated contains groups with all the atoms
-    involved by an angle constraint, with the exception of the hydrogen
-    atoms due to the use of *-hyd no*. The atom ids selected in the groups
-    can be seen from the *index.ndx* file:
+The *angle.ndx* file generated contains groups with all the atoms
+involved by an angle constraint, with the exception of the hydrogen
+atoms due to the use of *-hyd no*. The atom ids selected in the groups
+can be seen from the *index.ndx* file:
 
 ..  code-block:: bw
 
@@ -494,11 +420,9 @@ Equilibrate the PEG-water system
         31    33    35    38    40    42    45    47    49    52    54    56
         59    61    63    66    68    70    73    75    77    80    82    84
 
-..  container:: justify
-
-    Here, each number corresponds to the atom index, as can be seen from the 
-    initial *peg.gro* file. For instance, the atom of *id 2* is a carbon atom,
-    and the atom with *id 5* is an oxygen:
+Here, each number corresponds to the atom index, as can be seen from the 
+initial *peg.gro* file. For instance, the atom of *id 2* is a carbon atom,
+and the atom with *id 5* is an oxygen:
 
 ..  code-block:: bw
 
@@ -514,18 +438,14 @@ Equilibrate the PEG-water system
         1PEG     H4    8   1.699   1.500   1.425  4.2893  1.6837 -0.9462
     (...)
 
-..  container:: justify
-
-    Then, extract the angle distribution from the *production.xtc*
-    file using *gmx angle*:
+Then, extract the angle distribution from the *production.xtc*
+file using *gmx angle*:
 
 ..  code-block:: bash
 
     gmx angle -n angle.ndx  -f production.xtc -od angle-distribution.xvg -binwidth 0.25
 
-..  container:: justify
-
-    Select 1 for the O-C-C-O dihedral.
+Select 1 for the O-C-C-O dihedral.
 
 .. figure:: ../figures/level2/stretching-a-polymer/dihedral-distribution-light.png
     :alt: Angular distribution from molecular dynamics simulation in GROMACS
@@ -542,30 +462,22 @@ Equilibrate the PEG-water system
 Stretch on the polymer
 ======================
 
-..  container:: justify
+Create a new folder named *elongated-box/* next to *cubic-box/*, and copy
+*ff/*, *inputs/*, *em-peg.gro*, and em-peg.tpr from *cubic-box/*
+into *elongated-box/*:
 
-    Create a new folder named *elongated-box/* next to *cubic-box/*, and copy
-    *ff/*, *inputs/*, *em-peg.gro*, and em-peg.tpr from *cubic-box/*
-    into *elongated-box/*:
-
-..  container:: justify
-
-    To leave space for the stretched PEG molecule, let us create an
-    elongated box of length :math:`6~\text{nm}`
-    along the *x* direction:
+To leave space for the stretched PEG molecule, let us create an
+elongated box of length :math:`6~\text{nm}`
+along the *x* direction:
 
 ..  code-block:: bash
 
     gmx trjconv -f em-peg.gro -s em-peg.tpr -o peg-elongated.gro -center -pbc mol -box 6 2.6 2.6 
 
-..  container:: justify
+Select *system* for both centering and output.
 
-    Select *system* for both centering and output.
-
-..  container:: justify
-
-    Then, follow the exact same steps as previously to solvate and equilibrate
-    the system:
+Then, follow the exact same steps as previously to solvate and equilibrate
+the system:
 
 ..  code-block:: bash
 
@@ -583,22 +495,18 @@ Stretch on the polymer
 The index file
 --------------
 
-..  container:: justify
-
-    To apply a forcing to the ends of the PEG, one needs to create atom groups.
-    Specificaly, we want to create two groups, each containing a single oxygen
-    atom from the edges of the PEG molecules (with ID 82 and 5). In GROMACS,
-    this can be done using and index file *.ndx*. Create a new index file
-    named *index.ndx* using the *gmx make_ndx* command:
+To apply a forcing to the ends of the PEG, one needs to create atom groups.
+Specificaly, we want to create two groups, each containing a single oxygen
+atom from the edges of the PEG molecules (with ID 82 and 5). In GROMACS,
+this can be done using and index file *.ndx*. Create a new index file
+named *index.ndx* using the *gmx make_ndx* command:
 
 ..  code-block:: bash
 
     gmx make_ndx -f nvt.gro -o index.ndx
     
-..  container:: justify
+When prompted, type the following 4 lines to create 2 additional groups: 
 
-    When prompted, type the following 4 lines to create 2 additional groups: 
-    
 ..  code-block:: bash
 
     a 82
@@ -606,10 +514,8 @@ The index file
     name 6 End1
     name 7 End2
 
-..  container:: justify
-
-    Then, type *q* for quitting. The index file *index.ndx*
-    contains 2 additional groups named *End1* and *End2*:
+Then, type *q* for quitting. The index file *index.ndx*
+contains 2 additional groups named *End1* and *End2*:
 
 ..  code-block:: bw
 
@@ -629,14 +535,10 @@ The index file
 The input file
 --------------
 
-..  container:: justify
+Let us create an input file for the stretching of the PEG molecule.
 
-    Let us create an input file for the stretching of the PEG molecule.
-
-..  container:: justify
-
-    Create a new input file named *stretching-peg-h2o.mdp* within *inputs/*,
-    and copy the following lines in it:
+Create a new input file named *stretching-peg-h2o.mdp* within *inputs/*,
+and copy the following lines in it:
 
 ..  code-block:: bw
 
@@ -664,11 +566,9 @@ The input file
     ref_t = 300 300
     tc_grps = PEG Water
 
-..  container:: justify
-
-    So far, the script is similar to the previously created *production-peg-h2o.mdp*
-    file, but without the *comm-mode* commands. To apply the constant forcing to
-    the *End1* and *End2* groups, add the following lines to *production-peg-h2o.mdp*:
+So far, the script is similar to the previously created *production-peg-h2o.mdp*
+file, but without the *comm-mode* commands. To apply the constant forcing to
+the *End1* and *End2* groups, add the following lines to *production-peg-h2o.mdp*:
 
 ..  code-block:: bw
 
@@ -685,29 +585,23 @@ The input file
     pull-coord1-k = 200
     pull-coord1-start = yes
     pull-print-com = yes
-    
-..  container:: justify
 
-    The force constant is requested along the *x* direction only (Y N N),
-    with a force constant :math:`k = 200~\text{kJ}~\text{mol}^{-1}~\text{nm}^{-1}`. 
+The force constant is requested along the *x* direction only (Y N N),
+with a force constant :math:`k = 200~\text{kJ}~\text{mol}^{-1}~\text{nm}^{-1}`. 
 
-..  container:: justify
-
-    Launch the simulation using the *-n index.ndx* option for the *gmx grompp*
-    command to refer to the previously created index file, so that GROMACS
-    finds the *End1* and *End2* groups.
+Launch the simulation using the *-n index.ndx* option for the *gmx grompp*
+command to refer to the previously created index file, so that GROMACS
+finds the *End1* and *End2* groups.
 
 ..  code-block:: bash
 
     gmx grompp -f inputs/stretching-peg-h2o.mdp -c npt.gro -p topol.top -o stretching -n index.ndx
     gmx mdrun -deffnm stretching -v -nt 8
 
-..  container:: justify
-
-    Two data files named *stretching_pullf.xvg* and *stretching_pullx.xvg*
-    are created during the simulation, and contain respectively the
-    force and distance between the 2 groups *End1* and *End2* as a function
-    of time.
+Two data files named *stretching_pullf.xvg* and *stretching_pullx.xvg*
+are created during the simulation, and contain respectively the
+force and distance between the 2 groups *End1* and *End2* as a function
+of time.
 
 .. figure:: ../figures/level2/stretching-a-polymer/pull-position-light.png
     :alt: Pull position from molecular dynamics simulation in GROMACS
@@ -723,27 +617,21 @@ The input file
     *x* direction, :math:`\Delta x`,
     as a function of time :math:`t`.
 
-..  container:: justify
+It can be seen from the evolution of the distance between the groups,
+:math:`\Delta x`, that the system reaches its equilibrium state after
+approximately 20 pico-seconds.
 
-    It can be seen from the evolution of the distance between the groups,
-    :math:`\Delta x`, that the system reaches its equilibrium state after
-    approximately 20 pico-seconds.
-
-..  container:: justify
-
-    Let us probe the effect of the stretching on the structure of the PEG
-    by remeasuring the dihedral angle values:
+Let us probe the effect of the stretching on the structure of the PEG
+by remeasuring the dihedral angle values:
 
 ..  code-block:: bash
 
     gmx mk_angndx -s stretching.tpr -hyd no -type dihedral
     gmx angle -n angle.ndx  -f stretching-centered.xtc -od dihedral-distribution.xvg -binwidth 0.25 -type dihedral -b 20 
 
-..  container:: justify
-
-    Select 1 for the O-C-C-O dihedral. Here the option *-b 20* is used to disregard
-    the first 20 pico-seconds of the simulation during which the PEG has not 
-    reach is final length. 
+Select 1 for the O-C-C-O dihedral. Here the option *-b 20* is used to disregard
+the first 20 pico-seconds of the simulation during which the PEG has not 
+reach is final length. 
 
 .. figure:: ../figures/level2/stretching-a-polymer/comparison-dihedral-distribution-light.png
     :alt: Angular distribution from molecular dynamics simulation in GROMACS
@@ -758,12 +646,10 @@ The input file
     Figure: Angular distribution for the O-C-C-O dihedral of the PEG molecules,
     comparing the unstretched (cyan) and stretched case (orange).
 
-..  container:: justify
-
-    The change in dihedral angles disribution reveals a configurational change of 
-    the polymer induced by the forcing. This transition is called gauche-trans,
-    where *gauche* and *trans* refer to possible states
-    for the PEG monomer :cite:`binder1995monte, liese2017hydration`.
+The change in dihedral angles disribution reveals a configurational change of 
+the polymer induced by the forcing. This transition is called gauche-trans,
+where *gauche* and *trans* refer to possible states
+for the PEG monomer :cite:`binder1995monte, liese2017hydration`.
 
 .. figure:: ../figures/level2/stretching-a-polymer/gauche-trans.png
     :alt: Illustration of the gauche (left) and trans (right) states of the PEG polymer.
