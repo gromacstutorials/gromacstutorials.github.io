@@ -58,8 +58,8 @@ prepare the following three files (or sets of files):
     *gmx pdb2gmx*, *gmx trjconv*, or *gmx solvate*. This will be done
     in the next tutorial, :ref:`protein_electrolyte-label`.
 
-1) The configuration file (.gro)
---------------------------------
+1) Populating the box
+---------------------
 
 Let us create the simulation box by placing the ions
 and molecules into it. To do so, we start from an
@@ -108,14 +108,28 @@ into it:
 
 This topology file for the SO\ :sub:`4`\ :sup:`2-` ion is written in the same
 format as **empty.gro**. It contains 5 atoms named ``O1``, ``O2``, ``O3``, ``O4``,
-and ``S1``, all grouped in a residue called ``SO4``.
-
-
+and ``S1``, all grouped in a residue called ``SO4``. Then, let us call the 
+``insert-molecules`` command by typing in the terminal:
 
 ..  code-block:: bw
 
-    nb_so4=6
-    gmx insert-molecules -ci so4.gro -f empty.gro -o conf.gro -nmol ${nb_so4} -radius 0.5
+    gmx insert-molecules -ci so4.gro -f empty.gro -o conf.gro -nmol 6 -radius 0.5
+
+Here, the ``insert-molecules`` command of GROMACS uses **empty.gro** as an input (flag ``-f``),
+and create a new **.gro** file named **conf.gro** with 6 residue (flag ``-nmol``).
+The ``-radius 0.5`` option is used to prevent ions for being inserted closer than
+:math:`0.5~\text{nm}` from each others. The output should indicate that the 
+insertion were successful:
+
+..  code-block:: bw
+
+    Added 6 molecules (out of 6 requested)
+    Writing generated configuration to conf.gro
+
+
+
+
+
 
 ..  code-block:: bw
 
