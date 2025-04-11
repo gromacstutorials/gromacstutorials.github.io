@@ -69,7 +69,7 @@ into it:
 
 ..  code-block:: bw
 
-    Empty box
+    Cubic box
     0
     3.50000   3.50000   3.50000
 
@@ -77,7 +77,7 @@ into it:
 
     <a href="../../../../../../.dependencies/gromacstutorials-inputs/tutorial1/empty.gro" target="_blank">empty.gro</a>
 
-The first line, *Empty box*, is a comment, the second line is the
+The first line, *Cubic box*, is a comment, the second line is the
 total number of atoms (0), and the last line is the box dimension in nanometer,
 here 3.5 nm by 3.5 nm by 3.5 nm. This **.gro** file is written in |Gromos87 format.
 
@@ -116,7 +116,7 @@ and ``S1``, all grouped in a residue called ``SO4``. Then, let us call the
     gmx insert-molecules -ci so4.gro -f empty.gro -o conf.gro -nmol 6 -radius 0.5
 
 Here, the ``insert-molecules`` command of GROMACS uses **empty.gro** as an input (flag ``-f``),
-and create a new **.gro** file named **conf.gro** with 6 residue (flag ``-nmol``).
+and create a new **.gro** file named **conf.gro** (flag ``-o``) with 6 ions in it (flag ``-nmol``).
 The ``-radius 0.5`` option is used to prevent ions for being inserted closer than
 :math:`0.5~\text{nm}` from each others. The output should indicate that the 
 insertion were successful:
@@ -126,66 +126,86 @@ insertion were successful:
     Added 6 molecules (out of 6 requested)
     Writing generated configuration to conf.gro
 
-
-
-
-
+Looking at the generated the **conf.gro** file, it contains
+30 atoms corresponding to the 6 ions:
 
 ..  code-block:: bw
 
-    nb_na=$((2 * nb_so4))
-    gmx insert-molecules -ci na.gro -f conf.gro -o conf.gro -nmol ${nb_na} -radius 0.5
+    Cubic box
+    30
+        1SO4     O1    1   2.231   2.698   0.397
+        1SO4     O2    2   2.008   2.825   0.356
+        1SO4     O3    3   2.009   2.566   0.370
+        1SO4     O4    4   2.115   2.685   0.165
+        1SO4     S1    5   2.091   2.693   0.322
+        (...)
+        6SO4     O1   26   1.147   3.194   0.656
+        6SO4     O2   27   1.107   3.341   0.446
+        6SO4     O3   28   1.349   3.274   0.514
+        6SO4     O4   29   1.216   3.444   0.658
+        6SO4     S1   30   1.205   3.313   0.568
+    3.50000   3.50000   3.50000
 
-..  code-block:: bw
-
-    nb_h2o=800
-    gmx insert-molecules -ci h2o.gro -f conf.gro -o conf.gro -nmol ${nb_h2o} -radius 0.14
-
-
-
-
-
-.. |conf-SO4.gro| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/conf.gro" target="_blank">here</a>
-
-The *conf.gro* file looks like this:
-
-..  code-block:: bw
-
-    Na2SO4 solution
-    2846
-       1  SO4   O1    1   2.608   3.089   2.389
-       1  SO4   O2    2   2.562   3.181   2.150
-       1  SO4   O3    3   2.388   3.217   2.339
-       1  SO4   O4    4   2.425   2.980   2.241
-       1  SO4   S1    5   2.496   3.117   2.280
-    (...)
-     719  Sol  OW1 2843   3.220   2.380   1.540
-     719  Sol  HW1 2844   3.279   2.456   1.540
-     719  Sol  HW2 2845   3.279   2.304   1.540
-     719  Sol  MW1 2846   3.230   2.380   1.540
-   3.36000   3.36000   3.36000
-
- Between the second and the
+Between the second and the
 last lines, there is one line per
 atom. Each line indicates, from left to right:
 
-- the residue ID, with all the atoms from the same SO\ :sub:`4`\ :sup:`2-` ion sharing the same residue ID,
+- the residue ID, with all the atoms from the same
+  SO\ :sub:`4`\ :sup:`2-` ion sharing the same residue ID,
 - the residue name,
 - the atom name,
 - the atom ID,
-- the atom position: *x*, *y*, and *z* coordinates in nanometer.
+- the atom position: :math:`x`, :math:`y`, and :math:`z` coordinates in nanometer.
     
-Note that the format of a *.gro* file is fixed,
-and each column is in a fixed position.
+The format of a **.gro** file is fixed, and each column is in a
+fixed position. The generated **conf.gro** file can be visualized
+using VMD by typing in the terminal:
 
-The *conf.gro* file can be visualized using VMD by
-typing in the terminal:
+.. code-block:: bash
 
-..  code-block:: bash
+    vmd conf.gro
 
-     vmd conf.gro
+Then, download the |na.gro| template for the Na\ :sup:`+` ion
+and add 12 ions using the same command:
+
+..  code-block:: bw
+
+    gmx insert-molecules -ci na.gro -f conf.gro -o conf.gro -nmol 12 -radius 0.5
+
+.. |na.gro| raw:: html
+
+    <a href="../../../../../../.dependencies/gromacstutorials-inputs/tutorial1/na.gro" target="_blank">na.gro</a>
+
+Here, importantly, the same **conf.gro** file is used as input (``-f``) and
+output (``-o``), so the 12 ions will be added to the same file. Finally,
+download the |h2o.gro| template for the :math:`\text{H}_2\text{O}` molecule
+and add 800 molecules using the same command:
+
+..  code-block:: bw
+
+    gmx insert-molecules -ci h2o.gro -f conf.gro -o conf.gro -nmol 800 -radius 0.14
+
+.. |h2o.gro| raw:: html
+
+    <a href="../../../../../../.dependencies/gromacstutorials-inputs/tutorial1/h2o.gro" target="_blank">h2o.gro</a>
+
+The final **conf.gro** file contains :
+
+..  code-block:: bw
+
+    Cubic box
+    3242
+        1SO4     O1    1   2.660   2.778   1.461
+        1SO4     O2    2   2.869   2.640   1.392
+        1SO4     O3    3   2.686   2.533   1.540
+        1SO4     O4    4   2.840   2.717   1.638
+        1SO4     S1    5   2.763   2.667   1.507
+        (...)
+    818Sol    OW1 3239   1.130   0.170   2.960
+    818Sol    HW1 3240   1.155   0.134   3.058
+    818Sol    HW2 3241   1.039   0.132   2.918
+    818Sol    MW1 3242   1.130   0.170   2.960
+    3.50000   3.50000   3.50000
 
 .. figure:: ../figures/level1/bulk-solution/step0-light.png
     :alt: Gromacs initial configuration of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
@@ -200,19 +220,11 @@ typing in the terminal:
     Figure: SO\ :sub:`4`\ :sup:`2-` ions, Na\ :sup:`+` ions, and water molecules.
     Oxygen atoms are in red, hydrogen in white, sodium in blue, and sulfur in
     yellow. For better rendering, the atom representation and colors
-    were modified with respect to the default VMD representation. If 
-    you want to obtain the same rendering, you can follow this 
-    |vmd-tutorial| from the LAMMPS tutorials webpage to obtain a similar rendering.
-
-.. |vmd-tutorial| raw:: html
-
-    <a href="https://lammpstutorials.github.io/sphinx/build/html/tutorials/vmd/vmd-tutorial.html" target="_blank">VMD tutorial</a>
+    were modified with respect to the default VMD representation.
 
 As can be seen using VMD, the water molecules are
-arranged in a quite unrealistic and regular manner, with
-all dipoles facing in the same direction, and possibly
-wrong distances between some of the molecules and ions.
-This will be fixed during energy minimization.
+arranged in a quite unrealistic and regular manner.
+This will need to be fixed during energy minimization.
 
 2) The topology files (.top .itp)
 -------------------------------------
