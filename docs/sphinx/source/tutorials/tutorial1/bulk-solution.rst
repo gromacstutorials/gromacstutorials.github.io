@@ -570,8 +570,8 @@ value, which is usually the sign that the atoms are located at appropriate
 distances from each other. The system is now in a favorable state
 and the molecular dynamics simulation can be started.
 
-Minimalist :math:`NVT` input file
-=================================
+Molecular dynamics (:math:`NVT`)
+================================
 
 Let us first perform a short (20 picoseconds)
 equilibration in the :math:`NVT` ensemble. In the :math:`NVT` ensemble,
@@ -592,12 +592,77 @@ Here, the molecular dynamics (md) integrator is used, which is a leap-frog
 algorithm integrating Newton equations of motion. A number of 20000 steps with
 a timestep ``dt`` equal of :math:`0.001 ~ \text{ps}` will be performed.
 
+Let us cancel the translational of the center of mass
+of the system:
+
+..  code-block:: bw
+
+    comm_mode = linear
+    comm_grps = system
+
+Let us give an initial kick to the atom so that the initial
+total velocities give the desired temperature of :math:`360~\text{K}`:
+
+..  code-block:: bw
+
+    gen-vel = yes
+    gen-temp = 360
+
+Let us also specify the neighbor searching parameters:
+
+..  code-block:: bw
+
+    cutoff-scheme = Verlet
+    nstlist = 10
+    ns_type = grid
+
 Let us also ask GROMACS to print the trajectory in a compressed **.xtc** file
 every 1000 steps, or every 1 ps, by adding the following line to **nvt.mdp**:
 
 ..  code-block:: bw
 
+    nstlog = 100
+    nstenergy = 100
     nstxout-compressed = 1000
+
+Here, we also request gromacs to print thermodynamic information
+in the log file and in the energy file **.edr** every 100 steps.
+
+Let us impose the calculation of long-range
+electrostatic, by the use of the long-range fast smooth particle-mesh ewald (SPME)
+electrostatics with Fourier spacing of :math:`0.1~\text{nm}`, order
+of 4, and cut-off of :math:`1~\text{nm}` :cite:`darden1993particle, essmann1995smooth`.
+Let us also impose how the short-range van der Waals interactions
+should be treated by GROMACS, as well as the cut-off ``rvdw`` of :math:`1~\text{nm}`:
+
+..  code-block:: bw
+
+    vdw-type = Cut-off
+    rvdw = 1.0
+
+    coulombtype = pme
+    fourierspacing = 0.1
+    pme-order = 4
+    rcoulomb = 1.0
+
+For this system, computing the long-range Coulomb interactions is necessary,
+because electrostatic forces between charged particles decay slowly,
+as the inverse of the square of the distance between them, :math:`1/r^2`.
+
+Here, the cut-off *rcoulomb* separates the short-range interactions from the
+long-range interactions. Long-range interactions are treated in the
+reciprocal space, while short-range interactions are computed directly.
+
+Let us use the LINCS algorithm to constrain the hydrogen
+bonds :cite:`hess1997lincs`. The water
+molecules will thus be treated as rigid, which is generally better given
+the fast vibration of the hydrogen bonds.
+
+..  code-block:: bw
+
+    constraint-algorithm = lincs
+    constraints = hbonds
+    continuation = no
 
 Let us also control the temperature throughout the
 simulation using the so-called ``v-rescale`` thermostat, which is
@@ -606,14 +671,21 @@ a Berendsen thermostat with an additional stochastic term :cite:`bussi2007canoni
 ..  code-block:: bw
 
     tcoupl = v-rescale
-    ref-t = 360
-    tc-grps = system
-    tau-t = 0.5
+    ld-seed = 48456
+    tc-grps = Water non-Water
+    tau-t = 0.5 0.5
+    ref-t = 360 360
 
 The ``v-rescale`` thermostat is known to give a proper canonical
 ensemble. Here, we also specified that the thermostat is
 applied to the entire system using the ``tc-grps`` option and that the
 damping constant for the thermostat, ``tau-t``, is equal to 0.5 ps.
+
+Here, two separate temperature baths for
+the water molecules and the ions are used. Here, the ions are included
+in the default GROMACS group called *non-water*.
+Now, the same temperature :math:`T = 360 ~ \text{K}` is imposed to the
+two groups with the same characteristic time :math:`\tau = 0.5 ~ \text{ps}`.
 
 Note that the relatively high temperature of :math:`360~\text{K}`
 has been chosen here to reduce the viscosity of the solution and
@@ -641,148 +713,17 @@ GROMACS. In the terminal, type:
 
 and choose 10 for temperature, and then press enter twice.
 
-From the generated *nvt-T.xvg* file, one can see that temperature
-started from 0 K, which was expected since the atoms have no velocity
-during a minimization step, and reaches a temperature slightly larger than the
-requested 360 K after a duration of a few picoseconds.
+From the generated **nvt-T.xvg** file, one can see that temperature
+started from :math:`360~\text{K}`, as requested, then increase quicky 
+due to the interaction between neighbor species. Thanks to the
+thermostat that is removing the extra energy from the system,
+the temperature reaches the requested temperature of
+:math:`360~\text{K}` after a duration of a few picoseconds.
+
+.. 
 
 In general, it is better to perform a longer equilibration, but simulation
 durations are kept as short as possible for these tutorials. 
-
-.. figure:: ../figures/level1/bulk-solution/temperature-nvt-minimal-light.png
-    :alt: Gromacs tutorial : temperature versus time.
-    :class: only-light
-
-.. figure:: ../figures/level1/bulk-solution/temperature-nvt-minimal-dark.png
-    :alt: Gromacs tutorial : temperature versus time.
-    :class: only-dark
-
-.. container:: figurelegend
-
-    Figure: Evolution of the temperature :math:`T` as a function of
-    the time :math:`t` during the NVT equilibration. The dashed line is the
-    requested temperature of 360 K.
-
-Improving the NVT input
-=======================
-
-So far, very few commands have been placed in the
-*.mdp* input file, meaning that most of the instructions
-have been taken by GROMACS from the default
-parameters. You can find what parameters were used
-during the last nvt run by opening the new *nvt.mdp*
-file that has been created in the main folder.
-Exploring this new *nvt.mdp* file shows us that, for
-instance, plain cut-off Coulomb interactions have
-been used:
-
-..  code-block:: bw
-
-    (...)
-    ; Method for doing electrostatics
-    coulombtype = Cut-off
-    (...)
-
-For this system, computing the long-range Coulomb interactions is necessary,
-because electrostatic forces between charged particles decay slowly,
-as the inverse of the square of the distance between them, :math:`1/r^2`.
-
-In addition, the thermostating of the system should be improved, given that
-the temperature of the system is slightly larger than the desired temperature.
-For instance, separate thermostats can be applied to the water molecules
-and the ions.
-
-Let us improve the input used for the NVT step.
-First, in the *nvt.mdp* file, let us impose the calculation of long-range
-electrostatic, by the use of the
-long-range fast smooth particle-mesh ewald (SPME)
-electrostatics with Fourier spacing of :math:`0.1~\text{nm}`, order
-of 4, and cut-off of :math:`1~\text{nm}` :cite:`darden1993particle, essmann1995smooth`:
-
-..  code-block:: bw
-
-    coulombtype = pme
-    fourierspacing = 0.1
-    pme-order = 4
-    rcoulomb = 1.0
-
-Here, the cut-off *rcoulomb* separates the short-range interactions from the
-long-range interactions. Long-range interactions are treated in the
-reciprocal space, while short-range interactions are computed directly.
-
-Let us also impose how the short-range van der Waals interactions
-should be treated by GROMACS, as well as the cut-off *rvdw*
-of :math:`1~\text{nm}`:
-
-..  code-block:: bw
-
-    vdw-type = Cut-off
-    rvdw = 1.0
-
-Let us use the LINCS algorithm to constrain the hydrogen
-bonds :cite:`hess1997lincs`. The water
-molecules will thus be treated as rigid, which is generally better given
-the fast vibration of the hydrogen bonds.
-
-..  code-block:: bw
-
-    constraint-algorithm = lincs
-    constraints = hbonds
-    continuation = no
-
-Let us also use separate temperature baths for
-the water molecules and the ions. Here, the ions are included
-in the default GROMACS group called *non-water*.
-Within *nvt.mdp*, replace the following lines:
-
-..  code-block:: bw
-
-    tcoupl = v-rescale
-    ref-t = 360
-    tc-grps = system
-    tau-t = 0.5
-
-by:
-
-..  code-block:: bw
-
-    tcoupl = v-rescale
-    tc-grps = Water non-Water
-    tau-t = 0.5 0.5
-    ref-t = 360 360
-
-Now, the same temperature :math:`T = 360 ~ \text{K}` is imposed to the
-two groups with the same characteristic time :math:`\tau = 0.5 ~ \text{ps}`.
-      
-Let us also specify the neighbor searching parameters:
-
-..  code-block:: bw
-
-    cutoff-scheme = Verlet
-    nstlist = 10
-    ns_type = grid
-
-Let us give an initial kick to the atom so that the initial
-total velocities give the desired temperature of 360 K instead of 0 K
-as previously:
-
-..  code-block:: bw
-
-    gen-vel = yes
-    gen-temp = 360
-
-Finally, let us cancel the translational of the center of mass
-of the system:
-
-..  code-block:: bw
-
-    comm_mode = linear
-    comm_grps = system
-
-Run again GROMACS using this new input script. One difference with the
-previous (minimalist) NVT run is
-the temperature at the beginning of the run. The final
-temperature is also much closer to the desired temperature of 360 K.
 
 .. figure:: ../figures/level1/bulk-solution/temperature-nvt-light.png
     :alt: Gromacs tutorial : temperature versus time.
@@ -794,8 +735,8 @@ temperature is also much closer to the desired temperature of 360 K.
 
 .. container:: figurelegend
 
-    Figure: Evolution of the temperature as a function of the time
-    during the NVT equilibration.
+    Figure: Evolution of the temperature,  :math:`T`, as a function of the time,  :math:`t`
+    during the :math:`NVT` molecular dynamics simulation.
 
 Adjust the density using NPT
 ============================
