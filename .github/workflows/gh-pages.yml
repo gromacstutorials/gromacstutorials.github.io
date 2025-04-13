@@ -3,7 +3,7 @@ name: Deploy GitHub Pages
 on:
   push:
     branches:
-      - 2024.2  # Set a branch name to trigger deployment
+      - main
 jobs:
   deploy:
     runs-on: ubuntu-22.04
