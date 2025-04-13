@@ -570,16 +570,17 @@ value, which is usually the sign that the atoms are located at appropriate
 distances from each other. The system is now in a favorable state
 and the molecular dynamics simulation can be started.
 
-Minimalist NVT input file
-=========================
+Minimalist :math:`NVT` input file
+=================================
 
 Let us first perform a short (20 picoseconds)
-equilibration in the NVT ensemble. In the NVT ensemble, the number of
-atoms (N) and the volume (V) are maintained fixed, and the
-temperature of the system (T) is adjusted using a thermostat.
+equilibration in the :math:`NVT` ensemble. In the :math:`NVT` ensemble,
+the number of atoms (:math:`N`) and the volume (:math:`V`) are maintained
+fixed, and the temperature of the system (:math:`T`) is adjusted using
+a thermostat.
 
-Let us write a new input script called *nvt.mdp*, and save it in
-the *inputs/* folder. Copy the following lines into it:
+Let us create a new input script called **nvt.mdp**, and save it in
+the **inputs/** folder. Copy the following lines into it:
 
 ..  code-block:: bw
 
@@ -587,21 +588,20 @@ the *inputs/* folder. Copy the following lines into it:
     nsteps = 20000
     dt = 0.001
 
-Here, the molecular dynamics (md) integrator is used, this is a leap-frog
+Here, the molecular dynamics (md) integrator is used, which is a leap-frog
 algorithm integrating Newton equations of motion. A number of 20000 steps with
-a timestep *dt* equal of :math:`0.001 ~ \text{ps}` will be performed.
+a timestep ``dt`` equal of :math:`0.001 ~ \text{ps}` will be performed.
 
-Let us also ask GROMACS to print the trajectory in a compressed *xtc* file
-every 1000 steps, or every 1 ps, by adding the following line to *nvt.mdp*:
+Let us also ask GROMACS to print the trajectory in a compressed **.xtc** file
+every 1000 steps, or every 1 ps, by adding the following line to **nvt.mdp**:
 
 ..  code-block:: bw
 
     nstxout-compressed = 1000
 
 Let us also control the temperature throughout the
-simulation using the v-rescale thermostat, which is
-the Berendsen thermostat with an additional stochastic
-term :cite:`bussi2007canonical`.
+simulation using the so-called ``v-rescale`` thermostat, which is
+a Berendsen thermostat with an additional stochastic term :cite:`bussi2007canonical`:
 
 ..  code-block:: bw
 
@@ -610,38 +610,38 @@ term :cite:`bussi2007canonical`.
     tc-grps = system
     tau-t = 0.5
 
-The v-rescale thermostat is known to give
-a proper canonical ensemble. Here, we also specified that the thermostat is
-applied to the entire system using the *tc-grps* option and that the
-damping constant for the thermostat, *tau-t*, is equal to 0.5 ps.
+The ``v-rescale`` thermostat is known to give a proper canonical
+ensemble. Here, we also specified that the thermostat is
+applied to the entire system using the ``tc-grps`` option and that the
+damping constant for the thermostat, ``tau-t``, is equal to 0.5 ps.
 
-Note that the relatively high temperature of 360 K
+Note that the relatively high temperature of :math:`360~\text{K}`
 has been chosen here to reduce the viscosity of the solution and
 decrease the equilibration duration. 
     
 We now have a minimalist input file for performing
-the first NVT simulation. Run it by typing in the terminal:
+the first :math:`NVT` simulation. Run it by typing in the terminal:
 
 ..  code-block:: bw
 
-    gmx grompp -f inputs/nvt.mdp -c min.gro -p topol.top -o nvt -pp nvt -po nvt
+    gmx grompp -f inputs/nvt.mdp -c min.gro -o nvt -pp nvt -po nvt
     gmx mdrun -v -deffnm nvt
 
-Here *-c min.gro* ensures that the previously
-minimized configuration is used as a starting point.
+Here ``-c min.gro`` option ensures that the previously
+minimized configuration is used as a starting point for the :math:`NVT` simulation.
 
 After the completion of the simulation, we can
 ensure that the system temperature indeed reached
-the value of 360 K by using the energy command of
+the value of :math:`360~\text{K}` by using the energy command of
 GROMACS. In the terminal, type:
 
 ..  code-block:: bw
 
-    gmx energy -f nvt.edr -o temperature-nvt-minimal.xvg
+    gmx energy -f nvt.edr -o nvt-T.xvg
 
-and choose *temperature*.
+and choose 10 for temperature, and then press enter twice.
 
-From the generated *temperature-nvt-minimal.xvg* file, one can see that temperature
+From the generated *nvt-T.xvg* file, one can see that temperature
 started from 0 K, which was expected since the atoms have no velocity
 during a minimization step, and reaches a temperature slightly larger than the
 requested 360 K after a duration of a few picoseconds.
