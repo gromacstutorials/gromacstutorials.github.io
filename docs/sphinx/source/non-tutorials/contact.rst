@@ -23,7 +23,7 @@ Struggling with your simulation project?
 
 
 Support the GROMACS tutorials initiative
-=======================================
+========================================
 
 ..  container:: justify
 

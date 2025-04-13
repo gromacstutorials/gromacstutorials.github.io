@@ -738,16 +738,17 @@ durations are kept as short as possible for these tutorials.
     Figure: Evolution of the temperature,  :math:`T`, as a function of the time,  :math:`t`
     during the :math:`NVT` molecular dynamics simulation.
 
-Adjust the density using NPT
-============================
+Molecular dynamics (:math:`NpT`)
+================================
 
 Now that the temperature of the system is properly equilibrated,
-let us continue the simulation using the
-NPT ensemble, where the pressure of the system is imposed by a barostat
-and the volume of the box is allowed to relax. During NPT relaxation, the
+let us continue the simulation in the
+:math:`NpT` ensemble, where the pressure :math:`p` of the system
+is imposed by a barostat and the volume of the box :math:`V` is
+allowed to relax. During :math:`NpT` relaxation, the
 density of the fluid should converge toward its equilibrium value.
-Create a new input script, call it *npt.mdp*, and
-copy the following lines in it:
+Create a new input script, call it **npt.mdp**, and
+copy the following lines into it:
 
 ..  code-block:: bw
 
@@ -783,40 +784,42 @@ copy the following lines in it:
     tau-t = 0.5 0.5
     ref-t = 360 360
 
+So far, the differences with the previous :math:`NVT`
+script are the duration of the run (the value of ``nsteps``),
+and the removing of the ``gen-vel`` and ``gen-temp`` commands,
+because the atoms already have a velocity.
+
+Let us add an the isotropic C-rescale pressure
+coupling with a target pressure of 1 bar :cite:`bernetti2020pressure`
+by adding the following to **npt.mdp**:
+
+..  code-block:: bw
+
     pcoupl = C-rescale
     Pcoupltype = isotropic
     tau_p = 1.0
     ref_p = 1.0
     compressibility = 4.5e-5
-
-The main difference with the previous NVT script is
-the addition of the isotropic C-rescale pressure
-coupling with a target pressure of 1 bar :cite:`bernetti2020pressure`.
-Another difference is the addition of the *nstlog* and
-*nstenergy* commands to control the frequency at
-which information is printed in the log file and in
-the energy file (*edr*). Note also the removing the
-*gen-vel* commands, because the atoms already have a velocity. 
     
-Run the NPT equilibration using:
+Run the :math:`NpT` equilibration using:
 
 ..  code-block:: bash 
 
-    gmx grompp -f inputs/npt.mdp -c nvt.gro -p topol.top -o npt -pp npt -po npt
+    gmx grompp -f inputs/npt.mdp -c nvt.gro -o npt -pp npt -po npt
     gmx mdrun -v -deffnm npt
 
 Let us have a look a the temperature, the pressure, and the
-volume of the box during the NPT step using the *gmx energy*
+volume of the box during the NPT step using the ``gmx energy``
 command 3 consecutive times:
 
 ..  code-block:: bash
 
-    gmx energy -f npt.edr -o temperature-npt.xvg
-    gmx energy -f npt.edr -o pressure-npt.xvg
-    gmx energy -f npt.edr -o density-npt.xvg
+    gmx energy -f npt.edr -o npt-T.xvg
+    gmx energy -f npt.edr -o npt-p.xvg
+    gmx energy -f npt.edr -o npt-rho.xvg
 
-Choose respectively *temperature*, *pressure* and *density*.
-This is what I see:
+Choose respectively ``temperature`` (10), ``pressure`` (11) and
+``density`` (16).
 
 .. figure:: ../figures/level1/bulk-solution/temperature-npt-light.png
     :alt: Gromacs tutorial : NPT equilibration
@@ -828,10 +831,9 @@ This is what I see:
 
 ..  container:: figurelegend
 
-    Figure: Evolution of the temperature :math:`T` (a),
-    pressure :math:`p` (b),
-    and fluid density :math:`\rho` (c) as a
-    function of the time during the NPT equilibration.
+    Figure: Evolution of the temperature, :math:`T` (a),
+    pressure, :math:`p` (b), and fluid density, :math:`\rho` (c) as a
+    function of the time during the :math:`NpT` equilibration.
 
 The results show that the temperature remains well
 controlled during the NPT run, and
@@ -846,14 +848,16 @@ The pressure curve reveals large oscillations in the pressure, with the pressure
 values and large positive values. These large oscillations are typical in molecular dynamics, and not a source of
 concern here.
 
-Radial distribution function
-============================
+Production run
+==============
 
-Let us perform a :math:`400~\text{ps}` run in the NVT ensemble, during which the atom positions will be printed every
-pico-second. The trajectory will then be used to measure radial distribution functions and probe the solvation
-environment of the ions. 
-        
-Create a new input file within the *inputs/* folder, call it *production.mdp*, and copy the following lines into it:
+Let us perform a :math:`400~\text{ps}` run in the :math:`NVT` ensemble,
+during which the atom positions will be printed every pico-second. The
+trajectory will then be used to measure to probe the structure and dynamics
+of the system.
+
+Create a new input file within the **inputs/** folder, call
+it **production.mdp**, and copy the following lines into it:
 
 ..  code-block:: bw 
 
@@ -889,20 +893,24 @@ Create a new input file within the *inputs/* folder, call it *production.mdp*, a
     tau-t = 0.5 0.5
     ref_t = 360 360
 
-Run it using:
+All these commands have been seen in the previous part.
+Run it with GROMACS starting from the system equilibrated
+at equilibrium temperature and pressure, **npt.gro**, using:
 
 ..  code-block:: bash 
 
-    gmx grompp -f inputs/production.mdp -c npt.gro -p topol.top -o production -pp production -po production
+    gmx grompp -f inputs/production.mdp -c npt.gro -o production -pp production -po production
     gmx mdrun -v -deffnm production
 
-When the simulation is completed, let us compute the radial
+Radial distribution function
+----------------------------
+
+After the simulation is completed, let us compute the radial
 distribution functions between :math:`\text{Na}^+` and
-:math:`\text{H}_2\text{O}`, 
-:math:`\text{SO}_4^{2-}` and 
-:math:`\text{H}_2\text{O}`,
-as well as in between :math:`\text{H}_2\text{O}` molecules.
-This can be done using the *gmx rdf* command as follows:
+:math:`\text{H}_2\text{O}`, :math:`\text{SO}_4^{2-}` and 
+:math:`\text{H}_2\text{O}`, as well as in between
+:math:`\text{H}_2\text{O}` molecules. This can be done using
+the ``gmx rdf`` command as follows:
     
 ..  code-block:: bash 
 
