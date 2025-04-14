@@ -22,50 +22,48 @@ Bulk salt solution
 The objective of this tutorial is to use the open-source code GROMACS
 :cite:`van2005gromacs` to perform a molecular dynamics simulation. The
 system consists of a bulk solution of water mixed with sodium
-(Na\ :sup:`+`) and sulfate (SO\ :sub:`4`\ :sup:`2-`) ions.
+(:math:`\text{Na}_+`) and sulfate (:math:`\text{SO}_4^{2-}`) ions.
 
-This tutorial demonstrates how to set up a simulation box, solvate it
-with water, and add ions. It also introduces key components of molecular
+This tutorial guides you through setting up a simulation box,
+adding species to it, and then solvating them with water.
+It also introduces key components of molecular
 dynamics simulations, including energy minimization, thermostating, and
-*NVT* and *NpT* equilibrations. The resulting trajectory is analyzed
-using GROMACS utilities to extract properties such as the radial distribution
-function (RDF) and mean squared displacement (MSD). Trajectories are
-visualized using VMD :cite:`humphrey1996vmd`.
+both :math:`NVT` and :math:`NpT` equilibration steps. The resulting trajectory
+is analyzed using GROMACS utilities, radial distribution functions are
+extracted, and the trajectories are visualized using VMD :cite:`humphrey1996vmd`.
 
 .. include:: ../../non-tutorials/needhelp.rst
 .. include:: ../../non-tutorials/GROMACS2024.2.rst
 
-The input files
-===============
-
-In order to run the present simulation using GROMACS, we need to
-prepare the following three files (or sets of files):
-
-- 1) A **configuration file** (**.gro**) containing the initial positions of
-  the atoms and the box dimensions.
-
-- 2) A **topology file** (**.top**) specifying the location of the force
-  field files (**.itp**) and the number of residues in the simulation.
-
-- 3) An **input file** (**.mdp**) containing the simulation parameters
-  (e.g., imposed temperature, timestep, and cut-off values).
-
 ..
-    The specificity of the present tutorial is that both configuration
-    and topology files were prepared with homemade Python scripts, see
-    :ref:`create-conf-label`. In principle, it is also possible to
-    prepare the system using GROMACS functionalities, such as 
-    *gmx pdb2gmx*, *gmx trjconv*, or *gmx solvate*. This will be done
-    in the next tutorial, :ref:`protein_electrolyte-label`.
+    The input files
+    ===============
+    In order to run the present simulation using GROMACS, we need to
+    prepare the following three files (or sets of files):
 
-1) Populating the box
----------------------
+    - 1) A **configuration file** (**.gro**) containing the initial positions of
+    the atoms and the box dimensions.
 
-Let us create the simulation box by placing the ions
-and molecules into it. To do so, we start from an
-empty box. In a dedicated folder, create an empty
-file called |empty.gro|, and copy the following lines
-into it:
+    - 2) A **topology file** (**.top**) specifying the location of the force
+    field files (**.itp**) and the number of residues in the simulation.
+
+    - 3) An **input file** (**.mdp**) containing the simulation parameters
+    (e.g., imposed temperature, timestep, and cut-off values).
+
+    ..
+        The specificity of the present tutorial is that both configuration
+        and topology files were prepared with homemade Python scripts, see
+        :ref:`create-conf-label`. In principle, it is also possible to
+        prepare the system using GROMACS functionalities, such as 
+        *gmx pdb2gmx*, *gmx trjconv*, or *gmx solvate*. This will be done
+        in the next tutorial, :ref:`protein_electrolyte-label`.
+
+Populating the box
+==================
+
+Let us create the simulation box by placing the ions and molecules into it. To do  
+so, we start from an empty box. In a dedicated folder, create an empty file  
+called |empty.gro|, and copy the following lines into it:
 
 ..  code-block:: bw
 
@@ -77,19 +75,19 @@ into it:
 
     <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/empty.gro" target="_blank">empty.gro</a>
 
-The first line, *Cubic box*, is a comment, the second line is the
-total number of atoms (0), and the last line is the box dimension in nanometer,
-here 3.5 nm by 3.5 nm by 3.5 nm. This **.gro** file is written in Gromos87 format.
+The first line, *Cubic box*, is a comment; the second line indicates the total
+number of atoms (0); and the last line defines the box dimensions in
+nanometers -- in this case, 3.5 by 3.5 by :math:`3.5~\text{nm}`. This **.gro** file
+is written in |Gromos87| format.
 
 .. |Gromos87| raw:: html
 
     <a href="https://manual.gromacs.org/archive/5.0.4/online/gro.html" target="_blank">Gromos87</a>
 
-Let us populate this empty box with SO\ :sub:`4`\ :sup:`2-` ions first.
-To do so, the GROMACS command named ``insert-molecules`` is used, for which one
-needs to provide a template for the ion. Within the same folder as **empty.gro**,
-create a new file named |so4.gro|, and copy the following lines
-into it:
+Let us populate this empty box with :math:`\text{SO}_4^{2-}` ions first. To do so,
+the GROMACS command named ``insert-molecules`` is used, for which one needs to
+provide a template for the ion. Within the same folder as **empty.gro**, create a
+new file named |so4.gro|, and copy the following lines into it:
 
 ..  code-block:: bw
 
