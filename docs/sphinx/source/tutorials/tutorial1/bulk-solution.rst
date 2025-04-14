@@ -7,13 +7,13 @@ Bulk salt solution
 
     The very basics of GROMACS through a simple example
 
-.. figure:: ../figures/level1/bulk-solution/video-solution-white.webp
+.. figure:: figures/video-solution-white.webp
     :alt: Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
     :class: only-light
     :height: 250
     :align: right
 
-.. figure:: ../figures/level1/bulk-solution/video-solution-dark.webp
+.. figure:: figures/video-solution-dark.webp
     :alt: Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
     :class: only-dark
     :height: 250
@@ -79,7 +79,7 @@ into it:
 
 The first line, *Cubic box*, is a comment, the second line is the
 total number of atoms (0), and the last line is the box dimension in nanometer,
-here 3.5 nm by 3.5 nm by 3.5 nm. This **.gro** file is written in |Gromos87 format.
+here 3.5 nm by 3.5 nm by 3.5 nm. This **.gro** file is written in Gromos87 format.
 
 .. |Gromos87| raw:: html
 
@@ -496,12 +496,12 @@ minimization step using VMD by typing in the terminal:
 
     vmd conf.gro min.trr
 
-.. figure:: ../figures/level1/bulk-solution/solution-light.webp
+.. figure:: figures/solution-light.webp
     :alt: Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization.
     :class: only-light
     :height: 330
 
-.. figure:: ../figures/level1/bulk-solution/solution-dark.webp
+.. figure:: figures/solution-dark.webp
     :alt: Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization.
     :class: only-dark
     :height: 330
@@ -548,11 +548,11 @@ can be oppened with the Grace software (or equivalent) :cite:`grace`:
 
     xmgrace min-pe.xvg
 
-.. figure:: ../figures/level1/bulk-solution/potential-energy-min-light.png
+.. figure:: figures/potential-energy-min-light.png
     :alt: Gromacs tutorial : plot of the energy versus time.
     :class: only-light
 
-.. figure:: ../figures/level1/bulk-solution/potential-energy-min-dark.png
+.. figure:: figures/potential-energy-min-dark.png
     :alt: Gromacs tutorial : plot of the energy versus time.
     :class: only-dark
 
@@ -720,16 +720,14 @@ thermostat that is removing the extra energy from the system,
 the temperature reaches the requested temperature of
 :math:`360~\text{K}` after a duration of a few picoseconds.
 
-.. 
-
 In general, it is better to perform a longer equilibration, but simulation
 durations are kept as short as possible for these tutorials. 
 
-.. figure:: ../figures/level1/bulk-solution/temperature-nvt-light.png
+.. figure:: figures/temperature-nvt-light.png
     :alt: Gromacs tutorial : temperature versus time.
     :class: only-light
 
-.. figure:: ../figures/level1/bulk-solution/temperature-nvt-dark.png
+.. figure:: figures/temperature-nvt-dark.png
     :alt: Gromacs tutorial : temperature versus time.
     :class: only-dark
 
@@ -821,11 +819,11 @@ command 3 consecutive times:
 Choose respectively ``temperature`` (10), ``pressure`` (11) and
 ``density`` (16).
 
-.. figure:: ../figures/level1/bulk-solution/temperature-npt-light.png
+.. figure:: figures/temperature-npt-light.png
     :alt: Gromacs tutorial : NPT equilibration
     :class: only-light
 
-.. figure:: ../figures/level1/bulk-solution/temperature-npt-dark.png
+.. figure:: figures/temperature-npt-dark.png
     :alt: Gromacs tutorial : NPT equilibration
     :class: only-dark
 
@@ -938,6 +936,20 @@ and then by typing 2 and 4.
 
 The results show...
 
+.. figure:: figures/rdf-plain.png
+    :alt: Gromacs tutorial RDF radial distribution function
+    :class: only-light
+
+.. figure:: figures/rdf-plain-dm.png
+    :alt: Gromacs tutorial RDF radial distribution function
+    :class: only-dark
+
+.. container:: figurelegend
+
+    Figure: Radial distribution functions (RDF) as calculated between sodium
+    and water (:math:`\text{Na}^+ - \text{H}_2\text{O}`), between sulfate and
+    water (:math:`\text{SO}_4^{2-} - \text{H}_2\text{O}`).
+
 The main issue with the calculated rdf, is that it includes all the atoms from 
 thr :math:`\text{H}_2\text{O}` molecules (including the hydrogen atoms) and all
 the atoms from the :math:`\text{SO}_4^{2-}`, leading to more peaks and dephts
@@ -993,19 +1005,20 @@ and select 3 and 7.
 
 and select 8 and 7.
 
-    
-.. figure:: ../figures/level1/bulk-solution/rdf-production-light.png
+.. figure:: figures/rdf-filtered.png
     :alt: Gromacs tutorial RDF radial distribution function
     :class: only-light
 
-.. figure:: ../figures/level1/bulk-solution/rdf-production-dark.png
+.. figure:: figures/rdf-filtered-dm.png
     :alt: Gromacs tutorial RDF radial distribution function
     :class: only-dark
 
 .. container:: figurelegend
 
     Figure: Radial distribution functions (RDF) as calculated between sodium
-    and water, between sulfate and water, and finally between water and water.
+    and water oxygens (:math:`\text{Na}^+ - \text{OW1}`), between sulfur and
+    water oxygens  (:math:`\text{S1} - \text{OW1}`), and in between water oxygens
+    (:math:`\text{OW1} - \text{OW1}`),.
 
 The radial distribution functions highlight the typical distance between
 the different species of the fluid. For instance, it can be seen that
@@ -1013,9 +1026,6 @@ there is a strong hydration layer of water around sodium ions at a typical
 distance of :math:`2.4 ~ \text{Å}` from the center of the sodium ion.
 
 .. include:: ../../non-tutorials/accessfile.rst
-
-
-
 
 ..
     Mean square displacement

@@ -1,3 +1,8 @@
 [submodule ".dependencies/gromacstutorials-inputs"]
 	path = .dependencies/gromacstutorials-inputs
 	url = git@github.com:gromacstutorials/gromacstutorials-inputs.git
+	branch = main
+[submodule ".dependencies/pyplot-perso"]
+	path = .dependencies/pyplot-perso
+	url = git@github.com:simongravelle/pyplot-perso.git
+	branch = LAMMPS-livecom
