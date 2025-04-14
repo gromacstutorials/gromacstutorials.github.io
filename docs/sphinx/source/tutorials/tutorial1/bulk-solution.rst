@@ -902,28 +902,97 @@ at equilibrium temperature and pressure, **npt.gro**, using:
     gmx grompp -f inputs/production.mdp -c npt.gro -o production -pp production -po production
     gmx mdrun -v -deffnm production
 
-Radial distribution function
-----------------------------
+Measurement
+===========
 
-After the simulation is completed, let us compute the radial
-distribution functions between :math:`\text{Na}^+` and
-:math:`\text{H}_2\text{O}`, :math:`\text{SO}_4^{2-}` and 
-:math:`\text{H}_2\text{O}`, as well as in between
-:math:`\text{H}_2\text{O}` molecules. This can be done using
+After completing the simulation, we proceed to compute the radial distribution functions (rdf):
+
+.. math::
+
+   g(r) = \frac{V}{N_{\text{ref}} \rho} \frac{dN(r)}{dr},
+
+where :math:`V` is the volume of the simulation box, :math:`N_{\text{ref}}` is
+the number of reference atoms, :math:`\rho` is the average number density of
+particles in the system, and :math:`\frac{dN(r)}{dr}` is the number of particles
+in a spherical shell of thickness :math:`dr` around a reference particle at
+a distance :math:`r`.
+
+First, let us measure the rdf between :math:`\text{Na}^+`
+ions and :math:`\text{H}_2\text{O}` molecules, as well as between :math:`\text{SO}_4^{2-}`
+ions and :math:`\text{H}_2\text{O}`. This can be done using
 the ``gmx rdf`` command as follows:
     
-..  code-block:: bash 
+..  code-block:: bw 
 
-    gmx rdf -f production.xtc -s production.tpr -o na-sol-rdf.xvg
+    gmx rdf -f production.xtc -s production.tpr -o production-rdf-na-h2o.xvg
 
-Selecting the sodium ions, and then the water. Repeat the same operation for 
-the sulfate and water, and for the water and water. For the water-water
-RDF, it is better to exclude the intra-molecular contribution using
-the *-excl* option, as follows:
+Then select the sodium ions as *reference* by typing 3, the water
+as *selection* by typing 4, and press ``Ctrl+D``. The same can be done
+for :math:`\text{SO}_4^{2-}` ions by typing:
 
-..  code-block:: bash 
+..  code-block:: bw 
 
-    gmx rdf -f production.xtc -s production.tpr -o sol-sol-rdf.xvg -excl
+    ${gmx} rdf -f production.xtc -s production.tpr -o production-rdf-so4-h2o.xvg
+
+and then by typing 2 and 4.
+
+The results show...
+
+The main issue with the calculated rdf, is that it includes all the atoms from 
+thr :math:`\text{H}_2\text{O}` molecules (including the hydrogen atoms) and all
+the atoms from the :math:`\text{SO}_4^{2-}`, leading to more peaks and dephts
+and a more difficult analysis. Rdfs would be easiers to interpret, if only the 
+water oxygen atoms (with name ``OW1``) and :math:`\text{SO}_4^{2-}` ions 
+sulfur atoms (with name ``S1``) where included in the analysis. As these groups were not
+included in the original group, we have to create them ourself.
+
+To create groups, we can use the ``gmx make_ndx`` command as follow:
+
+..  code-block:: bw 
+
+    gmx make_ndx -f production.tpr << EOF
+    a OW1
+    a S1
+    q
+    EOF
+
+And then type ``a OW1`` and press enter, ``a S1`` and press enter, and then
+press ``q`` to save and quit. This will create a file name **index.ndx** that
+contain two more groups (named OW1 and S1) alongside the default ones:
+
+..  code-block:: bw 
+
+    (...)
+    3223 3224 3225 3226 3227 3228 3229 3230 3231 3232 3233 3234 3235 3236 3237
+    3238 3239 3240 3241 3242
+    [ non-Water ]
+    1    2    3    4    5    6    7    8    9   10   11   12   13   14   15
+    16   17   18   19   20   21   22   23   24   25   26   27   28   29   30
+    31   32   33   34   35   36   37   38   39   40   41   42
+    [ OW1 ]
+    43   47   51   55   59   63   67   71   75   79   83   87   91   95   99
+    103  107  111  115  119  123  127  131  135  139  143  147  151  155  159
+    (...)
+    3163 3167 3171 3175 3179 3183 3187 3191 3195 3199 3203 3207 3211 3215 3219
+    3223 3227 3231 3235 3239
+    [ S1 ]
+    5   10   15   20   25   30
+
+Then, let us rerun the ``gmx rdf`` command using the **index.ndx** file, and
+selecting the newly created groups:
+
+..  code-block:: bw 
+
+    gmx rdf -f production.xtc -s production.tpr -o production-rdf-na-OW1.xvg -n index.ndx
+
+and select 3 and 7.
+
+..  code-block:: bw 
+
+    gmx rdf -f production.xtc -s production.tpr -o production-rdf-so4-OW1.xvg -n index.ndx
+
+and select 8 and 7.
+
     
 .. figure:: ../figures/level1/bulk-solution/rdf-production-light.png
     :alt: Gromacs tutorial RDF radial distribution function
@@ -943,56 +1012,60 @@ the different species of the fluid. For instance, it can be seen that
 there is a strong hydration layer of water around sodium ions at a typical
 distance of :math:`2.4 ~ \text{Å}` from the center of the sodium ion.
 
-Mean square displacement
-========================
-
-To probe the system dynamics, let us compute the mean square
-displacement for all 3 species.  For the sulfate ion, type:
-
-..  code-block:: bash 
-
-    gmx msd -f production.xtc -s production.tpr -o so4-msd.xvg
-
-Select the :math:`\text{SO}_4^{2-}` ions (in my case, it is done by typing
-*2*), and then press *ctrl D*. Repeat the same operation for the sodium
-ions and for the water molecules.
-
-The slope of the MSD in the limit of long times gives an estimate of the diffusion
-coefficient, following :math:`D = \text{MSD} / 2 d t`,
-where :math:`d = 3` is the dimension of the system. Here,
-I find a value of :math:`1.4 \mathrm{e}-5 ~ \text{cm}^2/\text{s}` for the
-diffusion coefficient of the sulfur ions. 
-    
-Repeat the same for :math:`\text{Na}^+` and water. 
-
-For sodium, I find a value of :math:`1.6 \mathrm{e}-5 ~ \text{cm}^2/\text{s}`
-for the diffusion coefficient,
-and for water :math:`5.3 \mathrm{e}-5 ~ \text{cm}^2/\text{s}`.
-For comparison, the experimental diffusion coefficient of *pure* water at 
-temperature :math:`T = 360~\text{K}`
-is :math:`7.3 \mathrm{e}-5 ~ \text{cm}^2/\text{s}` :cite:`simpson1958diffusion`.
-In the presence of ions, the diffusion coefficient of water is expected to
-be reduced.
-
-.. figure:: ../figures/level1/bulk-solution/msd-production-light.png
-    :alt: Gromacs tutorial : diffusion coefficient
-    :class: only-light
-
-.. figure:: ../figures/level1/bulk-solution/msd-production-dark.png
-    :alt: Gromacs tutorial : diffusion coefficient
-    :class: only-dark
-
-.. container:: figurelegend
-
-    Figure: Mean square displacement (msd) for the three species. The dashed line
-    highlight the proportionality between msd and time :math:`t` which is expected
-    at long times, when the system reaches the diffusive regime.
-
-.. admonition:: About diffusion coefficient measurement in molecular simulations
-    :class: info
-
-    In principle, diffusion coefficients obtained from the MSD in a
-    finite-sized box must be corrected, but this is beyond the scope of
-    the present tutorial :cite:`loche2021transferable`.
-
 .. include:: ../../non-tutorials/accessfile.rst
+
+
+
+
+..
+    Mean square displacement
+    ========================
+
+    To probe the system dynamics, let us compute the mean square
+    displacement for all 3 species.  For the sulfate ion, type:
+
+    ..  code-block:: bash 
+
+        gmx msd -f production.xtc -s production.tpr -o so4-msd.xvg
+
+    Select the :math:`\text{SO}_4^{2-}` ions (in my case, it is done by typing
+    *2*), and then press *ctrl D*. Repeat the same operation for the sodium
+    ions and for the water molecules.
+
+    The slope of the MSD in the limit of long times gives an estimate of the diffusion
+    coefficient, following :math:`D = \text{MSD} / 2 d t`,
+    where :math:`d = 3` is the dimension of the system. Here,
+    I find a value of :math:`1.4 \mathrm{e}-5 ~ \text{cm}^2/\text{s}` for the
+    diffusion coefficient of the sulfur ions. 
+        
+    Repeat the same for :math:`\text{Na}^+` and water. 
+
+    For sodium, I find a value of :math:`1.6 \mathrm{e}-5 ~ \text{cm}^2/\text{s}`
+    for the diffusion coefficient,
+    and for water :math:`5.3 \mathrm{e}-5 ~ \text{cm}^2/\text{s}`.
+    For comparison, the experimental diffusion coefficient of *pure* water at 
+    temperature :math:`T = 360~\text{K}`
+    is :math:`7.3 \mathrm{e}-5 ~ \text{cm}^2/\text{s}` :cite:`simpson1958diffusion`.
+    In the presence of ions, the diffusion coefficient of water is expected to
+    be reduced.
+
+    .. figure:: ../figures/level1/bulk-solution/msd-production-light.png
+        :alt: Gromacs tutorial : diffusion coefficient
+        :class: only-light
+
+    .. figure:: ../figures/level1/bulk-solution/msd-production-dark.png
+        :alt: Gromacs tutorial : diffusion coefficient
+        :class: only-dark
+
+    .. container:: figurelegend
+
+        Figure: Mean square displacement (msd) for the three species. The dashed line
+        highlight the proportionality between msd and time :math:`t` which is expected
+        at long times, when the system reaches the diffusive regime.
+
+    .. admonition:: About diffusion coefficient measurement in molecular simulations
+        :class: info
+
+        In principle, diffusion coefficients obtained from the MSD in a
+        finite-sized box must be corrected, but this is beyond the scope of
+        the present tutorial :cite:`loche2021transferable`.
