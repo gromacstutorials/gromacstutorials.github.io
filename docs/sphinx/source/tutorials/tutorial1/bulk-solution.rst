@@ -8,13 +8,13 @@ Bulk salt solution
     The very basics of GROMACS through a simple example
 
 .. figure:: figures/video-solution-white.webp
-    :alt: Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
+    :alt: Water solution of :math:`\text{SO}_4^{2-}` and :math:`\text{Na}_+` ions visualized with VMD
     :class: only-light
     :height: 250
     :align: right
 
 .. figure:: figures/video-solution-dark.webp
-    :alt: Water solution of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
+    :alt: Water solution of :math:`\text{SO}_4^{2-}` and :math:`\text{Na}_+` ions visualized with VMD
     :class: only-dark
     :height: 250
     :align: right
@@ -104,10 +104,11 @@ new file named |so4.gro|, and copy the following lines into it:
 
     <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/so4.gro" target="_blank">so4.gro</a>
 
-This topology file for the SO\ :sub:`4`\ :sup:`2-` ion is written in the same
+This topology file for the :math:`\text{SO}_4^{2-}` ion is written in the same |Gromos87|
 format as **empty.gro**. It contains 5 atoms named ``O1``, ``O2``, ``O3``, ``O4``,
-and ``S1``, all grouped in a residue called ``SO4``. Then, let us call the 
-``insert-molecules`` command by typing in the terminal:
+and ``S1``, all grouped in a residue called ``SO4``.
+
+Let us call the ``gmx insert-molecules`` command by typing in the terminal:
 
 ..  code-block:: bw
 
@@ -116,7 +117,7 @@ and ``S1``, all grouped in a residue called ``SO4``. Then, let us call the
 Here, the ``insert-molecules`` command of GROMACS uses **empty.gro** as an input (flag ``-f``),
 and create a new **.gro** file named **conf.gro** (flag ``-o``) with 6 ions in it (flag ``-nmol``).
 The ``-radius 0.5`` option is used to prevent ions for being inserted closer than
-:math:`0.5~\text{nm}` from each others. The output should indicate that the 
+:math:`0.5~\text{nm}` from each other. The output should indicate that the 
 insertion were successful:
 
 ..  code-block:: bw
@@ -124,8 +125,8 @@ insertion were successful:
     Added 6 molecules (out of 6 requested)
     Writing generated configuration to conf.gro
 
-Looking at the generated the **conf.gro** file, it contains
-30 atoms corresponding to the 6 ions:
+Looking at the generated **conf.gro** file, it contains 30 atoms corresponding
+to the 6 ions:
 
 ..  code-block:: bw
 
@@ -144,27 +145,28 @@ Looking at the generated the **conf.gro** file, it contains
         6SO4     S1   30   1.205   3.313   0.568
     3.50000   3.50000   3.50000
 
-Between the second and the
-last lines, there is one line per
-atom. Each line indicates, from left to right:
+Between the second and the last lines, there is one line per atom. Each line
+indicates, from left to right:
 
-- the residue ID, with all the atoms from the same
-  SO\ :sub:`4`\ :sup:`2-` ion sharing the same residue ID,
-- the residue name,
-- the atom name,
-- the atom ID,
-- the atom position: :math:`x`, :math:`y`, and :math:`z` coordinates in nanometer.
+- the residue ID, with all 5 atoms from the same :math:`\text{SO}_4^{2-}` ion
+  sharing the same residue ID,
+- the residue name (SO4),
+- the atom name (O1, O2, O3, O4, or S1),
+- the atom ID (1 to 30),
+- the atom position: :math:`x`, :math:`y`, and :math:`z` coordinates in
+  nanometers.
     
-The format of a **.gro** file is fixed, and each column is in a
-fixed position. The generated **conf.gro** file can be visualized
-using VMD by typing in the terminal:
+The format of a **.gro** file is fixed, and each column is in a fixed position.
+
+The generated **conf.gro** file can be visualized using VMD by typing in the
+terminal:
 
 .. code-block:: bash
 
     vmd conf.gro
 
-Then, download the |na.gro| template for the Na\ :sup:`+` ion
-and add 12 ions using the same command:
+Then, download the |na.gro| template for the :math:`\text{Na}_+` ion and add
+12 ions using the same command:
 
 ..  code-block:: bw
 
@@ -176,8 +178,8 @@ and add 12 ions using the same command:
 
 Here, importantly, the same **conf.gro** file is used as input (``-f``) and
 output (``-o``), so the 12 ions will be added to the same file. Finally,
-download the |h2o.gro| template for the :math:`\text{H}_2\text{O}` molecule
-and add 800 molecules using the same command:
+download the |h2o.gro| template for the :math:`\text{H}_2\text{O}` molecule and
+add 800 molecules using the same command:
 
 ..  code-block:: bw
 
@@ -206,23 +208,23 @@ The final **conf.gro** file contains :
     3.50000   3.50000   3.50000
 
 .. figure:: ../figures/level1/bulk-solution/step0-light.png
-    :alt: Gromacs initial configuration of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
+    :alt: Gromacs initial configuration of :math:`\text{SO}_4^{2-}` and :math:`\text{Na}_+` ions visualized with VMD
     :class: only-light
 
 .. figure:: ../figures/level1/bulk-solution/step0-dark.png
-    :alt: Gromacs initial configuration of SO\ :sub:`4`\ :sup:`2-` and Na\ :sup:`+` ions visualized with VMD
+    :alt: Gromacs initial configuration of :math:`\text{SO}_4^{2-}` and :math:`\text{Na}_+` ions visualized with VMD
     :class: only-dark
 
 .. container:: figurelegend
 
-    Figure: SO\ :sub:`4`\ :sup:`2-` ions, Na\ :sup:`+` ions, and water molecules.
+    Figure: :math:`\text{SO}_4^{2-}` ions, :math:`\text{Na}_+` ions, and water molecules.
     Oxygen atoms are in red, hydrogen in white, sodium in blue, and sulfur in
-    yellow. For better rendering, the atom representation and colors
-    were modified with respect to the default VMD representation.
+    yellow. For better rendering, the atom representation and colors were
+    modified with respect to the default VMD representation.
 
-As can be seen using VMD, the water molecules are
-arranged in a quite unrealistic and regular manner.
-This will need to be fixed during energy minimization.
+As can be seen using VMD, the water molecules are arranged in a quite
+unrealistic manner, with some molecules being too close. This will need to be
+fixed during energy minimization.
 
 2) Choose the potential
 -----------------------
@@ -258,7 +260,7 @@ folder (see below).
     
 The rest of the **topol.top** file contains the system
 name (here, *Na2SO4 solution*), and the list of the residues. Here, there
-are 6 SO\ :sub:`4`\ :sup:`2-` ions, 12 Na\ :sup:`+` ions,
+are 6 :math:`\text{SO}_4^{2-}` ions, 12 :math:`\text{Na}_+` ions,
 and 700 water molecules.
 
 .. admonition:: About topol.top
@@ -332,7 +334,7 @@ four-point water model (D).
 Finally, the **h2o.itp**, **na.itp**, and **so4.itp** files contain information 
 about the residues, such as their exact compositions, which pairs of
 atoms are connected by bonds as well as the parameters for these bonds.
-In the case of the SO\ :sub:`4`\ :sup:`2-`,
+In the case of the :math:`\text{SO}_4^{2-}`,
 for instance, the sulfur atom forms a bond of equilibrium distance
 :math:`0.152~\text{nm}`
 and rigidity constant :math:`3.7656 \mathrm{e}4 ~ \text{kJ/mol/nm}^2`
