@@ -534,31 +534,31 @@ GROMACS. In the terminal, type:
 
 ..  code-block:: bash
 
-    gmx energy -f min.edr -o min-pe.xvg
+    gmx energy -f min.edr -o min-Ep.xvg
 
 Choose ``potential`` by typing ``5`` (the number may differ in your case),
 then press ``Enter`` twice. 
 
 Here, the portable energy file **min.edr** produced
 by GROMACS during the minimization run is used, and the
-result is saved a **.xvg** file named **min-pe.xvg**. **.xvg** files
+result is saved a **.xvg** file named **min-Ep.xvg**. **.xvg** files
 can be oppened with the Grace software (or equivalent) :cite:`grace`:
 
 ..  code-block:: bash
 
     xmgrace min-pe.xvg
 
-.. figure:: figures/potential-energy-min-light.png
+.. figure:: figures/min-Ep.png
     :alt: Gromacs tutorial : plot of the energy versus time.
     :class: only-light
 
-.. figure:: figures/potential-energy-min-dark.png
+.. figure:: figures/min-Ep-dm.png
     :alt: Gromacs tutorial : plot of the energy versus time.
     :class: only-dark
 
 .. container:: figurelegend
 
-    Figure: Evolution of the potential energy :math:`E_\text{p}` as a function of the
+    Figure: Evolution of the potential energy, :math:`E_\text{p}`, as a function of the
     number of steps during energy minimization.
 
 One can see from the energy plot that the potential energy is initially quite large,
