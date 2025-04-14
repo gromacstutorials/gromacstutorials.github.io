@@ -723,11 +723,11 @@ the temperature reaches the requested temperature of
 In general, it is better to perform a longer equilibration, but simulation
 durations are kept as short as possible for these tutorials. 
 
-.. figure:: figures/temperature-nvt-light.png
+.. figure:: figures/nvt-T.png
     :alt: Gromacs tutorial : temperature versus time.
     :class: only-light
 
-.. figure:: figures/temperature-nvt-dark.png
+.. figure:: figures/nvt-T-dm.png
     :alt: Gromacs tutorial : temperature versus time.
     :class: only-dark
 
@@ -819,11 +819,11 @@ command 3 consecutive times:
 Choose respectively ``temperature`` (10), ``pressure`` (11) and
 ``density`` (16).
 
-.. figure:: figures/temperature-npt-light.png
+.. figure:: figures/npt-T-p-rho.png
     :alt: Gromacs tutorial : NPT equilibration
     :class: only-light
 
-.. figure:: figures/temperature-npt-dark.png
+.. figure:: figures/npt-T-p-rho-dm.png
     :alt: Gromacs tutorial : NPT equilibration
     :class: only-dark
 
