@@ -226,13 +226,33 @@ As can be seen using VMD, the water molecules are arranged in a quite
 unrealistic manner, with some molecules being too close. This will need to be
 fixed during energy minimization.
 
-2) Choose the potential
------------------------
+Set the parameters
+==================
 
-Information concerning the interactions of the different
-atoms and molecules are provided in the topology files (**.top** and **.itp**).
-The |topol-SO4.top| file must be placed in the same folder as the **conf.gro**
-file. It contains the following lines:
+Parameters for the interactions of the different atoms and molecules are
+provided in the topology files (**.top** and **.itp**). These parameters
+include the non-bonded interactions, :math:`V_{\text{nb}}(r)`, which are modeled as a
+combination of Lennard-Jones and Coulomb potentials:
+
+.. math::
+
+   V_{\text{nb}}(r) = 4\varepsilon \left[ \left( \frac{\sigma}{r_{ij}} \right)^{12}
+   - \left( \frac{\sigma}{r_{ij}} \right)^6 \right] + \frac{q_i q_j}{4\pi\varepsilon_0 r_{ij}}
+
+where:
+
+- :math:`r_{ij}` is the distance between particles :math:`i` and :math:`j`,
+- :math:`\varepsilon` is the depth of the Lennard-Jones potential well,
+- :math:`\sigma` is the distance at which the Lennard-Jones potential is zero,
+- :math:`q_i` and :math:`q_j` are the charges of particles :math:`i` and :math:`j`,
+- :math:`\varepsilon_0` is the vacuum permittivity.
+
+The parameters from the **.top** and **.itp** files also describe the bonded
+interactions that are used to join atoms from the same residues, typically using
+combinations of harmonic potentials or similar functional forms.
+
+First, the |topol-SO4.top| file must be placed in the same folder as the
+**conf.gro** file. It contains the following lines:
 
 .. |topol-SO4.top| raw:: html
 
@@ -253,33 +273,31 @@ file. It contains the following lines:
     Na 12
     SOL 700
 
-The 4 first lines are used to include the values of the
-parameters that are given in 4 separate file (**forcefield.itp**,
-**h2o.itp**, **na.itp**, **so4.itp**) located in the **ff/**
-folder (see below). 
-    
-The rest of the **topol.top** file contains the system
-name (here, *Na2SO4 solution*), and the list of the residues. Here, there
-are 6 :math:`\text{SO}_4^{2-}` ions, 12 :math:`\text{Na}_+` ions,
-and 700 water molecules.
+The first four lines are used to include the values of the parameters that are
+provided in four separate files (**forcefield.itp**, **h2o.itp**, **na.itp**,
+**so4.itp**) located in the **ff/** folder (see below). The rest of
+the **topol.top** file contains the system name (here,
+*Na2SO4 solution*), and the list of the residues. Here, there are
+6 :math:`\text{SO}_4^{2-}` ions, 12 :math:`\text{Na}_+` ions, and
+700 water molecules.
 
 .. admonition:: About topol.top
     :class: info
 
     It is crucial that the order and number of residues in the
     topology file match the order of the **conf.gro** file.
-    
-Create a folder named **ff/** next to the **conf.gro** and the
-**topol.top** files, and copy the four following files into it:
+
+Create a folder named **ff/** next to the **conf.gro** and the **topol.top**
+files, and copy the four following files into it:
 
 - |forcefield.itp|
 - |h2o.itp|
 - |na.itp|
 - |so4.itp|
 
-These four files contain information about the atoms (names,
-masses, changes, Lennard-Jones coefficients) and residues (bond
-and angular constraints) for all the species that are involved here.
+These four files contain information about the atoms (names, masses, charges,
+Lennard-Jones coefficients) and residues (bond and angular constraints) for all
+the species involved in the system.
 
 .. |forcefield.itp| raw:: html
 
@@ -299,9 +317,9 @@ and angular constraints) for all the species that are involved here.
 
 More specifically, the **forcefield.itp** file contains a line that specifies
 the combination rules as ``comb-rule 2``, which corresponds to the well-known
-Lorentz-Berthelot rule, where :math:`\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilon_{jj}}` and
-:math:`\sigma_{ij} = (\sigma_{ii}+\sigma_{jj})/2`
-:cite:`lorentz1881ueber,berthelot1898melange`:
+Lorentz-Berthelot rule :cite:`lorentz1881ueber,berthelot1898melange`, where:
+:math:`\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilon_{jj}}, \sigma_{ij} = \frac{\sigma_{ii} + \sigma_{jj}}{2}`.
+In **forcefield.itp**, this rule is specified as:
 
 ..  code-block:: bw
 
@@ -309,12 +327,12 @@ Lorentz-Berthelot rule, where :math:`\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilo
     ; nbfunc  comb-rule  gen-pairs  fudgeLJ  fudgeQQ
     1       2          no         1.0      0.833
     
-The ``fudge`` parameters specify how the pair interaction between
-fourth neighbors in a residue are handled, which is not relevant for
-the small residues considered here. The **forcefield.itp** file also
-contains the list of atoms, and their respective charge in the units of
-the elementary charge :math:`e`, as well as their respective Lennard-Jones
-parameters :math:`\sigma` (in nanometer) and :math:`\epsilon` (in kJ/mol):
+Here, the ``fudge`` parameters specify how the pair interaction between fourth
+neighbors in a residue are handled, which is not relevant for the small
+residues considered here. The **forcefield.itp** file also contains the list
+of atoms, and their respective charge in units of the elementary charge
+:math:`e`, as well as their respective Lennard-Jones parameters :math:`\sigma`
+(in nanometers) and :math:`\epsilon` (in kJ/mol):
 
 ..  code-block:: bw
 
@@ -327,18 +345,16 @@ parameters :math:`\sigma` (in nanometer) and :math:`\epsilon` (in kJ/mol):
     OW     8      15.9994   0.0000  A      0.31650  0.77323
     MW     0       0.0000  -1.0540  D      0.00000  0.00000
 
-Here, ``ptype`` is used to differential the real atoms (A), such as 
+Here, ``ptype`` is used to differentiate the real atoms (A), such as
 hydrogens and oxygens, from the virtual and massless site of the
 four-point water model (D).
 
-Finally, the **h2o.itp**, **na.itp**, and **so4.itp** files contain information 
-about the residues, such as their exact compositions, which pairs of
-atoms are connected by bonds as well as the parameters for these bonds.
-In the case of the :math:`\text{SO}_4^{2-}`,
-for instance, the sulfur atom forms a bond of equilibrium distance
-:math:`0.152~\text{nm}`
-and rigidity constant :math:`3.7656 \mathrm{e}4 ~ \text{kJ/mol/nm}^2`
-with each of the four oxygen atoms:
+Finally, the **h2o.itp**, **na.itp**, and **so4.itp** files contain information
+about the residues, such as their exact compositions, which pairs of atoms
+are connected by bonds, as well as the parameters for these bonds. In the case
+of the :math:`\text{SO}_4^{2-}`, for instance, the sulfur atom forms a bond of
+equilibrium distance :math:`0.152~\text{nm}` and rigidity constant
+:math:`3.7656 \times 10^4~\text{kJ/mol/nm}^2` with each of the four oxygen atoms:
 
 ..  code-block:: bw
 
@@ -349,46 +365,30 @@ with each of the four oxygen atoms:
         3    5    1   0.1520   3.7656e4
         4    5    1   0.1520   3.7656e4
 
-3) The input file (.mdp)
-------------------------
-
-The input file contains instructions about the
-simulation, such as
-
-- the number of steps to perform,
-- the thermostat to be used (e.g. Langevin :cite:`schneider1978molecular`, Berendsen :cite:`berendsen1984molecular`),
-- the cut-off for the interactions,
-- the integrator or algorithms (e.g. steepest-descent :cite:`debye1909naherungsformeln`, leap-frog :cite:`allen2017computer`).
-
-In this tutorial, 4 different input files will be
-written to perform respectively an energy
-minimization of the salt solution, an equilibration
-in the NVT ensemble (i.e. with fixed box size), an equilibration
-in the NPT ensemble (i.e. with changing box size), and finally
-a production run.
-
-Input files will be placed in an *inputs/* folder
-that must be created next to **ff/**. 
-
-
-
-The rest of the tutorial focuses on writing the input files and performing the
-molecular dynamics simulation. 
-
 Energy minimization
 ===================
 
-It is clear from the configuration (**.gro**) file that the molecules and ions
-are currently in a quite unphysical configuration. It would be risky to
-directly start the molecular dynamics simulation as atoms would undergo huge
-forces and accelerate, and the system could eventually explode.
+To run GROMACS, one needs to prepare an input file that contains instructions
+about the simulation, such as:
+
+- the number of steps to perform,
+- the thermostat to be used (e.g. Langevin :cite:`schneider1978molecular`,
+  Berendsen :cite:`berendsen1984molecular`),
+- the cut-off for the interactions,
+- the integrator or algorithms (e.g. steepest-descent
+  :cite:`debye1909naherungsformeln`, leap-frog :cite:`allen2017computer`).
+
+It is clear from the configuration (**.gro**) file that the molecules and
+ions are currently in a quite unphysical configuration. It would be risky to
+directly start the molecular dynamics simulation, as atoms would undergo huge
+forces and accelerate, potentially causing the system to explode.
 
 To bring the system into a more favorable state, let us perform an energy
-minimization which consists in moving the atoms until the forces between
-them are reasonable.
+minimization, which consists of moving the atoms until the forces between them
+are reasonable.
 
 Open a blank file, call it **min.mdp**, and save it in a new folder named
-**inputs/**, and located alongside **ff/** and **topol.top**:
+**inputs/**, located alongside **ff/** and **topol.top**:
 
 .. figure:: ../figures/level1/bulk-solution/gromacs_inputs-light.png
     :alt: Gromacs files and structure folder
@@ -402,37 +402,35 @@ Open a blank file, call it **min.mdp**, and save it in a new folder named
 
 .. container:: figurelegend
 
-    Figure: Structure of the folder with the **.itp**, **.gro**, and **.top** files.
+    Figure: Structure of the folder containing the **.itp**, **.gro**, and **.top** files.
 
 Copy the following lines into **min.mdp**:
 
-..  code-block:: bw
+.. code-block:: bw
 
     integrator = steep
     nsteps = 5000
 
-These two lines are GROMACS commands. The ``integrator``` specifies
-to GROMACS that the algorithm to be used is the |speepest-descent|
-which moves the atoms following the direction of the largest forces
-until one of the stopping criteria is reached :cite:`debye1909naherungsformeln`. 
-The ``nsteps`` command specifies the maximum number of steps to perform,
-here 5000.
+These two lines are GROMACS commands. The ``integrator`` specifies to GROMACS
+that the algorithm to be used is the |steepest-descent|, which moves the atoms
+following the direction of the largest forces until one of the stopping criteria
+is reached :cite:`debye1909naherungsformeln`. The ``nsteps`` command specifies
+the maximum number of steps to perform, here 5000.
 
-.. |speepest-descent| raw:: html
+.. |steepest-descent| raw:: html
 
     <a href="https://manual.gromacs.org/current/reference-manual/algorithms/energy-minimization.html" target="_blank">steepest-descent</a>
 
-To visualize the trajectory of the atoms during the minimization,
-let us also add the following command to the input file:
+To visualize the trajectory of the atoms during the minimization, let us also
+add the following command to the input file:
 
-..  code-block:: bw
+.. code-block:: bw
 
     nstxout = 10
 
-The ``nstxout`` command requests GROMACS to print the atom
-positions every 10 steps. The trajectory will be printed in 
-a compressed **.trr** trajectory file that can be read by VMD
-or Ovito.
+The ``nstxout`` command requests GROMACS to print the atom positions every 10
+steps. The trajectory will be printed in a compressed **.trr** trajectory file
+that can be read by VMD or Ovito.
 
 Let us run that input script using GROMACS. From the terminal, type:
 
@@ -441,20 +439,19 @@ Let us run that input script using GROMACS. From the terminal, type:
     gmx grompp -f inputs/min.mdp -c conf.gro -o min -pp min -po min
     gmx mdrun -v -deffnm min
 
-The ``grompp`` command is used to preprocess the files in order to
-prepare the simulation. This command also checks the validity of the
-files. By using the ``-f`` and ``-c`` keywords, we specify which
-input file must be used, and well as the initial configuration, i.e.
-the initial positions of the atoms. The other keywords ``-o``, ``-pp``, and ``-po`` are
-used to specify the names of the output that will be produced during the run. 
+The ``grompp`` command is used to preprocess the files in order to prepare
+the simulation. This command also checks the validity of the files. By using
+the ``-f`` and ``-c`` keywords, we specify which input file must be used, as
+well as the initial configuration, i.e., the initial positions of the atoms.
+The other keywords ``-o``, ``-pp``, and ``-po`` are used to specify the names
+of the outputs that will be produced during the run.
 
-The ``mdrun`` command calls the engine
-performing the computation from the preprocessed
-files, which is recognized thanks to the ``-deffnm`` keyword. The ``-v``
-option enables *verbose* so that more information is printed in the terminal.
+The ``mdrun`` command calls the engine performing the computation from the
+preprocessed files, which is recognized thanks to the ``-deffnm`` keyword. The
+``-v`` option enables *verbose* mode so that more information is printed in
+the terminal.
 
-If everything works, informations must be printed in the terminal,
-including :
+If everything works, information should be printed in the terminal, including:
 
 ..  code-block:: bw
 
@@ -464,16 +461,13 @@ including :
     Maximum force     =  4.4285486e+02 on atom 30
     Norm of force     =  4.6696228e+01
 
-The information printed in the terminal indicates us
-that energy minimization has been performed, even
-though the precision that was asked from the default
-parameters were not reached. We can ignore this message,
-as long as the final energy is large and negative,
-the simulation will work just fine. 
+The information printed in the terminal indicates that energy minimization
+has been performed, even though the precision requested by the default
+parameters was not reached. We can ignore this message, as long as the final
+energy is large and negative, the simulation will work just fine.
 
-To appreaciate the effect of the energy minimization, compare the
-potential energy of the system and the maximum force at the first 
-and last steps:
+To appreciate the effect of the energy minimization, compare the potential
+energy of the system and the maximum force at the first and last steps:
 
 ..  code-block:: bw
 
@@ -483,16 +477,15 @@ and last steps:
     Step=  533, Dmax= 1.3e-06 nm, Epot= -4.98327e+04 Fmax= 2.23955e+02, atom= 816
     (...)
 
-As can be seen, the maximum force has been reduced by orders of magnitudes,
-down to :math:`224 ~ \text{kJ/mol/nm}` (about 0.4 pN).
-During the exectution of GROMACS, the following 7 files must have
-been created: **min.edr**, **min.gro**, **min.log**, **min.mdp**,
-**min.top**, **min.tpr**, **min.trr**.
+As can be seen, the maximum force has been reduced by orders of magnitude,
+down to :math:`224 ~ \text{kJ/mol/nm}` (about 0.4 pN). During the execution
+of GROMACS, the following 7 files must have been created: **min.edr**,
+**min.gro**, **min.log**, **min.mdp**, **min.top**, **min.tpr**, **min.trr**.
 
-Let us visualize the trajectories of the atoms during the
-minimization step using VMD by typing in the terminal:
+Let us visualize the trajectories of the atoms during the minimization step
+using VMD by typing in the terminal:
 
-..  code-block:: bash
+.. code-block:: bash
 
     vmd conf.gro min.trr
 
@@ -513,40 +506,46 @@ minimization step using VMD by typing in the terminal:
 You can avoid having molecules and ions being cut by the periodic boundary
 conditions by rewriting the trajectory using:
 
-..  code-block:: bash
-    
+.. code-block:: bash
+
     gmx trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole
 
-Then, select ``0`` as the group of your choice for the output,
-and reoppen the modified trajectory using VMD:
+Then, select ``0`` as the group of your choice for the output, and reopen the
+modified trajectory using VMD:
 
-..  code-block:: bash
+.. code-block:: bash
 
     vmd conf.gro min.trr
 
-From the trajectory vizualisation, one can see that the molecules
-reorient themselves into more energetically favorable positions, and that
-the distances between the atoms are being progressively homogenized.
+From the trajectory visualization, one can see that the molecules reorient
+themselves into more energetically favorable positions, and that the distances
+between the atoms are progressively homogenized.
 
-Let us have a look at the evolution of the potential energy
-of the system. To do so, we can use the ``gmx energy`` command of
-GROMACS. In the terminal, type:
+Let us have a look at the evolution of the potential energy of the system. To
+do so, we can use the ``gmx energy`` command of GROMACS. In the terminal, type:
 
-..  code-block:: bash
+.. code-block:: bash
 
     gmx energy -f min.edr -o min-Ep.xvg
 
 Choose ``potential`` by typing ``5`` (the number may differ in your case),
-then press ``Enter`` twice. 
+then press ``Enter`` twice.
 
-Here, the portable energy file **min.edr** produced
-by GROMACS during the minimization run is used, and the
-result is saved a **.xvg** file named **min-Ep.xvg**. **.xvg** files
-can be oppened with the Grace software (or equivalent) :cite:`grace`:
+Here, the portable energy file **min.edr** produced by GROMACS during the
+minimization run is used, and the result is saved as a **.xvg** file named
+**min-Ep.xvg**. **.xvg** files can be opened with the Grace software (or
+equivalent) :cite:`grace`:
 
 ..  code-block:: bash
 
     xmgrace min-pe.xvg
+
+One can see from the energy plot that the potential energy is initially close to 0,
+which is the expected consequence of atoms being too close to one
+another, as well as molecules being randomly oriented in space. As the
+minimization progresses, the potential energy rapidly decreases and reaches
+a large and negative value, which is usually the sign that the atoms are
+located at appropriate distances from each other.
 
 .. figure:: figures/min-Ep.png
     :alt: Gromacs tutorial : plot of the energy versus time.
@@ -558,17 +557,11 @@ can be oppened with the Grace software (or equivalent) :cite:`grace`:
 
 .. container:: figurelegend
 
-    Figure: Evolution of the potential energy, :math:`E_\text{p}`, as a function of the
-    number of steps during energy minimization.
+    Figure: Evolution of the potential energy, :math:`E_\text{p}`, as a function of
+    the number of steps during energy minimization.
 
-One can see from the energy plot that the potential energy is initially quite large,
-which is the expected consequence of atoms being too close from
-one another, as well as molecules being randomly oriented in space.
-As the minimization progresses, the potential energy
-rapidly decreases and reaches a large and negative
-value, which is usually the sign that the atoms are located at appropriate
-distances from each other. The system is now in a favorable state
-and the molecular dynamics simulation can be started.
+The system is now in a favorable state, and the molecular dynamics
+simulation can be started.
 
 Molecular dynamics (:math:`NVT`)
 ================================
