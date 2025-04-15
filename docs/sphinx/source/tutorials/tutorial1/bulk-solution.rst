@@ -812,6 +812,14 @@ command 3 consecutive times:
 Choose respectively ``temperature`` (10), ``pressure`` (11) and
 ``density`` (16).
 
+The results show that the temperature remains well controlled during the NPT
+run, and that the fluid density was initially too small, i.e.,
+:math:`\rho \approx 600\,\mathrm{kg}/\mathrm{m}^3`. Due to the change in
+volume induced by the barostat, the fluid density gently reaches its equilibrium
+value of about :math:`1000\,\mathrm{kg}/\mathrm{m}^3` after a few tens of
+pico-seconds. Once the system has reached its equilibrium density, the
+pressure stabilizes itself near the desired value of 1 bar.
+
 .. figure:: figures/npt-T-p-rho.png
     :alt: Gromacs tutorial : NPT equilibration
     :class: only-light
@@ -826,18 +834,10 @@ Choose respectively ``temperature`` (10), ``pressure`` (11) and
     pressure, :math:`p` (b), and fluid density, :math:`\rho` (c) as a
     function of the time during the :math:`NpT` equilibration.
 
-The results show that the temperature remains well
-controlled during the NPT run, and
-that the fluid density was initially too small,
-i.e. :math:`\rho \approx 600\,\mathrm{kg}/\mathrm{m}^3`.
-Due to the change in volume induced by the barostat, the fluid density 
-gently reaches its equilibrium value of about :math:`1000\,\mathrm{kg}/\mathrm{m}^3`
-after approximately 40 pico-seconds. Once the system has reached its equilibrium
-density, the pressure stabilizes itself near the desired value of 1 bar.
-
-The pressure curve reveals large oscillations in the pressure, with the pressure alternating between large negative
-values and large positive values. These large oscillations are typical in molecular dynamics, and not a source of
-concern here.
+The pressure curve reveals large oscillations in the pressure, with the
+pressure alternating between large negative values and large positive values.
+These large oscillations are typical in molecular dynamics and are not a
+source of concern here.
 
 Production run
 ==============
