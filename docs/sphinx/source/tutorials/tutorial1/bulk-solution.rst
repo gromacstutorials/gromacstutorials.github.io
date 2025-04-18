@@ -207,6 +207,10 @@ The final **conf.gro** file contains :
     818Sol    MW1 3242   1.130   0.170   2.960
     3.50000   3.50000   3.50000
 
+The molecules and ions have been placed randomly in space, and
+are therefore arranged in a quite unrealistic manner. This will be
+fixed during energy minimization.
+
 .. figure:: figures/populate-box.png
     :alt: Gromacs configuration SO4 Na ions visualized with VMD
     :class: only-light
@@ -220,10 +224,6 @@ The final **conf.gro** file contains :
     Figure: :math:`\text{SO}_4^{2-}` ions, :math:`\text{Na}_+` ions, and water molecules.
     Oxygen atoms are in red, hydrogen in white, sodium in blue, and sulfur in
     yellow. For easier visualization, water molecules are represented as sticks.
-
-The molecules and ions have been placed randomly in space, and
-are therefore arranged in a quite unrealistic manner. This will be
-fixed during energy minimization.
 
 Set the parameters
 ==================
