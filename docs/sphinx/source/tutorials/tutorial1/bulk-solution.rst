@@ -33,7 +33,7 @@ is analyzed using GROMACS utilities, radial distribution functions are
 extracted, and the trajectories are visualized using VMD :cite:`humphrey1996vmd`.
 
 .. include:: ../../non-tutorials/needhelp.rst
-.. include:: ../../non-tutorials/GROMACS2024.2.rst
+.. include:: ../../non-tutorials/GROMACS2025.1.rst
 
 ..
     The input files
@@ -207,23 +207,22 @@ The final **conf.gro** file contains :
     818Sol    MW1 3242   1.130   0.170   2.960
     3.50000   3.50000   3.50000
 
-.. figure:: ../figures/level1/bulk-solution/step0-light.png
-    :alt: Gromacs initial configuration of :math:`\text{SO}_4^{2-}` and :math:`\text{Na}_+` ions visualized with VMD
+.. figure:: figures/populate-box.png
+    :alt: Gromacs configuration SO4 Na ions visualized with VMD
     :class: only-light
 
-.. figure:: ../figures/level1/bulk-solution/step0-dark.png
-    :alt: Gromacs initial configuration of :math:`\text{SO}_4^{2-}` and :math:`\text{Na}_+` ions visualized with VMD
+.. figure:: figures/populate-box-dm.png
+    :alt: Gromacs configuration SO4 Na ions visualized with VMD
     :class: only-dark
 
 .. container:: figurelegend
 
     Figure: :math:`\text{SO}_4^{2-}` ions, :math:`\text{Na}_+` ions, and water molecules.
     Oxygen atoms are in red, hydrogen in white, sodium in blue, and sulfur in
-    yellow. For better rendering, the atom representation and colors were
-    modified with respect to the default VMD representation.
+    yellow. For easier visualization, water molecules are represented as sticks.
 
-As can be seen using VMD, the water molecules are arranged in a quite
-unrealistic manner, with some molecules being too close. This will need to be
+The molecules and ions have been placed randomly in space, and
+are therefore arranged in a quite unrealistic manner. This will be
 fixed during energy minimization.
 
 Set the parameters
