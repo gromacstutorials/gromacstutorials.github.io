@@ -7,7 +7,7 @@ Bulk salt solution
 
     The very basics of GROMACS through a simple example
 
-.. figure:: figures/video-solution-white.webp
+.. figure:: figures/video-solution-light.webp
     :alt: Water solution of :math:`\text{SO}_4^{2-}` and :math:`\text{Na}_+` ions visualized with VMD
     :class: only-light
     :height: 250
