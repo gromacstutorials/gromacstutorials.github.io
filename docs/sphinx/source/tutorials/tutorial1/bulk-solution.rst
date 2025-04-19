@@ -1045,11 +1045,7 @@ as follows:
 
 ..  code-block:: bw 
 
-    gmx make_ndx -f production.tpr << EOF
-    a OW1
-    a S1
-    q
-    EOF
+    gmx make_ndx -f production.tpr
 
 Then type ``a OW1`` and press enter, ``a S1`` and press enter, and finally
 press ``q`` to save and quit. This will create a file named **index.ndx** that
