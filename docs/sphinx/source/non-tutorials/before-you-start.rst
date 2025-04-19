@@ -60,7 +60,7 @@ Python (optional)
 
     The version 2.6.1 of MDAnalysis is used
     together with the version 3.11.4
-    of Python :cite:`vanrossumPythonTutorial, michaud-agrawalMDAnalysisToolkitAnalysis2011`.
+    of Python :cite:`vanrossumPythonTutorial1995, michaud-agrawalMDAnalysisToolkitAnalysis2011`.
 
 ..  container:: justify
 

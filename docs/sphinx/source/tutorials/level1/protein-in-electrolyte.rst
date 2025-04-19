@@ -21,7 +21,7 @@ Protein in electrolyte
 
 The goal of this tutorial is to use GROMACS and perform a simple
 molecular dynamics simulation of a protein solvated in an electrolyte. The
-protein is downloaded from the Protein Data Bank (PDB) :cite:`bankProteinDataBank`
+protein is downloaded from the Protein Data Bank (PDB) :cite:`bankProteinDataBank1971`
 and solvated in an electrolyte made of water molecules and Na+ Cl- ions.
 
 This tutorial covers some of the basic uses of GROMACS, including system
@@ -38,7 +38,7 @@ Convert the PDB file
 Download the *.pdb* file from the |ProteinDataBank|,
 or simply click |1cta.pdb|. The protein is a calcium-binding peptide from site III
 of chicken troponin-C that has been determined using 1H-NMR spectroscopy
-:cite:`shawDeterminationSolutionStructure`.
+:cite:`shawDeterminationSolutionStructure1992`.
 
 .. |ProteinDataBank| raw:: html
 
