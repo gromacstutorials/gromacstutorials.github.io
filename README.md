@@ -4,8 +4,6 @@ This is the script of the [GROMACS tutorials](https://gromacstutorials.github.io
 All the GROMACS input files used or generated during the tutorials can be found
 in the [gromacstutorials-inputs](https://github.com/gromacstutorials/gromacstutorials-inputs) repository.
 
-The tutorials are compatible with the 2024.2 release of GROMACS.
-
 <p float="left">
     <a href="https://gromacstutorials.github.io/sphinx/build/html/tutorials/level1/bulk-solution.html">
         <img src="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials.github.io/2024.2/docs/avatars/level1/bulk-solution/bulk-solution-gromacs.png" width="32%" />
