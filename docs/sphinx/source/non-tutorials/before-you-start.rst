@@ -36,7 +36,7 @@ VMD (optional)
 ..  container:: justify
 
     In order to visualize the simulation, the version
-    1.9.3 of |VMD| will be used :cite:`humphrey1996vmd`.
+    1.9.3 of |VMD| will be used :cite:`humphreyVMDVisualMolecular1996`.
     Some basic instructions for VMD are given on *lammpstutorials*, see
     |VMD-lammps-tutorials|. If you prefer, feel free to use an alternative visualization
     software like |Ovito|.
@@ -60,7 +60,7 @@ Python (optional)
 
     The version 2.6.1 of MDAnalysis is used
     together with the version 3.11.4
-    of Python :cite:`van1995python, michaud2011mdanalysis, gowers2016mdanalysis`.
+    of Python :cite:`vanrossumPythonTutorial, michaud-agrawalMDAnalysisToolkitAnalysis2011`.
 
 ..  container:: justify
 
@@ -103,13 +103,13 @@ Recommended reading
 
 ..  container:: justify
 
-    To better understand molecular dynamics simulations, I recommend the reading
-    of *Understanding molecular simulation* by Daan Frenkel and Berend
-    Smit :cite:`frenkel2023understanding`, as well as
-    *Computer simulation of liquids* by Michael Allen and Dominic Tildesley
-    :cite:`allen2017computer`. To understand the basic concepts 
-    of fluid and Soft Matter systems, I recommend reading *Basic concepts for
-    simple and complex liquids* by Jean-Louis Barrat and Jean-Pierre Hansen
-    :cite:`barrat2003basic`,
-    as well as *Theory of simple liquids: with applications to soft matter*
-    by Jean-Pierre Hansen and Ian Ranald McDonald :cite:`hansen2013theory`.
+   To better understand molecular dynamics simulations, I recommend the reading
+   of *Understanding molecular simulation* by Daan Frenkel and Berend
+   Smit :cite:`frenkelUnderstandingMolecularSimulation2002`, as well as
+   *Computer simulation of liquids* by Michael Allen and Dominic Tildesley
+   :cite:`allenComputerSimulationLiquids2017`. To understand the basic concepts 
+   of fluid and Soft Matter systems, I recommend reading *Basic concepts for
+   simple and complex liquids* by Jean-Louis Barrat and Jean-Pierre Hansen
+   :cite:`barratBasicConceptsSimple2003`,
+   as well as *Theory of simple liquids: with applications to soft matter*
+   by Jean-Pierre Hansen and Ian Ranald McDonald :cite:`hansenTheorySimpleLiquids2013a`.

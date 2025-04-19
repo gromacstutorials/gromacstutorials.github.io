@@ -117,7 +117,7 @@ Residue definition
 ..  container:: justify
 
     The water molecule contains a massless point (TIP4P model) in addition to
-    the oxygen and hydrogens atoms :cite:`abascal2005general`.
+    the oxygen and hydrogens atoms :cite:`abascalGeneralPurposeModel2005`.
 
 .. figure:: ../figures/create-GRO-python/molecule-light.png
     :alt: Gromacs tutorial : Initial water molecule, sodium, and sulfide ions.
