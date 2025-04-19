@@ -1011,7 +1011,7 @@ Then select the sodium ions as *reference* by typing 3, the water as
 
 .. code-block:: bw
 
-    ${gmx} rdf -f production.xtc -s production.tpr -o production-rdf-so4-h2o.xvg
+    gmx rdf -f production.xtc -s production.tpr -o production-rdf-so4-h2o.xvg
 
 and then by typing 2 and 4.
 
