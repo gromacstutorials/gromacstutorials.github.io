@@ -40,7 +40,7 @@ jobs:
           cp source/lammps_replace.html build/html/non-tutorials/lammps.html
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
-        if: ${{ github.ref == 'refs/heads/2024.2' }}
+        if: ${{ github.ref == 'refs/heads/main' }}
         with:
           context: .
           github_token: ${{ secrets.GITHUB_TOKEN }}
