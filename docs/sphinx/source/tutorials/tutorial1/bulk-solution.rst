@@ -20,7 +20,8 @@ Ionic solution
     :align: right
 
 The objective of this tutorial is to use the open-source code GROMACS
-:cite:`van2005gromacs` to perform a molecular dynamics simulation. The
+:cite:`abrahamGROMACSHighPerformance2015` to perform a molecular
+dynamics simulation. The
 system consists of a bulk solution of water mixed with sodium
 (:math:`\text{Na}_+`) and sulfate (:math:`\text{SO}_4^{2-}`) ions.
 
@@ -30,7 +31,8 @@ It also introduces key components of molecular
 dynamics simulations, including energy minimization, thermostating, and
 both :math:`NVT` and :math:`NpT` equilibration steps. The resulting trajectory
 is analyzed using GROMACS utilities, radial distribution functions are
-extracted, and the trajectories are visualized using VMD :cite:`humphrey1996vmd`.
+extracted, and the trajectories are visualized using
+VMD :cite:`humphreyVMDVisualMolecular1996`.
 
 .. include:: ../../non-tutorials/needhelp.rst
 .. include:: ../../non-tutorials/GROMACS2025.1.rst
@@ -76,7 +78,7 @@ called |empty.gro|, and copy the following lines into it:
     <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/empty.gro" target="_blank">empty.gro</a>
 
 The first line, *Cubic box*, is a comment; the second line indicates the total
-number of atoms (0); and the last line defines the box dimensions in
+number of atoms (0 here); and the last line defines the box dimensions in
 nanometers -- in this case, 3.5 by 3.5 by :math:`3.5~\text{nm}`. This **.gro** file
 is written in |Gromos87| format.
 
@@ -117,16 +119,28 @@ Let us call the ``gmx insert-molecules`` command by typing in the terminal:
 Here, the ``insert-molecules`` command of GROMACS uses **empty.gro** as an input (flag ``-f``),
 and create a new **.gro** file named **conf.gro** (flag ``-o``) with 6 ions in it (flag ``-nmol``).
 The ``-radius 0.5`` option is used to prevent ions for being inserted closer than
-:math:`0.5~\text{nm}` from each other. The output should indicate that the 
-insertion were successful:
+:math:`0.5~\text{nm}` from each other.
 
-..  code-block:: bw
+.. admonition:: Note
+    :class: non-title-info
+
+    Each GROMACS command comes with online documentation. See, for instance,
+    this |doc-gmx| for the ``insert-molecules`` command.
+
+.. |doc-gmx| raw:: html
+
+    <a href="https://manual.gromacs.org/2025.1/onlinehelp/gmx-insert-molecules.html" target="_blank">page</a>
+
+The output printed in the terminal should indicate that the insertions were
+successful:
+
+.. code-block:: bw
 
     Added 6 molecules (out of 6 requested)
     Writing generated configuration to conf.gro
 
-Looking at the generated **conf.gro** file, it contains 30 atoms corresponding
-to the 6 ions:
+Looking at the generated **conf.gro** file, it contains 30 atoms,
+corresponding to the 6 ions:
 
 ..  code-block:: bw
 
@@ -149,14 +163,21 @@ Between the second and the last lines, there is one line per atom. Each line
 indicates, from left to right:
 
 - the residue ID, with all 5 atoms from the same :math:`\text{SO}_4^{2-}` ion
-  sharing the same residue ID,
-- the residue name (SO4),
-- the atom name (O1, O2, O3, O4, or S1),
-- the atom ID (1 to 30),
+  sharing the same residue ID;
+- the residue name (SO4);
+- the atom name (O1, O2, O3, O4, or S1);
+- the atom ID (1 to 30);
 - the atom position: :math:`x`, :math:`y`, and :math:`z` coordinates in
   nanometers.
-    
-The format of a **.gro** file is fixed, and each column is in a fixed position.
+
+.. admonition:: Note
+    :class: non-title-info
+
+    The format of a **.gro** file is fixed and very rigid: each column has a
+    specific position and width. Fields such as residue ID, residue name, atom
+    name, atom number, and coordinates must follow the exact formatting rules
+    defined by GROMACS. Any deviation in spacing or alignment may cause parsing
+    errors or incorrect behavior when the file is read by GROMACS.
 
 The generated **conf.gro** file can be visualized using VMD by typing in the
 terminal:
@@ -165,7 +186,7 @@ terminal:
 
     vmd conf.gro
 
-Then, download the |na.gro| template for the :math:`\text{Na}_+` ion and add
+Then, download the |na.gro| template for the :math:`\text{Na}^+` ion and add
 12 ions using the same command:
 
 ..  code-block:: bw
@@ -176,10 +197,11 @@ Then, download the |na.gro| template for the :math:`\text{Na}_+` ion and add
 
     <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/na.gro" target="_blank">na.gro</a>
 
-Here, importantly, the same **conf.gro** file is used as input (``-f``) and
-output (``-o``), so the 12 ions will be added to the same file. Finally,
-download the |h2o.gro| template for the :math:`\text{H}_2\text{O}` molecule and
-add 800 molecules using the same command:
+Here, importantly, the same **conf.gro** file is used as both input (``-f``) and
+output (``-o``), so the 12 ions will be added to the same file named **conf.gro**.
+Finally, download the |h2o.gro| template for the :math:`\text{H}_2\text{O}` molecule,
+save it in the same folder, and add 800 water molecules to the system using the
+same command once again:
 
 ..  code-block:: bw
 
@@ -231,37 +253,61 @@ forces exerted by their surroundings.
     a single :math:`\text{Na}_+` ion and a single :math:`\text{SO}_4^{2-}`, as well
     as the surrounding water molecules.
 
+In case you encountered a problem during this part of the tutorial, you can
+download the **conf.gro** file by clicking |conf_gro|, and continue with the
+tutorial.
+
+.. |conf_gro| raw:: html
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/conf.gro" target="_blank">here</a>
+
+
 Set the parameters
 ==================
 
-Parameters for the interactions of the different atoms and molecules are
+Parameters for the interactions between the different atoms and molecules are
 provided in the topology files (**.top** and **.itp**). These parameters
-include the non-bonded interactions, :math:`V_{\text{nb}}(r)`, which are modeled as a
-combination of Lennard-Jones and Coulomb potentials:
+include both bonded and non-bonded interactions. 
 
-.. math::
+.. admonition:: About bonded and non-bonded interactions in molecular dynamics
+    :class: info
+        
+    Non-bonded interactions are
+    modeled as a combination of Lennard-Jones and Coulomb potentials:
 
-   V_{\text{nb}}(r) = 4\varepsilon \left[ \left( \frac{\sigma}{r_{ij}} \right)^{12}
-   - \left( \frac{\sigma}{r_{ij}} \right)^6 \right] + \frac{q_i q_j}{4\pi\varepsilon_0 r_{ij}}
+    .. math::
 
-where:
+        V_{\text{nb}}(r) = 4\varepsilon \left[ \left( \frac{\sigma}{r_{ij}} \right)^{12}
+        - \left( \frac{\sigma}{r_{ij}} \right)^6 \right] + \frac{q_i q_j}{4\pi\varepsilon_0 r_{ij}},
 
-- :math:`r_{ij}` is the distance between particles :math:`i` and :math:`j`,
-- :math:`\varepsilon` is the depth of the Lennard-Jones potential well,
-- :math:`\sigma` is the distance at which the Lennard-Jones potential is zero,
-- :math:`q_i` and :math:`q_j` are the charges of particles :math:`i` and :math:`j`,
-- :math:`\varepsilon_0` is the vacuum permittivity.
+    where:
 
-The parameters from the **.top** and **.itp** files also describe the bonded
-interactions that are used to join atoms from the same residues, typically using
-combinations of harmonic potentials or similar functional forms.
+    - :math:`r_{ij}` is the distance between particles :math:`i` and :math:`j`,
+    - :math:`\varepsilon` is the depth of the Lennard-Jones potential well,
+    - :math:`\sigma` is the distance at which the Lennard-Jones potential is zero,
+    - :math:`q_i` and :math:`q_j` are the charges of particles :math:`i` and :math:`j`,
+    - :math:`\varepsilon_0` is the vacuum permittivity.
+
+    Bonded interactions are used to connect atoms within the same residue, typically
+    modeled using harmonic potentials or similar functional forms.  A commonly used
+    expression for bond stretching is the harmonic potential:
+
+    .. math::
+
+        V_{\text{bond}}(r) = \frac{1}{2}k_b(r - r_0)^2,
+
+    where:
+
+    - :math:`r` is the distance between the bonded atoms,
+    - :math:`r_0` is the equilibrium bond length,
+    - :math:`k_b` is the bond force constant.
 
 First, the |topol-SO4.top| file must be placed in the same folder as the
 **conf.gro** file. It contains the following lines:
 
 .. |topol-SO4.top| raw:: html
 
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/bulk-solution/topol.top" target="_blank">topol.top</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/topol.top" target="_blank">topol.top</a>
 
 ..  code-block:: bw
 
@@ -278,19 +324,26 @@ First, the |topol-SO4.top| file must be placed in the same folder as the
     Na 12
     SOL 700
 
-The first four lines are used to include the values of the parameters that are
-provided in four separate files (**forcefield.itp**, **h2o.itp**, **na.itp**,
-**so4.itp**) located in the **ff/** folder (see below). The rest of
-the **topol.top** file contains the system name (here,
-*Na2SO4 solution*), and the list of the residues. Here, there are
-6 :math:`\text{SO}_4^{2-}` ions, 12 :math:`\text{Na}_+` ions, and
-700 water molecules.
+The first four lines are used to include the values of the parameters provided
+in four separate files (**forcefield.itp**, **h2o.itp**, **na.itp**, **so4.itp**),
+located in the **ff/** folder (which will be provided below). The rest of the
+**topol.top** file contains the system name (here, *Na2SO4 solution*) and the
+list of residues. Here, in agreement with the previously created **conf.gro**
+file, there are 6 :math:`\text{SO}_4^{2-}` ions, 12 :math:`\text{Na}^+` ions,
+and 700 water molecules.
 
 .. admonition:: About topol.top
     :class: info
 
-    It is crucial that the order and number of residues in the
-    topology file match the order of the **conf.gro** file.
+    It is crucial that the order and number of residues in the topology file
+    match the order of the **conf.gro** file. If there is a mismatch, GROMACS
+    will stop with an error such as:
+
+        Fatal error:
+        Number of coordinates in coordinate file does not match topology
+
+    This typically means the residue counts or their ordering in the topology
+    do not reflect the actual contents of the coordinate file.
 
 Create a folder named **ff/** next to the **conf.gro** and the **topol.top**
 files, and copy the four following files into it:
@@ -306,23 +359,23 @@ the species involved in the system.
 
 .. |forcefield.itp| raw:: html
 
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/ff/forcefield.itp" target="_blank">forcefield.itp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/forcefield.itp" target="_blank">forcefield.itp</a>
 
 .. |h2o.itp| raw:: html
 
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/ff/h2o.itp" target="_blank">h2o.itp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/h2o.itp" target="_blank">h2o.itp</a>
 
 .. |na.itp| raw:: html
 
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/ff/na.itp" target="_blank">na.itp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/na.itp" target="_blank">na.itp</a>
 
 .. |so4.itp| raw:: html
 
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/bulk-solution/ff/so4.itp" target="_blank">so4.itp</a>
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/so4.itp" target="_blank">so4.itp</a>
 
 More specifically, the **forcefield.itp** file contains a line that specifies
 the combination rules as ``comb-rule 2``, which corresponds to the well-known
-Lorentz-Berthelot rule :cite:`lorentz1881ueber,berthelot1898melange`, where:
+Lorentz-Berthelot rule :cite:`lorentzUeberAnwendungSatzes1881,berthelotMelangeGaz1898`, where:
 :math:`\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilon_{jj}}, \sigma_{ij} = \frac{\sigma_{ii} + \sigma_{jj}}{2}`.
 In **forcefield.itp**, this rule is specified as:
 
@@ -377,11 +430,12 @@ To run GROMACS, one needs to prepare an input file that contains instructions
 about the simulation, such as:
 
 - the number of steps to perform,
-- the thermostat to be used (e.g. Langevin :cite:`schneider1978molecular`,
-  Berendsen :cite:`berendsen1984molecular`),
+- the thermostat to be used (e.g. Langevin :cite:`schneiderMoleculardynamicsStudyThreedimensional1978`,
+  Berendsen :cite:`berendsenMolecularDynamicsCoupling1984`),
 - the cut-off for the interactions,
 - the integrator or algorithms (e.g. steepest-descent
-  :cite:`debye1909naherungsformeln`, leap-frog :cite:`allen2017computer`).
+  :cite:`debyeNaeherungsformelnFuerZylinderfunktionen1909`,
+  leap-frog :cite:`allenComputerSimulationLiquids2017`).
 
 It is clear from the configuration (**.gro**) file that the molecules and
 ions are currently in a quite unphysical configuration. It would be risky to
@@ -393,7 +447,8 @@ minimization, which consists of moving the atoms until the forces between them
 are reasonable.
 
 Open a blank file, call it **min.mdp**, and save it in a new folder named
-**inputs/**, located alongside **ff/** and **topol.top**:
+**inputs/**, located alongside **ff/** and **topol.top**. This is
+what the repository should look like at this point.
 
 .. figure:: ../figures/level1/bulk-solution/gromacs_inputs-light.png
     :alt: Gromacs files and structure folder
@@ -419,7 +474,7 @@ Copy the following lines into **min.mdp**:
 These two lines are GROMACS commands. The ``integrator`` specifies to GROMACS
 that the algorithm to be used is the |steepest-descent|, which moves the atoms
 following the direction of the largest forces until one of the stopping criteria
-is reached :cite:`debye1909naherungsformeln`. The ``nsteps`` command specifies
+is reached :cite:`debyeNaeherungsformelnFuerZylinderfunktionen1909`. The ``nsteps`` command specifies
 the maximum number of steps to perform, here 5000.
 
 .. |steepest-descent| raw:: html
@@ -446,13 +501,14 @@ Let us run that input script using GROMACS. From the terminal, type:
 
 The ``grompp`` command is used to preprocess the files in order to prepare
 the simulation. This command also checks the validity of the files. By using
-the ``-f`` and ``-c`` keywords, we specify which input file must be used, as
-well as the initial configuration, i.e., the initial positions of the atoms.
-The other keywords ``-o``, ``-pp``, and ``-po`` are used to specify the names
+the ``-f`` and ``-c`` options, we specify which input file must be used
+(here **inputs/min.mdp**), as well as the initial configuration, i.e.,
+the initial positions of the atoms (here, **conf.gro**).
+The other options ``-o``, ``-pp``, and ``-po`` are used to specify the names
 of the outputs that will be produced during the run.
 
 The ``mdrun`` command calls the engine performing the computation from the
-preprocessed files, which is recognized thanks to the ``-deffnm`` keyword. The
+preprocessed files, which is recognized thanks to the ``-deffnm`` option. The
 ``-v`` option enables *verbose* mode so that more information is printed in
 the terminal.
 
@@ -468,11 +524,11 @@ If everything works, information should be printed in the terminal, including:
 
 The information printed in the terminal indicates that energy minimization
 has been performed, even though the precision requested by the default
-parameters was not reached. We can ignore this message, as long as the final
-energy is large and negative, the simulation will work just fine.
+parameters was not reached. This message can be ignored—as long as the final
+potential energy is large and negative, the simulation will proceed just fine.
 
-To appreciate the effect of the energy minimization, compare the potential
-energy of the system and the maximum force at the first and last steps:
+To appreciate the effect of energy minimization, compare the potential energy
+of the system and the maximum force at the first and last steps:
 
 ..  code-block:: bw
 
@@ -494,6 +550,30 @@ using VMD by typing in the terminal:
 
     vmd conf.gro min.trr
 
+With that command, we are importing both a topology file (**conf.gro**) and
+a trajectory file (**min.trr**) into VMD.
+
+.. admonition:: Tip for better visualization
+    :class: info
+
+    You can avoid having molecules and ions being cut by the periodic boundary
+    conditions by rewriting the trajectory using:
+
+    .. code-block:: bash
+
+        gmx trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole
+
+    Then, select ``0`` as the group of your choice for the output, and reopen
+    the modified trajectory using VMD:
+
+    .. code-block:: bash
+
+        vmd conf.gro min_whole.trr
+
+From the trajectory visualization, one can see that the molecules reorient
+themselves into more energetically favorable positions, and that the distances
+between the atoms are progressively homogenized.
+
 .. figure:: figures/minimisation.webp
     :alt: Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization.
     :class: only-light
@@ -504,25 +584,7 @@ using VMD by typing in the terminal:
 
 .. container:: figurelegend
 
-    Figure: Movie showing the motion of the atoms during the energy minimization.
-
-You can avoid having molecules and ions being cut by the periodic boundary
-conditions by rewriting the trajectory using:
-
-.. code-block:: bash
-
-    gmx trjconv -f min.trr -s min.tpr -o min_whole.trr -pbc whole
-
-Then, select ``0`` as the group of your choice for the output, and reopen the
-modified trajectory using VMD:
-
-.. code-block:: bash
-
-    vmd conf.gro min.trr
-
-From the trajectory visualization, one can see that the molecules reorient
-themselves into more energetically favorable positions, and that the distances
-between the atoms are progressively homogenized.
+    Figure: Molecules and ions rearranging during energy minimization.
 
 Let us have a look at the evolution of the potential energy of the system. To
 do so, we can use the ``gmx energy`` command of GROMACS. In the terminal, type:
@@ -531,24 +593,28 @@ do so, we can use the ``gmx energy`` command of GROMACS. In the terminal, type:
 
     gmx energy -f min.edr -o min-Ep.xvg
 
-Choose ``potential`` by typing ``5`` (the number may differ in your case),
+Choose ``Potential`` by typing ``5`` (the number may differ in your case),
 then press ``Enter`` twice.
 
 Here, the portable energy file **min.edr** produced by GROMACS during the
-minimization run is used, and the result is saved as a **.xvg** file named
-**min-Ep.xvg**. **.xvg** files can be opened with the Grace software (or
-equivalent) :cite:`grace`:
+minimization run is used as input, and the result is saved as a **.xvg** file
+named **min-Ep.xvg**. **.xvg** files can be opened with the |grace| software (or
+equivalent):
 
 ..  code-block:: bash
 
     xmgrace min-pe.xvg
 
-One can see from the energy plot that the potential energy is initially close to 0,
-which is the expected consequence of atoms being too close to one
-another, as well as molecules being randomly oriented in space. As the
-minimization progresses, the potential energy rapidly decreases and reaches
-a large and negative value, which is usually the sign that the atoms are
-located at appropriate distances from each other.
+.. |grace| raw:: html
+
+    <a href="https://plasma-gate.weizmann.ac.il/Grace/" target="_blank">Grace</a>
+
+One can see from the energy plot that the potential energy is initially close
+to zero. This is expected when atoms are too close to one another and molecules
+are randomly oriented in space. As the minimization progresses, the potential
+energy rapidly decreases and reaches a large negative value, which usually
+indicates that the atoms are now located at appropriate distances from one
+another.
 
 .. figure:: figures/min-Ep.png
     :alt: Gromacs tutorial : plot of the energy versus time.
@@ -569,14 +635,32 @@ simulation can be started.
 Molecular dynamics (:math:`NVT`)
 ================================
 
-Let us first perform a short (20 picoseconds)
-equilibration in the :math:`NVT` ensemble. In the :math:`NVT` ensemble,
-the number of atoms (:math:`N`) and the volume (:math:`V`) are maintained
-fixed, and the temperature of the system (:math:`T`) is adjusted using
-a thermostat.
+Let us first perform a short (20 picoseconds) equilibration in the :math:`NVT`
+ensemble using molecular dynamics. In the :math:`NVT` ensemble, the number of
+atoms (:math:`N`) and the volume (:math:`V`) are maintained fixed, and the
+temperature of the system (:math:`T`) is adjusted using a thermostat.
 
-Let us create a new input script called **nvt.mdp**, and save it in
-the **inputs/** folder. Copy the following lines into it:
+.. admonition:: About molecular dynamics
+    :class: info
+
+    Molecular dynamics (MD) involves solving Newton's equations of motion
+    to update particle positions and velocities based on the forces applied
+    to the atoms :cite:`frenkelUnderstandingMolecularSimulation2002`. By default, GROMACS uses
+    the |leap-frog| Verlet integration scheme :cite:`hockneyQuietHighresolutionComputer1974`.
+    A typical MD simulation follows these steps:
+
+    1. Compute forces on particles using the potential energy function.
+    2. Update velocities based on the forces at the current timestep.
+    3. Update positions using the velocities from the previous timestep.
+    4. Apply periodic boundary conditions and constraints as required.
+    5. Repeat for each timestep (e.g., 0.001 ps) throughout the simulation.
+
+.. |leap-frog| raw:: html
+
+    <a href="https://manual.gromacs.org/nightly/reference-manual/algorithms/molecular-dynamics.html#update" target="_blank">leap-frog</a>
+
+Let us create a new input script called **nvt.mdp**, and save it in the
+**inputs/** folder. Copy the following lines into it:
 
 ..  code-block:: bw
 
@@ -584,12 +668,11 @@ the **inputs/** folder. Copy the following lines into it:
     nsteps = 20000
     dt = 0.001
 
-Here, the molecular dynamics (md) integrator is used, which is a leap-frog
-algorithm integrating Newton equations of motion. A number of 20000 steps with
-a timestep ``dt`` equal of :math:`0.001 ~ \text{ps}` will be performed.
+Here, the molecular dynamics (MD) integrator is used, which is a leap-frog
+algorithm integrating Newton's equations of motion. A total of 20,000 steps with
+a timestep ``dt`` equal to :math:`0.001 ~ \text{ps}` will be performed.
 
-Let us cancel the translational of the center of mass
-of the system:
+Let us cancel the translation of the center of mass of the system:
 
 ..  code-block:: bw
 
@@ -627,7 +710,7 @@ in the log file and in the energy file **.edr** every 100 steps.
 Let us impose the calculation of long-range
 electrostatic, by the use of the long-range fast smooth particle-mesh ewald (SPME)
 electrostatics with Fourier spacing of :math:`0.1~\text{nm}`, order
-of 4, and cut-off of :math:`1~\text{nm}` :cite:`darden1993particle, essmann1995smooth`.
+of 4, and cut-off of :math:`1~\text{nm}` :cite:`dardenParticleMeshEwald1993, essmannSmoothParticleMesh1995`.
 Let us also impose how the short-range van der Waals interactions
 should be treated by GROMACS, as well as the cut-off ``rvdw`` of :math:`1~\text{nm}`:
 
@@ -650,7 +733,7 @@ long-range interactions. Long-range interactions are treated in the
 reciprocal space, while short-range interactions are computed directly.
 
 Let us use the LINCS algorithm to constrain the hydrogen
-bonds :cite:`hess1997lincs`. The water
+bonds :cite:`hessLINCSLinearConstraint1997`. The water
 molecules will thus be treated as rigid, which is generally better given
 the fast vibration of the hydrogen bonds.
 
@@ -662,7 +745,7 @@ the fast vibration of the hydrogen bonds.
 
 Let us also control the temperature throughout the
 simulation using the so-called ``v-rescale`` thermostat, which is
-a Berendsen thermostat with an additional stochastic term :cite:`bussi2007canonical`:
+a Berendsen thermostat with an additional stochastic term :cite:`bussiCanonicalSamplingVelocity2007`:
 
 ..  code-block:: bw
 
@@ -784,7 +867,7 @@ and the removing of the ``gen-vel`` and ``gen-temp`` commands,
 because the atoms already have a velocity.
 
 Let us add an the isotropic C-rescale pressure
-coupling with a target pressure of 1 bar :cite:`bernetti2020pressure`
+coupling with a target pressure of 1 bar :cite:`bernettiPressureControlUsing2020`
 by adding the following to **npt.mdp**:
 
 ..  code-block:: bw

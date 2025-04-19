@@ -145,7 +145,7 @@ Most of these commands have been seen in previous tutorials. The most
 important command is *integrator = steep*, which set the algorithm
 used by GROMACS as the steepest-descent,
 which moves the atoms following the direction of the largest forces
-until one of the stopping criteria is reached :cite:`debye1909naherungsformeln`.
+until one of the stopping criteria is reached :cite:`debyeNaeherungsformelnFuerZylinderfunktionen1909`.
 
 Run the energy minimization using GROMACS by typing in a terminal:
 
@@ -649,7 +649,7 @@ reach is final length.
 The change in dihedral angles disribution reveals a configurational change of 
 the polymer induced by the forcing. This transition is called gauche-trans,
 where *gauche* and *trans* refer to possible states
-for the PEG monomer :cite:`binder1995monte, liese2017hydration`.
+for the PEG monomer :cite:`binderMonteCarloMolecular1995, lieseHydrationEffectsTurn2017`.
 
 .. figure:: ../figures/level2/stretching-a-polymer/gauche-trans.png
     :alt: Illustration of the gauche (left) and trans (right) states of the PEG polymer.

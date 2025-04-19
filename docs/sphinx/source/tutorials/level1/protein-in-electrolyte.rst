@@ -21,7 +21,7 @@ Protein in electrolyte
 
 The goal of this tutorial is to use GROMACS and perform a simple
 molecular dynamics simulation of a protein solvated in an electrolyte. The
-protein is downloaded from the Protein Data Bank (PDB) :cite:`bank1971protein`
+protein is downloaded from the Protein Data Bank (PDB) :cite:`bankProteinDataBank`
 and solvated in an electrolyte made of water molecules and Na+ Cl- ions.
 
 This tutorial covers some of the basic uses of GROMACS, including system
@@ -38,7 +38,7 @@ Convert the PDB file
 Download the *.pdb* file from the |ProteinDataBank|,
 or simply click |1cta.pdb|. The protein is a calcium-binding peptide from site III
 of chicken troponin-C that has been determined using 1H-NMR spectroscopy
-:cite:`shaw1992determination`.
+:cite:`shawDeterminationSolutionStructure`.
 
 .. |ProteinDataBank| raw:: html
 
@@ -94,10 +94,10 @@ the different atoms. This can be done using the *gmx pdb2gmx* command:
 Here, the *-ignh* option is used to ignore the hydrogen atoms that are in
 the coordinate file. The *-water spce* open is used to
 specify the water model; the extended simple point charge
-model (spce) :cite:`berendsen1987missing`. 
+model (spce) :cite:`berendsenMissingTermEffective1987`. 
 
 When running *gmx pdb2gmx*, choose the *AMBER03 protein, nucleic
-AMBER94* force field :cite:`duan2003point`. A new *gro* file named
+AMBER94* force field :cite:`duanPointchargeForceField2003`. A new *gro* file named
 *unsolvated.gro* was created, as well as a topology *.top* file named
 *topol.top*.
 
@@ -158,7 +158,7 @@ To do so, create a new folder named *inputs/*, and create a file named
     rcoulomb = 1.0
 
 Here, the speepest-descent method is used, with a maximum number of steps
-of 50 :cite:`debye1909naherungsformeln`. The trajectory is printed every 10
+of 50 :cite:`debyeNaeherungsformelnFuerZylinderfunktionen1909`. The trajectory is printed every 10
 step, as specified by the *nstxout* option. The other commands control the
 interactions and cut-offs. 
 
@@ -322,7 +322,7 @@ of :math:`T = 300~\text{K}`
 with a characteristic time of :math:`0.5~\text{ps}`.
 The *v-rescale* thermostat
 corresponds to the Berendsen thermostat with an additional stochastic
-term :cite:`bussi2007canonical`, and is known to give proper canonical ensemble.
+term :cite:`bussiCanonicalSamplingVelocity2007`, and is known to give proper canonical ensemble.
 
 The *LINCS* algorithm is used to constrain the hydrogen bonds, allowing us 
 to use a timestep of :math:`1~\text{fs}`. Without such constraint, the fast

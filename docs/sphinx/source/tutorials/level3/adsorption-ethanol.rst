@@ -315,7 +315,7 @@ The n is :
     1 nanosecond long run.
 
 The density profiles show an excess of
-ethanol at the 2 interfaces, which is commonly observed :cite:`stewart2003molecular`.
+ethanol at the 2 interfaces, which is commonly observed :cite:`stewartMolecularDynamicsSimulations2003`.
 There is also a local maxima in the water density near the center of the fluid
 layer (near :math:`x = 3~\text{nm}`), and two depletion areas in between the center
 of the fluid layer and the two interfaces.

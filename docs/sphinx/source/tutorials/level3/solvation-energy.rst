@@ -27,7 +27,7 @@ water, the free energy of solvation will be calculated.
 The large and flat molecule used here is a graphene-like and
 discoid molecule named hexabenzocoronene (HBC) of
 formula :math:`\text{C}_{42}\text{H}_{18}`. The TIP4P/epsilon
-model is used for the water :cite:`fuentes2014non`.
+model is used for the water :cite:`fuentes-azcatlNonPolarizableForceField2014`.
 
 .. include:: ../../non-tutorials/recommand-salt.rst
 .. include:: ../../non-tutorials/needhelp.rst
@@ -43,7 +43,7 @@ Download the configuration files for the HBC molecule
 by clicking |FJEW_allatom_optimised_geometry.pdb|, and save it in
 the *preparation/* folder. The molecule 
 was downloaded from the |atb-HBC| on the automated topology builder
-(ATB) :cite:`malde2011automated`.
+(ATB) :cite:`maldeAutomatedForceField2011`.
 
 .. |FJEW_allatom_optimised_geometry.pdb| raw:: html
 
