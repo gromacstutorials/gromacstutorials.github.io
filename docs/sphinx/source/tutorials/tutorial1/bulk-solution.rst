@@ -1,7 +1,7 @@
 .. _bulk-solution-label:
 
-Bulk salt solution
-******************
+Ionic solution
+**************
 
 .. container:: hatnote
 
@@ -207,9 +207,12 @@ The final **conf.gro** file contains :
     818Sol    MW1 3242   1.130   0.170   2.960
     3.50000   3.50000   3.50000
 
-The molecules and ions have been placed randomly in space, and
-are therefore arranged in a quite unrealistic manner. This will be
-fixed during energy minimization.
+The molecules and ions have been placed randomly in space, and are
+therefore arranged in a rather unrealistic manner. For instance, molecules
+should be oriented away from ions based on their charge, which is not the
+case, as can be seen using VMD. This will be corrected during energy
+minimization, where the residues will be moved and rotated according to the
+forces exerted by their surroundings.
 
 .. figure:: figures/populate-box.png
     :alt: Gromacs configuration SO4 Na ions visualized with VMD
@@ -221,9 +224,12 @@ fixed during energy minimization.
 
 .. container:: figurelegend
 
-    Figure: :math:`\text{SO}_4^{2-}` ions, :math:`\text{Na}_+` ions, and water molecules.
-    Oxygen atoms are in red, hydrogen in white, sodium in blue, and sulfur in
-    yellow. For easier visualization, water molecules are represented as sticks.
+    Figure: (Left) Full system showing the :math:`\text{SO}_4^{2-}` ions, the
+    :math:`\text{Na}_+` ions, and the water molecules, with oxygen atoms in red,
+    hydrogen in white, sodium in blue, and sulfur in yellow. For easier
+    visualization, water molecules are represented as sticks. (Right) Zoom-in on
+    a single :math:`\text{Na}_+` ion and a single :math:`\text{SO}_4^{2-}`, as well
+    as the surrounding water molecules.
 
 Set the parameters
 ==================
@@ -488,15 +494,13 @@ using VMD by typing in the terminal:
 
     vmd conf.gro min.trr
 
-.. figure:: figures/solution-light.webp
+.. figure:: figures/minimisation.webp
     :alt: Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization.
     :class: only-light
-    :height: 330
 
-.. figure:: figures/solution-dark.webp
+.. figure:: figures/minimisation-dm.webp
     :alt: Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization.
     :class: only-dark
-    :height: 330
 
 .. container:: figurelegend
 
@@ -895,38 +899,41 @@ at equilibrium temperature and pressure, **npt.gro**, using:
 Measurement
 ===========
 
-After completing the simulation, we proceed to compute the radial distribution functions (rdf):
+After completing the simulation, we proceed to compute the radial distribution
+functions (RDF):
 
 .. math::
 
    g(r) = \frac{V}{N_{\text{ref}} \rho} \frac{dN(r)}{dr},
 
+
 where :math:`V` is the volume of the simulation box, :math:`N_{\text{ref}}` is
 the number of reference atoms, :math:`\rho` is the average number density of
 particles in the system, and :math:`\frac{dN(r)}{dr}` is the number of particles
 in a spherical shell of thickness :math:`dr` around a reference particle at
-a distance :math:`r`.
+distance :math:`r`.
 
-First, let us measure the rdf between :math:`\text{Na}^+`
-ions and :math:`\text{H}_2\text{O}` molecules, as well as between :math:`\text{SO}_4^{2-}`
-ions and :math:`\text{H}_2\text{O}`. This can be done using
-the ``gmx rdf`` command as follows:
-    
+First, let us measure the RDF between :math:`\text{Na}^+` ions and
+:math:`\text{H}_2\text{O}` molecules, as well as between :math:`\text{SO}_4^{2-}`
+ions and :math:`\text{H}_2\text{O}` molecules. This can be done using the
+``gmx rdf`` command as follows:
+
 ..  code-block:: bw 
 
     gmx rdf -f production.xtc -s production.tpr -o production-rdf-na-h2o.xvg
 
-Then select the sodium ions as *reference* by typing 3, the water
-as *selection* by typing 4, and press ``Ctrl+D``. The same can be done
-for :math:`\text{SO}_4^{2-}` ions by typing:
+Then select the sodium ions as *reference* by typing 3, the water as
+*selection* by typing 4, and press ``Ctrl+D``. The same can be done for
+:math:`\text{SO}_4^{2-}` ions by typing:
 
-..  code-block:: bw 
+.. code-block:: bw
 
     ${gmx} rdf -f production.xtc -s production.tpr -o production-rdf-so4-h2o.xvg
 
 and then by typing 2 and 4.
 
-The results show...
+The results show multiple peaks, corresponding to the most likely distances
+between the ions and the water molecules.
 
 .. figure:: figures/rdf-plain.png
     :alt: Gromacs tutorial RDF radial distribution function
@@ -938,19 +945,20 @@ The results show...
 
 .. container:: figurelegend
 
-    Figure: Radial distribution functions (RDF) as calculated between sodium
-    and water (:math:`\text{Na}^+ - \text{H}_2\text{O}`), between sulfate and
+    Figure: Radial distribution functions (RDF) calculated between sodium and
+    water (:math:`\text{Na}^+ - \text{H}_2\text{O}`), and between sulfate and
     water (:math:`\text{SO}_4^{2-} - \text{H}_2\text{O}`).
 
-The main issue with the calculated rdf, is that it includes all the atoms from 
-thr :math:`\text{H}_2\text{O}` molecules (including the hydrogen atoms) and all
-the atoms from the :math:`\text{SO}_4^{2-}`, leading to more peaks and dephts
-and a more difficult analysis. Rdfs would be easiers to interpret, if only the 
-water oxygen atoms (with name ``OW1``) and :math:`\text{SO}_4^{2-}` ions 
-sulfur atoms (with name ``S1``) where included in the analysis. As these groups were not
-included in the original group, we have to create them ourself.
+The main issue with the calculated RDFs is that they includes all the atoms from
+the :math:`\text{H}_2\text{O}` molecules (including the hydrogen atoms) and all
+the atoms from the :math:`\text{SO}_4^{2-}` ions, leading to more peaks and
+depths, making analysis more difficult. RDFs would be easier to interpret if
+only the water oxygen atoms (with name ``OW1``) and the sulfur atoms of the
+:math:`\text{SO}_4^{2-}` ions (with name ``S1``) were included in the analysis.
 
-To create groups, we can use the ``gmx make_ndx`` command as follow:
+Since these groups were not included in the original GROMACS group, we need to
+create them ourselves. To create groups, we can use the ``gmx make_ndx`` command
+as follows:
 
 ..  code-block:: bw 
 
@@ -960,9 +968,9 @@ To create groups, we can use the ``gmx make_ndx`` command as follow:
     q
     EOF
 
-And then type ``a OW1`` and press enter, ``a S1`` and press enter, and then
-press ``q`` to save and quit. This will create a file name **index.ndx** that
-contain two more groups (named OW1 and S1) alongside the default ones:
+Then type ``a OW1`` and press enter, ``a S1`` and press enter, and finally
+press ``q`` to save and quit. This will create a file named **index.ndx** that
+contains two additional groups (named OW1 and S1) alongside the default ones:
 
 ..  code-block:: bw 
 
@@ -982,7 +990,7 @@ contain two more groups (named OW1 and S1) alongside the default ones:
     [ S1 ]
     5   10   15   20   25   30
 
-Then, let us rerun the ``gmx rdf`` command using the **index.ndx** file, and
+Then, let us rerun the ``gmx rdf`` command using the **index.ndx** file and
 selecting the newly created groups:
 
 ..  code-block:: bw 
@@ -995,7 +1003,8 @@ and select 3 and 7.
 
     gmx rdf -f production.xtc -s production.tpr -o production-rdf-so4-OW1.xvg -n index.ndx
 
-and select 8 and 7.
+and select 8 and 7. As can be seen by plotting the generated **.xvg** files, the RDF
+is much cleaner now that we have selected the atoms of interest.
 
 .. figure:: figures/rdf-filtered.png
     :alt: Gromacs tutorial RDF radial distribution function
@@ -1007,10 +1016,10 @@ and select 8 and 7.
 
 .. container:: figurelegend
 
-    Figure: Radial distribution functions (RDF) as calculated between sodium
-    and water oxygens (:math:`\text{Na}^+ - \text{OW1}`), between sulfur and
-    water oxygens  (:math:`\text{S1} - \text{OW1}`), and in between water oxygens
-    (:math:`\text{OW1} - \text{OW1}`),.
+    Figure: Radial distribution functions (RDF) calculated between sodium and
+    water oxygens (:math:`\text{Na}^+ - \text{OW1}`), between sulfur and
+    water oxygens (:math:`\text{S1} - \text{OW1}`), and between water oxygens
+    (:math:`\text{OW1} - \text{OW1}`).
 
 The radial distribution functions highlight the typical distance between
 the different species of the fluid. For instance, it can be seen that
