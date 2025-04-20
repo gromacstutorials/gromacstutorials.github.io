@@ -37,3 +37,11 @@
 .. |vscode| raw:: html
 
    <a href="https://code.visualstudio.com/" target="_blank">Visual Studio Code</a>
+
+.. |personal-page| raw:: html
+
+   <a href="https://simongravelle.github.io/" target="_blank">personal page</a>
+
+.. |patreon| raw:: html
+
+    <a href="https://www.patreon.com/molecularsimulations" target="_blank">patreon</a>
