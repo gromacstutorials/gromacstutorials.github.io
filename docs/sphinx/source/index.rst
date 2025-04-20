@@ -13,8 +13,8 @@ GROMACS tutorials
     :caption: Tutorials
 
     tutorials/tutorial1/bulk-solution.rst
-    tutorials/level1/protein-in-electrolyte.rst
-    tutorials/level2/stretching-a-polymer.rst
+    tutorials/tutorial2/protein-in-electrolyte.rst
+    tutorials/tutorial3/stretching-a-polymer.rst
     tutorials/level3/solvation-energy.rst
     tutorials/level3/adsorption-ethanol.rst
 
