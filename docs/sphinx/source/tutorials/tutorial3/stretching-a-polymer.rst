@@ -1,4 +1,5 @@
 .. _stretching-polymer-label:
+.. include:: ../../non-tutorials/links.rst
 
 Stretching a polymer
 ********************

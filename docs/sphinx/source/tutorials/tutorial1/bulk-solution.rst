@@ -1,4 +1,5 @@
 .. _bulk-solution-label:
+.. include:: ../../non-tutorials/links.rst
 
 Ionic solution
 **************
@@ -73,18 +74,10 @@ called |empty.gro|, and copy the following lines into it:
     0
     3.50000   3.50000   3.50000
 
-.. |empty.gro| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/empty.gro" target="_blank">empty.gro</a>
-
 The first line, *Cubic box*, is a comment; the second line indicates the total
 number of atoms (0 here); and the last line defines the box dimensions in
 nanometers -- in this case, 3.5 by 3.5 by :math:`3.5~\text{nm}`. This **.gro** file
 is written in |Gromos87| format.
-
-.. |Gromos87| raw:: html
-
-    <a href="https://manual.gromacs.org/archive/5.0.4/online/gro.html" target="_blank">Gromos87</a>
 
 Let us populate this empty box with :math:`\text{SO}_4^{2-}` ions first. To do so,
 the GROMACS command named ``insert-molecules`` is used, for which one needs to
@@ -101,10 +94,6 @@ new file named |so4.gro|, and copy the following lines into it:
         1  SO4   O4    4   0.425   0.980   0.241
         1  SO4   S1    5   0.496   1.117   0.280
     1.00000   1.00000   1.00000
-
-.. |so4.gro| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/so4.gro" target="_blank">so4.gro</a>
 
 This topology file for the :math:`\text{SO}_4^{2-}` ion is written in the same |Gromos87|
 format as **empty.gro**. It contains 5 atoms named ``O1``, ``O2``, ``O3``, ``O4``,
@@ -125,11 +114,7 @@ The ``-radius 0.5`` option is used to prevent ions for being inserted closer tha
     :class: non-title-info
 
     Each GROMACS command comes with online documentation. See, for instance,
-    this |doc-gmx| for the ``insert-molecules`` command.
-
-.. |doc-gmx| raw:: html
-
-    <a href="https://manual.gromacs.org/2025.1/onlinehelp/gmx-insert-molecules.html" target="_blank">page</a>
+    this page for the |insert-molecules| command.
 
 The output printed in the terminal should indicate that the insertions were
 successful:
@@ -193,10 +178,6 @@ Then, download the |na.gro| template for the :math:`\text{Na}^+` ion and add
 
     gmx insert-molecules -ci na.gro -f conf.gro -o conf.gro -nmol 12 -radius 0.5
 
-.. |na.gro| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/na.gro" target="_blank">na.gro</a>
-
 Here, importantly, the same **conf.gro** file is used as both input (``-f``) and
 output (``-o``), so the 12 ions will be added to the same file named **conf.gro**.
 Finally, download the |h2o.gro| template for the :math:`\text{H}_2\text{O}` molecule,
@@ -206,10 +187,6 @@ same command once again:
 ..  code-block:: bw
 
     gmx insert-molecules -ci h2o.gro -f conf.gro -o conf.gro -nmol 800 -radius 0.14
-
-.. |h2o.gro| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/h2o.gro" target="_blank">h2o.gro</a>
 
 The final **conf.gro** file contains :
 
@@ -254,13 +231,8 @@ forces exerted by their surroundings.
     as the surrounding water molecules.
 
 In case you encountered a problem during this part of the tutorial, you can
-download the **conf.gro** file by clicking |conf_gro|, and continue with the
+download the |conf_gro_tutorial1| file, and continue with the
 tutorial.
-
-.. |conf_gro| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/conf.gro" target="_blank">here</a>
-
 
 Set the parameters
 ==================
@@ -304,10 +276,6 @@ include both bonded and non-bonded interactions.
 
 First, the |topol-SO4.top| file must be placed in the same folder as the
 **conf.gro** file. It contains the following lines:
-
-.. |topol-SO4.top| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/topol.top" target="_blank">topol.top</a>
 
 ..  code-block:: bw
 
@@ -356,22 +324,6 @@ files, and copy the four following files into it:
 These four files contain information about the atoms (names, masses, charges,
 Lennard-Jones coefficients) and residues (bond and angular constraints) for all
 the species involved in the system.
-
-.. |forcefield.itp| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/forcefield.itp" target="_blank">forcefield.itp</a>
-
-.. |h2o.itp| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/h2o.itp" target="_blank">h2o.itp</a>
-
-.. |na.itp| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/na.itp" target="_blank">na.itp</a>
-
-.. |so4.itp| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/so4.itp" target="_blank">so4.itp</a>
 
 More specifically, the **forcefield.itp** file contains a line that specifies
 the combination rules as ``comb-rule 2``, which corresponds to the well-known
@@ -476,10 +428,6 @@ that the algorithm to be used is the |steepest-descent|, which moves the atoms
 following the direction of the largest forces until one of the stopping criteria
 is reached :cite:`debyeNaeherungsformelnFuerZylinderfunktionen1909`. The ``nsteps`` command specifies
 the maximum number of steps to perform, here 5000.
-
-.. |steepest-descent| raw:: html
-
-    <a href="https://manual.gromacs.org/current/reference-manual/algorithms/energy-minimization.html" target="_blank">steepest-descent</a>
 
 To visualize the trajectory of the atoms during the minimization, let us also
 add the following command to the input file:
@@ -605,10 +553,6 @@ equivalent):
 
     xmgrace min-pe.xvg
 
-.. |grace| raw:: html
-
-    <a href="https://plasma-gate.weizmann.ac.il/Grace/" target="_blank">Grace</a>
-
 One can see from the energy plot that the potential energy is initially close
 to zero. This is expected when atoms are too close to one another and molecules
 are randomly oriented in space. As the minimization progresses, the potential
@@ -654,10 +598,6 @@ temperature of the system (:math:`T`) is adjusted using a thermostat.
     3. Update positions using the velocities from the previous timestep.
     4. Apply periodic boundary conditions and constraints as required.
     5. Repeat for each timestep (e.g., 0.001 ps) throughout the simulation.
-
-.. |leap-frog| raw:: html
-
-    <a href="https://manual.gromacs.org/nightly/reference-manual/algorithms/molecular-dynamics.html#update" target="_blank">leap-frog</a>
 
 Let us create a new input script called **nvt.mdp**, and save it in the
 **inputs/** folder. Copy the following lines into it:

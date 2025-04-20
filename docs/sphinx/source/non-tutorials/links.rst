@@ -57,3 +57,63 @@
 .. |trjconv| raw:: html
 
    <a href="https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html" target="_blank">trjconv</a>
+
+.. |empty.gro| raw:: html
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/empty.gro" target="_blank">empty.gro</a>
+
+.. |Gromos87| raw:: html
+
+    <a href="https://manual.gromacs.org/archive/5.0.4/online/gro.html" target="_blank">Gromos87</a>
+
+.. |so4.gro| raw:: html
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/so4.gro" target="_blank">so4.gro</a>
+
+.. |insert-molecules| raw:: html
+
+    <a href="https://manual.gromacs.org/2025.1/onlinehelp/gmx-insert-molecules.html" target="_blank">insert-molecules</a>
+
+.. |na.gro| raw:: html
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/na.gro" target="_blank">na.gro</a>
+
+.. |h2o.gro| raw:: html
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/h2o.gro" target="_blank">h2o.gro</a>
+
+.. |conf_gro_tutorial1| raw:: html
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/conf.gro" target="_blank">conf.gro</a>
+
+.. |topol-SO4.top| raw:: html
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/topol.top" target="_blank">topol.top</a>
+
+.. |forcefield.itp| raw:: html
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/forcefield.itp" target="_blank">forcefield.itp</a>
+
+.. |h2o.itp| raw:: html
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/h2o.itp" target="_blank">h2o.itp</a>
+
+.. |na.itp| raw:: html
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/na.itp" target="_blank">na.itp</a>
+
+.. |so4.itp| raw:: html
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/so4.itp" target="_blank">so4.itp</a>
+
+.. |steepest-descent| raw:: html
+
+    <a href="https://manual.gromacs.org/current/reference-manual/algorithms/energy-minimization.html" target="_blank">steepest-descent</a>
+
+.. |grace| raw:: html
+
+    <a href="https://plasma-gate.weizmann.ac.il/Grace/" target="_blank">Grace</a>
+
+.. |leap-frog| raw:: html
+
+   <a href="https://manual.gromacs.org/nightly/reference-manual/algorithms/molecular-dynamics.html#update" target="_blank">leap-frog</a>
