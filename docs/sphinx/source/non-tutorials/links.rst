@@ -45,3 +45,15 @@
 .. |patreon| raw:: html
 
     <a href="https://www.patreon.com/molecularsimulations" target="_blank">patreon</a>
+
+.. |Protein-Data-Bank| raw:: html
+
+   <a href="https://www.rcsb.org/structure/1CTA" target="_blank">Protein Data Bank</a>
+
+.. |1cta-pdb| raw:: html
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level1/protein-in-electrolyte/1cta.pdb" target="_blank">1cta.pdb</a>
+
+.. |trjconv| raw:: html
+
+   <a href="https://manual.gromacs.org/current/onlinehelp/gmx-trjconv.html" target="_blank">trjconv</a>
