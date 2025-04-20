@@ -117,3 +117,27 @@
 .. |leap-frog| raw:: html
 
    <a href="https://manual.gromacs.org/nightly/reference-manual/algorithms/molecular-dynamics.html#update" target="_blank">leap-frog</a>
+
+.. |Liese2017| raw:: html
+
+   <a href="https://doi.org/10.1021/acsnano.6b07071" target="_blank">Liese</a>
+
+.. |peg-gro| raw:: html
+
+   <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/cubic-box/peg.gro" target="_blank">peg.gro</a> 
+
+.. |video_peg_youtube| raw:: html
+
+   <a href="https://www.youtube.com/watch?v=8ldIHP175TI&t=9s" target="_blank">video</a>
+
+.. |download_charmm35r.itp| raw:: html
+
+   <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/cubic-box/ff/charmm35r.itp" target="_blank">charmm35r.itp</a>
+   
+.. |download_peg.itp| raw:: html
+
+   <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/cubic-box/ff/peg.itp" target="_blank">peg.itp</a>
+
+.. |download_tip3p.itp| raw:: html
+
+    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/cubic-box/ff/tip3p.itp" target="_blank">tip3p.itp</a>

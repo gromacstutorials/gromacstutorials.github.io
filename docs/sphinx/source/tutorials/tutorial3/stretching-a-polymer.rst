@@ -21,28 +21,20 @@ Stretching a polymer
     :class: only-light
 
 The goal of this tutorial is to use GROMACS and solvate a small
-hydrophilic polymer in a reservoir of water. 
+hydrophilic polymer in a reservoir of water.
 
 An all-atom description is used for both polymer and water. The polymer is
-PolyEthylene Glycol (PEG). Once the system is properly
-equilibrated at the desired temperature and pressure, a force is applied
-to both ends of the polymer. The evolution of the polymer length
-is measured, and the energetics of the system is measured.
+PolyEthylene Glycol (PEG). Once the system is properly equilibrated at the
+desired temperature and pressure, a force is applied to both ends of the
+polymer. The evolution of the polymer length is measured, and the energetics
+of the system is analyzed. This tutorial was inspired by a publication by
+|Liese2017| and coworkers, in which molecular dynamics simulations are
+compared with force spectroscopy experiments :cite:`lieseHydrationEffectsTurn2017`.
 
 .. 
     (GROMOS 54A7 force
     field :cite:`schmid2011definition`)
     (SPC flexible model :cite:`wu2006flexible`)
-
-
-
-    This tutorial was inspired by a |Liese2017| by Liese and coworkers, in which
-    molecular dynamics simulations are
-    compared with force spectroscopy experiments :cite:`liese2017hydration`.
-
-.. |Liese2017| raw:: html
-
-   <a href="https://doi.org/10.1021/acsnano.6b07071" target="_blank">publication</a>
 
 .. include:: ../../non-tutorials/recommand-salt.rst
 .. include:: ../../non-tutorials/needhelp.rst
@@ -51,12 +43,8 @@ is measured, and the energetics of the system is measured.
 Prepare the PEG molecule
 ========================
 
-Download the *peg.gro* file for the PEG molecule by clicking |download_H2O.data|.
-The *peg.gro* file can be visualized using vmd, by typing in a terminal:
-
-.. |download_H2O.data| raw:: html
-
-   <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/cubic-box/peg.gro" target="_blank">here</a> 
+Download the |peg-gro| file for the PEG molecule by clicking. The
+**peg.gro** file can be visualized using VMD, by typing in a terminal:
 
 .. code-block:: bash
 
@@ -78,53 +66,35 @@ The *peg.gro* file can be visualized using vmd, by typing in a terminal:
     oxygen atoms (in red), and hydrogen atoms (in white). See
     the corresponding |video_peg_youtube|.
 
-.. |video_peg_youtube| raw:: html
+Save **peg.gro** in a new folder. Next to **peg.gro** create an empty
+file named **topol.top**, and copy the following lines into it:
 
-   <a href="https://www.youtube.com/watch?v=8ldIHP175TI&t=9s" target="_blank">video</a>
-
-Save *peg.gro* in a new folder. Next to *peg.gro* create an empty
-file named *topol.top*, and copy the following lines in it:
-
-..  code-block:: bw
+.. code-block:: bash
 
     [ defaults ]
-    ; nbfunc	comb-rule	gen-pairs	fudgeLJ	fudgeQQ
-      1         1           no          1.0     1.0
+    ; nbfunc    comb-rule    gen-pairs    fudgeLJ    fudgeQQ
+        1         1            no           1.0     1.0
 
     ; Include forcefield parameters
     #include "ff/charmm35r.itp"
     #include "ff/peg.itp"
-    #include "ff/tip3p.itp
+    #include "ff/tip3p.itp"
 
     [ system ]
     ; Name
-      PEG
+        PEG
 
     [ molecules ]
     ; Compound        #mols
-      PEG             1
+        PEG             1
 
-Next to *conf.gro* and *topol.top*, create a folder named *ff/*, and copy
-the following 3 *.itp* files into it: |download_charmm35r.itp|, |download_peg.itp|,
-and |download_tip3p.itp|. 
-
-.. |download_charmm35r.itp| raw:: html
-
-   <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/cubic-box/ff/charmm35r.itp" target="_blank">charmm35r.itp</a>
-   
-.. |download_peg.itp| raw:: html
-
-   <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/cubic-box/ff/peg.itp" target="_blank">peg.itp</a>
-
-.. |download_tip3p.itp| raw:: html
-
-    <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/level2/stretching-a-polymer/cubic-box/ff/tip3p.itp" target="_blank">tip3p.itp</a>
-
-These 3 files contain the parameters for the PEG and the water molecules
+Next to **conf.gro** and **topol.top**, create a folder named **ff/**, and copy
+the following 3 **.itp** files into it: |download_charmm35r.itp|, |download_peg.itp|,
+and |download_tip3p.itp|. These 3 files contain the parameters for the PEG and the water molecules
 with oxygen (OW) and hydrogen (HW) atoms.
 
-Create an *inputs/* folder next to *ff/*, and create a new empty file
-called *em.mdp*. Copy the following lines into it:
+Create an **inputs/** folder next to **ff/**, and create a new empty file
+called **em.mdp**. Copy the following lines into it:
 
 ..  code-block:: bw
 
@@ -142,11 +112,11 @@ called *em.mdp*. Copy the following lines into it:
     rvdw = 1
     pbc = xyz
 
-Most of these commands have been seen in previous tutorials. The most
-important command is *integrator = steep*, which set the algorithm
-used by GROMACS as the steepest-descent,
-which moves the atoms following the direction of the largest forces
-until one of the stopping criteria is reached :cite:`debyeNaeherungsformelnFuerZylinderfunktionen1909`.
+Most of these commands have been seen in previous tutorials. Arguably the
+most important command is ``integrator = steep``, which sets the algorithm
+used by GROMACS as the steepest-descent method. This algorithm moves the
+atoms following the direction of the largest forces until one of the stopping
+criteria is reached :cite:`debyeNaeherungsformelnFuerZylinderfunktionen1909`.
 
 Run the energy minimization using GROMACS by typing in a terminal:
 
@@ -155,8 +125,8 @@ Run the energy minimization using GROMACS by typing in a terminal:
     gmx grompp -f inputs/em.mdp -c peg.gro -p topol.top -o em-peg
     gmx mdrun -deffnm em-peg -v -nt 8
 
-The *-nt 8* option limits the number of threads that GROMACS uses. Adjust
-the number to your computer. 
+The ``-nt 8`` option limits the number of threads that GROMACS uses. Adjust
+the number to your computer.
 
 After the simulation is over, open the trajectory file with VMD by typing
 in a terminal:
@@ -166,19 +136,20 @@ in a terminal:
     vmd peg.gro em-peg.trr
 
 From VMD, the PEG molecule can be seen moving a little by the
-steepest-descent algorithm. 
+steepest-descent algorithm.
 
-Before adding the water, let us reshape the box and recenter the PEG molecule
-in the box. As a first step, let us use a cubic box of
-lateral size :math:`2.6~\text{nm}`.
+Before adding the water, let us reshape the box and recenter the PEG
+molecule in the box. As a first step, let us use a cubic box of lateral
+size :math:`2.6~\text{nm}`.
 
-..  code-block:: bash
+.. code-block:: bash
 
-    gmx trjconv -f em-peg.gro -s em-peg.tpr -o peg-recentered.gro -center -pbc mol -box 2.6 2.6 2.6
+    gmx trjconv -f em-peg.gro -s em-peg.tpr -o peg-recentered.gro -center
+    -pbc mol -box 2.6 2.6 2.6
 
-Select *system* for both centering and output. The newly created *gro*
-file named *peg-recentered.gro* will be used as a starting point
-for the next step of the tutorial.
+Select ``system`` for both centering and output. The newly created **.gro**
+file named **peg-recentered.gro** will be used as a starting point for the
+next step of the tutorial.
 
 Solvate the PEG molecule
 ========================
