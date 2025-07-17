@@ -27,7 +27,7 @@ An all-atom description is used for both polymer and water. The polymer is
 PolyEthylene Glycol (PEG). Once the system is properly equilibrated at the
 desired temperature and pressure, a force is applied to both ends of the
 polymer. The evolution of the polymer length is measured, and the energetics
-of the system is analyzed. This tutorial was inspired by a publication by
+of the system is analyzed. This tutorial is inspired by a publication by
 |Liese2017| and coworkers, in which molecular dynamics simulations are
 compared with force spectroscopy experiments :cite:`lieseHydrationEffectsTurn2017`.
 
@@ -90,8 +90,16 @@ file named **topol.top**, and copy the following lines into it:
 
 Next to **conf.gro** and **topol.top**, create a folder named **ff/**, and copy
 the following 3 **.itp** files into it: |download_charmm35r.itp|, |download_peg.itp|,
-and |download_tip3p.itp|. These 3 files contain the parameters for the PEG and the water molecules
-with oxygen (OW) and hydrogen (HW) atoms.
+and |download_tip3p.itp|. These files provide the necessary force field parameters
+for both the PEG (C, OE, H, OT, and HT atoms) and the water molecules (OW and HW atoms).
+
+.. admonition:: Note
+    :class: non-title-info
+
+    The **charmm35r.itp** file contains the atomic masses, partial charges, and
+    Lennard-Jones nonbonded interaction parameters. The **peg.itp** and **tip3p.itp**
+    files define the bonded parameters for PEG and water molecules, including bonds,
+    angles, and dihedrals contraints. 
 
 Create an **inputs/** folder next to **ff/**, and create a new empty file
 called **em.mdp**. Copy the following lines into it:

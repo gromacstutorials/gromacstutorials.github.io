@@ -120,7 +120,7 @@
 
 .. |Liese2017| raw:: html
 
-   <a href="https://doi.org/10.1021/acsnano.6b07071" target="_blank">Liese</a>
+   <a href="https://doi.org/10.1021/acsnano.6b07071" target="_blank">Susanne Liese</a>
 
 .. |peg-gro| raw:: html
 
