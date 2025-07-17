@@ -76,7 +76,7 @@ called |empty.gro|, and copy the following lines into it:
 
 The first line, *Cubic box*, is a comment; the second line indicates the total
 number of atoms (0 here); and the last line defines the box dimensions in
-nanometers -- in this case, 3.5 by 3.5 by :math:`3.5~\text{nm}`. This **.gro** file
+nanometers; in this case, 3.5 by 3.5 by :math:`3.5~\text{nm}`. This **.gro** file
 is written in |Gromos87| format.
 
 Let us populate this empty box with :math:`\text{SO}_4^{2-}` ions first. To do so,
