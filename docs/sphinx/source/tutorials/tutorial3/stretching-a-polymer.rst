@@ -102,7 +102,7 @@ for both the PEG (C, OE, H, OT, and HT atoms) and the water molecules (OW and HW
     angles, and dihedrals contraints. 
 
 Create an **inputs/** folder next to **ff/**, and create a new empty file
-called **em.mdp**. Copy the following lines into it:
+called **em.mdp** into it. Copy the following lines into **em.mdp**:
 
 ..  code-block:: bw
 
@@ -125,6 +125,15 @@ most important command is ``integrator = steep``, which sets the algorithm
 used by GROMACS as the steepest-descent method. This algorithm moves the
 atoms following the direction of the largest forces until one of the stopping
 criteria is reached :cite:`debyeNaeherungsformelnFuerZylinderfunktionen1909`.
+The stopping criteria include reaching the maximum force tolerance set by
+``emtol``, or completing the maximum number of steps specified by
+``nsteps``. The initial step size for energy minimization is controlled by
+``emstep``. Other parameters define the treatment of nonbonded interactions,
+such as ``cutoff-scheme = Verlet``, electrostatics handled by Particle-Mesh
+Ewald with ``coulombtype = PME``, cutoff distances ``rcoulomb`` and
+``rvdw`` set to 1 nm. Periodic boundary conditions are applied in all
+directions with ``pbc = xyz``. Output frequencies for energy and coordinate
+writing are set by ``nstenergy`` and ``nstxout``, respectively.
 
 Run the energy minimization using GROMACS by typing in a terminal:
 
@@ -136,43 +145,40 @@ Run the energy minimization using GROMACS by typing in a terminal:
 The ``-nt 8`` option limits the number of threads that GROMACS uses. Adjust
 the number to your computer.
 
-After the simulation is over, open the trajectory file with VMD by typing
-in a terminal:
+After the simulation is complete, open the trajectory file with VMD by typing
+the following command in a terminal:
 
 ..  code-block:: bash
 
     vmd peg.gro em-peg.trr
 
-From VMD, the PEG molecule can be seen moving a little by the
-steepest-descent algorithm.
+In VMD, you can observe the PEG molecule moving slightly as a result of the
+steepest-descent energy minimization.
 
-Before adding the water, let us reshape the box and recenter the PEG
-molecule in the box. As a first step, let us use a cubic box of lateral
-size :math:`2.6~\text{nm}`.
+Before adding water, let us reshape the box and recenter the PEG molecule within
+it. Let us also place it in a cubic box with a lateral size of :math:`2.6~\text{nm}`.
 
 .. code-block:: bash
 
     gmx trjconv -f em-peg.gro -s em-peg.tpr -o peg-recentered.gro -center
     -pbc mol -box 2.6 2.6 2.6
 
-Select ``system`` for both centering and output. The newly created **.gro**
-file named **peg-recentered.gro** will be used as a starting point for the
-next step of the tutorial.
+Select ``system``  for both the centering and output prompts. The newly created
+**peg-recentered.gro** file will be used as the starting point for the next step
+of the tutorial.
 
 Solvate the PEG molecule
 ========================
 
-Let us add the water molecules to the system by using *gmx solvate*:
+Let us add water molecules to the system using ``gmx solvate``:
 
 ..  code-block:: bash
 
     gmx solvate -cp peg-recentered.gro -cs spc216.gro -o peg-solvated.gro -p topol.top
 
-Here *spc216.gro* is a default GROMACS file containing a pre-equilibrated
-water reservoir.
-
-The newly created file *peg-solvated.gro* contains the water molecules,
-and a a new line in was added to the topology file *topol.top*:
+Here, **spc216.gro** is a default GROMACS file containing a pre-equilibrated
+water reservoir. The newly created file **peg-solvated.gro** contains the
+water molecules, and a new line has been added to the topology file **topol.top**:
 
 ..  code-block:: bw
 
@@ -181,22 +187,17 @@ and a a new line in was added to the topology file *topol.top*:
     PEG               1 
     SOL               546
 
-We can apply the same energy minimization to the newly created solvated
-system. Simply add the following line to *em.mdp*:
+We can apply the same energy minimization as before to the newly created
+solvated system. Simply add the following line to **em.mdp**:
 
 ..  code-block:: bw
 
     define = -DFLEXIBLE
 
-And then launch the energy minimization again using:
-
-..  code-block:: bash
-
-    gmx grompp -f inputs/em.mdp -c peg-solvated.gro -p topol.top -o em
-    gmx mdrun -deffnm em -v -nt 8
-
-The ``define = -DFLEXIBLE`` option triggers the following **if** condition
-within the **tip3p.itp** file:
+With the ``define = -DFLEXIBLE`` option, the water molecules are treated as
+flexible during energy minimization, enabling bond stretching and angle bending
+in water. The ``define = -DFLEXIBLE`` option triggers the following **if**
+condition within the **tip3p.itp** file:
 
 ..  code-block:: bw
 
@@ -209,22 +210,33 @@ within the **tip3p.itp** file:
     [ angles ]
     ; i      j      k       funct   angle   force.c.
     2        1      3       1       104.52  628.02  104.52  628.02
-    
-With this **if** condition the water molecules 
-behave as flexible. This is better because rigid molecules and 
-energy minimization usually don't go along well. For the next molecular
-dynamics steps, rigid water molecules will be used by not including
-the ``define = -DFLEXIBLE`` command in the inputs.
+
+With this **if** condition, the water molecules behave as flexible, which is
+preferable because rigid molecules and energy minimization usually do not work
+well together.
+
+.. admonition:: Note
+    :class: non-title-info
+
+    For the subsequent molecular dynamics steps, rigid water
+    molecules will be used by removing the ``define = -DFLEXIBLE`` command from the
+    inputs.
+
+Finally, launch the energy minimization again using:
+
+..  code-block:: bash
+
+    gmx grompp -f inputs/em.mdp -c peg-solvated.gro -p topol.top -o em
+    gmx mdrun -deffnm em -v -nt 8
 
 Equilibrate the PEG-water system
 ================================
 
-Let use equilibrate the system in two steps: first a NVT simulation,
-with constant number of particles, constant volume, and imposed temperature,
-and second a NPT simulation with imposed pressure. 
-
-Within the **inputs/** folder, create a new input named **nvt-peg-h2o.mdp**,
-and copy the following lines into it:
+Let us further equilibrate the system in two steps: first, an *NVT* simulation
+with constant number of particles, constant volume, and imposed temperature;
+and second, an *NpT* simulation with imposed pressure. Within the **inputs/**
+folder, create a new input file named **nvt-peg-h2o.mdp**, and copy the
+following lines into it:
 
 ..  code-block:: bw
 
@@ -260,11 +272,15 @@ and copy the following lines into it:
     comm-grps = PEG
 
 Most of these commands have already been seen. In addition to the conventional
-*md* leap-frog algorithm integrator, long-range Coulomb and short-range
-van der Waals interactions, the LINCS constraint algorithm is used to maintain
-the hydrogen bonds as rigid. An initial temperature of :math:`300~K` is given
-to the system by the ``gen-`` commands, and the PEG is maintained in the center
-of the box by the ``comm-mode`` and ``comm-grps`` commands.
+``md`` leap-frog algorithm integrator, with long-range Coulomb and short-range
+van der Waals interactions, the LINCS constraint algorithm is used to keep the
+hydrogen bonds rigid. Temperature coupling at :math:`300~K` is imposed on both
+the PEG and water groups using velocity rescaling with a stochastic term
+(``tcoupl = v-rescale``). Initial velocities at :math:`300~K` are generated
+by the ``gen-`` commands, with a specified random seed.
+The ``comm-mode`` and ``comm-grps`` commands ensure that the PEG molecule
+remains centered in the box by removing its center-of-mass motion separately
+from the solvent.
 
 Launch the *NVT* simulation using:
 
@@ -273,14 +289,14 @@ Launch the *NVT* simulation using:
     gmx grompp -f inputs/nvt-peg-h2o.mdp -c em.gro -p topol.top -o nvt -maxwarn 1
     gmx mdrun -deffnm nvt -v -nt 8
 
-The ``maxwarn 1`` option is used to avoid a GROMACS WARNING related to the
-centering of the PEG in the box. 
+The ``-maxwarn 1`` option is used to bypass a GROMACS warning related to the
+centering of the PEG molecule in the box.
 
-Let us follow-up with the NPT equilibration. Duplicate the **nvt-peg-h2o.mdp**
-file into a new input file named **npt-peg-h2o.mdp**. Within **npt-peg-h2o.mdp**,
-Within the **npt-peg-h2o.mdp**, delete the lines related to the creation
-of velocity as its better to keep the velocities generated during the
-*NVT* run:
+Let us follow up with the *NPT* equilibration. Duplicate the
+**nvt-peg-h2o.mdp** file into a new input file named **npt-peg-h2o.mdp**.
+Within **npt-peg-h2o.mdp**, delete the lines related to the creation of
+velocities, as it is better to preserve the velocities generated during the
+previous *NVT* run:
 
 ..  code-block:: bw
 
@@ -288,8 +304,8 @@ of velocity as its better to keep the velocities generated during the
     gen-temp = 300
     gen-seed = 65823
 
-In addition to the removal the previous 3 lines, add the following lines 
-to **npt-peg-h2o.mdp** to specify the isotropic barostat with imposed pressure
+In addition to removing these three lines, add the following lines to
+**npt-peg-h2o.mdp** to enable an isotropic barostat with an imposed pressure
 of :math:`1~\text{bar}`:
 
 ..  code-block:: bw
@@ -300,6 +316,16 @@ of :math:`1~\text{bar}`:
     ref-p = 1.0
     compressibility = 4.5e-5
 
+These last five lines configure the pressure coupling. The ``pcoupl`` option selects
+the ``c-rescale`` barostat, a stochastic barostat suitable for equilibration. The
+pressure coupling type is set to isotropic, meaning the box dimensions scale
+uniformly in all directions. The ``tau-p`` parameter defines the coupling time
+constant in picoseconds, determining how quickly the system adjusts to the
+target pressure. The ``ref-p`` sets the reference pressure at
+:math:`1~\text{bar}`, and ``compressibility`` specifies the isothermal
+compressibility of water, which is required for volume fluctuations to properly
+reflect the solvent properties.
+
 Run the *NpT* simulation, using the final state of the *NVT* simulation
 **nvt.gro** as starting configuration:
 
@@ -309,8 +335,8 @@ Run the *NpT* simulation, using the final state of the *NVT* simulation
     ${gmx} mdrun -deffnm npt -v -nt 8
 
 Let us observe the evolution of the potential energy of the system during the
-3 successive equilibration steps, i.e. the energy minimization, *NVT*, and *NpT* steps,
-using the ``gmx energy`` command as follow:
+three successive equilibration steps, i.e. the energy minimization, *NVT*, and
+*NpT* steps, using the ``gmx energy`` command as follows:
 
 ..  code-block:: bash
 
@@ -318,7 +344,7 @@ using the ``gmx energy`` command as follow:
     gmx energy -f nvt.edr -o energy-nvt.xvg
     gmx energy -f npt.edr -o energy-npt.xvg
 
-For each of the 3 ``gmx energy`` commands, select ``potential``.
+For each of the three ``gmx energy`` commands, select ``Potential`` when prompted.
 
 .. figure:: ../figures/level2/stretching-a-polymer/potential-energy-light.png
     :alt: Potential energy from molecular dynamics simulation in GROMACS
@@ -334,13 +360,11 @@ For each of the 3 ``gmx energy`` commands, select ``potential``.
     respectively the energy minimization (a), the NVT step (b), and the NPT
     step (c). 
 
-Let us launch a longer simulation, and extract the angle distribution
-between the different atoms of the PEG molecules. This angle
-distribution will be used later as a benchmark to probe the effect of
-of the stretching on the PEG structure.
-
-Create a new input named **production-peg-h2o.mdp**, and copy the following
-lines into it:
+Let us launch a longer simulation and extract the angle distribution
+between the different atoms of the PEG molecule. This angle distribution
+will later serve as a benchmark to assess the effect of stretching on the
+PEG structure. Create a new input file named **production-peg-h2o.mdp**, and
+copy the following lines into it:
 
 ..  code-block:: bw
 
@@ -371,8 +395,9 @@ lines into it:
     comm-mode = linear
     comm-grps = PEG
 
-This script resembles the **nvt-peg-h2o.mdp** input, but the duration and
-output frequency is different, and without the ``gen-vel`` commands. 
+This input file is similar to **nvt-peg-h2o.mdp**, but with a longer simulation
+time and more frequent output, and without the ``gen-vel`` commands to preserve
+the velocities from the previous equilibration.
 
 Run it using:
 
@@ -388,10 +413,10 @@ command:
 
     gmx mk_angndx -s production.tpr -hyd no
 
-The **angle.ndx** file generated contains groups with all the atoms
-involved by an angle constraint, with the exception of the hydrogen
-atoms due to the use of ``-hyd no``. The atom ids selected in the groups
-can be seen from the **index.ndx** file:
+The **angle.ndx** file generated contains groups of all atoms involved
+in angle constraints, with hydrogen atoms excluded thanks to the
+``-hyd no`` option. The atom indices included in the groups can be
+verified in the **index.ndx** file:
 
 ..  code-block:: bw
 
@@ -400,9 +425,9 @@ can be seen from the **index.ndx** file:
         31    33    35    38    40    42    45    47    49    52    54    56
         59    61    63    66    68    70    73    75    77    80    82    84
 
-Here, each number corresponds to the atom index, as can be seen from the 
-initial **peg.gro** file. For instance, the atom of ``id 2`` is a carbon atom,
-and the atom with ``id 5`` is an oxygen:
+Here, each number corresponds to an atom index, as listed in the
+initial **peg.gro** file. For example, atom ``id 2`` is a carbon atom,
+and atom ``id 5`` is an oxygen atom:
 
 ..  code-block:: bw
 
@@ -419,13 +444,13 @@ and the atom with ``id 5`` is an oxygen:
     (...)
 
 Then, extract the angle distribution from the **production.xtc**
-file using ``gmx angle``:
+trajectory using ``gmx angle``:
 
 ..  code-block:: bash
 
     gmx angle -n angle.ndx  -f production.xtc -od angle-distribution.xvg -binwidth 0.25
 
-Select 1 for the O-C-C-O dihedral.
+When prompted, select group 1 corresponding to the O-C-C-O dihedral.
 
 .. figure:: ../figures/level2/stretching-a-polymer/dihedral-distribution-light.png
     :alt: Angular distribution from molecular dynamics simulation in GROMACS
