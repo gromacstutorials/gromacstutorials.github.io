@@ -15,8 +15,8 @@ GROMACS tutorials
     tutorials/tutorial1/bulk-solution.rst
     tutorials/tutorial2/protein-in-electrolyte.rst
     tutorials/tutorial3/stretching-a-polymer.rst
-    tutorials/level3/solvation-energy.rst
-    tutorials/level3/adsorption-ethanol.rst
+    tutorials/tutorial4/solvation-energy.rst
+    tutorials/tutorial5/adsorption-ethanol.rst
 
 .. toctree::
     :maxdepth: 2
