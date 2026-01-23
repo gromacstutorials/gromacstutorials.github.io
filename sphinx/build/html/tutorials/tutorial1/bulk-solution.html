@@ -1,0 +1,1195 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="../../">
+  <head><meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../_static/favicon-32x32.png" sizes="32x32" rel="icon" type="image/png"><link rel="index" title="Index" href="../../genindex.html"><link rel="search" title="Search" href="../../search.html"><link rel="next" title="Protein in electrolyte" href="../tutorial2/protein-in-electrolyte.html"><link rel="prev" title="About" href="../../non-tutorials/contact.html">
+        <link rel="prefetch" href="../../_static/logo.png" as="image">
+
+    <!-- Generated with Sphinx 7.4.7 and Furo 2025.12.19 -->
+        <title>Ionic solution - </title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=7bdb33bb" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=9c3e77be" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=8dab3a3b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=f0f82579" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle site navigation sidebar">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc" aria-label="Toggle table of contents sidebar">
+<label class="overlay sidebar-overlay" for="__navigation"></label>
+<label class="overlay toc-overlay" for="__toc"></label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <span class="icon"><svg><use href="#svg-menu"></use></svg></span>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="../../index.html"><div class="brand">    </div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="../../_static/logo.png" alt="Logo"/>
+  </div>
+  
+  <span class="sidebar-brand-text">    </span>
+  
+</a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Main</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/before-you-start.html">Before You Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/contact.html">About</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Ionic solution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial2/protein-in-electrolyte.html">Protein in electrolyte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial3/stretching-a-polymer.html">Stretching a polymer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial4/solvation-energy.html">Solvation energy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial5/adsorption-ethanol.html">Free energy profile</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Extra content</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/extra/create-GRO-python.html">Write topology using Python</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/bibliography.html">Bibliography</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Alternative</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../non-tutorials/lammps.html">Use LAMMPS instead</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="../../_sources/tutorials/tutorial1/bulk-solution.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle" aria-label="Toggle Light / Dark / Auto color theme">
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <span class="icon"><svg><use href="#svg-toc"></use></svg></span>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <span class="target" id="bulk-solution-label"></span><section id="ionic-solution">
+<h1>Ionic solution<a class="headerlink" href="#ionic-solution" title="Link to this heading">¶</a></h1>
+<div class="hatnote docutils container">
+<p>The very basics of GROMACS through a simple example</p>
+</div>
+<figure class="align-right">
+<a class="only-light reference internal image-reference" href="../../_images/bulk-solution.webp"><img alt="Water solution of :math:`\text{SO}_4^{2-}` and :math:`\text{Na}_+` ions visualized with VMD" class="only-light" src="../../_images/bulk-solution.webp" style="height: 250px;" />
+</a>
+</figure>
+<figure class="align-right">
+<a class="only-dark reference internal image-reference" href="../../_images/bulk-solution-dm.webp"><img alt="Water solution of :math:`\text{SO}_4^{2-}` and :math:`\text{Na}_+` ions visualized with VMD" class="only-dark" src="../../_images/bulk-solution-dm.webp" style="height: 250px;" />
+</a>
+</figure>
+<p>The objective of this tutorial is to use the open-source code GROMACS
+<span id="id1">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id4" title="Mark James Abraham, Teemu Murtola, Roland Schulz, Szilárd Páll, Jeremy C. Smith, Berk Hess, and Erik Lindahl. GROMACS: High performance molecular simulations through multi-level parallelism from laptops to supercomputers. SoftwareX, 1–2:19–25, September 2015. doi:10.1016/j.softx.2015.06.001.">8</a>]</span> to perform a molecular
+dynamics simulation. The
+system consists of a bulk solution of water mixed with sodium
+(<span class="math notranslate nohighlight">\(\text{Na}_+\)</span>) and sulfate (<span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span>) ions.</p>
+<p>This tutorial guides you through setting up a simulation box,
+adding species to it, and then solvating them with water.
+It also introduces key components of molecular
+dynamics simulations, including energy minimization, thermostating, and
+both <span class="math notranslate nohighlight">\(NVT\)</span> and <span class="math notranslate nohighlight">\(NpT\)</span> equilibration steps. The resulting trajectory
+is analyzed using GROMACS utilities, radial distribution functions are
+extracted, and the trajectories are visualized using
+VMD <span id="id2">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id228" title="William Humphrey, Andrew Dalke, and Klaus Schulten. VMD: Visual molecular dynamics. Journal of Molecular Graphics, 14(1):33–38, February 1996. doi:10.1016/0263-7855(96)00018-5.">1</a>]</span>.</p>
+<div class="patreon admonition">
+<p class="admonition-title">Struggling with your molecular simulations project?</p>
+<p>Get guidance for your GROMACS simulations. <span class="xref std std-ref">contact-label</span> for
+personalized <a href="https://www.patreon.com/molecularsimulations" target="_blank">advice</a> for your project.</p>
+</div>
+<div class="version docutils container">
+<p>This tutorial is compatible with the 2025.1 GROMACS version.</p>
+</div>
+<section id="populating-the-box">
+<h2>Populating the box<a class="headerlink" href="#populating-the-box" title="Link to this heading">¶</a></h2>
+<p>Let us create the simulation box by placing the ions and molecules into it. To do
+so, we start from an empty box. In a dedicated folder, create an empty file
+called <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/empty.gro" target="_blank">empty.gro</a>, and copy the following lines into it:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>Cubic box
+0
+3.50000   3.50000   3.50000
+</pre></div>
+</div>
+<p>The first line, <em>Cubic box</em>, is a comment; the second line indicates the total
+number of atoms (0 here); and the last line defines the box dimensions in
+nanometers; in this case, 3.5 by 3.5 by <span class="math notranslate nohighlight">\(3.5~\text{nm}\)</span>. This <strong>.gro</strong> file
+is written in <a href="https://manual.gromacs.org/archive/5.0.4/online/gro.html" target="_blank">Gromos87</a> format.</p>
+<p>Let us populate this empty box with <span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span> ions first. To do so,
+the GROMACS command named <code class="docutils literal notranslate"><span class="pre">insert-molecules</span></code> is used, for which one needs to
+provide a template for the ion. Within the same folder as <strong>empty.gro</strong>, create a
+new file named <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/so4.gro" target="_blank">so4.gro</a>, and copy the following lines into it:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>SO4 ion
+5
+    1  SO4   O1    1   0.608   1.089   0.389
+    1  SO4   O2    2   0.562   1.181   0.150
+    1  SO4   O3    3   0.388   1.217   0.339
+    1  SO4   O4    4   0.425   0.980   0.241
+    1  SO4   S1    5   0.496   1.117   0.280
+1.00000   1.00000   1.00000
+</pre></div>
+</div>
+<p>This topology file for the <span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span> ion is written in the same <a href="https://manual.gromacs.org/archive/5.0.4/online/gro.html" target="_blank">Gromos87</a>
+format as <strong>empty.gro</strong>. It contains 5 atoms named <code class="docutils literal notranslate"><span class="pre">O1</span></code>, <code class="docutils literal notranslate"><span class="pre">O2</span></code>, <code class="docutils literal notranslate"><span class="pre">O3</span></code>, <code class="docutils literal notranslate"><span class="pre">O4</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">S1</span></code>, all grouped in a residue called <code class="docutils literal notranslate"><span class="pre">SO4</span></code>.</p>
+<p>Let us call the <code class="docutils literal notranslate"><span class="pre">gmx</span> <span class="pre">insert-molecules</span></code> command by typing in the terminal:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx insert-molecules -ci so4.gro -f empty.gro -o conf.gro -nmol 6 -radius 0.5
+</pre></div>
+</div>
+<p>Here, the <code class="docutils literal notranslate"><span class="pre">insert-molecules</span></code> command of GROMACS uses <strong>empty.gro</strong> as an input (flag <code class="docutils literal notranslate"><span class="pre">-f</span></code>),
+and create a new <strong>.gro</strong> file named <strong>conf.gro</strong> (flag <code class="docutils literal notranslate"><span class="pre">-o</span></code>) with 6 ions in it (flag <code class="docutils literal notranslate"><span class="pre">-nmol</span></code>).
+The <code class="docutils literal notranslate"><span class="pre">-radius</span> <span class="pre">0.5</span></code> option is used to prevent ions for being inserted closer than
+<span class="math notranslate nohighlight">\(0.5~\text{nm}\)</span> from each other.</p>
+<div class="non-title-info admonition">
+<p class="admonition-title">Note</p>
+<p>Each GROMACS command comes with online documentation. See, for instance,
+this page for the <a href="https://manual.gromacs.org/2025.1/onlinehelp/gmx-insert-molecules.html" target="_blank">insert-molecules</a> command.</p>
+</div>
+<p>The output printed in the terminal should indicate that the insertions were
+successful:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>Added 6 molecules (out of 6 requested)
+Writing generated configuration to conf.gro
+</pre></div>
+</div>
+<p>Looking at the generated <strong>conf.gro</strong> file, it contains 30 atoms,
+corresponding to the 6 ions:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>Cubic box
+30
+    1SO4     O1    1   2.231   2.698   0.397
+    1SO4     O2    2   2.008   2.825   0.356
+    1SO4     O3    3   2.009   2.566   0.370
+    1SO4     O4    4   2.115   2.685   0.165
+    1SO4     S1    5   2.091   2.693   0.322
+    (...)
+    6SO4     O1   26   1.147   3.194   0.656
+    6SO4     O2   27   1.107   3.341   0.446
+    6SO4     O3   28   1.349   3.274   0.514
+    6SO4     O4   29   1.216   3.444   0.658
+    6SO4     S1   30   1.205   3.313   0.568
+3.50000   3.50000   3.50000
+</pre></div>
+</div>
+<p>Between the second and the last lines, there is one line per atom. Each line
+indicates, from left to right:</p>
+<ul class="simple">
+<li><p>the residue ID, with all 5 atoms from the same <span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span> ion
+sharing the same residue ID;</p></li>
+<li><p>the residue name (SO4);</p></li>
+<li><p>the atom name (O1, O2, O3, O4, or S1);</p></li>
+<li><p>the atom ID (1 to 30);</p></li>
+<li><p>the atom position: <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>, and <span class="math notranslate nohighlight">\(z\)</span> coordinates in
+nanometers.</p></li>
+</ul>
+<div class="non-title-info admonition">
+<p class="admonition-title">Note</p>
+<p>The format of a <strong>.gro</strong> file is fixed and very rigid: each column has a
+specific position and width. Fields such as residue ID, residue name, atom
+name, atom number, and coordinates must follow the exact formatting rules
+defined by GROMACS. Any deviation in spacing or alignment may cause parsing
+errors or incorrect behavior when the file is read by GROMACS.</p>
+</div>
+<p>The generated <strong>conf.gro</strong> file can be visualized using VMD by typing in the
+terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>conf.gro
+</pre></div>
+</div>
+<p>Then, download the <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/na.gro" target="_blank">na.gro</a> template for the <span class="math notranslate nohighlight">\(\text{Na}^+\)</span> ion and add
+12 ions using the same command:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx insert-molecules -ci na.gro -f conf.gro -o conf.gro -nmol 12 -radius 0.5
+</pre></div>
+</div>
+<p>Here, importantly, the same <strong>conf.gro</strong> file is used as both input (<code class="docutils literal notranslate"><span class="pre">-f</span></code>) and
+output (<code class="docutils literal notranslate"><span class="pre">-o</span></code>), so the 12 ions will be added to the same file named <strong>conf.gro</strong>.
+Finally, download the <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/h2o.gro" target="_blank">h2o.gro</a> template for the <span class="math notranslate nohighlight">\(\text{H}_2\text{O}\)</span> molecule,
+save it in the same folder, and add 800 water molecules to the system using the
+same command once again:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx insert-molecules -ci h2o.gro -f conf.gro -o conf.gro -nmol 800 -radius 0.14
+</pre></div>
+</div>
+<p>The final <strong>conf.gro</strong> file contains :</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>Cubic box
+3242
+    1SO4     O1    1   2.660   2.778   1.461
+    1SO4     O2    2   2.869   2.640   1.392
+    1SO4     O3    3   2.686   2.533   1.540
+    1SO4     O4    4   2.840   2.717   1.638
+    1SO4     S1    5   2.763   2.667   1.507
+    (...)
+818Sol    OW1 3239   1.130   0.170   2.960
+818Sol    HW1 3240   1.155   0.134   3.058
+818Sol    HW2 3241   1.039   0.132   2.918
+818Sol    MW1 3242   1.130   0.170   2.960
+3.50000   3.50000   3.50000
+</pre></div>
+</div>
+<p>The molecules and ions have been placed randomly in space, and are
+therefore arranged in a rather unrealistic manner. For instance, molecules
+should be oriented away from ions based on their charge, which is not the
+case, as can be seen using VMD. This will be corrected during energy
+minimization, where the residues will be moved and rotated according to the
+forces exerted by their surroundings.</p>
+<figure class="align-default">
+<img alt="Gromacs configuration SO4 Na ions visualized with VMD" class="only-light" src="../../_images/populate-box.png" />
+</figure>
+<figure class="align-default">
+<img alt="Gromacs configuration SO4 Na ions visualized with VMD" class="only-dark" src="../../_images/populate-box-dm.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: (Left) Full system showing the <span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span> ions, the
+<span class="math notranslate nohighlight">\(\text{Na}_+\)</span> ions, and the water molecules, with oxygen atoms in red,
+hydrogen in white, sodium in blue, and sulfur in yellow. For easier
+visualization, water molecules are represented as sticks. (Right) Zoom-in on
+a single <span class="math notranslate nohighlight">\(\text{Na}_+\)</span> ion and a single <span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span>, as well
+as the surrounding water molecules.</p>
+</div>
+<p>In case you encountered a problem during this part of the tutorial, you can
+download the <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/conf.gro" target="_blank">conf.gro</a> file, and continue with the
+tutorial.</p>
+</section>
+<section id="set-the-parameters">
+<h2>Set the parameters<a class="headerlink" href="#set-the-parameters" title="Link to this heading">¶</a></h2>
+<p>Parameters for the interactions between the different atoms and molecules are
+provided in the topology files (<strong>.top</strong> and <strong>.itp</strong>). These parameters
+include both bonded and non-bonded interactions.</p>
+<div class="info admonition">
+<p class="admonition-title">About bonded and non-bonded interactions in molecular dynamics</p>
+<p>Non-bonded interactions are
+modeled as a combination of Lennard-Jones and Coulomb potentials:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[V_{\text{nb}}(r) = 4\varepsilon \left[ \left( \frac{\sigma}{r_{ij}} \right)^{12}
+- \left( \frac{\sigma}{r_{ij}} \right)^6 \right] + \frac{q_i q_j}{4\pi\varepsilon_0 r_{ij}},\]</div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(r_{ij}\)</span> is the distance between particles <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\varepsilon\)</span> is the depth of the Lennard-Jones potential well,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span> is the distance at which the Lennard-Jones potential is zero,</p></li>
+<li><p><span class="math notranslate nohighlight">\(q_i\)</span> and <span class="math notranslate nohighlight">\(q_j\)</span> are the charges of particles <span class="math notranslate nohighlight">\(i\)</span> and <span class="math notranslate nohighlight">\(j\)</span>,</p></li>
+<li><p><span class="math notranslate nohighlight">\(\varepsilon_0\)</span> is the vacuum permittivity.</p></li>
+</ul>
+<p>Bonded interactions are used to connect atoms within the same residue, typically
+modeled using harmonic potentials or similar functional forms.  A commonly used
+expression for bond stretching is the harmonic potential:</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[V_{\text{bond}}(r) = \frac{1}{2}k_b(r - r_0)^2,\]</div>
+</div>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(r\)</span> is the distance between the bonded atoms,</p></li>
+<li><p><span class="math notranslate nohighlight">\(r_0\)</span> is the equilibrium bond length,</p></li>
+<li><p><span class="math notranslate nohighlight">\(k_b\)</span> is the bond force constant.</p></li>
+</ul>
+</div>
+<p>First, the <a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/topol.top" target="_blank">topol.top</a> file must be placed in the same folder as the
+<strong>conf.gro</strong> file. It contains the following lines:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>#include &quot;ff/forcefield.itp&quot;
+#include &quot;ff/h2o.itp&quot;
+#include &quot;ff/na.itp&quot;
+#include &quot;ff/so4.itp&quot;
+
+[ System ]
+Na2SO4 solution
+
+[ Molecules ]
+SO4 6
+Na 12
+SOL 700
+</pre></div>
+</div>
+<p>The first four lines are used to include the values of the parameters provided
+in four separate files (<strong>forcefield.itp</strong>, <strong>h2o.itp</strong>, <strong>na.itp</strong>, <strong>so4.itp</strong>),
+located in the <strong>ff/</strong> folder (which will be provided below). The rest of the
+<strong>topol.top</strong> file contains the system name (here, <em>Na2SO4 solution</em>) and the
+list of residues. Here, in agreement with the previously created <strong>conf.gro</strong>
+file, there are 6 <span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span> ions, 12 <span class="math notranslate nohighlight">\(\text{Na}^+\)</span> ions,
+and 700 water molecules.</p>
+<div class="info admonition">
+<p class="admonition-title">About topol.top</p>
+<p>It is crucial that the order and number of residues in the topology file
+match the order of the <strong>conf.gro</strong> file. If there is a mismatch, GROMACS
+will stop with an error such as:</p>
+<blockquote>
+<div><p>Fatal error:
+Number of coordinates in coordinate file does not match topology</p>
+</div></blockquote>
+<p>This typically means the residue counts or their ordering in the topology
+do not reflect the actual contents of the coordinate file.</p>
+</div>
+<p>Create a folder named <strong>ff/</strong> next to the <strong>conf.gro</strong> and the <strong>topol.top</strong>
+files, and copy the four following files into it:</p>
+<ul class="simple">
+<li><p><a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/forcefield.itp" target="_blank">forcefield.itp</a></p></li>
+<li><p><a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/h2o.itp" target="_blank">h2o.itp</a></p></li>
+<li><p><a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/na.itp" target="_blank">na.itp</a></p></li>
+<li><p><a href="https://raw.githubusercontent.com/gromacstutorials/gromacstutorials-inputs/main/tutorial1/ff/so4.itp" target="_blank">so4.itp</a></p></li>
+</ul>
+<p>These four files contain information about the atoms (names, masses, charges,
+Lennard-Jones coefficients) and residues (bond and angular constraints) for all
+the species involved in the system.</p>
+<p>More specifically, the <strong>forcefield.itp</strong> file contains a line that specifies
+the combination rules as <code class="docutils literal notranslate"><span class="pre">comb-rule</span> <span class="pre">2</span></code>, which corresponds to the well-known
+Lorentz-Berthelot rule <span id="id3">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id306" title="H. A. Lorentz. Ueber die Anwendung des Satzes vom Virial in der kinetischen Theorie der Gase. Annalen der Physik, 248(1):127–136, January 1881. doi:10.1002/andp.18812480110.">9</a>, <a class="reference internal" href="../../non-tutorials/bibliography.html#id42" title="Daniel Berthelot. Sur le m\\'e\lange des gaz. Compt. Rendus, 126(3):15, 1898.">10</a>]</span>, where:
+<span class="math notranslate nohighlight">\(\epsilon_{ij} = \sqrt{\epsilon_{ii} \epsilon_{jj}}, \sigma_{ij} = \frac{\sigma_{ii} + \sigma_{jj}}{2}\)</span>.
+In <strong>forcefield.itp</strong>, this rule is specified as:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ defaults ]
+; nbfunc  comb-rule  gen-pairs  fudgeLJ  fudgeQQ
+1       2          no         1.0      0.833
+</pre></div>
+</div>
+<p>Here, the <code class="docutils literal notranslate"><span class="pre">fudge</span></code> parameters specify how the pair interaction between fourth
+neighbors in a residue are handled, which is not relevant for the small
+residues considered here. The <strong>forcefield.itp</strong> file also contains the list
+of atoms, and their respective charge in units of the elementary charge
+<span class="math notranslate nohighlight">\(e\)</span>, as well as their respective Lennard-Jones parameters <span class="math notranslate nohighlight">\(\sigma\)</span>
+(in nanometers) and <span class="math notranslate nohighlight">\(\epsilon\)</span> (in kJ/mol):</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ atomtypes ]
+; name  at.num  mass      charge  ptype  sigma    epsilon
+Na    11      22.9900   1.0000  A      0.23100  0.45000
+OS     8      15.9994  -1.0000  A      0.38600  0.12
+SO    16      32.0600   2.0000  A      0.35500  1.0465
+HW     1       1.0079   0.5270  A      0.00000  0.00000
+OW     8      15.9994   0.0000  A      0.31650  0.77323
+MW     0       0.0000  -1.0540  D      0.00000  0.00000
+</pre></div>
+</div>
+<p>Here, <code class="docutils literal notranslate"><span class="pre">ptype</span></code> is used to differentiate the real atoms (A), such as
+hydrogens and oxygens, from the virtual and massless site of the
+four-point water model (D).</p>
+<p>Finally, the <strong>h2o.itp</strong>, <strong>na.itp</strong>, and <strong>so4.itp</strong> files contain information
+about the residues, such as their exact compositions, which pairs of atoms
+are connected by bonds, as well as the parameters for these bonds. In the case
+of the <span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span>, for instance, the sulfur atom forms a bond of
+equilibrium distance <span class="math notranslate nohighlight">\(0.152~\text{nm}\)</span> and rigidity constant
+<span class="math notranslate nohighlight">\(3.7656 \times 10^4~\text{kJ/mol/nm}^2\)</span> with each of the four oxygen atoms:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>[ bonds ]
+;  ai   aj  funct   c0         c1
+    1    5    1   0.1520   3.7656e4
+    2    5    1   0.1520   3.7656e4
+    3    5    1   0.1520   3.7656e4
+    4    5    1   0.1520   3.7656e4
+</pre></div>
+</div>
+</section>
+<section id="energy-minimization">
+<h2>Energy minimization<a class="headerlink" href="#energy-minimization" title="Link to this heading">¶</a></h2>
+<p>To run GROMACS, one needs to prepare an input file that contains instructions
+about the simulation, such as:</p>
+<ul class="simple">
+<li><p>the number of steps to perform,</p></li>
+<li><p>the thermostat to be used (e.g. Langevin <span id="id4">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id440" title="T. Schneider and E. Stoll. Molecular-dynamics study of a three-dimensional one-component model for distortive phase transitions. Physical Review B, 17(3):1302–1322, February 1978. doi:10.1103/PhysRevB.17.1302.">11</a>]</span>,
+Berendsen <span id="id5">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id39" title="H. J. C. Berendsen, J. P. M. Postma, W. F. Van Gunsteren, A. DiNola, and J. R. Haak. Molecular dynamics with coupling to an external bath. The Journal of Chemical Physics, 81(8):3684–3690, October 1984. doi:10.1063/1.448118.">12</a>]</span>),</p></li>
+<li><p>the cut-off for the interactions,</p></li>
+<li><p>the integrator or algorithms (e.g. steepest-descent
+<span id="id6">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id105" title="P. Debye. Näherungsformeln für die Zylinderfunktionen für große Werte des Arguments und unbeschränkt veränderliche Werte des Index. Mathematische Annalen, 67(4):535–558, December 1909. doi:10.1007/BF01450097.">13</a>]</span>,
+leap-frog <span id="id7">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id10" title="M. P. Allen and D. J. Tildesley. Computer Simulation of Liquids. Oxford University Press, Oxford, United Kingdom, second edition edition, 2017. ISBN 978-0-19-880319-5 978-0-19-880320-1.">5</a>]</span>).</p></li>
+</ul>
+<p>It is clear from the configuration (<strong>.gro</strong>) file that the molecules and
+ions are currently in a quite unphysical configuration. It would be risky to
+directly start the molecular dynamics simulation, as atoms would undergo huge
+forces and accelerate, potentially causing the system to explode.</p>
+<p>To bring the system into a more favorable state, let us perform an energy
+minimization, which consists of moving the atoms until the forces between them
+are reasonable.</p>
+<p>Open a blank file, call it <strong>min.mdp</strong>, and save it in a new folder named
+<strong>inputs/</strong>, located alongside <strong>ff/</strong> and <strong>topol.top</strong>. This is
+what the repository should look like at this point.</p>
+<figure class="align-default">
+<a class="only-light reference internal image-reference" href="../../_images/gromacs_inputs-light.png"><img alt="Gromacs files and structure folder" class="only-light" src="../../_images/gromacs_inputs-light.png" style="height: 200px;" />
+</a>
+</figure>
+<figure class="align-default">
+<a class="only-dark reference internal image-reference" href="../../_images/gromacs_inputs-dark.png"><img alt="Gromacs files and structure folder" class="only-dark" src="../../_images/gromacs_inputs-dark.png" style="height: 200px;" />
+</a>
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: Structure of the folder containing the <strong>.itp</strong>, <strong>.gro</strong>, and <strong>.top</strong> files.</p>
+</div>
+<p>Copy the following lines into <strong>min.mdp</strong>:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = steep
+nsteps = 5000
+</pre></div>
+</div>
+<p>These two lines are GROMACS commands. The <code class="docutils literal notranslate"><span class="pre">integrator</span></code> specifies to GROMACS
+that the algorithm to be used is the <a href="https://manual.gromacs.org/current/reference-manual/algorithms/energy-minimization.html" target="_blank">steepest-descent</a>, which moves the atoms
+following the direction of the largest forces until one of the stopping criteria
+is reached <span id="id8">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id105" title="P. Debye. Näherungsformeln für die Zylinderfunktionen für große Werte des Arguments und unbeschränkt veränderliche Werte des Index. Mathematische Annalen, 67(4):535–558, December 1909. doi:10.1007/BF01450097.">13</a>]</span>. The <code class="docutils literal notranslate"><span class="pre">nsteps</span></code> command specifies
+the maximum number of steps to perform, here 5000.</p>
+<p>To visualize the trajectory of the atoms during the minimization, let us also
+add the following command to the input file:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>nstxout = 10
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">nstxout</span></code> command requests GROMACS to print the atom positions every 10
+steps. The trajectory will be printed in a compressed <strong>.trr</strong> trajectory file
+that can be read by VMD or Ovito.</p>
+<p>Let us run that input script using GROMACS. From the terminal, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/min.mdp<span class="w"> </span>-c<span class="w"> </span>conf.gro<span class="w"> </span>-o<span class="w"> </span>min<span class="w"> </span>-pp<span class="w"> </span>min<span class="w"> </span>-po<span class="w"> </span>min
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>min
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">grompp</span></code> command is used to preprocess the files in order to prepare
+the simulation. This command also checks the validity of the files. By using
+the <code class="docutils literal notranslate"><span class="pre">-f</span></code> and <code class="docutils literal notranslate"><span class="pre">-c</span></code> options, we specify which input file must be used
+(here <strong>inputs/min.mdp</strong>), as well as the initial configuration, i.e.,
+the initial positions of the atoms (here, <strong>conf.gro</strong>).
+The other options <code class="docutils literal notranslate"><span class="pre">-o</span></code>, <code class="docutils literal notranslate"><span class="pre">-pp</span></code>, and <code class="docutils literal notranslate"><span class="pre">-po</span></code> are used to specify the names
+of the outputs that will be produced during the run.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">mdrun</span></code> command calls the engine performing the computation from the
+preprocessed files, which is recognized thanks to the <code class="docutils literal notranslate"><span class="pre">-deffnm</span></code> option. The
+<code class="docutils literal notranslate"><span class="pre">-v</span></code> option enables <em>verbose</em> mode so that more information is printed in
+the terminal.</p>
+<p>If everything works, information should be printed in the terminal, including:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>Steepest Descents converged to machine precision in 534 steps,
+but did not reach the requested Fmax &lt; 10.
+Potential Energy  = -4.9832715e+04
+Maximum force     =  4.4285486e+02 on atom 30
+Norm of force     =  4.6696228e+01
+</pre></div>
+</div>
+<p>The information printed in the terminal indicates that energy minimization
+has been performed, even though the precision requested by the default
+parameters was not reached. This message can be ignored—as long as the final
+potential energy is large and negative, the simulation will proceed just fine.</p>
+<p>To appreciate the effect of energy minimization, compare the potential energy
+of the system and the maximum force at the first and last steps:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>(...)
+Step=    0, Dmax= 1.0e-02 nm, Epot= -2.29663e+03 Fmax= 1.07264e+04, atom= 29
+(...)
+Step=  533, Dmax= 1.3e-06 nm, Epot= -4.98327e+04 Fmax= 2.23955e+02, atom= 816
+(...)
+</pre></div>
+</div>
+<p>As can be seen, the maximum force has been reduced by orders of magnitude,
+down to <span class="math notranslate nohighlight">\(224 ~ \text{kJ/mol/nm}\)</span> (about 0.4 pN). During the execution
+of GROMACS, the following 7 files must have been created: <strong>min.edr</strong>,
+<strong>min.gro</strong>, <strong>min.log</strong>, <strong>min.mdp</strong>, <strong>min.top</strong>, <strong>min.tpr</strong>, <strong>min.trr</strong>.</p>
+<p>Let us visualize the trajectories of the atoms during the minimization step
+using VMD by typing in the terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>conf.gro<span class="w"> </span>min.trr
+</pre></div>
+</div>
+<p>With that command, we are importing both a topology file (<strong>conf.gro</strong>) and
+a trajectory file (<strong>min.trr</strong>) into VMD.</p>
+<div class="info admonition">
+<p class="admonition-title">Tip for better visualization</p>
+<p>You can avoid having molecules and ions being cut by the periodic boundary
+conditions by rewriting the trajectory using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>trjconv<span class="w"> </span>-f<span class="w"> </span>min.trr<span class="w"> </span>-s<span class="w"> </span>min.tpr<span class="w"> </span>-o<span class="w"> </span>min_whole.trr<span class="w"> </span>-pbc<span class="w"> </span>whole
+</pre></div>
+</div>
+<p>Then, select <code class="docutils literal notranslate"><span class="pre">0</span></code> as the group of your choice for the output, and reopen
+the modified trajectory using VMD:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vmd<span class="w"> </span>conf.gro<span class="w"> </span>min_whole.trr
+</pre></div>
+</div>
+</div>
+<p>From the trajectory visualization, one can see that the molecules reorient
+themselves into more energetically favorable positions, and that the distances
+between the atoms are progressively homogenized.</p>
+<figure class="align-default">
+<img alt="Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization." class="only-light" src="../../_images/minimisation.webp" />
+</figure>
+<figure class="align-default">
+<img alt="Gromacs tutorial : Movie showing the motion of the atoms during the energy minimization." class="only-dark" src="../../_images/minimisation-dm.webp" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: Molecules and ions rearranging during energy minimization.</p>
+</div>
+<p>Let us have a look at the evolution of the potential energy of the system. To
+do so, we can use the <code class="docutils literal notranslate"><span class="pre">gmx</span> <span class="pre">energy</span></code> command of GROMACS. In the terminal, type:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>energy<span class="w"> </span>-f<span class="w"> </span>min.edr<span class="w"> </span>-o<span class="w"> </span>min-Ep.xvg
+</pre></div>
+</div>
+<p>Choose <code class="docutils literal notranslate"><span class="pre">Potential</span></code> by typing <code class="docutils literal notranslate"><span class="pre">5</span></code> (the number may differ in your case),
+then press <code class="docutils literal notranslate"><span class="pre">Enter</span></code> twice.</p>
+<p>Here, the portable energy file <strong>min.edr</strong> produced by GROMACS during the
+minimization run is used as input, and the result is saved as a <strong>.xvg</strong> file
+named <strong>min-Ep.xvg</strong>. <strong>.xvg</strong> files can be opened with the <a href="https://plasma-gate.weizmann.ac.il/Grace/" target="_blank">Grace</a> software (or
+equivalent):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>xmgrace<span class="w"> </span>min-pe.xvg
+</pre></div>
+</div>
+<p>One can see from the energy plot that the potential energy is initially close
+to zero. This is expected when atoms are too close to one another and molecules
+are randomly oriented in space. As the minimization progresses, the potential
+energy rapidly decreases and reaches a large negative value, which usually
+indicates that the atoms are now located at appropriate distances from one
+another.</p>
+<figure class="align-default">
+<img alt="Gromacs tutorial : plot of the energy versus time." class="only-light" src="../../_images/min-Ep.png" />
+</figure>
+<figure class="align-default">
+<img alt="Gromacs tutorial : plot of the energy versus time." class="only-dark" src="../../_images/min-Ep-dm.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: Evolution of the potential energy, <span class="math notranslate nohighlight">\(E_\text{p}\)</span>, as a function of
+the number of steps during energy minimization.</p>
+</div>
+<p>The system is now in a favorable state, and the molecular dynamics
+simulation can be started.</p>
+</section>
+<section id="molecular-dynamics-nvt">
+<h2>Molecular dynamics (<span class="math notranslate nohighlight">\(NVT\)</span>)<a class="headerlink" href="#molecular-dynamics-nvt" title="Link to this heading">¶</a></h2>
+<p>Let us first perform a short (20 picoseconds) equilibration in the <span class="math notranslate nohighlight">\(NVT\)</span>
+ensemble using molecular dynamics. In the <span class="math notranslate nohighlight">\(NVT\)</span> ensemble, the number of
+atoms (<span class="math notranslate nohighlight">\(N\)</span>) and the volume (<span class="math notranslate nohighlight">\(V\)</span>) are maintained fixed, and the
+temperature of the system (<span class="math notranslate nohighlight">\(T\)</span>) is adjusted using a thermostat.</p>
+<div class="info admonition">
+<p class="admonition-title">About molecular dynamics</p>
+<p>Molecular dynamics (MD) involves solving Newton’s equations of motion
+to update particle positions and velocities based on the forces applied
+to the atoms <span id="id9">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id145" title="Daan Frenkel and Berend Smit. Understanding Molecular Simulation: From Algorithms to Applications. Number Volume 1 in Computational Science Series. Academic press, San Diego, 2nd ed edition, 2002. ISBN 978-0-12-267351-1.">4</a>]</span>. By default, GROMACS uses
+the <a href="https://manual.gromacs.org/nightly/reference-manual/algorithms/molecular-dynamics.html#update" target="_blank">leap-frog</a> Verlet integration scheme <span id="id10">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id214" title="R.W Hockney, S.P Goel, and J.W Eastwood. Quiet high-resolution computer models of a plasma. Journal of Computational Physics, 14(2):148–158, February 1974. doi:10.1016/0021-9991(74)90010-2.">14</a>]</span>.
+A typical MD simulation follows these steps:</p>
+<ol class="arabic simple">
+<li><p>Compute forces on particles using the potential energy function.</p></li>
+<li><p>Update velocities based on the forces at the current timestep.</p></li>
+<li><p>Update positions using the velocities from the previous timestep.</p></li>
+<li><p>Apply periodic boundary conditions and constraints as required.</p></li>
+<li><p>Repeat for each timestep (e.g., 0.001 ps) throughout the simulation.</p></li>
+</ol>
+</div>
+<p>Let us create a new input script called <strong>nvt.mdp</strong>, and save it in the
+<strong>inputs/</strong> folder. Copy the following lines into it:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = md
+nsteps = 20000
+dt = 0.001
+</pre></div>
+</div>
+<p>Here, the molecular dynamics (MD) integrator is used, which is a leap-frog
+algorithm integrating Newton’s equations of motion. A total of 20,000 steps with
+a timestep <code class="docutils literal notranslate"><span class="pre">dt</span></code> equal to <span class="math notranslate nohighlight">\(0.001 ~ \text{ps}\)</span> will be performed.</p>
+<p>Let us cancel the translation of the center of mass of the system:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>comm_mode = linear
+comm_grps = system
+</pre></div>
+</div>
+<p>Let us give an initial kick to the atom so that the initial
+total velocities give the desired temperature of <span class="math notranslate nohighlight">\(360~\text{K}\)</span>:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gen-vel = yes
+gen-temp = 360
+</pre></div>
+</div>
+<p>Let us also specify the neighbor searching parameters:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>cutoff-scheme = Verlet
+nstlist = 10
+ns_type = grid
+</pre></div>
+</div>
+<p>Let us also ask GROMACS to print the trajectory in a compressed <strong>.xtc</strong> file
+every 1000 steps, or every 1 ps, by adding the following line to <strong>nvt.mdp</strong>:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>nstlog = 100
+nstenergy = 100
+nstxout-compressed = 1000
+</pre></div>
+</div>
+<p>Here, we also request gromacs to print thermodynamic information
+in the log file and in the energy file <strong>.edr</strong> every 100 steps.</p>
+<p>Let us impose the calculation of long-range
+electrostatic, by the use of the long-range fast smooth particle-mesh ewald (SPME)
+electrostatics with Fourier spacing of <span class="math notranslate nohighlight">\(0.1~\text{nm}\)</span>, order
+of 4, and cut-off of <span class="math notranslate nohighlight">\(1~\text{nm}\)</span> <span id="id11">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id100" title="Tom Darden, Darrin York, and Lee Pedersen. Particle mesh Ewald: An \emph N ·log( \emph N ) method for Ewald sums in large systems. The Journal of Chemical Physics, 98(12):10089–10092, June 1993. doi:10.1063/1.464397.">15</a>, <a class="reference internal" href="../../non-tutorials/bibliography.html#id127" title="Ulrich Essmann, Lalith Perera, Max L. Berkowitz, Tom Darden, Hsing Lee, and Lee G. Pedersen. A smooth particle mesh Ewald method. The Journal of Chemical Physics, 103(19):8577–8593, November 1995. doi:10.1063/1.470117.">16</a>]</span>.
+Let us also impose how the short-range van der Waals interactions
+should be treated by GROMACS, as well as the cut-off <code class="docutils literal notranslate"><span class="pre">rvdw</span></code> of <span class="math notranslate nohighlight">\(1~\text{nm}\)</span>:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>vdw-type = Cut-off
+rvdw = 1.0
+
+coulombtype = pme
+fourierspacing = 0.1
+pme-order = 4
+rcoulomb = 1.0
+</pre></div>
+</div>
+<p>For this system, computing the long-range Coulomb interactions is necessary,
+because electrostatic forces between charged particles decay slowly,
+as the inverse of the square of the distance between them, <span class="math notranslate nohighlight">\(1/r^2\)</span>.</p>
+<p>Here, the cut-off <em>rcoulomb</em> separates the short-range interactions from the
+long-range interactions. Long-range interactions are treated in the
+reciprocal space, while short-range interactions are computed directly.</p>
+<p>Let us use the LINCS algorithm to constrain the hydrogen
+bonds <span id="id12">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id204" title="Berk Hess, Henk Bekker, Herman J. C. Berendsen, and Johannes G. E. M. Fraaije. LINCS: A linear constraint solver for molecular simulations. Journal of Computational Chemistry, 18(12):1463–1472, 1997. doi:10.1002/(SICI)1096-987X(199709)18:12&lt;1463::AID-JCC4&gt;3.0.CO;2-H.">17</a>]</span>. The water
+molecules will thus be treated as rigid, which is generally better given
+the fast vibration of the hydrogen bonds.</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>constraint-algorithm = lincs
+constraints = hbonds
+continuation = no
+</pre></div>
+</div>
+<p>Let us also control the temperature throughout the
+simulation using the so-called <code class="docutils literal notranslate"><span class="pre">v-rescale</span></code> thermostat, which is
+a Berendsen thermostat with an additional stochastic term <span id="id13">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id63" title="Giovanni Bussi, Davide Donadio, and Michele Parrinello. Canonical sampling through velocity rescaling. The Journal of Chemical Physics, 126(1):014101, January 2007. doi:10.1063/1.2408420.">18</a>]</span>:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>tcoupl = v-rescale
+ld-seed = 48456
+tc-grps = Water non-Water
+tau-t = 0.5 0.5
+ref-t = 360 360
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">v-rescale</span></code> thermostat is known to give a proper canonical
+ensemble. Here, we also specified that the thermostat is
+applied to the entire system using the <code class="docutils literal notranslate"><span class="pre">tc-grps</span></code> option and that the
+damping constant for the thermostat, <code class="docutils literal notranslate"><span class="pre">tau-t</span></code>, is equal to 0.5 ps.</p>
+<p>Here, two separate temperature baths for
+the water molecules and the ions are used. Here, the ions are included
+in the default GROMACS group called <em>non-water</em>.
+Now, the same temperature <span class="math notranslate nohighlight">\(T = 360 ~ \text{K}\)</span> is imposed to the
+two groups with the same characteristic time <span class="math notranslate nohighlight">\(\tau = 0.5 ~ \text{ps}\)</span>.</p>
+<p>Note that the relatively high temperature of <span class="math notranslate nohighlight">\(360~\text{K}\)</span>
+has been chosen here to reduce the viscosity of the solution and
+decrease the equilibration duration.</p>
+<p>We now have a minimalist input file for performing
+the first <span class="math notranslate nohighlight">\(NVT\)</span> simulation. Run it by typing in the terminal:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx grompp -f inputs/nvt.mdp -c min.gro -o nvt -pp nvt -po nvt
+gmx mdrun -v -deffnm nvt
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">-c</span> <span class="pre">min.gro</span></code> option ensures that the previously
+minimized configuration is used as a starting point for the <span class="math notranslate nohighlight">\(NVT\)</span> simulation.</p>
+<p>After the completion of the simulation, we can
+ensure that the system temperature indeed reached
+the value of <span class="math notranslate nohighlight">\(360~\text{K}\)</span> by using the energy command of
+GROMACS. In the terminal, type:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx energy -f nvt.edr -o nvt-T.xvg
+</pre></div>
+</div>
+<p>and choose 10 for temperature, and then press enter twice.</p>
+<p>From the generated <strong>nvt-T.xvg</strong> file, one can see that temperature
+started from <span class="math notranslate nohighlight">\(360~\text{K}\)</span>, as requested, then increase quicky
+due to the interaction between neighbor species. Thanks to the
+thermostat that is removing the extra energy from the system,
+the temperature reaches the requested temperature of
+<span class="math notranslate nohighlight">\(360~\text{K}\)</span> after a duration of a few picoseconds.</p>
+<p>In general, it is better to perform a longer equilibration, but simulation
+durations are kept as short as possible for these tutorials.</p>
+<figure class="align-default">
+<img alt="Gromacs tutorial : temperature versus time." class="only-light" src="../../_images/nvt-T.png" />
+</figure>
+<figure class="align-default">
+<img alt="Gromacs tutorial : temperature versus time." class="only-dark" src="../../_images/nvt-T-dm.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: Evolution of the temperature,  <span class="math notranslate nohighlight">\(T\)</span>, as a function of the time,  <span class="math notranslate nohighlight">\(t\)</span>
+during the <span class="math notranslate nohighlight">\(NVT\)</span> molecular dynamics simulation.</p>
+</div>
+</section>
+<section id="molecular-dynamics-npt">
+<h2>Molecular dynamics (<span class="math notranslate nohighlight">\(NpT\)</span>)<a class="headerlink" href="#molecular-dynamics-npt" title="Link to this heading">¶</a></h2>
+<p>Now that the temperature of the system is properly equilibrated,
+let us continue the simulation in the
+<span class="math notranslate nohighlight">\(NpT\)</span> ensemble, where the pressure <span class="math notranslate nohighlight">\(p\)</span> of the system
+is imposed by a barostat and the volume of the box <span class="math notranslate nohighlight">\(V\)</span> is
+allowed to relax. During <span class="math notranslate nohighlight">\(NpT\)</span> relaxation, the
+density of the fluid should converge toward its equilibrium value.
+Create a new input script, call it <strong>npt.mdp</strong>, and
+copy the following lines into it:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = md
+nsteps = 80000
+dt = 0.001
+
+comm_mode = linear
+comm_grps = system
+
+cutoff-scheme = Verlet
+nstlist = 10
+ns_type = grid
+
+nstlog = 100
+nstenergy = 100
+nstxout-compressed = 1000
+
+vdw-type = Cut-off
+rvdw = 1.0
+
+coulombtype = pme
+fourierspacing = 0.1
+pme-order = 4
+rcoulomb = 1.0
+
+constraint-algorithm = lincs
+constraints = hbonds
+
+tcoupl = v-rescale
+ld-seed = 48456
+tc-grps = Water non-Water
+tau-t = 0.5 0.5
+ref-t = 360 360
+</pre></div>
+</div>
+<p>So far, the differences with the previous <span class="math notranslate nohighlight">\(NVT\)</span>
+script are the duration of the run (the value of <code class="docutils literal notranslate"><span class="pre">nsteps</span></code>),
+and the removing of the <code class="docutils literal notranslate"><span class="pre">gen-vel</span></code> and <code class="docutils literal notranslate"><span class="pre">gen-temp</span></code> commands,
+because the atoms already have a velocity.</p>
+<p>Let us add an the isotropic C-rescale pressure
+coupling with a target pressure of 1 bar <span id="id14">[<a class="reference internal" href="../../non-tutorials/bibliography.html#id41" title="Mattia Bernetti and Giovanni Bussi. Pressure control using stochastic cell rescaling. The Journal of Chemical Physics, 153(11):114107, September 2020. doi:10.1063/5.0020514.">19</a>]</span>
+by adding the following to <strong>npt.mdp</strong>:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>pcoupl = C-rescale
+Pcoupltype = isotropic
+tau_p = 1.0
+ref_p = 1.0
+compressibility = 4.5e-5
+</pre></div>
+</div>
+<p>Run the <span class="math notranslate nohighlight">\(NpT\)</span> equilibration using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/npt.mdp<span class="w"> </span>-c<span class="w"> </span>nvt.gro<span class="w"> </span>-o<span class="w"> </span>npt<span class="w"> </span>-pp<span class="w"> </span>npt<span class="w"> </span>-po<span class="w"> </span>npt
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>npt
+</pre></div>
+</div>
+<p>Let us have a look a the temperature, the pressure, and the
+volume of the box during the NPT step using the <code class="docutils literal notranslate"><span class="pre">gmx</span> <span class="pre">energy</span></code>
+command 3 consecutive times:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>energy<span class="w"> </span>-f<span class="w"> </span>npt.edr<span class="w"> </span>-o<span class="w"> </span>npt-T.xvg
+gmx<span class="w"> </span>energy<span class="w"> </span>-f<span class="w"> </span>npt.edr<span class="w"> </span>-o<span class="w"> </span>npt-p.xvg
+gmx<span class="w"> </span>energy<span class="w"> </span>-f<span class="w"> </span>npt.edr<span class="w"> </span>-o<span class="w"> </span>npt-rho.xvg
+</pre></div>
+</div>
+<p>Choose respectively <code class="docutils literal notranslate"><span class="pre">temperature</span></code> (10), <code class="docutils literal notranslate"><span class="pre">pressure</span></code> (11) and
+<code class="docutils literal notranslate"><span class="pre">density</span></code> (16).</p>
+<p>The results show that the temperature remains well controlled during the NPT
+run, and that the fluid density was initially too small, i.e.,
+<span class="math notranslate nohighlight">\(\rho \approx 600\,\mathrm{kg}/\mathrm{m}^3\)</span>. Due to the change in
+volume induced by the barostat, the fluid density gently reaches its equilibrium
+value of about <span class="math notranslate nohighlight">\(1000\,\mathrm{kg}/\mathrm{m}^3\)</span> after a few tens of
+pico-seconds. Once the system has reached its equilibrium density, the
+pressure stabilizes itself near the desired value of 1 bar.</p>
+<figure class="align-default">
+<img alt="Gromacs tutorial : NPT equilibration" class="only-light" src="../../_images/npt-T-p-rho.png" />
+</figure>
+<figure class="align-default">
+<img alt="Gromacs tutorial : NPT equilibration" class="only-dark" src="../../_images/npt-T-p-rho-dm.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: Evolution of the temperature, <span class="math notranslate nohighlight">\(T\)</span> (a),
+pressure, <span class="math notranslate nohighlight">\(p\)</span> (b), and fluid density, <span class="math notranslate nohighlight">\(\rho\)</span> (c) as a
+function of the time during the <span class="math notranslate nohighlight">\(NpT\)</span> equilibration.</p>
+</div>
+<p>The pressure curve reveals large oscillations in the pressure, with the
+pressure alternating between large negative values and large positive values.
+These large oscillations are typical in molecular dynamics and are not a
+source of concern here.</p>
+</section>
+<section id="production-run">
+<h2>Production run<a class="headerlink" href="#production-run" title="Link to this heading">¶</a></h2>
+<p>Let us perform a <span class="math notranslate nohighlight">\(400~\text{ps}\)</span> run in the <span class="math notranslate nohighlight">\(NVT\)</span> ensemble,
+during which the atom positions will be printed every pico-second. The
+trajectory will then be used to measure to probe the structure and dynamics
+of the system.</p>
+<p>Create a new input file within the <strong>inputs/</strong> folder, call
+it <strong>production.mdp</strong>, and copy the following lines into it:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>integrator = md
+nsteps = 400000
+dt = 0.001
+
+comm_mode = linear
+comm_grps = system
+
+cutoff-scheme = Verlet
+nstlist = 10
+ns_type = grid
+
+nstlog = 100
+nstenergy = 100
+nstxout-compressed = 1000
+
+vdw-type = Cut-off
+rvdw = 1.0
+
+coulombtype = pme
+fourierspacing = 0.1
+pme-order = 4
+rcoulomb = 1.0
+
+constraint-algorithm = lincs
+constraints = hbonds
+
+tcoupl = v-rescale
+ld-seed = 48456
+tc-grps = Water non-Water
+tau-t = 0.5 0.5
+ref_t = 360 360
+</pre></div>
+</div>
+<p>All these commands have been seen in the previous part.
+Run it with GROMACS starting from the system equilibrated
+at equilibrium temperature and pressure, <strong>npt.gro</strong>, using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmx<span class="w"> </span>grompp<span class="w"> </span>-f<span class="w"> </span>inputs/production.mdp<span class="w"> </span>-c<span class="w"> </span>npt.gro<span class="w"> </span>-o<span class="w"> </span>production<span class="w"> </span>-pp<span class="w"> </span>production<span class="w"> </span>-po<span class="w"> </span>production
+gmx<span class="w"> </span>mdrun<span class="w"> </span>-v<span class="w"> </span>-deffnm<span class="w"> </span>production
+</pre></div>
+</div>
+</section>
+<section id="measurement">
+<h2>Measurement<a class="headerlink" href="#measurement" title="Link to this heading">¶</a></h2>
+<p>After completing the simulation, we proceed to compute the radial distribution
+functions (RDF):</p>
+<div class="math-wrapper docutils container">
+<div class="math notranslate nohighlight">
+\[g(r) = \frac{V}{N_{\text{ref}} \rho} \frac{dN(r)}{dr},\]</div>
+</div>
+<p>where <span class="math notranslate nohighlight">\(V\)</span> is the volume of the simulation box, <span class="math notranslate nohighlight">\(N_{\text{ref}}\)</span> is
+the number of reference atoms, <span class="math notranslate nohighlight">\(\rho\)</span> is the average number density of
+particles in the system, and <span class="math notranslate nohighlight">\(\frac{dN(r)}{dr}\)</span> is the number of particles
+in a spherical shell of thickness <span class="math notranslate nohighlight">\(dr\)</span> around a reference particle at
+distance <span class="math notranslate nohighlight">\(r\)</span>.</p>
+<p>First, let us measure the RDF between <span class="math notranslate nohighlight">\(\text{Na}^+\)</span> ions and
+<span class="math notranslate nohighlight">\(\text{H}_2\text{O}\)</span> molecules, as well as between <span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span>
+ions and <span class="math notranslate nohighlight">\(\text{H}_2\text{O}\)</span> molecules. This can be done using the
+<code class="docutils literal notranslate"><span class="pre">gmx</span> <span class="pre">rdf</span></code> command as follows:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx rdf -f production.xtc -s production.tpr -o production-rdf-na-h2o.xvg
+</pre></div>
+</div>
+<p>Then select the sodium ions as <em>reference</em> by typing 3, the water as
+<em>selection</em> by typing 4, and press <code class="docutils literal notranslate"><span class="pre">Ctrl+D</span></code>. The same can be done for
+<span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span> ions by typing:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx rdf -f production.xtc -s production.tpr -o production-rdf-so4-h2o.xvg
+</pre></div>
+</div>
+<p>and then by typing 2 and 4.</p>
+<p>The results show multiple peaks, corresponding to the most likely distances
+between the ions and the water molecules.</p>
+<figure class="align-default">
+<img alt="Gromacs tutorial RDF radial distribution function" class="only-light" src="../../_images/rdf-plain.png" />
+</figure>
+<figure class="align-default">
+<img alt="Gromacs tutorial RDF radial distribution function" class="only-dark" src="../../_images/rdf-plain-dm.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: Radial distribution functions (RDF) calculated between sodium and
+water (<span class="math notranslate nohighlight">\(\text{Na}^+ - \text{H}_2\text{O}\)</span>), and between sulfate and
+water (<span class="math notranslate nohighlight">\(\text{SO}_4^{2-} - \text{H}_2\text{O}\)</span>).</p>
+</div>
+<p>The main issue with the calculated RDFs is that they includes all the atoms from
+the <span class="math notranslate nohighlight">\(\text{H}_2\text{O}\)</span> molecules (including the hydrogen atoms) and all
+the atoms from the <span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span> ions, leading to more peaks and
+depths, making analysis more difficult. RDFs would be easier to interpret if
+only the water oxygen atoms (with name <code class="docutils literal notranslate"><span class="pre">OW1</span></code>) and the sulfur atoms of the
+<span class="math notranslate nohighlight">\(\text{SO}_4^{2-}\)</span> ions (with name <code class="docutils literal notranslate"><span class="pre">S1</span></code>) were included in the analysis.</p>
+<p>Since these groups were not included in the original GROMACS group, we need to
+create them ourselves. To create groups, we can use the <code class="docutils literal notranslate"><span class="pre">gmx</span> <span class="pre">make_ndx</span></code> command
+as follows:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx make_ndx -f production.tpr
+</pre></div>
+</div>
+<p>Then type <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">OW1</span></code> and press enter, <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">S1</span></code> and press enter, and finally
+press <code class="docutils literal notranslate"><span class="pre">q</span></code> to save and quit. This will create a file named <strong>index.ndx</strong> that
+contains two additional groups (named OW1 and S1) alongside the default ones:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>(...)
+3223 3224 3225 3226 3227 3228 3229 3230 3231 3232 3233 3234 3235 3236 3237
+3238 3239 3240 3241 3242
+[ non-Water ]
+1    2    3    4    5    6    7    8    9   10   11   12   13   14   15
+16   17   18   19   20   21   22   23   24   25   26   27   28   29   30
+31   32   33   34   35   36   37   38   39   40   41   42
+[ OW1 ]
+43   47   51   55   59   63   67   71   75   79   83   87   91   95   99
+103  107  111  115  119  123  127  131  135  139  143  147  151  155  159
+(...)
+3163 3167 3171 3175 3179 3183 3187 3191 3195 3199 3203 3207 3211 3215 3219
+3223 3227 3231 3235 3239
+[ S1 ]
+5   10   15   20   25   30
+</pre></div>
+</div>
+<p>Then, let us rerun the <code class="docutils literal notranslate"><span class="pre">gmx</span> <span class="pre">rdf</span></code> command using the <strong>index.ndx</strong> file and
+selecting the newly created groups:</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx rdf -f production.xtc -s production.tpr -o production-rdf-na-OW1.xvg -n index.ndx
+</pre></div>
+</div>
+<p>and select 3 and 7.</p>
+<div class="highlight-bw notranslate"><div class="highlight"><pre><span></span>gmx rdf -f production.xtc -s production.tpr -o production-rdf-so4-OW1.xvg -n index.ndx
+</pre></div>
+</div>
+<p>and select 8 and 7. As can be seen by plotting the generated <strong>.xvg</strong> files, the RDF
+is much cleaner now that we have selected the atoms of interest.</p>
+<figure class="align-default">
+<img alt="Gromacs tutorial RDF radial distribution function" class="only-light" src="../../_images/rdf-filtered.png" />
+</figure>
+<figure class="align-default">
+<img alt="Gromacs tutorial RDF radial distribution function" class="only-dark" src="../../_images/rdf-filtered-dm.png" />
+</figure>
+<div class="figurelegend docutils container">
+<p>Figure: Radial distribution functions (RDF) calculated between sodium and
+water oxygens (<span class="math notranslate nohighlight">\(\text{Na}^+ - \text{OW1}\)</span>), between sulfur and
+water oxygens (<span class="math notranslate nohighlight">\(\text{S1} - \text{OW1}\)</span>), and between water oxygens
+(<span class="math notranslate nohighlight">\(\text{OW1} - \text{OW1}\)</span>).</p>
+</div>
+<p>The radial distribution functions highlight the typical distance between
+the different species of the fluid. For instance, it can be seen that
+there is a strong hydration layer of water around sodium ions at a typical
+distance of <span class="math notranslate nohighlight">\(2.4 ~ \text{Å}\)</span> from the center of the sodium ion.</p>
+<p>You can access all the input scripts and data files that
+are used in these tutorials from <a href="https://github.com/gromacstutorials/gromacstutorials-inputs" target="_blank">GitHub</a>.</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="../tutorial2/protein-in-electrolyte.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Protein in electrolyte</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="../../non-tutorials/contact.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">About</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            Made with 
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Ionic solution</a><ul>
+<li><a class="reference internal" href="#populating-the-box">Populating the box</a></li>
+<li><a class="reference internal" href="#set-the-parameters">Set the parameters</a></li>
+<li><a class="reference internal" href="#energy-minimization">Energy minimization</a></li>
+<li><a class="reference internal" href="#molecular-dynamics-nvt">Molecular dynamics (<span class="math notranslate nohighlight">\(NVT\)</span>)</a></li>
+<li><a class="reference internal" href="#molecular-dynamics-npt">Molecular dynamics (<span class="math notranslate nohighlight">\(NpT\)</span>)</a></li>
+<li><a class="reference internal" href="#production-run">Production run</a></li>
+<li><a class="reference internal" href="#measurement">Measurement</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/scripts/furo.js?v=46bd48cc"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js?v=1ae7504c"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    </body>
+</html>
